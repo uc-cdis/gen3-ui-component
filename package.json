@@ -1,0 +1,51 @@
+{
+  "name": "@gen3/base-component",
+  "version": "0.1.0",
+  "description": "Basic UI component for gen3",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "prepare": "rm -rf dist && mkdir dist && babel src --out-dir dist --copy-files"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uc-cdis/gen3-ui-component.git"
+  },
+  "keywords": [
+    "gen3"
+  ],
+  "author": "cdis.uchicago.edu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uc-cdis/gen3-ui-component/issues"
+  },
+  "homepage": "https://github.com/uc-cdis/gen3-ui-component#readme",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "devDependencies": {
+    "@storybook/react": "^3.4.8",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.4.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^23.4.1",
+    "less": "^3.8.0",
+    "less-loader": "^4.1.0",
+    "prop-types": "^15.6.0",
+    "react-test-renderer": "^16.4.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "setupTestFrameworkScriptFile": "./src/setupTests.js"
+  }
+}
