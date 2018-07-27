@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Button.less';
+import './Button.css';
 
 class Button extends Component {
   render() {
