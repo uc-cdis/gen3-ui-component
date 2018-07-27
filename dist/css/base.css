@@ -1,0 +1,62 @@
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 2em;
+  letter-spacing: 0rem;
+  color: #000000;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 2em;
+  letter-spacing: .02rem;
+  color: #000000;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 2em;
+  letter-spacing: .02rem;
+  color: #000000;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 2em;
+  letter-spacing: .02rem;
+  color: #000000;
+}
+
+.introduction {
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1.6em;
+  letter-spacing: .03rem;
+  color: #000000;
+}
+
+.body {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.6em;
+  letter-spacing: .02rem;
+  color: #606060;
+}
+
+caption {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.6em;
+  letter-spacing: .02rem;
+  color: #606060;
+}
+
+.special-number {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: .03rem;
+  color: #3283C8;
+}

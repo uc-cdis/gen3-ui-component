@@ -1,3 +1,248 @@
-.btn-normal {
-  background-color: #ffffff;
+h1, h2, h3, h4, 
+.introduction, 
+.body,
+.caption,
+.special-number,
+.form-body, 
+.form-h1, .form-h2, .form-caption, 
+.form-special-number {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 2em;
+  letter-spacing: 0rem;
+  color: #000000;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 2em;
+  letter-spacing: .02rem;
+  color: #000000;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 2em;
+  letter-spacing: .02rem;
+  color: #000000;
+}
+
+h4 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 2em;
+  letter-spacing: .02rem;
+  color: #000000;
+}
+
+.introduction {
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 1.6em;
+  letter-spacing: .03rem;
+  color: #000000;
+}
+
+.body {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.6em;
+  letter-spacing: .02rem;
+  color: #606060;
+}
+
+.caption {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.6em;
+  letter-spacing: .02rem;
+  color: #606060;
+}
+
+.special-number {
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: .03rem;
+  color: #3283C8;
+}
+
+.form-body {
+  font-size: 12px;
+  font-weight: regular;
+  line-height: 1em;
+  letter-spacing: .03rem;
+  color: #606060;
+}
+
+.form-h1 {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2em;
+  letter-spacing: .02rem;
+  color: #000000;
+}
+
+.form-h2 {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2em;
+  letter-spacing: .03rem;
+  color: #000000;
+}
+
+.form-caption {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1em;
+  letter-spacing: .03rem;
+  color: #3283C8;
+}
+.form-special-number {
+  font-size: 18px; 
+  font-weight: 600; 
+  line-height: 1em; 
+  letter-spacing: .02rem; 
+  color: #3283C8;
+}
+
+.gen3-color-base-blue {
+  background-color: #3283C8;
+}
+
+.base-blue-light {
+  background-color: #05B8EE;
+}
+
+.gen3-color-lime {
+  background-color: #7EC500;
+}
+
+.gen3-color-iris {
+  background-color: #AD91FF;
+}
+
+.gen3-color-rose {
+  background-color: #E74C3C;
+}
+
+.gen3-color-bee {
+  background-color: #F4B940;
+}
+
+.gen3-color-base-blue-light {
+  background-color: #05B8EE;
+}
+
+.gen3-color-pink {
+  background-color: #FF7ABC;
+}
+
+.gen3-color-highlight-orange {
+  background-color: #EF8523;
+}
+
+.gen3-color-highlight-orange-light {
+  background-color: #FF9635;
+}
+
+.gen3-color-mint {
+  background-color: #26D9B1;
+}
+
+.gen3-color-bg-coal {
+  background-color: #4A4A4A;
+}
+
+.gen3-color-bg-cloud {
+  background-color: #F5F5F5;
+}
+
+.gen3-color-gray {
+  background-color: #606060;
+}
+
+.gen3-color-lightgray {
+  background-color: #9B9B9B;
+}
+
+.gen3-color-smoke {
+  background-color: #D1D1D1;
+}
+
+.gen3-color-silver {
+  background-color: #E7E7E7;
+}
+
+.gen3-color-black {
+  background-color: #000000;
+}
+
+.gen3-color-white {
+  background-color: #FFFFFF;
+}
+
+button, 
+.button {
+  border-radius: 4px;
+  width: 152px;
+  height: 40px;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.btn-primary-white {
+  border: 1px solid #606060;
+  background-color: #FFFFFF;
+  font-weight: 600;
+  color: #606060;
+  fill: #606060;
+}
+
+.btn-primary-white:hover, 
+.btn-primary-white:hover svg path {
+  border: 1px solid #000000;
+  color: #000000;
+  fill: #000000;
+}
+
+.btn-primary-white:active, 
+.btn-primary-white:active svg path{
+  border: 1px solid #FF9635;
+  color: #FF9635;
+  fill: #FF9635;
+}
+
+.btn-primary-orange {
+  border: 1px solid #9B9B9B;
+  background-color: #EF8523;
+  font-weight: 600;
+  color: #FFFFFF;
+  fill: #FFFFFF;
+}
+
+.btn-primary-orange:hover,
+.btn-primary-orange:hover svg path {
+  border: 1px solid #606060;
+  background-color: #FF9635;
+}
+
+.btn-primary-orange:active {
+  background-color: #FF9635;
+}
+
+.btn-form {
+  border: 1px solid #E7E7E7;
+  width: 220px;
+  height: 20px;
+  background-color: #F5F5F5;
+  color: #9B9B9B;
+  font-weight: 500;
 }
