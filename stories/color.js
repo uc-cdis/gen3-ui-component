@@ -90,11 +90,11 @@ storiesOf('General/Colors', module)
         <h4>Core System Colors</h4>
         <div style={colorSessionStyle}>
           {
-            coreSystemColors.map(group => (
-              <div style={colorPairStyle}>
+            coreSystemColors.map((group, index) => (
+              <div key={index} style={colorPairStyle}>
                 {
                   group.map(entry => (
-                    <div style={colorItemStyle}>
+                    <div key={entry.name} style={colorItemStyle}>
                       <div style={systemColorBlockStyle} className={'gen3-color-'+entry.color}></div>
                       <span className="body">{entry.name}</span>
                     </div>
@@ -109,11 +109,11 @@ storiesOf('General/Colors', module)
         <h4>Support System Colors</h4>
         <div style={colorSessionStyle}>
           {
-            supportSystemColors.map(group => (
-              <div style={colorPairStyle}>
+            supportSystemColors.map((group, index) => (
+              <div key={index} style={colorPairStyle}>
                 {
                   group.map(entry => (
-                    <div style={colorItemStyle}>
+                    <div key={entry.name} style={colorItemStyle}>
                       <div style={systemColorBlockStyle} className={'gen3-color-'+entry.color}></div>
                       <span className="body">{entry.name}</span>
                     </div>
@@ -128,11 +128,11 @@ storiesOf('General/Colors', module)
         <h4>Extended Colors</h4>
         <div style={colorSessionStyle}>
           {
-            extendSystemColors.map(group => (
-              <div style={colorPairStyle}>
+            extendSystemColors.map((group, index) => (
+              <div key={index} style={colorPairStyle}>
                 {
                   group.map(entry => (
-                    <div style={colorItemStyle}>
+                    <div key={entry.name} style={colorItemStyle}>
                       <div style={systemColorBlockStyle} className={'gen3-color-'+entry.color}></div>
                       <span className="body">{entry.name}</span>
                     </div>
@@ -149,7 +149,7 @@ storiesOf('General/Colors', module)
     <div style={colorSessionStyle}>
     {
       visColors.map(entry => (
-        <div style={visColorItemStyle}>
+        <div key={entry.name} style={visColorItemStyle}>
           <div style={visColorBlockStyle} className={'gen3-color-'+entry.color}></div>
           <div className="body" style={visColorTextStyle}>{entry.name}</div>
         </div>
