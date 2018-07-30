@@ -2,18 +2,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import '../src/css/base.css'
 
-const systemColorBlockStyle = {
-  width: '50px', 
-  height: '50px', 
-  display: 'inline-block',
-};
-
-const visColorBlockStyle = {
-  width: '50px', 
-  height: '50px', 
-  display: 'inline-block',
-};
-
 const coreSystemColors = [
   [
     {name: 'base-blue', color: 'base-blue'}, 
@@ -59,69 +47,111 @@ const visColors = [
   {name: 'mint', color: 'mint'},
 ];
 
+const colorBlockWidth = '150px';
+
+const systemColorBlockStyle = {
+  width: colorBlockWidth, 
+  height: '50px', 
+};
+
+const visColorBlockStyle = {
+  width: '50px', 
+  height: '50px', 
+};
+
+const colorItemStyle = {
+  width: colorBlockWidth,
+};
+
+const colorPairStyle = {
+  display: 'flex', 
+  flexDirection: 'row',
+  margin: '10px 20px'
+};
+
+const colorSessionStyle = {
+  display: 'flex',
+  borderBottom: 'solid gray 1px',
+};
+
+const visColorItemStyle = {
+  width: '100px',
+};
+
+const visColorTextStyle = {
+  paddingTop: '10px',
+  paddingLeft: '3px',
+}
+
 storiesOf('General/Colors', module)
   .add('System Colors', () => (
     <div>
       <div>
         <h4>Core System Colors</h4>
-        {
-          coreSystemColors.map(group => (
-            <div>
-              {
-                group.map(entry => (
-                  <div>
-                    <div style={systemColorBlockStyle} className={'gen3-color-'+entry.color}></div>
-                    <span>{entry.name}</span>
-                  </div>
-                ))
-              }
-            </div>
-          ))
-        }
+        <div style={colorSessionStyle}>
+          {
+            coreSystemColors.map(group => (
+              <div style={colorPairStyle}>
+                {
+                  group.map(entry => (
+                    <div style={colorItemStyle}>
+                      <div style={systemColorBlockStyle} className={'gen3-color-'+entry.color}></div>
+                      <span className="body">{entry.name}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            ))
+          }
+        </div>
       </div>
       <div>
         <h4>Support System Colors</h4>
-        {
-          supportSystemColors.map(group => (
-            <div>
-              {
-                group.map(entry => (
-                  <div>
-                    <div style={systemColorBlockStyle} className={'gen3-color-'+entry.color}></div>
-                    <span>{entry.name}</span>
-                  </div>
-                ))
-              }
-            </div>
-          ))
-        }
+        <div style={colorSessionStyle}>
+          {
+            supportSystemColors.map(group => (
+              <div style={colorPairStyle}>
+                {
+                  group.map(entry => (
+                    <div style={colorItemStyle}>
+                      <div style={systemColorBlockStyle} className={'gen3-color-'+entry.color}></div>
+                      <span className="body">{entry.name}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            ))
+          }
+        </div>
       </div>
       <div>
         <h4>Extended Colors</h4>
-        {
-          extendSystemColors.map(group => (
-            <div>
-              {
-                group.map(entry => (
-                  <div>
-                    <div style={systemColorBlockStyle} className={'gen3-color-'+entry.color}></div>
-                    <span>{entry.name}</span>
-                  </div>
-                ))
-              }
-            </div>
-          ))
-        }
+        <div style={colorSessionStyle}>
+          {
+            extendSystemColors.map(group => (
+              <div style={colorPairStyle}>
+                {
+                  group.map(entry => (
+                    <div style={colorItemStyle}>
+                      <div style={systemColorBlockStyle} className={'gen3-color-'+entry.color}></div>
+                      <span className="body">{entry.name}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
   ))
   .add('Data Visualization Colors', () => (
-    <div>
+    <div style={colorSessionStyle}>
     {
       visColors.map(entry => (
-        <div>
+        <div style={visColorItemStyle}>
           <div style={visColorBlockStyle} className={'gen3-color-'+entry.color}></div>
-          <span className="body">{entry.name}</span>
+          <div className="body" style={visColorTextStyle}>{entry.name}</div>
         </div>
       ))
     }
