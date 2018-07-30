@@ -38,7 +38,7 @@ var Button = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'button',
-        { className: 'btn-normal' },
+        { type: 'button', className: 'btn-normal' },
         this.props.label
       );
     }
@@ -49,10 +49,6 @@ var Button = function (_Component) {
 
 Button.propTypes = {
   label: _propTypes2.default.string.isRequired
-};
-
-Button.defaultProps = {
-  label: 'click me!'
 };
 
 exports.default = Button;

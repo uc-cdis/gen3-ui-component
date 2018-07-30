@@ -1,13 +1,13 @@
 {
-  "name": "@gen3/base-component",
-  "version": "0.1.0",
+  "name": "@gen3/ui-component",
+  "version": "0.0.1",
   "description": "Basic UI component for gen3",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "prepare": "rm -rf dist && mkdir dist && babel src --out-dir dist --copy-files",
-    "eslint": "eslint --ext js --ext jsx --ignore-pattern '**/setupTests.js' --fix src"
+    "eslint": "eslint --ext js --ext jsx --ignore-pattern '**/setupTests.js' --ignore-pattern 'dist/' --fix src"
   },
   "repository": {
     "type": "git",
