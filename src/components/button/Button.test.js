@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Button from './Button';
+import Button from '.';
 
 describe('<Button />', () => {
   const btn = mount(<Button label="test-button" />).find(Button);

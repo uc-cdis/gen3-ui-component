@@ -1,3 +1,4 @@
 import './typography.js';
+import './icons.js';
 import './color.js';
-import './button.js';
+import './components.js';
