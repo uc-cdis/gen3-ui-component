@@ -1,0 +1,102 @@
+.g3-icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: left top;
+  width: 18px;
+  height: 18px;
+  background-size: 18px 18px;
+}
+
+.g3-icon--lg {
+  width: 40px;
+  height: 40px;
+  background-size: 40px 40px;
+}
+
+.g3-icon--md {
+  width: 18px;
+  height: 18px;
+  background-size: 18px 18px;
+}
+
+.g3-icon--sm {
+  width: 12px;
+  height: 12px;
+  background-size: 12px 12px;
+}
+
+.g3-icon--analysis {
+  background-image: url(../images/icons/analysis.svg);
+}
+
+.g3-icon--back {
+  background-image: url(../images/icons/back.svg);
+}
+
+.g3-icon--copy {
+  background-image: url(../images/icons/copy.svg);
+}
+
+.g3-icon--cross-key {
+  background-image: url(../images/icons/cross-key.svg);
+}
+
+.g3-icon--cross {
+  background-image: url(../images/icons/cross.svg);
+}
+
+.g3-icon--delete {
+  background-image: url(../images/icons/delete.svg);
+}
+
+.g3-icon--dictionary {
+  background-image: url(../images/icons/dictionary.svg);
+}
+
+.g3-icon--download {
+  background-image: url(../images/icons/download.svg);
+}
+
+.g3-icon--exit {
+  background-image: url(../images/icons/exit.svg);
+}
+
+.g3-icon--exploration {
+  background-image: url(../images/icons/exploration.svg);
+}
+
+.g3-icon--files {
+  background-image: url(../images/icons/files.svg);
+}
+
+.g3-icon--graph {
+  background-image: url(../images/icons/graph.svg);
+}
+
+.g3-icon--key {
+  background-image: url(../images/icons/key.svg);
+}
+
+.g3-icon--link {
+  background-image: url(../images/icons/link.svg);
+}
+
+.g3-icon--profile {
+  background-image: url(../images/icons/profile.svg);
+}
+
+.g3-icon--query {
+  background-image: url(../images/icons/query.svg);
+}
+
+.g3-icon--upload-white {
+  background-image: url(../images/icons/upload-white.svg);
+}
+
+.g3-icon--upload {
+  background-image: url(../images/icons/upload.svg);
+}
+
+.g3-icon--workspace {
+  background-image: url(../images/icons/workspace.svg);
+}
