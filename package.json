@@ -7,7 +7,8 @@
     "test": "jest",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "prepare": "rm -rf dist && mkdir dist && babel src --out-dir dist --copy-files",
-    "eslint": "eslint --ext js --ext jsx --ignore-pattern '**/setupTests.js' --ignore-pattern 'dist/' --fix src"
+    "eslint": "eslint --ext js --ext jsx --ignore-pattern '**/setupTests.js' --ignore-pattern 'dist/' --fix src",
+    "stylelint": "stylelint 'src/**/*.less' 'src/**/*.css' 'stories/*.css' --config .stylelintrc.js --fix"
   },
   "repository": {
     "type": "git",
@@ -24,9 +25,10 @@
   "homepage": "https://github.com/uc-cdis/gen3-ui-component#readme",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "prop-types": "^15.6.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "prop-types": "^15.6.0"
+    "stylelint": "^9.5.0"
   },
   "devDependencies": {
     "@storybook/addon-notes": "^3.4.8",
