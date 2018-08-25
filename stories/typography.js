@@ -35,26 +35,26 @@ H4 - This is a main title
       <div className="typo-demo-block" style={typoDemoItemStyle}>
         <div className="introduction">
 This is some introduction:
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus vulputate diam eu 
-          pretium. Mauris elit orci, ultricies id fermentum vel, porta et eros. Vestibulum 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus vulputate diam eu
+          pretium. Mauris elit orci, ultricies id fermentum vel, porta et eros. Vestibulum
           condimentum lectus
         </div>
       </div>
       <div className="typo-demo-block" style={typoDemoItemStyle}>
         <div className="body">
-This is body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus vulputate diam 
-eu pretium. Mauris elit orci, ultricies id fermentum vel, porta et eros. Vestibulum condimentum 
-lectus in convallis feugiat. Sed vulputate fringilla felis. Aliquam ut arcu et dui feugiat 
+This is body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus vulputate diam
+eu pretium. Mauris elit orci, ultricies id fermentum vel, porta et eros. Vestibulum condimentum
+lectus in convallis feugiat. Sed vulputate fringilla felis. Aliquam ut arcu et dui feugiat
 scelerisque eu quis diam. Mauris placerat congue dui
         </div>
       </div>
       <div className="typo-demo-block" style={typoDemoItemStyle}>
         <div className="caption">
 Caption
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus vulputate diam eu 
-          pretium. Mauris elit orci, ultricies id fermentum vel, porta et eros. Vestibulum 
-          condimentum lectus in convallis feugiat. Sed vulputate fringilla felis. Aliquam ut arcu 
-          et dui feugiat scelerisque eu quis diam. Mauris placerat congue dui sit amet blandit. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus vulputate diam eu
+          pretium. Mauris elit orci, ultricies id fermentum vel, porta et eros. Vestibulum
+          condimentum lectus in convallis feugiat. Sed vulputate fringilla felis. Aliquam ut arcu
+          et dui feugiat scelerisque eu quis diam. Mauris placerat congue dui sit amet blandit.
           Phasellus condimentum libero vel velit auctor, sit amet tincidunt velit varius.
         </div>
       </div>

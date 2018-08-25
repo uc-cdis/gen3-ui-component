@@ -28,11 +28,11 @@
     "prop-types": "^15.6.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "stylelint": "^9.5.0"
+    "stylelint": "^9.5.0",
+    "@storybook/addon-notes": "^3.4.8",
+    "@storybook/react": "^3.4.8"
   },
   "devDependencies": {
-    "@storybook/addon-notes": "^3.4.8",
-    "@storybook/react": "^3.4.8",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
