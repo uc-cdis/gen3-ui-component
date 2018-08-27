@@ -27,16 +27,16 @@ const iconClassList = [
 
 storiesOf('General/Icons and Images', module)
   .add('Icons', () => (
-    <div className="icon-demo">
+    <div className='icon-demo'>
       {
         iconClassList.map(iconClass => (
-          <div className="icon-demo__card">
-            <div className="icon-demo__icon-wrap">
+          <div className='icon-demo__card'>
+            <div className='icon-demo__icon-wrap'>
               <i className={`icon-demo__icon g3-icon ${iconClass}`} />
             </div>
             <div>
               {iconClass.split(' ').map(iconClassName => (
-                <p className="icon-demo__text">
+                <p className='icon-demo__text'>
                   {iconClassName}
                 </p>
               ))}

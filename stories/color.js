@@ -98,7 +98,7 @@ Core System Colors
                   group.map(entry => (
                     <div key={entry.name} style={colorItemStyle}>
                       <div style={systemColorBlockStyle} className={`g3-color__${entry.color}`} />
-                      <span className="body">
+                      <span className='body'>
                         {entry.name}
                       </span>
                     </div>
@@ -121,7 +121,7 @@ Support System Colors
                   group.map(entry => (
                     <div key={entry.name} style={colorItemStyle}>
                       <div style={systemColorBlockStyle} className={`g3-color__${entry.color}`} />
-                      <span className="body">
+                      <span className='body'>
                         {entry.name}
                       </span>
                     </div>
@@ -144,7 +144,7 @@ Extended Colors
                   group.map(entry => (
                     <div key={entry.name} style={colorItemStyle}>
                       <div style={systemColorBlockStyle} className={`g3-color__${entry.color}`} />
-                      <span className="body">
+                      <span className='body'>
                         {entry.name}
                       </span>
                     </div>
@@ -163,7 +163,7 @@ Extended Colors
         visColors.map(entry => (
           <div key={entry.name} style={visColorItemStyle}>
             <div style={visColorBlockStyle} className={`g3-color__${entry.color}`} />
-            <div className="body" style={visColorTextStyle}>
+            <div className='body' style={visColorTextStyle}>
               {entry.name}
             </div>
           </div>

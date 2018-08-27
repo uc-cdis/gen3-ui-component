@@ -12,11 +12,17 @@ class Button extends Component {
   render() {
     return (
       <button
-        type="button"
+        type='button'
         className={`${this.props.className} g3-button g3-button--${this.props.buttonType} ${this.props.enabled ? '' : 'g3-button--disabled'}`}
         onClick={e => this.handleClick(e)}
       >
+        {this.props.leftIcon && (
+          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon}`} />
+        )}
         {this.props.label}
+        {this.props.rightIcon && (
+          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.rightIcon}`} />
+        )}
       </button>
     );
   }
@@ -28,6 +34,8 @@ Button.propTypes = {
   enabled: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,
+  leftIcon: PropTypes.string,
+  rightIcon: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -35,6 +43,8 @@ Button.defaultProps = {
   enabled: true,
   className: '',
   onClick: () => {},
+  leftIcon: null,
+  rightIcon: null,
 };
 
 export default Button;
