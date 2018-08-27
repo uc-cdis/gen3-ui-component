@@ -12,9 +12,9 @@
   font-weight: 600;
 }
 
-.g3-button--disabled,
-.g3-button--disabled:hover,
-.g3-button--disabled:active {
+.g3-button.g3-button--disabled,
+.g3-button.g3-button--disabled:hover,
+.g3-button.g3-button--disabled:active {
   background-color: var(--g3-disabled-btn__bg-color);
   color: var(--g3-disabled-btn__color);
   border: 1px solid var(--g3-disabled-btn__border-color);

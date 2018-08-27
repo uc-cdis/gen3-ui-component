@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "prepare": "rm -rf dist && mkdir dist && babel src --out-dir dist --copy-files",
+    "prepare": "rm -rf dist && mkdir dist && babel src --out-dir dist --copy-files --ignore src/**/*test.js,src/setupTests.js",
     "eslint": "eslint --ext js --ext jsx --ignore-pattern '**/setupTests.js' --ignore-pattern 'dist/' --fix src",
     "stylelint": "stylelint 'src/**/*.less' 'src/**/*.css' 'stories/*.css' --config .stylelintrc.js --fix"
   },

@@ -9,8 +9,8 @@ const clickFunction = (e) => {
 storiesOf('Components', module)
   .add('Button Primary White', () => (
     <React.Fragment>
-      <Button type="primary" label="Primary Button" onClick={clickFunction} />
-      <Button type="secondary" label="Secondary Button" onClick={clickFunction} />
-      <Button type="primary" label="Disabled Button" onClick={clickFunction} enabled={false} />
+      <Button buttonType="primary" label="Primary Button" onClick={clickFunction} />
+      <Button buttonType="secondary" label="Secondary Button" onClick={clickFunction} />
+      <Button buttonType="primary" label="Disabled Button" onClick={clickFunction} enabled={false} />
     </React.Fragment>
   ));

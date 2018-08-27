@@ -13,7 +13,7 @@ class Button extends Component {
     return (
       <button
         type="button"
-        className={`${this.props.className} g3-button g3-button--${this.props.type} g3-button--${this.props.enabled ? 'enabled' : 'disabled'}`}
+        className={`${this.props.className} g3-button g3-button--${this.props.buttonType} ${this.props.enabled ? '' : 'g3-button--disabled'}`}
         onClick={e => this.handleClick(e)}
       >
         {this.props.label}
@@ -24,14 +24,14 @@ class Button extends Component {
 
 Button.propTypes = {
   label: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['primary', 'secondary']),
+  buttonType: PropTypes.oneOf(['primary', 'secondary']),
   enabled: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,
 };
 
 Button.defaultProps = {
-  type: 'primary',
+  buttonType: 'primary',
   enabled: true,
   className: '',
   onClick: () => {},

@@ -49,7 +49,7 @@ var Button = function (_Component) {
         'button',
         {
           type: 'button',
-          className: this.props.className + ' g3-button g3-button--' + this.props.type + ' g3-button--' + (this.props.enabled ? 'enabled' : 'disabled'),
+          className: this.props.className + ' g3-button g3-button--' + this.props.buttonType + ' ' + (this.props.enabled ? '' : 'g3-button--disabled'),
           onClick: function onClick(e) {
             return _this2.handleClick(e);
           }
@@ -64,14 +64,14 @@ var Button = function (_Component) {
 
 Button.propTypes = {
   label: _propTypes2.default.string.isRequired,
-  type: _propTypes2.default.oneOf(['primary', 'secondary']),
+  buttonType: _propTypes2.default.oneOf(['primary', 'secondary']),
   enabled: _propTypes2.default.bool,
   className: _propTypes2.default.string,
   onClick: _propTypes2.default.func
 };
 
 Button.defaultProps = {
-  type: 'primary',
+  buttonType: 'primary',
   enabled: true,
   className: '',
   onClick: function onClick() {}
