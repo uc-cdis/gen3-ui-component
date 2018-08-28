@@ -10,18 +10,19 @@ class Button extends Component {
   }
 
   render() {
+    const buttonTypeClassName = !this.props.enabled ? 'g3-button--disabled' : `g3-button--${this.props.buttonType}`;
     return (
       <button
         type='button'
-        className={`${this.props.className} g3-button g3-button--${this.props.buttonType} ${this.props.enabled ? '' : 'g3-button--disabled'}`}
+        className={`${this.props.className} g3-button ${buttonTypeClassName}`}
         onClick={e => this.handleClick(e)}
       >
         {this.props.leftIcon && (
-          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon}`} />
+          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon} g3-button__icon g3-button__icon--left`} />
         )}
         {this.props.label}
         {this.props.rightIcon && (
-          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.rightIcon}`} />
+          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.rightIcon} g3-button__icon g3-button__icon--right`} />
         )}
       </button>
     );

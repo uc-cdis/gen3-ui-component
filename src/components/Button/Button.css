@@ -2,7 +2,7 @@
 
 .g3-button {
   border-radius: 4px;
-  width: 152px;
+  min-width: 152px;
   height: 40px;
   font-size: 14px;
   display: inline-block;
@@ -12,9 +12,11 @@
   font-weight: 600;
 }
 
-.g3-button.g3-button--disabled,
-.g3-button.g3-button--disabled:hover,
-.g3-button.g3-button--disabled:active {
+.g3-button__icon {
+  margin: 0 8px;
+}
+
+.g3-button--disabled {
   background-color: var(--g3-disabled-btn__bg-color);
   color: var(--g3-disabled-btn__color);
   border: 1px solid var(--g3-disabled-btn__border-color);
@@ -23,6 +25,10 @@
 
 .g3-button--disabled svg path {
   fill: var(--g3-disabled-btn__color);
+}
+
+.g3-button--disabled .g3-button__icon {
+  background-color: var(--g3-disabled-btn__color);
 }
 
 .g3-button--primary {
@@ -40,6 +46,10 @@
 
 .g3-button--primary:active {
   border: 1px solid var(--g3-primary-btn__border-color--active);
+}
+
+.g3-button--primary .g3-button__icon {
+  background-color: var(--g3-primary-btn__color);
 }
 
 .g3-button--secondary {
@@ -61,4 +71,8 @@
   border: 1px solid var(--g3-secondary-btn__border-color--active);
   color: var(--g3-secondary-btn__color--active);
   fill: var(--g3-secondary-btn__color--active);
+}
+
+.g3-button--secondary .g3-button__icon {
+  background-color: var(--g3-secondary-btn__color);
 }

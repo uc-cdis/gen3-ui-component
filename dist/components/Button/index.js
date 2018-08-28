@@ -45,18 +45,19 @@ var Button = function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      var buttonTypeClassName = !this.props.enabled ? 'g3-button--disabled' : 'g3-button--' + this.props.buttonType;
       return _react2.default.createElement(
         'button',
         {
           type: 'button',
-          className: this.props.className + ' g3-button g3-button--' + this.props.buttonType + ' ' + (this.props.enabled ? '' : 'g3-button--disabled'),
+          className: this.props.className + ' g3-button ' + buttonTypeClassName,
           onClick: function onClick(e) {
             return _this2.handleClick(e);
           }
         },
-        this.props.leftIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.leftIcon }),
+        this.props.leftIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.leftIcon + ' g3-button__icon g3-button__icon--left' }),
         this.props.label,
-        this.props.rightIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.rightIcon })
+        this.props.rightIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.rightIcon + ' g3-button__icon g3-button__icon--right' })
       );
     }
   }]);
