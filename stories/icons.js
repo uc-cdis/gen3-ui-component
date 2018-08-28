@@ -29,13 +29,13 @@ storiesOf('General/Icons and Images', module)
     <div className='icon-demo'>
       {
         iconClassList.map(iconClass => (
-          <div className='icon-demo__card'>
+          <div className='icon-demo__card' key={iconClass}>
             <div className='icon-demo__icon-wrap'>
               <i className={`icon-demo__icon g3-icon ${iconClass}`} />
             </div>
             <div>
               {iconClass.split(' ').map(iconClassName => (
-                <p className='icon-demo__text'>
+                <p className='icon-demo__text' key={iconClassName}>
                   {iconClassName}
                 </p>
               ))}
