@@ -4,7 +4,7 @@ import './Button.css';
 
 class Button extends Component {
   handleClick(e) {
-    if (this.props.onClick) {
+    if (this.props.enabled && this.props.onClick) {
       this.props.onClick(e);
     }
   }

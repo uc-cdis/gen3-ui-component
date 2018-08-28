@@ -36,7 +36,7 @@ var Button = function (_Component) {
   _createClass(Button, [{
     key: 'handleClick',
     value: function handleClick(e) {
-      if (this.props.onClick) {
+      if (this.props.enabled && this.props.onClick) {
         this.props.onClick(e);
       }
     }
@@ -54,7 +54,9 @@ var Button = function (_Component) {
             return _this2.handleClick(e);
           }
         },
-        this.props.label
+        this.props.leftIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.leftIcon }),
+        this.props.label,
+        this.props.rightIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.rightIcon })
       );
     }
   }]);
@@ -67,14 +69,18 @@ Button.propTypes = {
   buttonType: _propTypes2.default.oneOf(['primary', 'secondary']),
   enabled: _propTypes2.default.bool,
   className: _propTypes2.default.string,
-  onClick: _propTypes2.default.func
+  onClick: _propTypes2.default.func,
+  leftIcon: _propTypes2.default.string,
+  rightIcon: _propTypes2.default.string
 };
 
 Button.defaultProps = {
   buttonType: 'primary',
   enabled: true,
   className: '',
-  onClick: function onClick() {}
+  onClick: function onClick() {},
+  leftIcon: null,
+  rightIcon: null
 };
 
 exports.default = Button;
