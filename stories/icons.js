@@ -4,7 +4,6 @@ import '../src/css/icon.css';
 import './icon-story.css';
 
 const iconClassList = [
-  'g3-icon--upload-white',
   'g3-icon--download',
   'g3-icon--upload',
   'g3-icon--back',
