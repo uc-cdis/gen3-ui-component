@@ -7,7 +7,7 @@ const clickFunction = (e) => {
 };
 
 storiesOf('Components', module)
-  .add('Button Primary White', () => (
+  .add('Buttons', () => (
     <React.Fragment>
       <Button buttonType='primary' label='Primary Button' onClick={clickFunction} leftIcon='download' rightIcon='copy' />
       <Button buttonType='secondary' label='Secondary Button' onClick={clickFunction} leftIcon='download' rightIcon='copy' />

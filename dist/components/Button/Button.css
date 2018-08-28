@@ -10,10 +10,15 @@
   cursor: pointer;
   outline: none;
   font-weight: 600;
+  padding: 1px 20px;
 }
 
-.g3-button__icon {
-  margin: 0 8px;
+.g3-button__icon--left {
+  margin: 0 8px 0 0;
+}
+
+.g3-button__icon--right {
+  margin: 0 0 0 8px;
 }
 
 .g3-button--disabled {
