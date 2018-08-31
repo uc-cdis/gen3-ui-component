@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './TopIconButton.css';
 
-const TopIconButton = ({ item, onActiveTab = () => {}, isActive = false, tabIndex }) => {
-  return (
+const TopIconButton = ({
+  item, onActiveTab = () => {}, isActive = false, tabIndex,
+}) => (
   <div
-    className='top-icon-button body'
+    className={isActive ? 'top-icon-button top-icon-button--active body' : 'top-icon-button body'}
     onClick={onActiveTab}
     onKeyDown={onActiveTab}
     role='button'
@@ -15,12 +16,12 @@ const TopIconButton = ({ item, onActiveTab = () => {}, isActive = false, tabInde
     <i className={item.iconClassName} />
   </div>
 );
-}
 
 TopIconButton.propTypes = {
   item: PropTypes.object.isRequired,
-  isActive: PropTypes.bool.isRequired,
+  isActive: PropTypes.bool,
   onActiveTab: PropTypes.func,
+  tabIndex: PropTypes.number.isRequired,
 };
 
 TopIconButton.defaultProps = {

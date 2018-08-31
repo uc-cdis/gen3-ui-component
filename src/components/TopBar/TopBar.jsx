@@ -5,7 +5,9 @@ import TopIconButton from './TopIconButton';
 import './TopBar.css';
 
 class TopBar extends Component {
-  isActive = id => this.props.activeTab === id;
+  isActive = (id) => {
+    return this.props.activeTab === id;
+  }
 
   render() {
     return (

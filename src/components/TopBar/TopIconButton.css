@@ -9,7 +9,7 @@
   outline: none;
 }
 
-.top-icon-button:active, .top-icon-button:hover {
+.top-icon-button--active, .top-icon-button:hover {
   border-bottom: 1px solid var(--g3-color__white);
 }
 

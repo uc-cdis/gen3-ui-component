@@ -19,7 +19,7 @@ storiesOf('Layout', module)
       <TopBar
         topItems={topItems}
         user={user}
-        onActiveTab={action('link-click')}
+        onActiveTab={action('link clicked')}
         onLogoutClick={action('logout')}
       />
     </StaticRouter>
