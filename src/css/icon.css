@@ -97,73 +97,73 @@
 }
 
 .g3-icon--analysis {
-  mask-image: url(../images/icons/analysis.svg);
+  mask-image: svg-load(../images/icons/analysis.svg);
 }
 
 .g3-icon--back {
-  mask-image: url(../images/icons/back.svg);
+  mask-image: svg-load(../images/icons/back.svg);
 }
 
 .g3-icon--copy {
-  mask-image: url(../images/icons/copy.svg);
+  mask-image: svg-load(../images/icons/copy.svg);
 }
 
 .g3-icon--cross-key {
-  mask-image: url(../images/icons/cross-key.svg);
+  mask-image: svg-load(../images/icons/cross-key.svg);
 }
 
 .g3-icon--cross {
-  mask-image: url(../images/icons/cross.svg);
+  mask-image: svg-load(../images/icons/cross.svg);
 }
 
 .g3-icon--delete {
-  mask-image: url(../images/icons/delete.svg);
+  mask-image: svg-load(../images/icons/delete.svg);
 }
 
 .g3-icon--dictionary {
-  mask-image: url(../images/icons/dictionary.svg);
+  mask-image: svg-load(../images/icons/dictionary.svg);
 }
 
 .g3-icon--download {
-  mask-image: url(../images/icons/download.svg);
+  mask-image: svg-load(../images/icons/download.svg);
 }
 
 .g3-icon--exit {
-  mask-image: url(../images/icons/exit.svg);
+  mask-image: svg-load(../images/icons/exit.svg);
 }
 
 .g3-icon--exploration {
-  mask-image: url(../images/icons/exploration.svg);
+  mask-image: svg-load(../images/icons/exploration.svg);
 }
 
 .g3-icon--files {
-  mask-image: url(../images/icons/files.svg);
+  mask-image: svg-load(../images/icons/files.svg);
 }
 
 .g3-icon--graph {
-  mask-image: url(../images/icons/graph.svg);
+  mask-image: svg-load(../images/icons/graph.svg);
 }
 
 .g3-icon--key {
-  mask-image: url(../images/icons/key.svg);
+  mask-image: svg-load(../images/icons/key.svg);
 }
 
 .g3-icon--link {
-  mask-image: url(../images/icons/link.svg);
+  mask-image: svg-load(../images/icons/link.svg);
 }
 
 .g3-icon--profile {
-  mask-image: url(../images/icons/profile.svg);
+  mask-image: svg-load(../images/icons/profile.svg);
 }
 
 .g3-icon--query {
-  mask-image: url(../images/icons/query.svg);
+  mask-image: svg-load(../images/icons/query.svg);
 }
 
 .g3-icon--upload {
-  mask-image: url(../images/icons/upload.svg);
+  mask-image: svg-load(../images/icons/upload.svg);
 }
 
 .g3-icon--workspace {
-  mask-image: url(../images/icons/workspace.svg);
+  mask-image: svg-load(../images/icons/workspace.svg);
 }

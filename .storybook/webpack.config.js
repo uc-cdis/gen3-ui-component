@@ -2,13 +2,9 @@ const path = require("path");
 
 module.exports = (baseConfig, env, defaultConfig) => {
   defaultConfig.module.rules.push({
-    test: /\.less$/,
+    test: /\.css$/,
     include: path.resolve(__dirname, "../src"),
-    loaders: [
-      'style-loader',
-      'css-loader',
-      'less-loader',
-    ]
+    loader: 'postcss-loader',
   });
   defaultConfig.resolve.extensions.push(".less");
 
