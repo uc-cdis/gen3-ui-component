@@ -1,0 +1,21 @@
+@import '../../css/base.css';
+
+.top-icon-button.body {
+  color: var(--g3-color__white);
+  margin: auto 20px;
+  width: auto;
+  display: flex;
+  align-items: baseline;
+  outline: none;
+}
+
+.top-icon-button:active, .top-icon-button:hover {
+  border-bottom: 1px solid var(--g3-color__white);
+}
+
+.top-icon-button .g3-icon {
+  background-color: white;
+  margin-left: 5px;
+  width: 12px;
+  height: 12px;
+}
