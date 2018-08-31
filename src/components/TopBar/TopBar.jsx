@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 import TopIconButton from './TopIconButton';
 import './TopBar.css';
 
-/**
- * NavBar renders row of nav-items of form { name, icon, link }
- * @param {dictIcons, topItems,user,onLogoutClick} params
- */
 class TopBar extends Component {
   isActive = id => this.props.activeTab === id;
 

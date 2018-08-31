@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import IconComponent from '../Icon';
 import './TopIconButton.css';
 
 const TopIconButton = ({ item, onActiveTab = () => {}, isActive = false, tabIndex }) => {
