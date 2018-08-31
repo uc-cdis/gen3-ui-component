@@ -25,7 +25,7 @@ describe('<TopBar />', () => {
         onActiveTab={onActiveTab}
         onLogout={onLogout}
       />
-    </StaticRouter>
+    </StaticRouter>,
   );
 
   it('renders', () => {
@@ -33,8 +33,8 @@ describe('<TopBar />', () => {
   });
 
   it('maps external and internal links properly', () => {
-    expect(component.find('Link').length).toBe(3);
-    expect(component.find('a').length).toBe(tabItems.length + 1);
+    expect(component.find('Link').length).toBe(2);
+    expect(component.find('a').length).toBe(tabItems.length);
   });
 
   it('wont show the user if undefined', () => {
@@ -46,8 +46,8 @@ describe('<TopBar />', () => {
           onActiveTab={onActiveTab}
           onLogout={onLogout}
         />
-      </StaticRouter>
+      </StaticRouter>,
     );
-    expect(noUserComponent.find('a').length).toBe(tabItems.length);
+    expect(noUserComponent.find('button').length).toBe(0);
   });
 });

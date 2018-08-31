@@ -32,6 +32,14 @@
   margin-bottom: 10px;
 }
 
+.top-bar button {
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  background-color: var(--gen3-color__base-blue);
+  cursor: pointer;
+}
+
 .top-bar__link:last-child {
   border-right: 0;
 }
