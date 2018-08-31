@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import TopIconButton from './TopIconButton';
+import TopBarButton from './TopBarButton';
 import './TopBar.css';
 
 class TopBar extends Component {
@@ -15,7 +15,7 @@ class TopBar extends Component {
         <header className='top-bar__header'>
           <nav className='top-bar__nav'>
             {
-              this.props.topItems.map(
+              this.props.tabItems.map(
                 (item, i) => (
                   (item.link.startsWith('http')) ?
                     <a
@@ -25,7 +25,7 @@ class TopBar extends Component {
                       target='_blank'
                       rel='noopener noreferrer'
                     >
-                      <TopIconButton
+                      <TopBarButton
                         item={item}
                         isActive={this.isActive(item.link)}
                         onActiveTab={() => this.props.onActiveTab(item.link)}
@@ -37,7 +37,7 @@ class TopBar extends Component {
                       key={item.link}
                       to={item.link}
                     >
-                      <TopIconButton
+                      <TopBarButton
                         item={item}
                         isActive={this.isActive(item.link)}
                         onActiveTab={() => this.props.onActiveTab(item.link)}
@@ -49,13 +49,13 @@ class TopBar extends Component {
             }
             {
               this.props.user.username !== undefined
-              && <Link className='top-bar__link' to='#' onClick={this.props.onLogoutClick}>
-                <TopIconButton
+              && <Link className='top-bar__link' to='#' onClick={this.props.onLogout}>
+                <TopBarButton
                   item={{
                     name: this.props.user.username,
                     iconClassName: 'g3-icon g3-icon--exit'
                   }}
-                  tabIndex={this.props.topItems.length}
+                  tabIndex={this.props.tabItems.length}
                 />
               </Link>
             }
@@ -67,11 +67,11 @@ class TopBar extends Component {
 }
 
 TopBar.propTypes = {
-  topItems: PropTypes.array.isRequired,
+  tabItems: PropTypes.array.isRequired,
   user: PropTypes.shape({ username: PropTypes.string }).isRequired,
   activeTab: PropTypes.string,
   onActiveTab: PropTypes.func,
-  onLogoutClick: PropTypes.func.isRequired,
+  onLogout: PropTypes.func.isRequired,
 };
 
 TopBar.defaultProps = {

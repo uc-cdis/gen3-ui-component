@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import { StaticRouter } from 'react-router-dom';
 import TopBar from './TopBar';
 
-const topItems = [
+const tabItems = [
   { iconClassName: 'g3-icon g3-icon--upload', link: '/submission', name: 'Data Submission' },
   { link: 'https://uc-cdis.github.io/gen3-user-doc/user-guide/guide-overview', name: 'Documentation' },
   { iconClassName: 'g3-icon g3-icon--exploration', link: '/explorer', name: 'Explorer' },
@@ -14,16 +14,16 @@ const user = {
 };
 
 const onActiveTab = jest.fn();
-const onLogoutClick = jest.fn();
+const onLogout = jest.fn();
 
 describe('<TopBar />', () => {
   const component = mount(
     <StaticRouter location={{ pathname: '/' }} context={{}}>
       <TopBar
-        topItems={topItems}
+        tabItems={tabItems}
         user={user}
         onActiveTab={onActiveTab}
-        onLogoutClick={onLogoutClick}
+        onLogout={onLogout}
       />
     </StaticRouter>
   );
@@ -34,20 +34,20 @@ describe('<TopBar />', () => {
 
   it('maps external and internal links properly', () => {
     expect(component.find('Link').length).toBe(3);
-    expect(component.find('a').length).toBe(topItems.length + 1);
+    expect(component.find('a').length).toBe(tabItems.length + 1);
   });
 
   it('wont show the user if undefined', () => {
     const noUserComponent = mount(
       <StaticRouter location={{ pathname: '/' }} context={{}}>
         <TopBar
-          topItems={topItems}
+          tabItems={tabItems}
           user={{}}
           onActiveTab={onActiveTab}
-          onLogoutClick={onLogoutClick}
+          onLogout={onLogout}
         />
       </StaticRouter>
     );
-    expect(noUserComponent.find('a').length).toBe(topItems.length);
+    expect(noUserComponent.find('a').length).toBe(tabItems.length);
   });
 });

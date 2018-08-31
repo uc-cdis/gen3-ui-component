@@ -1,6 +1,6 @@
 @import '../../css/base.css';
 
-.top-icon-button.body {
+.top-bar-button.body {
   color: var(--g3-color__white);
   margin: auto 20px;
   width: auto;
@@ -9,11 +9,11 @@
   outline: none;
 }
 
-.top-icon-button--active, .top-icon-button:hover {
+.top-bar-button--active, .top-bar-button:hover {
   border-bottom: 1px solid var(--g3-color__white);
 }
 
-.top-icon-button .g3-icon {
+.top-bar-button .g3-icon {
   background-color: white;
   margin-left: 5px;
   width: 12px;
