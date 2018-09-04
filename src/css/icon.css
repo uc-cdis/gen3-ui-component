@@ -167,3 +167,11 @@
 .g3-icon--workspace {
   mask-image: svg-load(../images/icons/workspace.svg);
 }
+
+.g3-icon--clinical {
+  mask-image: svg-load(../images/icons/clinical.svg);
+}
+
+.g3-icon--datafile {
+  mask-image: svg-load(../images/icons/datafile.svg);
+}
