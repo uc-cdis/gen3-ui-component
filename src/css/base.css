@@ -39,13 +39,14 @@
 
 }
 
-h1, h2, h3, h4, 
-.introduction, 
+h1, h2, h3, h4,
+body,
+.introduction,
 .body,
 .caption,
 .special-number,
-.form-body, 
-.form-h1, .form-h2, .form-caption, 
+.form-body,
+.form-h1, .form-h2, .form-caption,
 .form-special-number {
   font-family: 'Source Sans Pro', sans-serif;
 }
@@ -74,6 +75,10 @@ h3 {
 h4 {
   font-size: 14px;
   letter-spacing: .02rem;
+}
+
+a {
+  text-decoration: none;
 }
 
 .introduction {

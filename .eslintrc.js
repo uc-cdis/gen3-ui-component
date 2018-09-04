@@ -6,11 +6,8 @@ module.exports = {
         "jest": true
     },
     "parserOptions": {
-        "sourceType": "module",
-        "ecmaVersion": 6,
-        "ecmaFeatures": {
-          "jsx": true
-        },
+      "sourceType": "module",
+      "ecmaVersion": 6,
     },
     "plugins": [
         "react"
