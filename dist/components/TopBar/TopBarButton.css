@@ -13,7 +13,7 @@
   border-bottom: 1px solid var(--g3-color__white);
 }
 
-.top-bar-button .g3-icon {
+.top-bar-button__icon {
   background-color: white;
   margin-left: 5px;
   width: 12px;

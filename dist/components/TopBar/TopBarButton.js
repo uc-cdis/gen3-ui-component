@@ -33,12 +33,15 @@ var TopBarButton = function TopBarButton(_ref) {
       tabIndex: tabIndex
     },
     item.name,
-    _react2.default.createElement('i', { className: item.iconClassName })
+    item.iconClassName ? _react2.default.createElement('i', { className: 'top-bar-button__icon ' + item.iconClassName }) : null
   );
 };
 
 TopBarButton.propTypes = {
-  item: _propTypes2.default.object.isRequired,
+  item: _propTypes2.default.shape({
+    name: _propTypes2.default.string.isRequired,
+    iconClassName: _propTypes2.default.string
+  }).isRequired,
   isActive: _propTypes2.default.bool,
   onActiveTab: _propTypes2.default.func,
   tabIndex: _propTypes2.default.number.isRequired
