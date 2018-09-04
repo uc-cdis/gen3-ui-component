@@ -13,12 +13,19 @@ const TopBarButton = ({
     tabIndex={tabIndex}
   >
     {item.name}
-    <i className={item.iconClassName} />
+    {
+      item.iconClassName
+        ? <i className={`top-bar-button__icon ${item.iconClassName}`} />
+        : null
+    }
   </div>
 );
 
 TopBarButton.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    iconClassName: PropTypes.string,
+  }).isRequired,
   isActive: PropTypes.bool,
   onActiveTab: PropTypes.func,
   tabIndex: PropTypes.number.isRequired,

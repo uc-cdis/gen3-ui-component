@@ -22,7 +22,11 @@
 }
 
 .top-bar__link {
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
   border-right: 2px solid #6896c6;
+  background-color: var(--gen3-color__base-blue);
   height: 20px;
   display: inline-block;
   text-align: center;
@@ -30,13 +34,6 @@
   padding: 0 0;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-.top-bar button {
-  border-left: none;
-  border-top: none;
-  border-bottom: none;
-  background-color: var(--gen3-color__base-blue);
   cursor: pointer;
 }
 

@@ -34,22 +34,17 @@ var TopBar = function (_Component) {
   _inherits(TopBar, _Component);
 
   function TopBar() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
     _classCallCheck(this, TopBar);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TopBar.__proto__ || Object.getPrototypeOf(TopBar)).call.apply(_ref, [this].concat(args))), _this), _this.isActive = function (id) {
-      return _this.props.activeTab === id;
-    }, _temp), _possibleConstructorReturn(_this, _ret);
+    return _possibleConstructorReturn(this, (TopBar.__proto__ || Object.getPrototypeOf(TopBar)).apply(this, arguments));
   }
 
   _createClass(TopBar, [{
+    key: 'isActive',
+    value: function isActive(id) {
+      return this.props.activeTab === id;
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
