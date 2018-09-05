@@ -14,6 +14,8 @@ const iconClassList = [
   'g3-icon g3-icon--delete',
   'g3-icon g3-icon--exit',
   'g3-icon g3-icon--link',
+  'g3-icon g3-icon--clinical',
+  'g3-icon g3-icon--datafile',
   'g3-icon g3-icon--profile g3-icon--lg',
   'g3-icon g3-icon--query g3-icon--lg',
   'g3-icon g3-icon--workspace g3-icon--lg',

@@ -1,8 +1,10 @@
 @import "../../css/base.css";
+@import "../../css/icon.css";
 
 .g3-button {
   border-radius: 4px;
   min-width: 152px;
+  width: auto;
   height: 40px;
   font-size: 14px;
   display: inline-block;
@@ -11,6 +13,11 @@
   outline: none;
   font-weight: 600;
   padding: 1px 20px;
+}
+
+.g3-button__icon {
+  position: relative;
+  top: 3px;
 }
 
 .g3-button__icon--left {
