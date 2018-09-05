@@ -22,16 +22,15 @@ gulp.task('css', function(){
 });
 
 gulp.task('js', function(){
-  return gulp.src('src/components/**/*.jsx')
+  return gulp.src([
+      'src/components/**/*.jsx',
+      '!src/**/*.test.js',
+      '!src/**/*.test.jsx',
+    ])
     .pipe(gulpif(isDev, sourcemaps.init()))
     .pipe(babel())
     .pipe(gulpif(isDev, sourcemaps.write({sourceRoot: '/g3-ui/'})))
     .pipe(gulp.dest('dist/components'))
-});
-
-gulp.task('icons', function() {
-  return gulp.src('src/images/icons/*')
-    .pipe(gulp.dest('dist/images/icons'))
 });
 
 // This is for old data portal base.less and will be deprecated
@@ -40,4 +39,4 @@ gulp.task('base.less', function() {
     .pipe(gulp.dest('dist/css'))
 })
 
-gulp.task('default', [ 'css', 'js', 'icons', 'base.less' ]);
+gulp.task('default', [ 'css', 'js', 'base.less' ]);
