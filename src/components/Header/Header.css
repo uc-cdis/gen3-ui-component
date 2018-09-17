@@ -1,0 +1,18 @@
+.header {
+  width: 100%;
+  background-color: var(--g3-color__base-blue-light);
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  height: 80px;
+  width: 100px;
+  padding: 0 30px;
+}
+
+.header__title {
+  color: var(--g3-color__white);
+}
