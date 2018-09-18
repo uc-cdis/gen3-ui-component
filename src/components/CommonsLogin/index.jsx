@@ -20,6 +20,7 @@ class CommonsLogin extends React.Component {
           label={this.props.buttonTitle}
           buttonType='secondary'
           onClick={this.props.onButtonClick}
+          enabled={this.props.buttonEnabled}
         />
       </div>
     );
@@ -31,6 +32,11 @@ CommonsLogin.propTypes = {
   logoSrc: PropTypes.string.isRequired,
   buttonTitle: PropTypes.string.isRequired,
   onButtonClick: PropTypes.func.isRequired,
+  buttonEnabled: PropTypes.bool,
+};
+
+CommonsLogin.defaultProps = {
+  buttonEnabled: true,
 };
 
 export default CommonsLogin;
