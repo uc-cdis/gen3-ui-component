@@ -1,6 +1,6 @@
 {
   "name": "@gen3/ui-component",
-  "version": "0.1.0",
+  "version": "0.0.5",
   "description": "Basic UI component for gen3",
   "main": "index.js",
   "scripts": {
