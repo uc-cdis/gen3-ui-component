@@ -13,7 +13,7 @@ class CommonsLogin extends React.Component {
         <img
           className='commons-login__logo'
           src={this.props.logoSrc}
-          alt={this.props.title + ' logo'}
+          alt={`${this.props.title} logo`}
         />
         <Button
           className='commons-login__button'
