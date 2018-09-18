@@ -3,6 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { StaticRouter } from 'react-router-dom';
 import TopBar from '../src/components/TopBar/TopBar';
+import Header from '../src/components/Header/.';
+import gen3Logo from '../src/images/logos/gen3.png';
 
 const tabItems = [
   { iconClassName: 'g3-icon g3-icon--upload', link: '/submission', name: 'Data Submission' },
@@ -23,4 +25,7 @@ storiesOf('Layout', module)
         onLogout={action('logout')}
       />
     </StaticRouter>
+  ))
+  .add('Header', () => (
+    <Header logoSrc={gen3Logo} title='Demo Framework' />
   ));
