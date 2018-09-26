@@ -1,0 +1,1 @@
+.header{width:100%;background-color:var(--g3-color__base-blue-light);height:100px;display:flex;align-items:center;justify-content:space-between}.header__logo-container{flex-basis:30%;padding:0 30px}.header__logo{height:80px}.header__title{flex-grow:1;color:var(--g3-color__white);text-align:center}
