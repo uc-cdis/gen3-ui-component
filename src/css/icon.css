@@ -179,3 +179,31 @@
 .g3-icon--user {
   mask-image: svg-load(../images/icons/user.svg);
 }
+
+.g3-icon--chevron-left {
+  mask-image: svg-load(../images/icons/chevron-left.svg);
+}
+
+.g3-icon--chevron-right {
+  mask-image: svg-load(../images/icons/chevron-right.svg);
+}
+
+.g3-icon--chevron-up {
+  mask-image: svg-load(../images/icons/chevron-up.svg);
+}
+
+.g3-icon--chevron-down {
+  mask-image: svg-load(../images/icons/chevron-down.svg);
+}
+
+.g3-icon--more {
+  mask-image: svg-load(../images/icons/more.svg);
+}
+
+.g3-icon--planet {
+  mask-image: svg-load(../images/icons/planet.svg);
+}
+
+.g3-icon--external-link {
+  mask-image: svg-load(../images/icons/external-link.svg);
+}
