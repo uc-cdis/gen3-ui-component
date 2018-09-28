@@ -48,6 +48,9 @@ var Button = function (_Component) {
       var _this2 = this;
 
       var buttonTypeClassName = !this.props.enabled ? 'g3-button--disabled' : 'g3-button--' + this.props.buttonType;
+      var otherAttrs = {};
+      if (this.props.id) otherAttrs.id = this.props.id;
+      if (this.props.value) otherAttrs.value = this.props.value;
       return _react2.default.createElement(
         'button',
         _extends({
@@ -56,7 +59,7 @@ var Button = function (_Component) {
           onClick: function onClick(e) {
             return _this2.handleClick(e);
           }
-        }, this.props),
+        }, otherAttrs),
         this.props.leftIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.leftIcon + ' g3-button__icon g3-button__icon--left' }),
         this.props.label,
         this.props.rightIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.rightIcon + ' g3-button__icon g3-button__icon--right' })
@@ -75,7 +78,9 @@ Button.propTypes = {
   onClick: _propTypes2.default.func,
   leftIcon: _propTypes2.default.string,
   rightIcon: _propTypes2.default.string,
-  type: _propTypes2.default.oneOf(['button', 'submit', 'reset'])
+  type: _propTypes2.default.oneOf(['button', 'submit', 'reset']),
+  id: _propTypes2.default.string,
+  value: _propTypes2.default.string
 };
 
 Button.defaultProps = {
@@ -85,7 +90,9 @@ Button.defaultProps = {
   onClick: function onClick() {},
   leftIcon: null,
   rightIcon: null,
-  type: 'button'
+  type: 'button',
+  id: null,
+  value: null
 };
 
 exports.default = Button;
