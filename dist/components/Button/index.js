@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
@@ -48,13 +50,13 @@ var Button = function (_Component) {
       var buttonTypeClassName = !this.props.enabled ? 'g3-button--disabled' : 'g3-button--' + this.props.buttonType;
       return _react2.default.createElement(
         'button',
-        {
+        _extends({
           type: 'button',
           className: this.props.className + ' g3-button ' + buttonTypeClassName,
           onClick: function onClick(e) {
             return _this2.handleClick(e);
           }
-        },
+        }, this.props),
         this.props.leftIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.leftIcon + ' g3-button__icon g3-button__icon--left' }),
         this.props.label,
         this.props.rightIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.rightIcon + ' g3-button__icon g3-button__icon--right' })
@@ -72,7 +74,8 @@ Button.propTypes = {
   className: _propTypes2.default.string,
   onClick: _propTypes2.default.func,
   leftIcon: _propTypes2.default.string,
-  rightIcon: _propTypes2.default.string
+  rightIcon: _propTypes2.default.string,
+  type: _propTypes2.default.oneOf(['button', 'submit', 'reset'])
 };
 
 Button.defaultProps = {
@@ -81,7 +84,8 @@ Button.defaultProps = {
   className: '',
   onClick: function onClick() {},
   leftIcon: null,
-  rightIcon: null
+  rightIcon: null,
+  type: 'button'
 };
 
 exports.default = Button;

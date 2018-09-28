@@ -16,6 +16,7 @@ class Button extends Component {
         type='button'
         className={`${this.props.className} g3-button ${buttonTypeClassName}`}
         onClick={e => this.handleClick(e)}
+        {...this.props}
       >
         {this.props.leftIcon && (
           <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon} g3-button__icon g3-button__icon--left`} />
@@ -37,6 +38,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   leftIcon: PropTypes.string,
   rightIcon: PropTypes.string,
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
 };
 
 Button.defaultProps = {
@@ -46,6 +48,7 @@ Button.defaultProps = {
   onClick: () => {},
   leftIcon: null,
   rightIcon: null,
+  type: 'button',
 };
 
 export default Button;
