@@ -40,9 +40,12 @@ DropdownItem.propTypes = {
   leftIcon: PropTypes.string,
   rightIcon: PropTypes.string,
   onClick: PropTypes.func,
-  children: PropTypes.any,
   tabIndex: PropTypes.number,
   disabled: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 DropdownItem.defaultProps = {
@@ -50,7 +53,6 @@ DropdownItem.defaultProps = {
   leftIcon: null,
   rightIcon: null,
   onClick: () => {},
-  children: '',
   disabled: false,
   tabIndex: 0, // override by Dropdown component
 };

@@ -41,7 +41,7 @@ var DropdownMenu = function (_Component) {
       var count = 0;
       return _react2.default.createElement(
         'div',
-        { className: 'g3-dropdown__menu ' + (this.props.menuOpen ? 'g3-dropdown__menu--shown' : '') + ' ' + (this.props.className || '') },
+        { className: 'g3-dropdown__menu ' + (this.props.menuOpen ? 'g3-dropdown__menu--opened' : '') + ' ' + (this.props.className || '') },
         _react2.default.Children.map(this.props.children, function (child) {
           if (child.type === _DropdownItem2.default) {
             count += 1;
@@ -59,13 +59,12 @@ var DropdownMenu = function (_Component) {
 }(_react.Component);
 
 DropdownMenu.propTypes = {
-  children: _propTypes2.default.any,
   className: _propTypes2.default.string,
-  menuOpen: _propTypes2.default.bool
+  menuOpen: _propTypes2.default.bool,
+  children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node]).isRequired
 };
 
 DropdownMenu.defaultProps = {
-  children: '',
   className: '',
   menuOpen: false // override by Dropdown component
 };

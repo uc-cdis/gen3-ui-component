@@ -69,9 +69,9 @@ DropdownItem.propTypes = {
   leftIcon: _propTypes2.default.string,
   rightIcon: _propTypes2.default.string,
   onClick: _propTypes2.default.func,
-  children: _propTypes2.default.any,
   tabIndex: _propTypes2.default.number,
-  disabled: _propTypes2.default.bool
+  disabled: _propTypes2.default.bool,
+  children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node]).isRequired
 };
 
 DropdownItem.defaultProps = {
@@ -79,7 +79,6 @@ DropdownItem.defaultProps = {
   leftIcon: null,
   rightIcon: null,
   onClick: function onClick() {},
-  children: '',
   disabled: false,
   tabIndex: 0 // override by Dropdown component
 };

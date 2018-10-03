@@ -6,7 +6,7 @@ class DropdownMenu extends Component {
   render() {
     let count = 0;
     return (
-      <div className={`g3-dropdown__menu ${this.props.menuOpen ? 'g3-dropdown__menu--shown' : ''} ${this.props.className || ''}`}>
+      <div className={`g3-dropdown__menu ${this.props.menuOpen ? 'g3-dropdown__menu--opened' : ''} ${this.props.className || ''}`}>
         {
           React.Children.map(this.props.children, (child) => {
             if (child.type === DropdownItem) {
@@ -24,13 +24,15 @@ class DropdownMenu extends Component {
 }
 
 DropdownMenu.propTypes = {
-  children: PropTypes.any,
   className: PropTypes.string,
   menuOpen: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 DropdownMenu.defaultProps = {
-  children: '',
   className: '',
   menuOpen: false, // override by Dropdown component
 };

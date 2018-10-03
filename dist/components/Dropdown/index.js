@@ -14,9 +14,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _DropdownToggle = require('./DropdownToggle');
+var _DropdownButton = require('./DropdownButton');
 
-var _DropdownToggle2 = _interopRequireDefault(_DropdownToggle);
+var _DropdownButton2 = _interopRequireDefault(_DropdownButton);
 
 var _DropdownItem = require('./DropdownItem');
 
@@ -25,10 +25,6 @@ var _DropdownItem2 = _interopRequireDefault(_DropdownItem);
 var _DropdownMenu = require('./DropdownMenu');
 
 var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
-
-var _DropdownMenuHeader = require('./DropdownMenuHeader');
-
-var _DropdownMenuHeader2 = _interopRequireDefault(_DropdownMenuHeader);
 
 var _DropdownMenuDivider = require('./DropdownMenuDivider');
 
@@ -55,16 +51,16 @@ var Dropdown = function (_Component) {
     _this.state = {
       menuOpen: false
     };
-    _this.handleToggle = _this.handleToggle.bind(_this);
+    _this.handleTriggerMenu = _this.handleTriggerMenu.bind(_this);
     _this.handleWindowClick = _this.handleWindowClick.bind(_this);
     _this.closeMenu = _this.closeMenu.bind(_this);
-    _this.toggleElementRef = _react2.default.createRef();
+    _this.menuTriggerElementRef = _react2.default.createRef();
     return _this;
   }
 
   _createClass(Dropdown, [{
-    key: 'handleToggle',
-    value: function handleToggle() {
+    key: 'handleTriggerMenu',
+    value: function handleTriggerMenu() {
       if (this.props.disabled) {
         return;
       }
@@ -80,10 +76,10 @@ var Dropdown = function (_Component) {
   }, {
     key: 'handleWindowClick',
     value: function handleWindowClick(e) {
-      if (!this.toggleElementRef || !this.toggleElementRef.current) {
+      if (!this.menuTriggerElementRef || !this.menuTriggerElementRef.current) {
         return;
       }
-      if (!this.toggleElementRef.current.contains(e.target)) {
+      if (!this.menuTriggerElementRef.current.contains(e.target)) {
         this.closeMenu();
       }
     }
@@ -112,10 +108,10 @@ var Dropdown = function (_Component) {
         { className: 'g3-dropdown ' + (this.props.disabled ? 'g3-dropdown--disabled' : '') + ' ' + (this.props.className || '') },
         _react2.default.Children.map(this.props.children, function (child) {
           return _react2.default.cloneElement(child, {
-            handleToggle: _this2.handleToggle,
+            handleTriggerMenu: _this2.handleTriggerMenu,
             menuOpen: _this2.state.menuOpen,
             afterClick: _this2.closeMenu,
-            toggleElementRef: _this2.toggleElementRef,
+            menuTriggerElementRef: _this2.menuTriggerElementRef,
             buttonType: _this2.props.buttonType,
             disabled: _this2.props.disabled
           });
@@ -128,23 +124,45 @@ var Dropdown = function (_Component) {
 }(_react.Component);
 
 Dropdown.propTypes = {
-  children: _propTypes2.default.any,
   className: _propTypes2.default.string,
   buttonType: _propTypes2.default.oneOf(['primary', 'secondary']),
-  disabled: _propTypes2.default.bool
+  disabled: _propTypes2.default.bool,
+  children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node]).isRequired
 };
 
 Dropdown.defaultProps = {
-  children: '',
   className: '',
   buttonType: 'primary',
   disabled: false
 };
 
-Dropdown.Toggle = _DropdownToggle2.default;
+/**
+* props:
+*   - split(bool): if true, the trigger button is split
+*   - label(stirng): label of the button
+*   - onClick(func): onclick function, ignored when split=false (onClick=triggerMenu)
+*   - className(string): class name
+*   - disabled(bool): whether disabled
+*/
+Dropdown.Button = _DropdownButton2.default;
+
+/**
+* Wrapper for a list of menu items
+* props:
+*   - className(string): class name
+*/
 Dropdown.Menu = _DropdownMenu2.default;
+
+/**
+* props:
+*   - className(string): class name
+*   - leftIcon(string): left icon name
+*   - rightIcon(string): right icon name
+*   - onClick(func): onclick function
+*   - disabled(bool): whether disabled
+*/
 Dropdown.Item = _DropdownItem2.default;
-Dropdown.MenuHeader = _DropdownMenuHeader2.default;
+
 Dropdown.MenuDivider = _DropdownMenuDivider2.default;
 
 exports.default = Dropdown;
