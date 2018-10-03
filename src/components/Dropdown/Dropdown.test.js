@@ -6,11 +6,11 @@ describe('<Dropdown />', () => {
   const func1 = jest.fn();
   const func2 = jest.fn();
   const func3 = jest.fn();
-  const connectedWrapper = mount(
+  const dropdownWrapper = mount(
     <Dropdown>
-      <Dropdown.Toggle>
+      <Dropdown.Button>
         Dropdown
-      </Dropdown.Toggle>
+      </Dropdown.Button>
       <Dropdown.Menu>
         <Dropdown.Item onClick={func1}>
 item1
@@ -18,11 +18,11 @@ item1
       </Dropdown.Menu>
     </Dropdown>,
   );
-  const separateWrapper = mount(
+  const splitDropdownWrapper = mount(
     <Dropdown>
-      <Dropdown.Toggle separate onClick={func2}>
+      <Dropdown.Button split onClick={func2}>
         Dropdown
-      </Dropdown.Toggle>
+      </Dropdown.Button>
       <Dropdown.Menu>
         <Dropdown.Item onClick={func3}>
 item1
@@ -32,22 +32,22 @@ item1
   );
 
   it('renders', () => {
-    expect(connectedWrapper.find(Dropdown).length).toBe(1);
-    expect(connectedWrapper.state().menuOpen).toEqual(false);
+    expect(dropdownWrapper.find(Dropdown).length).toBe(1);
+    expect(dropdownWrapper.state().menuOpen).toEqual(false);
   });
 
-  it('could toggle correctly', () => {
-    connectedWrapper.find('.g3-dropdown__toggle-main').simulate('click');
-    expect(connectedWrapper.state().menuOpen).toBe(true);
-    connectedWrapper.find('.g3-dropdown__item').simulate('click');
+  it('could trigger menu correctly', () => {
+    dropdownWrapper.find('.g3-dropdown-button__button').simulate('click');
+    expect(dropdownWrapper.state().menuOpen).toBe(true);
+    dropdownWrapper.find('.g3-dropdown__item').simulate('click');
     expect(func1.mock.calls.length).toBe(1);
 
-    separateWrapper.find('.g3-dropdown__toggle-main').simulate('click');
-    expect(separateWrapper.state().menuOpen).toBe(false);
+    splitDropdownWrapper.find('.g3-dropdown-button__button').simulate('click');
+    expect(splitDropdownWrapper.state().menuOpen).toBe(false);
     expect(func2.mock.calls.length).toBe(1);
-    separateWrapper.find('.g3-dropdown__toggle-separated').simulate('click');
-    expect(separateWrapper.state().menuOpen).toBe(true);
-    separateWrapper.find('.g3-dropdown__item').simulate('click');
+    splitDropdownWrapper.find('.g3-dropdown-button__menu-trigger').simulate('click');
+    expect(splitDropdownWrapper.state().menuOpen).toBe(true);
+    splitDropdownWrapper.find('.g3-dropdown__item').simulate('click');
     expect(func3.mock.calls.length).toBe(1);
   });
 });
