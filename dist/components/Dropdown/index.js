@@ -51,9 +51,6 @@ var Dropdown = function (_Component) {
     _this.state = {
       menuOpen: false
     };
-    _this.handleTriggerMenu = _this.handleTriggerMenu.bind(_this);
-    _this.handleWindowClick = _this.handleWindowClick.bind(_this);
-    _this.closeMenu = _this.closeMenu.bind(_this);
     _this.menuTriggerElementRef = _react2.default.createRef();
     return _this;
   }
@@ -86,17 +83,25 @@ var Dropdown = function (_Component) {
   }, {
     key: 'bindCancellingEvent',
     value: function bindCancellingEvent() {
-      window.addEventListener('click', this.handleWindowClick);
+      var _this2 = this;
+
+      window.addEventListener('click', function (e) {
+        return _this2.handleWindowClick(e);
+      });
     }
   }, {
     key: 'unbindCancellingEvent',
     value: function unbindCancellingEvent() {
-      window.removeEventListener('click', this.handleWindowClick);
+      var _this3 = this;
+
+      window.removeEventListener('click', function (e) {
+        return _this3.handleWindowClick(e);
+      });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this4 = this;
 
       if (this.state.menuOpen) {
         this.bindCancellingEvent();
@@ -108,12 +113,16 @@ var Dropdown = function (_Component) {
         { className: 'g3-dropdown ' + (this.props.disabled ? 'g3-dropdown--disabled' : '') + ' ' + (this.props.className || '') },
         _react2.default.Children.map(this.props.children, function (child) {
           return _react2.default.cloneElement(child, {
-            handleTriggerMenu: _this2.handleTriggerMenu,
-            menuOpen: _this2.state.menuOpen,
-            afterClick: _this2.closeMenu,
-            menuTriggerElementRef: _this2.menuTriggerElementRef,
-            buttonType: _this2.props.buttonType,
-            disabled: _this2.props.disabled
+            handleTriggerMenu: function handleTriggerMenu(e) {
+              return _this4.handleTriggerMenu(e);
+            },
+            menuOpen: _this4.state.menuOpen,
+            afterClick: function afterClick(e) {
+              return _this4.closeMenu(e);
+            },
+            menuTriggerElementRef: _this4.menuTriggerElementRef,
+            buttonType: _this4.props.buttonType,
+            disabled: _this4.props.disabled
           });
         })
       );

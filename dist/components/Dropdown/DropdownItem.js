@@ -25,13 +25,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DropdownItem = function (_Component) {
   _inherits(DropdownItem, _Component);
 
-  function DropdownItem(props) {
+  function DropdownItem() {
     _classCallCheck(this, DropdownItem);
 
-    var _this = _possibleConstructorReturn(this, (DropdownItem.__proto__ || Object.getPrototypeOf(DropdownItem)).call(this, props));
-
-    _this.handleClick = _this.handleClick.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (DropdownItem.__proto__ || Object.getPrototypeOf(DropdownItem)).apply(this, arguments));
   }
 
   _createClass(DropdownItem, [{
@@ -45,14 +42,20 @@ var DropdownItem = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         {
           role: 'button',
           tabIndex: this.props.tabIndex,
           className: this.props.className + ' g3-dropdown__item ' + (this.props.disabled ? 'g3-dropdown__item--disabled' : ''),
-          onClick: this.handleClick,
-          onKeyPress: this.handleClick
+          onClick: function onClick(e) {
+            return _this2.handleClick(e);
+          },
+          onKeyPress: function onKeyPress(e) {
+            return _this2.handleClick(e);
+          }
         },
         this.props.leftIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.leftIcon + ' g3-dropdown__item-icon g3-dropdown__item-icon--left' }),
         this.props.children,

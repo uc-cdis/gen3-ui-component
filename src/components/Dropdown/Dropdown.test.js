@@ -6,6 +6,7 @@ describe('<Dropdown />', () => {
   const func1 = jest.fn();
   const func2 = jest.fn();
   const func3 = jest.fn();
+  /* eslint-disable */
   const dropdownWrapper = mount(
     <Dropdown>
       <Dropdown.Button>
@@ -13,7 +14,7 @@ describe('<Dropdown />', () => {
       </Dropdown.Button>
       <Dropdown.Menu>
         <Dropdown.Item onClick={func1}>
-item1
+          item1
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>,
@@ -25,10 +26,11 @@ item1
       </Dropdown.Button>
       <Dropdown.Menu>
         <Dropdown.Item onClick={func3}>
-item1
+          item1
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>,
+    /* eslint-enable */
   );
 
   it('renders', () => {

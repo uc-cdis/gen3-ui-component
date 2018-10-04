@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class DropdownItem extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
   handleClick() {
     if (this.props.disabled) {
       return;
@@ -20,8 +15,8 @@ class DropdownItem extends Component {
         role='button'
         tabIndex={this.props.tabIndex}
         className={`${this.props.className} g3-dropdown__item ${this.props.disabled ? 'g3-dropdown__item--disabled' : ''}`}
-        onClick={this.handleClick}
-        onKeyPress={this.handleClick}
+        onClick={e => this.handleClick(e)}
+        onKeyPress={e => this.handleClick(e)}
       >
         {this.props.leftIcon && (
           <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon} g3-dropdown__item-icon g3-dropdown__item-icon--left`} />

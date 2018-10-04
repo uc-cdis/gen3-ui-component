@@ -27,13 +27,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DropdownButton = function (_Component) {
   _inherits(DropdownButton, _Component);
 
-  function DropdownButton(props) {
+  function DropdownButton() {
     _classCallCheck(this, DropdownButton);
 
-    var _this = _possibleConstructorReturn(this, (DropdownButton.__proto__ || Object.getPrototypeOf(DropdownButton)).call(this, props));
-
-    _this.handleClick = _this.handleClick.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (DropdownButton.__proto__ || Object.getPrototypeOf(DropdownButton)).apply(this, arguments));
   }
 
   _createClass(DropdownButton, [{
@@ -48,6 +45,8 @@ var DropdownButton = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var wrapperDisableStatusClassName = this.props.disabled ? 'g3-dropdown-button__wrapper--disabled' : '';
 
       var buttonTypeClassName = 'g3-dropdown-button__button--' + this.props.buttonType;
@@ -66,7 +65,9 @@ var DropdownButton = function (_Component) {
           {
             type: 'button',
             className: 'g3-dropdown-button__button ' + buttonIsSplitClassName + ' ' + buttonTypeClassName,
-            onClick: this.props.split ? this.handleClick : this.props.handleTriggerMenu,
+            onClick: this.props.split ? function (e) {
+              return _this2.handleClick(e);
+            } : this.props.handleTriggerMenu,
             label: this.props.label
           },
           this.props.children,

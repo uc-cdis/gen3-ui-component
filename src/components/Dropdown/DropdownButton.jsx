@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import './DropdownButton.css';
 
 class DropdownButton extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
   handleClick() {
     if (this.props.disabled) {
       return;
@@ -34,7 +29,7 @@ class DropdownButton extends Component {
         <button
           type='button'
           className={`g3-dropdown-button__button ${buttonIsSplitClassName} ${buttonTypeClassName}`}
-          onClick={this.props.split ? this.handleClick : this.props.handleTriggerMenu}
+          onClick={this.props.split ? e => this.handleClick(e) : this.props.handleTriggerMenu}
           label={this.props.label}
         >
           {this.props.children}
