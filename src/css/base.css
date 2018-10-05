@@ -40,6 +40,8 @@
   --g3-dropdown-item__bg-color: var(--g3-color__gray);
   --g3-dropdown-item__color: var(--g3-color__white);
 
+  --g3-footer-color: var(--g3-color__bg-coal);
+
 }
 
 h1, h2, h3, h4,

@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { StaticRouter } from 'react-router-dom';
 import TopBar from '../src/components/TopBar/TopBar';
 import Header from '../src/components/Header/.';
+import Footer from '../src/components/Footer/.';
 import gen3Logo from '../src/images/logos/gen3.png';
 
 const tabItems = [
@@ -28,4 +29,7 @@ storiesOf('Layout', module)
   ))
   .add('Header', () => (
     <Header logoSrc={gen3Logo} title='Demo Framework' />
+  ))
+  .add('Footer', () => (
+    <Footer logoSrc={gen3Logo} />
   ));
