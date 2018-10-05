@@ -39,7 +39,7 @@ var Header = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'header' },
-        _react2.default.createElement(
+        this.props.logoSrc && _react2.default.createElement(
           'div',
           { className: 'header__logo-container' },
           _react2.default.createElement('img', { className: 'header__logo', src: this.props.logoSrc, alt: this.props.title + ' logo' })
@@ -48,8 +48,7 @@ var Header = function (_React$Component) {
           'h1',
           { className: 'header__title' },
           this.props.title
-        ),
-        _react2.default.createElement('div', { className: 'header__logo-container' })
+        )
       );
     }
   }]);
@@ -58,8 +57,12 @@ var Header = function (_React$Component) {
 }(_react2.default.Component);
 
 Header.propTypes = {
-  logoSrc: _propTypes2.default.string.isRequired,
+  logoSrc: _propTypes2.default.string,
   title: _propTypes2.default.string.isRequired
+};
+
+Header.defaultProps = {
+  logoSrc: null
 };
 
 exports.default = Header;
