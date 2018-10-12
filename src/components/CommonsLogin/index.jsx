@@ -7,21 +7,25 @@ class CommonsLogin extends React.Component {
   render() {
     return (
       <div className='commons-login'>
-        <p className='commons-login__title'>
-          {this.props.title}
-        </p>
-        <img
-          className='commons-login__logo'
-          src={this.props.logoSrc}
-          alt={`${this.props.title} logo`}
-        />
-        <Button
-          className='commons-login__button'
-          label={this.props.buttonTitle}
-          buttonType='secondary'
-          onClick={this.props.onButtonClick}
-          enabled={this.props.buttonEnabled}
-        />
+        <div className='commons-login__info'>
+          <p className='commons-login__title'>
+            {this.props.title}
+          </p>
+          <img
+            className='commons-login__logo'
+            src={this.props.logoSrc}
+            alt={`${this.props.title} logo`}
+          />
+        </div>
+        <div className='commons-login__button'>
+          <h4 className='commons-login__message'>{this.props.message}</h4>
+          <Button
+            label={this.props.buttonTitle}
+            buttonType={this.props.buttonType}
+            onClick={this.props.onButtonClick}
+            enabled={this.props.buttonEnabled}
+          />
+        </div>
       </div>
     );
   }
@@ -33,10 +37,14 @@ CommonsLogin.propTypes = {
   buttonTitle: PropTypes.string.isRequired,
   onButtonClick: PropTypes.func.isRequired,
   buttonEnabled: PropTypes.bool,
+  buttonType: PropTypes.string,
+  message: PropTypes.string,
 };
 
 CommonsLogin.defaultProps = {
   buttonEnabled: true,
+  buttonType: 'secondary',
+  message: null,
 };
 
 export default CommonsLogin;

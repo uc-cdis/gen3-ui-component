@@ -14,4 +14,16 @@ storiesOf('Login', module)
         onButtonClick={action('login click')}
       />
     </div>
+  ))
+  .add('CommonsLogin with message', () => (
+    <div style={{ width: '250px' }}>
+      <CommonsLogin
+        title='KidsFirst'
+        logoSrc={kfLogo}
+        buttonTitle='Disconnect'
+        onButtonClick={action('logout click')}
+        message='Connected!'
+        buttonType='primary'
+      />
+    </div>
   ));
