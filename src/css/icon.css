@@ -180,6 +180,10 @@
   mask-image: svg-load(../images/icons/user.svg);
 }
 
+.g3-icon--user-circle {
+  mask-image: svg-load(../images/icons/user-circle.svg);
+}
+
 .g3-icon--chevron-left {
   mask-image: svg-load(../images/icons/chevron-left.svg);
 }
