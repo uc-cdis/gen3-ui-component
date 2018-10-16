@@ -17,6 +17,7 @@ const iconClassList = [
   'g3-icon g3-icon--clinical',
   'g3-icon g3-icon--datafile',
   'g3-icon g3-icon--user',
+  'g3-icon g3-icon--user-circle',
   'g3-icon g3-icon--chevron-left',
   'g3-icon g3-icon--chevron-right',
   'g3-icon g3-icon--chevron-up',
