@@ -44,22 +44,34 @@ var CommonsLogin = function (_React$Component) {
         'div',
         { className: 'commons-login' },
         _react2.default.createElement(
-          'p',
-          { className: 'commons-login__title' },
-          this.props.title
+          'div',
+          { className: 'commons-login__info' },
+          _react2.default.createElement(
+            'p',
+            { className: 'commons-login__title' },
+            this.props.title
+          ),
+          _react2.default.createElement('img', {
+            className: 'commons-login__logo',
+            src: this.props.logoSrc,
+            alt: this.props.title + ' logo'
+          })
         ),
-        _react2.default.createElement('img', {
-          className: 'commons-login__logo',
-          src: this.props.logoSrc,
-          alt: this.props.title + ' logo'
-        }),
-        _react2.default.createElement(_Button2.default, {
-          className: 'commons-login__button',
-          label: this.props.buttonTitle,
-          buttonType: 'secondary',
-          onClick: this.props.onButtonClick,
-          enabled: this.props.buttonEnabled
-        })
+        _react2.default.createElement(
+          'div',
+          { className: 'commons-login__button' },
+          _react2.default.createElement(
+            'h4',
+            { className: 'commons-login__message' },
+            this.props.message
+          ),
+          _react2.default.createElement(_Button2.default, {
+            label: this.props.buttonTitle,
+            buttonType: this.props.buttonType,
+            onClick: this.props.onButtonClick,
+            enabled: this.props.buttonEnabled
+          })
+        )
       );
     }
   }]);
@@ -72,11 +84,15 @@ CommonsLogin.propTypes = {
   logoSrc: _propTypes2.default.string.isRequired,
   buttonTitle: _propTypes2.default.string.isRequired,
   onButtonClick: _propTypes2.default.func.isRequired,
-  buttonEnabled: _propTypes2.default.bool
+  buttonEnabled: _propTypes2.default.bool,
+  buttonType: _propTypes2.default.string,
+  message: _propTypes2.default.string
 };
 
 CommonsLogin.defaultProps = {
-  buttonEnabled: true
+  buttonEnabled: true,
+  buttonType: 'secondary',
+  message: null
 };
 
 exports.default = CommonsLogin;
