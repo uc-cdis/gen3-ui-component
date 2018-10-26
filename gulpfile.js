@@ -4,6 +4,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const postcssInlineSvg = require('postcss-inline-svg');
+const postcssSvgo = require('postcss-svgo');
 const minifyCSS = require('gulp-csso');
 const babel = require('gulp-babel');
 
@@ -14,6 +15,7 @@ gulp.task('css', function(){
   const plugins = [
     autoprefixer(),
     postcssInlineSvg(),
+    postcssSvgo(),
   ];
   return gulp.src('src/**/*.css')
     .pipe(postcss(plugins))

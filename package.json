@@ -1,6 +1,6 @@
 {
   "name": "@gen3/ui-component",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Basic UI component for gen3",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,7 @@
     "@storybook/react": "^3.4.8",
     "babel-polyfill": "^6.26.0",
     "postcss-loader": "^3.0.0",
+    "postcss-svgo": "^4.0.1",
     "prop-types": "^15.6.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

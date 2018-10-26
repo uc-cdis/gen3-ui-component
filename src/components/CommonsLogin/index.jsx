@@ -18,7 +18,9 @@ class CommonsLogin extends React.Component {
           />
         </div>
         <div className='commons-login__button'>
-          <h4 className='commons-login__message'>{this.props.message}</h4>
+          <h4 className='commons-login__message'>
+            {this.props.message}
+          </h4>
           <Button
             label={this.props.buttonTitle}
             buttonType={this.props.buttonType}
