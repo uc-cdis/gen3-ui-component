@@ -220,12 +220,12 @@
   mask-image: svg-load(../images/icons/forward.svg);
 }
 
-.g3-icon--icon_eye {
-  mask-image: svg-load(../images/icons/icon_eye.svg);
+.g3-icon--eye {
+  mask-image: svg-load(../images/icons/eye.svg);
 }
 
-.g3-icon--icon_eye_close {
-  mask-image: svg-load(../images/icons/icon_eye_close.svg);
+.g3-icon--eye-close {
+  mask-image: svg-load(../images/icons/eye-close.svg);
 }
 
 .g3-icon--minus {
@@ -264,7 +264,7 @@
   mask-image: svg-load(../images/icons/clipboard.svg);
 }
 
-.g3-icon--clipboard {
+.g3-icon--clinical {
   mask-image: svg-load(../images/icons/clinical.svg);
 }
 
@@ -286,4 +286,8 @@
 
 .g3-icon--undefined {
   mask-image: svg-load(../images/icons/undefined.svg);
+}
+
+.g3-icon--list {
+  mask-image: svg-load(../images/icons/list.svg);
 }
