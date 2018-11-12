@@ -74,17 +74,38 @@
 .g3-button--secondary:hover,
 .g3-button--secondary:hover svg path {
   border: 1px solid var(--g3-secondary-btn__border-color--hover);
-  color: var(--g3-secondary-btn__color--hover);
-  fill: var(--g3-secondary-btn__color--hover);
+  background-color: var(--g3-secondary-btn__bg-color--hover);
 }
 
-.g3-button--secondary:active, 
-.g3-button--secondary:active svg path {
+.g3-button--secondary:active {
   border: 1px solid var(--g3-secondary-btn__border-color--active);
-  color: var(--g3-secondary-btn__color--active);
-  fill: var(--g3-secondary-btn__color--active);
 }
 
 .g3-button--secondary .g3-button__icon {
   background-color: var(--g3-secondary-btn__color);
+}
+
+.g3-button--default {
+  border: 1px solid var(--g3-default-btn__border-color);
+  background-color: var(--g3-default-btn__bg-color);
+  color: var(--g3-default-btn__color);
+  fill: var(--g3-default-btn__color);
+}
+
+.g3-button--default:hover,
+.g3-button--default:hover svg path {
+  border: 1px solid var(--g3-default-btn__border-color--hover);
+  color: var(--g3-default-btn__color--hover);
+  fill: var(--g3-default-btn__color--hover);
+}
+
+.g3-button--default:active, 
+.g3-button--default:active svg path {
+  border: 1px solid var(--g3-default-btn__border-color--active);
+  color: var(--g3-default-btn__color--active);
+  fill: var(--g3-default-btn__color--active);
+}
+
+.g3-button--default .g3-button__icon {
+  background-color: var(--g3-default-btn__color);
 }

@@ -35,7 +35,7 @@ class Button extends Component {
 
 Button.propTypes = {
   label: PropTypes.string.isRequired,
-  buttonType: PropTypes.oneOf(['primary', 'secondary']),
+  buttonType: PropTypes.oneOf(['primary', 'secondary', 'default']),
   enabled: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,

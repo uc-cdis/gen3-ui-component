@@ -168,8 +168,8 @@
   mask-image: svg-load(../images/icons/workspace.svg);
 }
 
-.g3-icon--clinical {
-  mask-image: svg-load(../images/icons/clinical.svg);
+.g3-icon--doctor {
+  mask-image: svg-load(../images/icons/doctor.svg);
 }
 
 .g3-icon--datafile {
@@ -210,4 +210,80 @@
 
 .g3-icon--external-link {
   mask-image: svg-load(../images/icons/external-link.svg);
+}
+
+.g3-icon--folder {
+  mask-image: svg-load(../images/icons/folder.svg);
+}
+
+.g3-icon--forward {
+  mask-image: svg-load(../images/icons/forward.svg);
+}
+
+.g3-icon--icon_eye {
+  mask-image: svg-load(../images/icons/icon_eye.svg);
+}
+
+.g3-icon--icon_eye_close {
+  mask-image: svg-load(../images/icons/icon_eye_close.svg);
+}
+
+.g3-icon--minus {
+  mask-image: svg-load(../images/icons/minus.svg);
+}
+
+.g3-icon--plus {
+  mask-image: svg-load(../images/icons/plus.svg);
+}
+
+.g3-icon--question-mark {
+  mask-image: svg-load(../images/icons/question-mark.svg);
+}
+
+.g3-icon--reset {
+  mask-image: svg-load(../images/icons/reset.svg);
+}
+
+.g3-icon--search {
+  mask-image: svg-load(../images/icons/search.svg);
+}
+
+.g3-icon--star {
+  mask-image: svg-load(../images/icons/star.svg);
+}
+
+.g3-icon--bar-chart {
+  mask-image: svg-load(../images/icons/bar-chart.svg);
+}
+
+.g3-icon--book {
+  mask-image: svg-load(../images/icons/book.svg);
+}
+
+.g3-icon--clipboard {
+  mask-image: svg-load(../images/icons/clipboard.svg);
+}
+
+.g3-icon--clipboard {
+  mask-image: svg-load(../images/icons/clinical.svg);
+}
+
+.g3-icon--file {
+  mask-image: svg-load(../images/icons/file.svg);
+}
+
+.g3-icon--lab {
+  mask-image: svg-load(../images/icons/lab.svg);
+}
+
+.g3-icon--notation {
+  mask-image: svg-load(../images/icons/notation.svg);
+}
+
+.g3-icon--stacked-bar {
+  mask-image: svg-load(../images/icons/stacked-bar.svg);
+}
+
+.g3-icon--undefined {
+  mask-image: svg-load(../images/icons/undefined.svg);
 }

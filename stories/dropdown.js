@@ -5,7 +5,7 @@ import Dropdown from '../src/components/Dropdown';
 
 storiesOf('Dropdown', module)
   .add('Split Button', () => (
-    <Dropdown buttonType='secondary' className='my-dropdown'>
+    <Dropdown buttonType='primary' className='my-dropdown'>
       <Dropdown.Button split onClick={action('item0 clicked')}>
           Split Dropdown
       </Dropdown.Button>
@@ -17,7 +17,7 @@ storiesOf('Dropdown', module)
     </Dropdown>
   ))
   .add('Single Dropdown', () => (
-    <Dropdown buttonType='primary' className='my-dropdown'>
+    <Dropdown buttonType='secondary' className='my-dropdown'>
       <Dropdown.Button onClick={action('item0 clicked')}>
           Dropdown
       </Dropdown.Button>

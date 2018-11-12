@@ -72,7 +72,7 @@ var Button = function (_Component) {
 
 Button.propTypes = {
   label: _propTypes2.default.string.isRequired,
-  buttonType: _propTypes2.default.oneOf(['primary', 'secondary']),
+  buttonType: _propTypes2.default.oneOf(['primary', 'secondary', 'default']),
   enabled: _propTypes2.default.bool,
   className: _propTypes2.default.string,
   onClick: _propTypes2.default.func,
