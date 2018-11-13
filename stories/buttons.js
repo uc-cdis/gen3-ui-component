@@ -10,6 +10,9 @@ storiesOf('Buttons', module)
   .add('Secondary', () => (
     <Button buttonType='secondary' label='Secondary Button' onClick={action('button click')} leftIcon='download' rightIcon='copy' />
   ))
+  .add('Default', () => (
+    <Button buttonType='default' label='Default Button' onClick={action('button click')} leftIcon='download' rightIcon='copy' />
+  ))
   .add('Disabled', () => (
     <Button buttonType='primary' label='Disabled Button' onClick={action('button click')} enabled={false} leftIcon='download' rightIcon='copy' />
   ));

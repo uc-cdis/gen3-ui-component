@@ -12,7 +12,7 @@
   background-color: white;
   border-radius: 4px;
   margin-top: 1px;
-  border: 1px solid var(--g3-secondary-btn__border-color);
+  border: 1px solid var(--g3-dropdown-menu__border-color);
   z-index: 2;
   width: calc(100% - 2px);
 }

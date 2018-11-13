@@ -134,7 +134,7 @@ var Dropdown = function (_Component) {
 
 Dropdown.propTypes = {
   className: _propTypes2.default.string,
-  buttonType: _propTypes2.default.oneOf(['primary', 'secondary']),
+  buttonType: _propTypes2.default.oneOf(['primary', 'secondary', 'default']),
   disabled: _propTypes2.default.bool,
   children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node]).isRequired
 };

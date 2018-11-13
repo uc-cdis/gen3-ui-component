@@ -71,7 +71,7 @@ class Dropdown extends Component {
 
 Dropdown.propTypes = {
   className: PropTypes.string,
-  buttonType: PropTypes.oneOf(['primary', 'secondary']),
+  buttonType: PropTypes.oneOf(['primary', 'secondary', 'default']),
   disabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
