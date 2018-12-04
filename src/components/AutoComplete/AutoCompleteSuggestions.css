@@ -1,5 +1,6 @@
 .auto-complete-suggestions__item {
-  height: calc(var(--g3-auto-complete__height) - 2 * var(--g3-auto-complete__padding));
+  box-sizing: border-box; /* include padding from height*/
+  height: var(--g3-auto-complete__height);
   color: var(--g3-auto-complete__suggestion-color);
   border-top: 1px solid var(--g3-color__gray);
   padding: var(--g3-auto-complete__padding);

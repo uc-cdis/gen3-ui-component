@@ -15,7 +15,8 @@
 }
 
 .auto-complete__input-wrapper {
-  height: calc(var(--g3-auto-complete__height) - 2 * var(--g3-auto-complete__padding));
+  height: var(--g3-auto-complete__height);
+  box-sizing: border-box; /* include padding from height*/
   width: calc(100% - 2px - 2 * var(--g3-auto-complete__padding)); /* for borders and paddings */
   padding: var(--g3-auto-complete__padding);
 }
