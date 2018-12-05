@@ -6,6 +6,9 @@
   padding: var(--g3-auto-complete__padding);
   background-color: var(--g3-auto-complete__suggestion-bg-color);
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .auto-complete-suggestions__item:last-child {
