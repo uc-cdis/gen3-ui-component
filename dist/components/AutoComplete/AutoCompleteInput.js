@@ -51,6 +51,7 @@ var AutoCompleteInput = function (_Component) {
     value: function handleClear() {
       this.inputElem.current.value = '';
       this.updateCloseIcon();
+      this.props.onInputChange('');
     }
   }, {
     key: 'updateCloseIcon',

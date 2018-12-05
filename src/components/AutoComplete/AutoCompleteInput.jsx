@@ -20,6 +20,7 @@ class AutoCompleteInput extends Component {
   handleClear() {
     this.inputElem.current.value = '';
     this.updateCloseIcon();
+    this.props.onInputChange('');
   }
 
   updateCloseIcon() {
