@@ -35,6 +35,10 @@ class AutoCompleteInput extends Component {
     this.props.onSubmitInput(this.inputElem.current.value);
   }
 
+  clearInput() {
+    this.inputElem.current.value = '';
+  }
+
   render() {
     return (
       <div className='auto-complete-input'>

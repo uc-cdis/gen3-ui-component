@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import AutoComplete from '../src/components/AutoComplete';
+import Button from '../src/components/Button';
 
 const suggestionItem1 = {
   fullString: 'abcdea',
@@ -24,25 +25,27 @@ const suggestionList = [
   suggestionItem2,
 ];
 
-const suggestionItemClickFunc = (suggestionItem, i) => {
-  console.log(suggestionItem, i);
-};
-
-const inputChangeFunc = (inputText) => {
-  console.log(inputText);
-};
-
-const submitInputFunc = inputText => {
-  console.log('submit ', inputText);
+const clearInputFunc = (ref) => {
+  ref.current.clearInput();
 };
 
 storiesOf('AutoComplete', module)
-  .add('autocomplete', () => (
-    <AutoComplete
-      suggestionList={suggestionList}
-      inputPlaceHolderText='Search in Dictionary'
-      onSuggestionItemClick={suggestionItemClickFunc}
-      onInputChange={inputChangeFunc}
-      onSubmitInput={submitInputFunc}
-    />
-  ));
+  .add('autocomplete', () => {
+    const autoCompleteRef = React.createRef();
+    return (
+      <div>
+        <AutoComplete
+          ref={autoCompleteRef}
+          suggestionList={suggestionList}
+          inputPlaceHolderText='Search in Dictionary'
+          onSuggestionItemClick={action('click suggestion item')}
+          onInputChange={action('input change')}
+          onSubmitInput={action('submit input')}
+        />
+        <Button
+          label='call clearInput from outside'
+          onClick={() => clearInputFunc(autoCompleteRef)}
+        />
+      </div>
+    );
+  });

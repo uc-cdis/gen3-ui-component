@@ -76,4 +76,10 @@ describe('<AutoComplete />', () => {
     expect(builtFragment.find('.auto-complete-suggestions__highlight').length)
       .toBe(suggestionItem1.matchedPieceIndices.length);
   });
+
+  it('could clear input from outside', () => {
+    autoComplete.find(AutoComplete).instance().clearInput();
+    const inputElem = autoComplete.find('.auto-complete-input__input-box');
+    expect(inputElem.text()).toBe('');
+  });
 });

@@ -5,12 +5,22 @@ import AutoCompleteSuggestions, { SuggestionItem } from './AutoCompleteSuggestio
 import './AutoComplete.css';
 
 class AutoComplete extends Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
+
+  clearInput() {
+    this.inputRef.current.clearInput();
+  }
+
   render() {
     const emptySuggestionsClassModifier = this.props.suggestionList.length === 0 ? 'auto-complete--empty-suggestion-list' : '';
     return (
       <div className={`auto-complete ${emptySuggestionsClassModifier}`}>
         <div className='auto-complete__input-wrapper'>
           <AutoCompleteInput
+            ref={this.inputRef}
             placeHolderText={this.props.inputPlaceHolderText}
             icon={this.props.inputIcon}
             onInputChange={this.props.onInputChange}

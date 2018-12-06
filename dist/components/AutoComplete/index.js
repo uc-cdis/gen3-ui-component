@@ -35,13 +35,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var AutoComplete = function (_Component) {
   _inherits(AutoComplete, _Component);
 
-  function AutoComplete() {
+  function AutoComplete(props) {
     _classCallCheck(this, AutoComplete);
 
-    return _possibleConstructorReturn(this, (AutoComplete.__proto__ || Object.getPrototypeOf(AutoComplete)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (AutoComplete.__proto__ || Object.getPrototypeOf(AutoComplete)).call(this, props));
+
+    _this.inputRef = _react2.default.createRef();
+    return _this;
   }
 
   _createClass(AutoComplete, [{
+    key: 'clearInput',
+    value: function clearInput() {
+      this.inputRef.current.clearInput();
+    }
+  }, {
     key: 'render',
     value: function render() {
       var emptySuggestionsClassModifier = this.props.suggestionList.length === 0 ? 'auto-complete--empty-suggestion-list' : '';
@@ -52,6 +60,7 @@ var AutoComplete = function (_Component) {
           'div',
           { className: 'auto-complete__input-wrapper' },
           _react2.default.createElement(_AutoCompleteInput2.default, {
+            ref: this.inputRef,
             placeHolderText: this.props.inputPlaceHolderText,
             icon: this.props.inputIcon,
             onInputChange: this.props.onInputChange,

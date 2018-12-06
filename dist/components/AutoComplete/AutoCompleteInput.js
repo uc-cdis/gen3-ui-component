@@ -68,6 +68,11 @@ var AutoCompleteInput = function (_Component) {
       this.props.onSubmitInput(this.inputElem.current.value);
     }
   }, {
+    key: 'clearInput',
+    value: function clearInput() {
+      this.inputElem.current.value = '';
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
