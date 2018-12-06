@@ -71,6 +71,7 @@ var AutoCompleteInput = function (_Component) {
     key: 'clearInput',
     value: function clearInput() {
       this.inputElem.current.value = '';
+      this.updateCloseIcon();
     }
   }, {
     key: 'render',

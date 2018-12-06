@@ -37,6 +37,7 @@ class AutoCompleteInput extends Component {
 
   clearInput() {
     this.inputElem.current.value = '';
+    this.updateCloseIcon();
   }
 
   render() {
