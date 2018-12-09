@@ -40,6 +40,12 @@ var AutoCompleteInput = function (_Component) {
   }
 
   _createClass(AutoCompleteInput, [{
+    key: 'setInputText',
+    value: function setInputText(text) {
+      this.inputElem.current.value = text;
+      this.updateCloseIcon();
+    }
+  }, {
     key: 'handleChange',
     value: function handleChange() {
       var currentInput = this.inputElem.current.value;

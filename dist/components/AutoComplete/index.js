@@ -45,6 +45,11 @@ var AutoComplete = function (_Component) {
   }
 
   _createClass(AutoComplete, [{
+    key: 'setInputText',
+    value: function setInputText(text) {
+      this.inputRef.current.setInputText(text);
+    }
+  }, {
     key: 'clearInput',
     value: function clearInput() {
       this.inputRef.current.clearInput();

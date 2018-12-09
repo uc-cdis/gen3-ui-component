@@ -10,6 +10,10 @@ class AutoComplete extends Component {
     this.inputRef = React.createRef();
   }
 
+  setInputText(text) {
+    this.inputRef.current.setInputText(text);
+  }
+
   clearInput() {
     this.inputRef.current.clearInput();
   }

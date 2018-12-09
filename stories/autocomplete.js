@@ -29,6 +29,10 @@ const clearInputFunc = (ref) => {
   ref.current.clearInput();
 };
 
+const setInputFunc = (ref) => {
+  ref.current.setInputText('some new content');
+}
+
 storiesOf('AutoComplete', module)
   .add('autocomplete', () => {
     const autoCompleteRef = React.createRef();
@@ -45,6 +49,10 @@ storiesOf('AutoComplete', module)
         <Button
           label='call clearInput from outside'
           onClick={() => clearInputFunc(autoCompleteRef)}
+        />
+        <Button
+          label='call setInputText from outside'
+          onClick={() => setInputFunc(autoCompleteRef)}
         />
       </div>
     );

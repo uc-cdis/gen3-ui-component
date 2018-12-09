@@ -11,6 +11,11 @@ class AutoCompleteInput extends Component {
     this.inputElem = React.createRef();
   }
 
+  setInputText(text) {
+    this.inputElem.current.value = text;
+    this.updateCloseIcon();
+  }
+
   handleChange() {
     const currentInput = this.inputElem.current.value;
     this.props.onInputChange(currentInput);
