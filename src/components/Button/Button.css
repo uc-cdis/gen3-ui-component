@@ -1,6 +1,10 @@
 @import "../../css/base.css";
 @import "../../css/icon.css";
 
+.g3-button__wrapper {
+  display: inline-block;
+}
+
 .g3-button {
   border-radius: 4px;
   min-width: 152px;
@@ -99,7 +103,7 @@
   fill: var(--g3-default-btn__color--hover);
 }
 
-.g3-button--default:active, 
+.g3-button--default:active,
 .g3-button--default:active svg path {
   border: 1px solid var(--g3-default-btn__border-color--active);
   color: var(--g3-default-btn__color--active);
@@ -108,4 +112,17 @@
 
 .g3-button--default .g3-button__icon {
   background-color: var(--g3-default-btn__color);
+}
+
+.g3-button__tooltip {
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--g3-color__silver);
+  padding: 10px 10px;
+  z-index: 1000;
+}
+
+.g3-button__tooltip--hidden {
+  opacity: 0;
+  height: 0;
 }

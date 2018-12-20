@@ -15,4 +15,7 @@ storiesOf('Buttons', module)
   ))
   .add('Disabled', () => (
     <Button buttonType='primary' label='Disabled Button' onClick={action('button click')} enabled={false} leftIcon='download' rightIcon='copy' />
+  ))
+  .add('w/ Tooltip', () => (
+    <Button buttonType='primary' label='Tooltip Button' onClick={action('button click')} leftIcon='download' rightIcon='copy' tooltipEnabled={true} tooltipText='This is a tooltip a user could use to display a message.'/>
   ));
