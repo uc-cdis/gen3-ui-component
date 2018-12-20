@@ -13,7 +13,7 @@ class Button extends Component {
   }
 
   toggleToolTip() {
-    this.setState({ showTooltip: !this.state.showTooltip });
+    this.setState(prevState => ({ showTooltip: !prevState.showTooltip }));
   }
 
   handleClick(e) {
@@ -48,7 +48,7 @@ class Button extends Component {
         </button>
         <div
           className={'g3-button__tooltip'.concat(this.state.showTooltip ? '' : '--hidden')}
-          style={ this.button.current ? { maxWidth: this.button.current.offsetWidth - 20 } : {} }
+          style={this.button.current ? { maxWidth: this.button.current.offsetWidth - 20 } : {}}
         >
           {this.props.tooltipText}
         </div>
