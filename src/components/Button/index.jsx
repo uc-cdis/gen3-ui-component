@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Tooltip from 'rc-tooltip';
+import 'rc-tooltip/assets/bootstrap_white.css';
 import './Button.css';
 
 class Button extends Component {
@@ -9,7 +11,6 @@ class Button extends Component {
       showTooltip: false,
     };
     this.toggleToolTip = this.toggleToolTip.bind(this);
-    this.button = React.createRef();
   }
 
   toggleToolTip() {
@@ -27,32 +28,37 @@ class Button extends Component {
     const otherAttrs = {};
     if (this.props.id) otherAttrs.id = this.props.id;
     if (this.props.value) otherAttrs.value = this.props.value;
+    const button = (
+      <button
+        type='button'
+        className={`${this.props.className} g3-button ${buttonTypeClassName}`}
+        onClick={e => this.handleClick(e)}
+        {...otherAttrs}
+      >
+        {this.props.leftIcon && (
+          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon} g3-button__icon g3-button__icon--left`} />
+        )}
+        {this.props.label}
+        {this.props.rightIcon && (
+          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.rightIcon} g3-button__icon g3-button__icon--right`} />
+        )}
+      </button>
+    );
+
     return (
-      <div className='g3-button__wrapper'>
-        <button
-          ref={this.button}
-          type='button'
-          className={`${this.props.className} g3-button ${buttonTypeClassName}`}
-          onClick={e => this.handleClick(e)}
-          onMouseEnter={this.props.tooltipEnabled ? this.toggleToolTip : null}
-          onMouseLeave={this.props.tooltipEnabled ? this.toggleToolTip : null}
-          {...otherAttrs}
-        >
-          {this.props.leftIcon && (
-            <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon} g3-button__icon g3-button__icon--left`} />
-          )}
-          {this.props.label}
-          {this.props.rightIcon && (
-            <i className={`g3-icon g3-icon--sm g3-icon--${this.props.rightIcon} g3-button__icon g3-button__icon--right`} />
-          )}
-        </button>
-        <div
-          className={'g3-button__tooltip'.concat(this.state.showTooltip ? '' : '--hidden')}
-          style={this.button.current ? { maxWidth: this.button.current.offsetWidth - 20 } : {}}
-        >
-          {this.props.tooltipText}
-        </div>
-      </div>
+      <React.Fragment>
+        {
+          this.props.tooltipEnabled ? (
+            <Tooltip
+              placement='bottom'
+              overlay={this.props.tooltipText}
+              arrowContent={<div className='rc-tooltip-arrow-inner' />}
+            >
+              {button}
+            </Tooltip>
+          ) : button
+        }
+      </React.Fragment>
     );
   }
 }
