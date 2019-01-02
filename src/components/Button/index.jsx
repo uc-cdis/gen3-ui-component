@@ -5,18 +5,6 @@ import 'rc-tooltip/assets/bootstrap_white.css';
 import './Button.css';
 
 class Button extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showTooltip: false,
-    };
-    this.toggleToolTip = this.toggleToolTip.bind(this);
-  }
-
-  toggleToolTip() {
-    this.setState(prevState => ({ showTooltip: !prevState.showTooltip }));
-  }
-
   handleClick(e) {
     if (this.props.enabled && this.props.onClick) {
       this.props.onClick(e);

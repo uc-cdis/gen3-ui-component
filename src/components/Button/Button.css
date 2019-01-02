@@ -110,19 +110,6 @@
   background-color: var(--g3-default-btn__color);
 }
 
-.g3-button__tooltip {
-  margin-top: 5px;
-  border-radius: 4px;
-  border: 1px solid var(--g3-color__silver);
-  padding: 10px 10px;
-  z-index: 1000;
-}
-
-.g3-button__tooltip--hidden {
-  opacity: 0;
-  height: 0;
-}
-
 /* Tooltip overrides */
 
 .rc-tooltip-inner {
