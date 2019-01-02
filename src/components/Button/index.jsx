@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Tooltip from 'rc-tooltip';
+import 'rc-tooltip/assets/bootstrap_white.css';
 import './Button.css';
 
 class Button extends Component {
@@ -14,7 +16,7 @@ class Button extends Component {
     const otherAttrs = {};
     if (this.props.id) otherAttrs.id = this.props.id;
     if (this.props.value) otherAttrs.value = this.props.value;
-    return (
+    const button = (
       <button
         type='button'
         className={`${this.props.className} g3-button ${buttonTypeClassName}`}
@@ -30,6 +32,22 @@ class Button extends Component {
         )}
       </button>
     );
+
+    return (
+      <React.Fragment>
+        {
+          this.props.tooltipEnabled ? (
+            <Tooltip
+              placement='bottom'
+              overlay={this.props.tooltipText}
+              arrowContent={<div className='rc-tooltip-arrow-inner' />}
+            >
+              {button}
+            </Tooltip>
+          ) : button
+        }
+      </React.Fragment>
+    );
   }
 }
 
@@ -44,6 +62,8 @@ Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
   id: PropTypes.string,
   value: PropTypes.string,
+  tooltipEnabled: PropTypes.bool,
+  tooltipText: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -56,6 +76,8 @@ Button.defaultProps = {
   type: 'button',
   id: null,
   value: null,
+  tooltipEnabled: false,
+  tooltipText: null,
 };
 
 export default Button;

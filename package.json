@@ -1,6 +1,6 @@
 {
   "name": "@gen3/ui-component",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Basic UI component for gen3",
   "main": "index.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "postcss-loader": "^3.0.0",
     "postcss-svgo": "^4.0.1",
     "prop-types": "^15.6.0",
+    "rc-tooltip": "^3.7.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router-dom": "^4.3.1",
