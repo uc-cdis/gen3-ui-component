@@ -2,16 +2,23 @@ language: node_js
 git:
   depth: 1
 node_js:
-  - "10"
-
+- '10'
 cache:
   directories:
-    - node_modules # NPM packages
-
+  - node_modules
 install:
-    - npm install --force
-
+- npm install --force
 script:
-    - npm test
-    - npm run eslint
-    - npm run stylelint
+- npm test
+- npm run eslint
+- npm run stylelint
+before_deploy: npm prepare .
+deploy:
+  provider: npm
+  email: abbygeorge@uchicago.edu
+  api_key:
+    secure: T8MetYAR0Xqg0CVB1nBORVLAe7ntN7T24KQ8gwYUy3n2k0bXKis/cirkf1ty9uyIEJv1qYkYmsJ89N9SSWT6QG7QwNkeGldyKYD0XJiG1++GWsuNSJNnEqjjnAjSwFvrqeFdATXo7OH0rW4chN8DfteVRYXBgC8usT8sahLmCISacdBuLvdgkveZm45+5SuC+glRXMVCB0aHQ7HOneSHqKa1c6BLha9OKfZllKlU4pTedzAi5Mm9ak9W+PoF6r16EqpCI1+OvNqE2sXmq4kVcLPewJOlWJQeEVQ6JbRht/U+d0Q7zH99+FUik+2PgviNivtsu5fY5fnkvSJfRwNpjgcJk8lTxE7XnWsQRR2gFJsywLtv2kWcV4J5klVivMymGEmODfKIWjGFV3EePeI8bTbzKoUnS1Lq99TDGDAGG3+bmTIUZaQm4ADVO8hcWpe2jkRJGqEOiHau/iSnVgZl2a6dyCpzJl6mpC+CiM23wBF2IHNkWsvhJSENATrGGYRelM2p1ULgFL6/d7dSyctSAOFn2/IdMdfFinVF2+ea79/zliwt7E4nLzqViT2jxEqr8aZjSk/NLPEWCtU1dwWYJYwUy8RPK32iiMA9rmfchw0G/sVEk+bfJVmqWJ0W7qcFdw/hw+XTxZ+v74b4XKDxBuFI7QsXBmgQMNqrNMtp2qM=
+  skip_cleanup: true
+  on:
+    repo: uc-cdis/gen3-ui-component
+    all_branches: true
