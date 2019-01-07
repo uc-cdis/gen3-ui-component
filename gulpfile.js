@@ -41,4 +41,4 @@ gulp.task('base.less', function() {
     .pipe(gulp.dest('dist/css'))
 })
 
-gulp.task('default', [ 'css', 'js', 'base.less' ]);
+gulp.task('default', gulp.series('css', 'js', 'base.less'));
