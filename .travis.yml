@@ -12,7 +12,9 @@ script:
 - npm test
 - npm run eslint
 - npm run stylelint
-before_deploy: npm run prepare
+before_deploy:
+  - npm run prepare
+  - npm version patch # bumps package version
 deploy:
   provider: npm
   email: planxcyborg@gmail.com
