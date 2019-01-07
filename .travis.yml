@@ -2,17 +2,17 @@ language: node_js
 git:
   depth: 1
 node_js:
-- '10'
+  - '10'
 cache:
   directories:
   - node_modules
 install:
-- npm install --force
+  - npm install --force
 script:
-- npm test
-- npm run eslint
-- npm run stylelint
-before_deploy: npm prepare .
+  - npm test
+  - npm run eslint
+  - npm run stylelint
+before_deploy: npm run prepare
 deploy:
   provider: npm
   email: abbygeorge@uchicago.edu
