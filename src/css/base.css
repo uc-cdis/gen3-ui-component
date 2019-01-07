@@ -23,14 +23,14 @@
   --g3-primary-btn__bg-color--hover: var(--g3-color__highlight-orange-light);
   --g3-primary-btn__border-color: var(--g3-color__lightgray);
   --g3-primary-btn__border-color--hover: var(--g3-color__gray);
-  --g3-primary-btn__border-color--active: var(--g3-color__light-gray);
+  --g3-primary-btn__border-color--active: var(--g3-color__lightgray);
 
   --g3-secondary-btn__color: var(--g3-color__white);
   --g3-secondary-btn__bg-color: var(--g3-color__base-blue);
   --g3-secondary-btn__bg-color--hover: var(--g3-color__base-blue-light);
   --g3-secondary-btn__border-color: var(--g3-color__lightgray);
   --g3-secondary-btn__border-color--hover: var(--g3-color__gray);
-  --g3-secondary-btn__border-color--active: var(--g3-color__light-gray);
+  --g3-secondary-btn__border-color--active: var(--g3-color__lightgray);
 
   --g3-default-btn__color: var(--g3-color__gray);
   --g3-default-btn__color--hover: var(--g3-color__black);
