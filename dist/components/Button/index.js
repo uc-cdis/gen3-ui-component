@@ -16,6 +16,12 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _rcTooltip = require('rc-tooltip');
+
+var _rcTooltip2 = _interopRequireDefault(_rcTooltip);
+
+require('rc-tooltip/assets/bootstrap_white.css');
+
 require('./Button.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -51,7 +57,7 @@ var Button = function (_Component) {
       var otherAttrs = {};
       if (this.props.id) otherAttrs.id = this.props.id;
       if (this.props.value) otherAttrs.value = this.props.value;
-      return _react2.default.createElement(
+      var button = _react2.default.createElement(
         'button',
         _extends({
           type: 'button',
@@ -63,6 +69,20 @@ var Button = function (_Component) {
         this.props.leftIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.leftIcon + ' g3-button__icon g3-button__icon--left' }),
         this.props.label,
         this.props.rightIcon && _react2.default.createElement('i', { className: 'g3-icon g3-icon--sm g3-icon--' + this.props.rightIcon + ' g3-button__icon g3-button__icon--right' })
+      );
+
+      return _react2.default.createElement(
+        _react2.default.Fragment,
+        null,
+        this.props.tooltipEnabled ? _react2.default.createElement(
+          _rcTooltip2.default,
+          {
+            placement: 'bottom',
+            overlay: this.props.tooltipText,
+            arrowContent: _react2.default.createElement('div', { className: 'rc-tooltip-arrow-inner' })
+          },
+          button
+        ) : button
       );
     }
   }]);
@@ -80,7 +100,9 @@ Button.propTypes = {
   rightIcon: _propTypes2.default.string,
   type: _propTypes2.default.oneOf(['button', 'submit', 'reset']),
   id: _propTypes2.default.string,
-  value: _propTypes2.default.string
+  value: _propTypes2.default.string,
+  tooltipEnabled: _propTypes2.default.bool,
+  tooltipText: _propTypes2.default.string
 };
 
 Button.defaultProps = {
@@ -92,7 +114,9 @@ Button.defaultProps = {
   rightIcon: null,
   type: 'button',
   id: null,
-  value: null
+  value: null,
+  tooltipEnabled: false,
+  tooltipText: null
 };
 
 exports.default = Button;
