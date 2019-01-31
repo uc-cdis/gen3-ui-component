@@ -20,4 +20,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: uc-cdis/gen3-ui-component
-    branch: master
+    tags: true
