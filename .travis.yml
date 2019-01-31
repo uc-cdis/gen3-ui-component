@@ -2,16 +2,22 @@ language: node_js
 git:
   depth: 1
 node_js:
-  - "10"
-
+- '10'
 cache:
   directories:
-    - node_modules # NPM packages
-
+  - node_modules
 install:
-    - npm install --force
-
+- npm install --force
 script:
-    - npm test
-    - npm run eslint
-    - npm run stylelint
+- npm test
+- npm run eslint
+- npm run stylelint
+deploy:
+  provider: npm
+  email: planxcyborg@gmail.com
+  api_key:
+    secure: eVhakUIs0SCPK/yrJgrS3M8lO0Et6c7bo/FmrcR39G3ig2pey1SruAK6HCAaVouSE6v2NQXFFOYJLeN24bwCrZ2ADpnUr/s27t7Z9Oc51oWbVEJv+PuTRAmtobqJivjI1+jhPQMGUo1t2YvuZwGAZUJf6i2YCYQXM29UnzqmmmamdIOTiCKJ5EsuEcO1Np12R4e2DjUaT3YOH55Mb9wKG3NmTKYZRHOsQImrmXgn79IKxeboGcP3TGtyvYFKBiRxryXtTTCEqXg21C5GBp9JkgMh6xR1wlSYc5IJIk4/JTIkwt4BzAWBXjkgVCzGnxe9IHZ8hrYBqN7uvpbU3DGRkomOwHp95T5IVQIqb4JEQeVeIqgj7joefewWhuU8fKGcXG9raDg45c63zMKgB7ACA8v4+vRuUbNALSzkB0c7kpgAcp1wzk5AaKMMdpeuLQHFjkbN3XJ9z8Mr9DWgEUJWpzUwvn4ed3S4nHyWxAjYtzECt7msa55uDww1D2kbt9DL568lVjv3JBRESogorxJ4HiqxjU3aZuPN8v0NmQ6cODjNB1NVfnF76KNOGzGLCvFQrmRIiYQdBno8ZYKnOqIz6ii9zC/LN4BU7sxBIpj7SLGV0tf9S26ya5cwzkdcPC0NrbN+QQHld9j3vyPjmvrZK272PGlIJzWiPrUyrWwoUNQ=
+  skip_cleanup: true
+  on:
+    repo: uc-cdis/gen3-ui-component
+    tags: true
