@@ -12,7 +12,6 @@ script:
 - npm test
 - npm run eslint
 - npm run stylelint
-before_deploy: npm version patch # bumps package version
 deploy:
   provider: npm
   email: planxcyborg@gmail.com
@@ -21,4 +20,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: uc-cdis/gen3-ui-component
-    all_branches: true
+    branch: master
