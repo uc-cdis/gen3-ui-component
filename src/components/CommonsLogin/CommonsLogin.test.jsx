@@ -5,7 +5,7 @@ import kfLogo from '../../images/logos/kf-logo.png';
 
 describe('<CommonsLogin />', () => {
   const commonsLogin = mount(
-    <CommonsLogin title='KidsFirst' logoSrc={kfLogo} buttonTitle='Connect' onButtonClick={() => {}} />,
+    <CommonsLogin title='KidsFirst' logoSrc={kfLogo} buttonTitle='Connect' onButtonClick={() => {}} isPending={false} />,
   ).find(CommonsLogin);
 
   it('renders', () => {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
+import Spinner from '../Spinner/Spinner';
 import 'rc-tooltip/assets/bootstrap_white.css';
 import './Button.css';
 
@@ -12,7 +13,7 @@ class Button extends Component {
   }
 
   render() {
-    const buttonTypeClassName = !this.props.enabled ? 'g3-button--disabled' : `g3-button--${this.props.buttonType}`;
+    const buttonTypeClassName = !this.props.enabled || this.props.isPending ? 'g3-button--disabled' : `g3-button--${this.props.buttonType}`;
     const otherAttrs = {};
     if (this.props.id) otherAttrs.id = this.props.id;
     if (this.props.value) otherAttrs.value = this.props.value;
@@ -23,13 +24,23 @@ class Button extends Component {
         onClick={e => this.handleClick(e)}
         {...otherAttrs}
       >
-        {this.props.leftIcon && (
-          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon} g3-button__icon g3-button__icon--left`} />
-        )}
-        {this.props.label}
-        {this.props.rightIcon && (
-          <i className={`g3-icon g3-icon--sm g3-icon--${this.props.rightIcon} g3-button__icon g3-button__icon--right`} />
-        )}
+        {
+          this.props.leftIcon && (
+            <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon} g3-button__icon g3-button__icon--left`} />
+          )
+        }
+        { this.props.label }
+        {
+          this.props.rightIcon && !this.props.isPending
+            ? <i className={`g3-icon g3-icon--sm g3-icon--${this.props.rightIcon} g3-button__icon g3-button__icon--right`} />
+            : null
+        }
+        { this.props.isPending ? (
+          <div className='g3-button__spinner g3-button__icon--right'>
+            <Spinner />
+          </div>
+        ) : null
+        }
       </button>
     );
 
@@ -64,6 +75,7 @@ Button.propTypes = {
   value: PropTypes.string,
   tooltipEnabled: PropTypes.bool,
   tooltipText: PropTypes.string,
+  isPending: PropTypes.bool.isRequired,
 };
 
 Button.defaultProps = {
