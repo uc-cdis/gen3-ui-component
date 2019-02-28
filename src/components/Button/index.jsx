@@ -7,7 +7,7 @@ import './Button.css';
 
 class Button extends Component {
   handleClick(e) {
-    if (this.props.enabled && this.props.onClick) {
+    if (this.props.enabled && this.props.onClick && !this.props.isPending) {
       this.props.onClick(e);
     }
   }
