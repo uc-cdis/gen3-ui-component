@@ -75,7 +75,7 @@ Button.propTypes = {
   value: PropTypes.string,
   tooltipEnabled: PropTypes.bool,
   tooltipText: PropTypes.string,
-  isPending: PropTypes.bool.isRequired,
+  isPending: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -90,6 +90,7 @@ Button.defaultProps = {
   value: null,
   tooltipEnabled: false,
   tooltipText: null,
+  isPending: false,
 };
 
 export default Button;

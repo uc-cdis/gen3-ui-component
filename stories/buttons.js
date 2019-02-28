@@ -44,7 +44,6 @@ storiesOf('Buttons', module)
       onClick={action('button click')}
       leftIcon='download'
       rightIcon='copy'
-      isPending={false}
     />
   ))
   .add('Secondary', () => (
@@ -54,7 +53,6 @@ storiesOf('Buttons', module)
       onClick={action('button click')}
       leftIcon='download'
       rightIcon='copy'
-      isPending={false}
     />
   ))
   .add('Default', () => (
@@ -64,7 +62,6 @@ storiesOf('Buttons', module)
       onClick={action('button click')}
       leftIcon='download'
       rightIcon='copy'
-      isPending={false}
     />
   ))
   .add('Disabled', () => (
@@ -87,7 +84,6 @@ storiesOf('Buttons', module)
         rightIcon='copy'
         tooltipEnabled={true}
         tooltipText='This is a tooltip a user could use to display a message.'
-        isPending={false}
       />
       <Button
         buttonType='primary'
@@ -98,7 +94,6 @@ storiesOf('Buttons', module)
         rightIcon='copy'
         tooltipEnabled={true}
         tooltipText='This would describe why the button is disabled.'
-        isPending={false}
       />
       <Button
         buttonType='primary'
@@ -108,7 +103,6 @@ storiesOf('Buttons', module)
         rightIcon='copy'
         tooltipEnabled={true}
         tooltipText='This is a tooltip a user could use to display a message.'
-        isPending={false}
       />
     </div>
   ))
