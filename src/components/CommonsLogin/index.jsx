@@ -42,13 +42,14 @@ CommonsLogin.propTypes = {
   buttonEnabled: PropTypes.bool,
   buttonType: PropTypes.string,
   message: PropTypes.string,
-  isPending: PropTypes.bool.isRequired,
+  isPending: PropTypes.bool,
 };
 
 CommonsLogin.defaultProps = {
   buttonEnabled: true,
   buttonType: 'secondary',
   message: null,
+  isPending: false,
 };
 
 export default CommonsLogin;
