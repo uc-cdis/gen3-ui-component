@@ -26,6 +26,7 @@ class CommonsLogin extends React.Component {
             buttonType={this.props.buttonType}
             onClick={this.props.onButtonClick}
             enabled={this.props.buttonEnabled}
+            isPending={this.props.isPending}
           />
         </div>
       </div>
@@ -41,12 +42,14 @@ CommonsLogin.propTypes = {
   buttonEnabled: PropTypes.bool,
   buttonType: PropTypes.string,
   message: PropTypes.string,
+  isPending: PropTypes.bool,
 };
 
 CommonsLogin.defaultProps = {
   buttonEnabled: true,
   buttonType: 'secondary',
   message: null,
+  isPending: false,
 };
 
 export default CommonsLogin;

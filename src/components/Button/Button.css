@@ -2,22 +2,18 @@
 @import "../../css/icon.css";
 
 .g3-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   border-radius: 4px;
   min-width: 152px;
   width: auto;
   height: 40px;
   font-size: 14px;
-  display: inline-block;
-  vertical-align: middle;
   cursor: pointer;
   outline: none;
   font-weight: 600;
   padding: 1px 20px;
-}
-
-.g3-button__icon {
-  position: relative;
-  top: 3px;
 }
 
 .g3-button__icon--left {
@@ -26,6 +22,15 @@
 
 .g3-button__icon--right {
   margin: 0 0 0 8px;
+}
+
+.g3-button__spinner .spinner {
+  padding: 0;
+}
+
+.g3-button__spinner .spinner .spinner__svg {
+  width: 20px;
+  margin-top: 3px;
 }
 
 .g3-button--disabled {
