@@ -11,7 +11,7 @@ storiesOf('Login', module)
         title='KidsFirst'
         logoSrc={kfLogo}
         buttonTitle='Connect'
-        onButtonClick={action('login click')}
+        onButtonClick={() => action('login click')('kf')}
       />
     </div>
   ))
@@ -21,7 +21,7 @@ storiesOf('Login', module)
         title='KidsFirst'
         logoSrc={kfLogo}
         buttonTitle='Disconnect'
-        onButtonClick={action('logout click')}
+        onButtonClick={() => action('logout click')('kf')}
         message='Connected!'
         buttonType='primary'
       />

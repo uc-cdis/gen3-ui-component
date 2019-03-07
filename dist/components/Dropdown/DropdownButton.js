@@ -1,88 +1,87 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _react = _interopRequireWildcard(require("react"));
 
-var _react = require('react');
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-require('./DropdownButton.css');
+require("./DropdownButton.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var DropdownButton = function (_Component) {
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var DropdownButton =
+/*#__PURE__*/
+function (_Component) {
   _inherits(DropdownButton, _Component);
 
   function DropdownButton() {
     _classCallCheck(this, DropdownButton);
 
-    return _possibleConstructorReturn(this, (DropdownButton.__proto__ || Object.getPrototypeOf(DropdownButton)).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(DropdownButton).apply(this, arguments));
   }
 
   _createClass(DropdownButton, [{
-    key: 'handleClick',
+    key: "handleClick",
     value: function handleClick() {
       if (this.props.disabled) {
         return;
       }
+
       this.props.onClick();
       this.props.afterClick();
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this = this;
 
       var wrapperDisableStatusClassName = this.props.disabled ? 'g3-dropdown-button__wrapper--disabled' : '';
-
-      var buttonTypeClassName = 'g3-dropdown-button__button--' + this.props.buttonType;
+      var buttonTypeClassName = "g3-dropdown-button__button--".concat(this.props.buttonType);
       var buttonIsSplitClassName = this.props.split ? 'g3-dropdown-button__button--with-split-trigger' : 'g3-dropdown-button__button--without-split-trigger';
-
-      var menuTriggerButtonTypeClassName = 'g3-dropdown-button__menu-trigger--' + this.props.buttonType;
-
-      return _react2.default.createElement(
-        'div',
-        {
-          ref: this.props.menuTriggerElementRef,
-          className: 'g3-dropdown-button__wrapper ' + wrapperDisableStatusClassName + ' ' + (this.props.className || '')
-        },
-        _react2.default.createElement(
-          'button',
-          {
-            type: 'button',
-            className: 'g3-dropdown-button__button ' + buttonIsSplitClassName + ' ' + buttonTypeClassName,
-            onClick: this.props.split ? function (e) {
-              return _this2.handleClick(e);
-            } : this.props.handleTriggerMenu,
-            label: this.props.label
-          },
-          this.props.children,
-          this.props.split || _react2.default.createElement('i', { className: 'g3-dropdown-button__icon' })
-        ),
-        this.props.split && _react2.default.createElement(
-          'button',
-          {
-            type: 'button',
-            className: 'g3-dropdown-button__menu-trigger ' + menuTriggerButtonTypeClassName,
-            onClick: this.props.handleTriggerMenu
-          },
-          _react2.default.createElement('i', { className: 'g3-dropdown-button__icon ' + (this.props.menuOpen ? 'g3-dropdown-button__icon--menu-opened' : '') })
-        )
-      );
+      var menuTriggerButtonTypeClassName = "g3-dropdown-button__menu-trigger--".concat(this.props.buttonType);
+      return _react.default.createElement("div", {
+        ref: this.props.menuTriggerElementRef,
+        className: "g3-dropdown-button__wrapper ".concat(wrapperDisableStatusClassName, " ").concat(this.props.className || '')
+      }, _react.default.createElement("button", {
+        type: "button",
+        className: "g3-dropdown-button__button ".concat(buttonIsSplitClassName, " ").concat(buttonTypeClassName),
+        onClick: this.props.split ? function (e) {
+          return _this.handleClick(e);
+        } : this.props.handleTriggerMenu,
+        label: this.props.label
+      }, this.props.children, this.props.split || _react.default.createElement("i", {
+        className: "g3-dropdown-button__icon"
+      })), this.props.split && _react.default.createElement("button", {
+        type: "button",
+        className: "g3-dropdown-button__menu-trigger ".concat(menuTriggerButtonTypeClassName),
+        onClick: this.props.handleTriggerMenu
+      }, _react.default.createElement("i", {
+        className: "g3-dropdown-button__icon ".concat(this.props.menuOpen ? 'g3-dropdown-button__icon--menu-opened' : '')
+      })));
     }
   }]);
 
@@ -90,26 +89,24 @@ var DropdownButton = function (_Component) {
 }(_react.Component);
 
 DropdownButton.propTypes = {
-  split: _propTypes2.default.bool,
-  className: _propTypes2.default.string,
-  label: _propTypes2.default.string,
-  onClick: _propTypes2.default.func,
-  handleTriggerMenu: _propTypes2.default.func,
-  menuOpen: _propTypes2.default.bool,
-  afterClick: _propTypes2.default.func,
-  menuTriggerElementRef: _propTypes2.default.object,
-  buttonType: _propTypes2.default.oneOf(['primary', 'secondary']),
-  disabled: _propTypes2.default.bool,
-  children: _propTypes2.default.oneOfType([_propTypes2.default.arrayOf(_propTypes2.default.node), _propTypes2.default.node]).isRequired
+  split: _propTypes.default.bool,
+  className: _propTypes.default.string,
+  label: _propTypes.default.string,
+  onClick: _propTypes.default.func,
+  handleTriggerMenu: _propTypes.default.func,
+  menuOpen: _propTypes.default.bool,
+  afterClick: _propTypes.default.func,
+  menuTriggerElementRef: _propTypes.default.object,
+  buttonType: _propTypes.default.oneOf(['primary', 'secondary']),
+  disabled: _propTypes.default.bool,
+  children: _propTypes.default.oneOfType([_propTypes.default.arrayOf(_propTypes.default.node), _propTypes.default.node]).isRequired
 };
-
 DropdownButton.defaultProps = {
   split: false,
   className: '',
   label: 'Dropdown Button',
   onClick: function onClick() {},
   buttonType: 'primary',
-
   // override by Dropdown component:
   handleTriggerMenu: function handleTriggerMenu() {},
   menuOpen: false,
@@ -117,5 +114,5 @@ DropdownButton.defaultProps = {
   menuTriggerElementRef: {},
   disabled: false
 };
-
-exports.default = DropdownButton;
+var _default = DropdownButton;
+exports.default = _default;

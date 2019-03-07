@@ -1,55 +1,48 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-require('./TopBarButton.css');
+require("./TopBarButton.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var TopBarButton = function TopBarButton(_ref) {
   var item = _ref.item,
       _ref$onActiveTab = _ref.onActiveTab,
-      onActiveTab = _ref$onActiveTab === undefined ? function () {} : _ref$onActiveTab,
+      onActiveTab = _ref$onActiveTab === void 0 ? function () {} : _ref$onActiveTab,
       _ref$isActive = _ref.isActive,
-      isActive = _ref$isActive === undefined ? false : _ref$isActive,
+      isActive = _ref$isActive === void 0 ? false : _ref$isActive,
       tabIndex = _ref.tabIndex;
-  return _react2.default.createElement(
-    'div',
-    {
-      className: isActive ? 'top-bar-button top-bar-button--active body' : 'top-bar-button body',
-      onClick: onActiveTab,
-      onKeyDown: onActiveTab,
-      role: 'button',
-      tabIndex: tabIndex
-    },
-    item.name,
-    item.iconClassName ? _react2.default.createElement('i', { className: 'top-bar-button__icon ' + item.iconClassName }) : null
-  );
+  return _react.default.createElement("div", {
+    className: isActive ? 'top-bar-button top-bar-button--active body' : 'top-bar-button body',
+    onClick: onActiveTab,
+    onKeyDown: onActiveTab,
+    role: "button",
+    tabIndex: tabIndex
+  }, item.name, item.iconClassName ? _react.default.createElement("i", {
+    className: "top-bar-button__icon ".concat(item.iconClassName)
+  }) : null);
 };
 
 TopBarButton.propTypes = {
-  item: _propTypes2.default.shape({
-    name: _propTypes2.default.string.isRequired,
-    iconClassName: _propTypes2.default.string
+  item: _propTypes.default.shape({
+    name: _propTypes.default.string.isRequired,
+    iconClassName: _propTypes.default.string
   }).isRequired,
-  isActive: _propTypes2.default.bool,
-  onActiveTab: _propTypes2.default.func,
-  tabIndex: _propTypes2.default.number.isRequired
+  isActive: _propTypes.default.bool,
+  onActiveTab: _propTypes.default.func,
+  tabIndex: _propTypes.default.number.isRequired
 };
-
 TopBarButton.defaultProps = {
   onActiveTab: function onActiveTab() {},
   isActive: false
 };
-
-exports.default = TopBarButton;
+var _default = TopBarButton;
+exports.default = _default;
