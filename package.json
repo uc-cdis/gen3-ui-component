@@ -25,10 +25,6 @@
   },
   "homepage": "https://github.com/uc-cdis/gen3-ui-component#readme",
   "dependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/polyfill": "^7.2.5",
-    "@storybook/addon-actions": "^5.0.0",
-    "@storybook/react": "^5.0.0",
     "babel-loader": "^8.0.5",
     "postcss-loader": "^3.0.0",
     "postcss-svgo": "^4.0.2",
@@ -40,6 +36,10 @@
     "stylelint": "^9.10.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/polyfill": "^7.2.5",
+    "@storybook/addon-actions": "^5.0.0",
+    "@storybook/react": "^5.0.0",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.4.10",
@@ -70,6 +70,8 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     },
-    "setupFilesAfterEnv": ["./src/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "./src/setupTests.js"
+    ]
   }
 }
