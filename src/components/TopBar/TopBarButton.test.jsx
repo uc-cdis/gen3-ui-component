@@ -14,7 +14,7 @@ const externalLink = {
 };
 
 const onActiveTab = jest.fn();
-const activeClassName = '.top-bar-button .top-bar-button--active .body';
+const activeClassName = '.top-bar-button--active';
 
 describe('<TopBar />', () => {
   const internalButton = mount(

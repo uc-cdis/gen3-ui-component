@@ -33,6 +33,3 @@ $ npm version patch
 ```
 This will do some compiling and parsing job and generate result scripts under `dist` directory.
 It will also bump the version of the npm package and commit the change.
-
-## Deployment
-After getting merged into master, Travis will automatically publish the package to npm.

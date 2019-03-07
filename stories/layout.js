@@ -23,7 +23,7 @@ storiesOf('Layout', module)
         tabItems={tabItems}
         user={user}
         onActiveTab={action('link clicked')}
-        onLogout={action('logout')}
+        onLogout={() => action('link clicked')('logout')}
       />
     </StaticRouter>
   ))

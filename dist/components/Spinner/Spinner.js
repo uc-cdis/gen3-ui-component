@@ -7,11 +7,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var _Button = _interopRequireDefault(require("../Button"));
-
-require("./CommonsLogin.css");
+require("./Spinner.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,62 +29,45 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var CommonsLogin =
+var Spinner =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(CommonsLogin, _React$Component);
+  _inherits(Spinner, _React$Component);
 
-  function CommonsLogin() {
-    _classCallCheck(this, CommonsLogin);
+  function Spinner() {
+    _classCallCheck(this, Spinner);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(CommonsLogin).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(Spinner).apply(this, arguments));
   }
 
-  _createClass(CommonsLogin, [{
+  _createClass(Spinner, [{
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        className: "commons-login"
-      }, _react.default.createElement("div", {
-        className: "commons-login__info"
-      }, _react.default.createElement("p", {
-        className: "commons-login__title"
-      }, this.props.title), _react.default.createElement("img", {
-        className: "commons-login__logo",
-        src: this.props.logoSrc,
-        alt: "".concat(this.props.title, " logo")
-      })), _react.default.createElement("div", {
-        className: "commons-login__button"
-      }, _react.default.createElement("h4", {
-        className: "commons-login__message"
-      }, this.props.message), _react.default.createElement(_Button.default, {
-        label: this.props.buttonTitle,
-        buttonType: this.props.buttonType,
-        onClick: this.props.onButtonClick,
-        enabled: this.props.buttonEnabled,
-        isPending: this.props.isPending
+        className: "spinner"
+      }, _react.default.createElement("svg", {
+        className: "spinner__svg",
+        width: "60",
+        height: "20",
+        viewBox: "0 0 60 20"
+      }, _react.default.createElement("circle", {
+        cx: "7",
+        cy: "15",
+        r: "4"
+      }), _react.default.createElement("circle", {
+        cx: "30",
+        cy: "15",
+        r: "4"
+      }), _react.default.createElement("circle", {
+        cx: "53",
+        cy: "15",
+        r: "4"
       })));
     }
   }]);
 
-  return CommonsLogin;
+  return Spinner;
 }(_react.default.Component);
 
-CommonsLogin.propTypes = {
-  title: _propTypes.default.string.isRequired,
-  logoSrc: _propTypes.default.string.isRequired,
-  buttonTitle: _propTypes.default.string.isRequired,
-  onButtonClick: _propTypes.default.func.isRequired,
-  buttonEnabled: _propTypes.default.bool,
-  buttonType: _propTypes.default.string,
-  message: _propTypes.default.string,
-  isPending: _propTypes.default.bool
-};
-CommonsLogin.defaultProps = {
-  buttonEnabled: true,
-  buttonType: 'secondary',
-  message: null,
-  isPending: false
-};
-var _default = CommonsLogin;
+var _default = Spinner;
 exports.default = _default;
