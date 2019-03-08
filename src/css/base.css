@@ -50,6 +50,8 @@
 
   --g3-footer-color: var(--g3-color__bg-coal);
 
+  --g3-font__medium-weight: 500;
+  --g3-font__semi-bold-weight: 600;
 }
 
 h1, h2, h3, h4,

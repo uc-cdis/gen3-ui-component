@@ -29,10 +29,12 @@
     "postcss-loader": "^3.0.0",
     "postcss-svgo": "^4.0.2",
     "prop-types": "^15.7.2",
+    "rc-slider": "^8.6.6",
     "rc-tooltip": "^3.7.3",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1",
+    "recharts": "^1.5.0",
     "stylelint": "^9.10.1"
   },
   "devDependencies": {

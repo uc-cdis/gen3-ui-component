@@ -6,3 +6,5 @@ import './dropdown.js';
 import './layout.js';
 import './login.js';
 import './autocomplete.js';
+import './filters.js';
+import './charts.js';
