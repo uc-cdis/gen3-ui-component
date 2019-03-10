@@ -46,8 +46,14 @@ function (_React$Component) {
     _classCallCheck(this, FilterGroup);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(FilterGroup).call(this, props));
+    var initialExpandedStatus = props.filterConfig.tabs.map(function (t) {
+      return t.fields.map(function () {
+        return false;
+      });
+    });
     _this.state = {
-      selectedTabIndex: 0
+      selectedTabIndex: 0,
+      expandedStatus: initialExpandedStatus
     };
     return _this;
   }
@@ -57,6 +63,17 @@ function (_React$Component) {
     value: function selectTab(index) {
       this.setState({
         selectedTabIndex: index
+      });
+    }
+  }, {
+    key: "handleToggle",
+    value: function handleToggle(tabIndex, sectionIndex) {
+      this.setState(function (prevState) {
+        var newExpandedStatus = prevState.expandedStatus.slice(0);
+        newExpandedStatus[tabIndex][sectionIndex] = !newExpandedStatus[tabIndex][sectionIndex];
+        return {
+          expandedStatus: newExpandedStatus
+        };
       });
     }
   }, {
@@ -85,7 +102,12 @@ function (_React$Component) {
         }, _this2.props.filterConfig.tabs[tab.key].title));
       })), _react.default.createElement("div", {
         className: "filter-group__filter-area"
-      }, _react.default.cloneElement(this.props.tabs[this.state.selectedTabIndex], _objectSpread({}, this.props))));
+      }, _react.default.cloneElement(this.props.tabs[this.state.selectedTabIndex], _objectSpread({}, this.props, {
+        onToggle: function onToggle(sectionIndex) {
+          return _this2.handleToggle(_this2.state.selectedTabIndex, sectionIndex);
+        },
+        expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex]
+      }))));
     }
   }]);
 

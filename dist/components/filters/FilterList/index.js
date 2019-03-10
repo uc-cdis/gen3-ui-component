@@ -40,24 +40,50 @@ var FilterList =
 function (_React$Component) {
   _inherits(FilterList, _React$Component);
 
-  function FilterList() {
+  function FilterList(props) {
+    var _this;
+
     _classCallCheck(this, FilterList);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(FilterList).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(FilterList).call(this, props));
+    var initialExpandedStatus = props.expandedStatus.length > 0 ? props.expandedStatus : props.sections.map(function () {
+      return false;
+    });
+    _this.state = {
+      expandedStatus: initialExpandedStatus
+    };
+    return _this;
   }
 
   _createClass(FilterList, [{
+    key: "handleSectionToggle",
+    value: function handleSectionToggle(index) {
+      this.setState(function (prevState) {
+        var tmp = prevState.expandedStatus[index];
+        var newExpandedStatus = prevState.expandedStatus.slice(0);
+        newExpandedStatus.splice(index, 1, !tmp);
+        return {
+          expandedStatus: newExpandedStatus
+        };
+      });
+      this.props.onToggle(index);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       return _react.default.createElement("div", {
         className: "filter-list"
       }, this.props.sections.map(function (section, index) {
-        return _react.default.createElement(_FilterSection.default, _extends({}, _this.props, {
+        return _react.default.createElement(_FilterSection.default, _extends({}, _this2.props, {
           key: index,
           title: section.title,
-          options: section.options
+          options: section.options,
+          expanded: _this2.state.expandedStatus[index],
+          onToggle: function onToggle() {
+            return _this2.handleSectionToggle(index);
+          }
         }));
       }));
     }
@@ -73,7 +99,13 @@ FilterList.propTypes = {
       text: _propTypes.default.string,
       filterType: _propTypes.default.oneOf(['singleSelect', 'range'])
     }))
-  })).isRequired
+  })).isRequired,
+  expandedStatus: _propTypes.default.arrayOf(_propTypes.default.bool),
+  onToggle: _propTypes.default.func
+};
+FilterList.defaultProps = {
+  expandedStatus: [],
+  onToggle: function onToggle() {}
 };
 var _default = FilterList;
 exports.default = _default;

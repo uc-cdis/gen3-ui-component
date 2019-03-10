@@ -43,6 +43,7 @@ describe('FilterGroup', () => {
   const filterConfig = {
     tabs: [{
       title: 'Project',
+
       fields: [
         'project',
         'study',

@@ -1,3 +1,5 @@
+@import "../../../css/base.css";
+
 .percentage-bar-chart {
   display: flex;
   background-color: var(--g3-color__white);

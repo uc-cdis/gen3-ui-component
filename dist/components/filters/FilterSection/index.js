@@ -47,7 +47,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(FilterSection).call(this, props));
     _this.state = {
-      isExpanded: false
+      isExpanded: _this.props.expanded
     };
     return _this;
   }
@@ -55,6 +55,7 @@ function (_React$Component) {
   _createClass(FilterSection, [{
     key: "toggleSection",
     value: function toggleSection() {
+      this.props.onToggle();
       this.setState(function (prevState) {
         return {
           isExpanded: !prevState.isExpanded
@@ -107,14 +108,23 @@ FilterSection.propTypes = {
   title: _propTypes.default.string,
   options: _propTypes.default.arrayOf(_propTypes.default.shape({
     text: _propTypes.default.string.isRequired,
-    filterType: _propTypes.default.oneOf(['singleSelect', 'range']).isRequired
+    filterType: _propTypes.default.oneOf(['singleSelect', 'range']).isRequired,
+    // for single select
+    selected: _propTypes.default.bool,
+    // for range filter
+    min: _propTypes.default.number,
+    max: _propTypes.default.number
   })),
   onSelect: _propTypes.default.func.isRequired,
-  onDrag: _propTypes.default.func.isRequired
+  onDrag: _propTypes.default.func.isRequired,
+  expanded: _propTypes.default.bool,
+  onToggle: _propTypes.default.func
 };
 FilterSection.defaultProps = {
   title: '',
-  options: []
+  options: [],
+  expanded: false,
+  onToggle: function onToggle() {}
 };
 var _default = FilterSection;
 exports.default = _default;

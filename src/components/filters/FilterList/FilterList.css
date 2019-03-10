@@ -1,3 +1,5 @@
+@import "../../../css/base.css";
+
 .filter-list {
   width: 100%;
   border-bottom: 1px solid var(--g3-color__silver);

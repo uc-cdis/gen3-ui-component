@@ -5,13 +5,26 @@ import './FilterGroup.css';
 class FilterGroup extends React.Component {
   constructor(props) {
     super(props);
+    const initialExpandedStatus = props.filterConfig.tabs
+      .map(t => t.fields.map(() => (false)));
     this.state = {
       selectedTabIndex: 0,
+      expandedStatus: initialExpandedStatus,
     };
   }
 
   selectTab(index) {
     this.setState({ selectedTabIndex: index });
+  }
+
+  handleToggle(tabIndex, sectionIndex) {
+    this.setState((prevState) => {
+      const newExpandedStatus = prevState.expandedStatus.slice(0);
+      newExpandedStatus[tabIndex][sectionIndex] = !newExpandedStatus[tabIndex][sectionIndex];
+      return {
+        expandedStatus: newExpandedStatus,
+      };
+    });
   }
 
   render() {
@@ -36,7 +49,19 @@ class FilterGroup extends React.Component {
           }
         </div>
         <div className='filter-group__filter-area'>
-          {React.cloneElement(this.props.tabs[this.state.selectedTabIndex], { ...this.props })}
+          {
+            React.cloneElement(
+              this.props.tabs[this.state.selectedTabIndex],
+              {
+                ...this.props,
+                onToggle: sectionIndex => this.handleToggle(
+                  this.state.selectedTabIndex,
+                  sectionIndex,
+                ),
+                expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex],
+              },
+            )
+          }
         </div>
       </div>
     );

@@ -9,11 +9,12 @@ class FilterSection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isExpanded: false,
+      isExpanded: this.props.expanded,
     };
   }
 
   toggleSection() {
+    this.props.onToggle();
     this.setState(prevState => ({ isExpanded: !prevState.isExpanded }));
   }
 
@@ -67,14 +68,26 @@ FilterSection.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string.isRequired,
     filterType: PropTypes.oneOf(['singleSelect', 'range']).isRequired,
+
+    // for single select
+    selected: PropTypes.bool,
+
+    // for range filter
+    min: PropTypes.number,
+    max: PropTypes.number,
+
   })),
   onSelect: PropTypes.func.isRequired,
   onDrag: PropTypes.func.isRequired,
+  expanded: PropTypes.bool,
+  onToggle: PropTypes.func,
 };
 
 FilterSection.defaultProps = {
   title: '',
   options: [],
+  expanded: false,
+  onToggle: () => {},
 };
 
 export default FilterSection;

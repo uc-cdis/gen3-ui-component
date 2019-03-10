@@ -1,3 +1,5 @@
+@import "../../../css/base.css";
+
 .filter-group {
   display: flex;
   flex-flow: column;
