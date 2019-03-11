@@ -51,6 +51,10 @@ const fileTypeOptions = [
   { text: 'Metabolomic MS', filterType: 'singleSelect' },
 ];
 
+const fileCountOptions = [
+  { min: 2, max: 97, filterType: 'range' },
+];
+
 const projectSections = [
   { title: 'Project', options: projectOptions },
   { title: 'Study', options: studyOptions },
@@ -64,6 +68,7 @@ const subjectSections = [
 
 const fileSections = [
   { title: 'File Types', options: fileTypeOptions },
+  { title: 'File Counts', options: fileCountOptions },
 ];
 
 const tabs = [
@@ -107,7 +112,7 @@ storiesOf('Filters', module)
     <div>
       <RangeFilter
         label='Age'
-        onDrag={action('range change')}
+        onAfterDrag={action('range change')}
         min={0}
         max={100}
       />
@@ -118,21 +123,20 @@ storiesOf('Filters', module)
       title={'Ethnicity'}
       options={ethnicityOptions}
       onSelect={action('checked')}
-      onDrag={action('range change')}
+      onAfterDrag={action('range change')}
     />
   ))
   .add('FilterList', () => (
     <FilterList
       sections={subjectSections}
       onSelect={action('checked')}
-      onDrag={action('range change')}
+      onAfterDrag={action('range change')}
     />
   ))
   .add('FilterGroup', () => (
     <FilterGroup
       tabs={tabs}
       filterConfig={filterConfig}
-      onSelect={action('checked')}
-      onDrag={action('range change')}
+      onFilterChange={action('filter change')}
     />
   ));

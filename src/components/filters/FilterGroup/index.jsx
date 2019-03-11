@@ -7,9 +7,27 @@ class FilterGroup extends React.Component {
     super(props);
     const initialExpandedStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => (false)));
+    const initialFilterStatus = props.filterConfig.tabs
+      .map(t => t.fields.map(() => ([])));
     this.state = {
       selectedTabIndex: 0,
       expandedStatus: initialExpandedStatus,
+      filterStatus: initialFilterStatus,
+
+      /**
+       * Currently filtered items, example:
+       *   {
+       *     'file_format': {
+       *        'selectedValues': ['CSV', 'TAR'],
+       *     },
+       *     'file_count': {
+       *        'lowerBound': 5,
+       *        'upperBound': 30,
+       *     },
+       *     ...
+       *   }
+       */
+      filterResults: {},
     };
   }
 
@@ -17,14 +35,63 @@ class FilterGroup extends React.Component {
     this.setState({ selectedTabIndex: index });
   }
 
-  handleToggle(tabIndex, sectionIndex) {
+  handleToggle(tabIndex, sectionIndex, newSectionExpandedStatus) {
     this.setState((prevState) => {
       const newExpandedStatus = prevState.expandedStatus.slice(0);
-      newExpandedStatus[tabIndex][sectionIndex] = !newExpandedStatus[tabIndex][sectionIndex];
+      newExpandedStatus[tabIndex][sectionIndex] = newSectionExpandedStatus;
       return {
         expandedStatus: newExpandedStatus,
       };
     });
+  }
+
+  handleSelect(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected) {
+    this.setState((prevState) => {
+      // update filter status
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      newFilterStatus[prevState.selectedTabIndex][sectionIndex][singleFilterIndex] = newSelected;
+
+      // update filter results
+      const newFilterResults = prevState.filterResults;
+      const field = this.props.filterConfig.tabs[prevState.selectedTabIndex].fields[sectionIndex];
+      if (typeof newFilterResults[field] === 'undefined') {
+        newFilterResults[field] = { selectedValues: [singleFilterLabel] };
+      } else {
+        const findIndex = newFilterResults[field].selectedValues.indexOf(singleFilterLabel);
+        if (findIndex >= 0 && !newSelected) {
+          newFilterResults[field].selectedValues.splice(findIndex, 1);
+        } else if (findIndex < 0 && newSelected) {
+          newFilterResults[field].selectedValues.push(singleFilterLabel);
+        }
+      }
+
+      // update component state
+      return {
+        filterStatus: newFilterStatus,
+        filterResults: newFilterResults,
+      };
+    }, () => {
+      this.callOnFilterChange();
+    });
+  }
+
+  handleDrag(sectionIndex, lowerBound, upperBound) {
+    this.setState((prevState) => {
+      // update filter status
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      newFilterStatus[prevState.selectedTabIndex][sectionIndex] = [lowerBound, upperBound];
+
+      // update filter results
+      const newFilterResults = prevState.filterResults;
+      const field = this.props.filterConfig.tabs[prevState.selectedTabIndex].fields[sectionIndex];
+      newFilterResults[field] = { lowerBound, upperBound };
+    }, () => {
+      this.callOnFilterChange();
+    });
+  }
+
+  callOnFilterChange() {
+    this.props.onFilterChange(this.state.filterResults);
   }
 
   render() {
@@ -53,12 +120,15 @@ class FilterGroup extends React.Component {
             React.cloneElement(
               this.props.tabs[this.state.selectedTabIndex],
               {
-                ...this.props,
-                onToggle: sectionIndex => this.handleToggle(
+                onToggle: (sectionIndex, newSectionExpandedStatus) => this.handleToggle(
                   this.state.selectedTabIndex,
                   sectionIndex,
+                  newSectionExpandedStatus,
                 ),
                 expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex],
+                filterStatus: this.state.filterStatus[this.state.selectedTabIndex],
+                onSelect: this.handleSelect.bind(this),
+                onAfterDrag: this.handleDrag.bind(this),
               },
             )
           }
@@ -76,6 +146,11 @@ FilterGroup.propTypes = {
       fields: PropTypes.arrayOf(PropTypes.string),
     })),
   }).isRequired,
+  onFilterChange: PropTypes.func,
+};
+
+FilterGroup.defaultProps = {
+  onFilterChange: () => {},
 };
 
 export default FilterGroup;

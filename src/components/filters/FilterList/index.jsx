@@ -4,25 +4,21 @@ import FilterSection from '../FilterSection';
 import './FilterList.css';
 
 class FilterList extends React.Component {
-  constructor(props) {
-    super(props);
-    const initialExpandedStatus = props.expandedStatus.length > 0 ? props.expandedStatus
-      : props.sections.map(() => (false));
-    this.state = {
-      expandedStatus: initialExpandedStatus,
-    };
+  handleSectionToggle(sectionIndex, newExpanded) {
+    this.props.onToggle(sectionIndex, newExpanded);
   }
 
-  handleSectionToggle(index) {
-    this.setState((prevState) => {
-      const tmp = prevState.expandedStatus[index];
-      const newExpandedStatus = prevState.expandedStatus.slice(0);
-      newExpandedStatus.splice(index, 1, !tmp);
-      return {
-        expandedStatus: newExpandedStatus,
-      };
-    });
-    this.props.onToggle(index);
+  handleSelectSingleFilter(
+    sectionIndex,
+    singleFilterIndex,
+    singleFilterLabel,
+    newSelected,
+  ) {
+    this.props.onSelect(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected);
+  }
+
+  handleDragRangeFilter(sectionIndex, lowerBound, upperBound) {
+    this.props.onAfterDrag(sectionIndex, lowerBound, upperBound);
   }
 
   render() {
@@ -31,12 +27,34 @@ class FilterList extends React.Component {
         {
           this.props.sections.map((section, index) => (
             <FilterSection
-              {...this.props}
               key={index}
               title={section.title}
               options={section.options}
-              expanded={this.state.expandedStatus[index]}
-              onToggle={() => this.handleSectionToggle(index)}
+              expanded={this.props.expandedStatus[index]}
+              onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
+              filterStatus={this.props.filterStatus[index]}
+              onSelect={
+                (
+                  singleFilterIndex,
+                  singleFilterLabel,
+                  newSelected,
+                ) => this.handleSelectSingleFilter(
+                  index,
+                  singleFilterIndex,
+                  singleFilterLabel,
+                  newSelected,
+                )
+              }
+              onAfterDrag={
+                (
+                  lowerBound,
+                  upperBound,
+                ) => this.handleDragRangeFilter(
+                  index,
+                  lowerBound,
+                  upperBound,
+                )
+              }
             />
           ))
         }
@@ -55,11 +73,20 @@ FilterList.propTypes = {
   })).isRequired,
   expandedStatus: PropTypes.arrayOf(PropTypes.bool),
   onToggle: PropTypes.func,
+  filterStatus: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.PropTypes.number,
+  ]))),
+  onSelect: PropTypes.func,
+  onAfterDrag: PropTypes.func,
 };
 
 FilterList.defaultProps = {
   expandedStatus: [],
   onToggle: () => {},
+  filterStatus: [],
+  onSelect: () => {},
+  onAfterDrag: () => {},
 };
 
 export default FilterList;

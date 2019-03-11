@@ -14,7 +14,7 @@ describe('SingleSelectFilter', () => {
 
   it('calls onSelect when selected', () => {
     expect(component.find('input').length).toBe(1);
-    component.find('input').simulate('click');
+    component.find('input').simulate('change');
     expect(onSelect).toHaveBeenCalled();
   });
 });

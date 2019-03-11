@@ -55,12 +55,22 @@ function (_React$Component) {
   _createClass(FilterSection, [{
     key: "toggleSection",
     value: function toggleSection() {
-      this.props.onToggle();
+      this.props.onToggle(!this.state.isExpanded);
       this.setState(function (prevState) {
         return {
           isExpanded: !prevState.isExpanded
         };
       });
+    }
+  }, {
+    key: "handleSelectSingleSelectFilter",
+    value: function handleSelectSingleSelectFilter(index, label, newSelected) {
+      this.props.onSelect(index, label, newSelected);
+    }
+  }, {
+    key: "handleDragRangeFilter",
+    value: function handleDragRangeFilter(lowerBound, upperBound) {
+      this.props.onAfterDrag(lowerBound, upperBound);
     }
   }, {
     key: "render",
@@ -86,16 +96,30 @@ function (_React$Component) {
       })), _react.default.createElement("div", {
         className: "filter-section__options"
       }, this.state.isExpanded ? this.props.options.map(function (option, index) {
-        return option.filterType === 'singleSelect' ? _react.default.createElement(_SingleSelectFilter.default, {
-          key: index,
-          label: option.text,
-          onSelect: _this2.props.onSelect
-        }) : _react.default.createElement(_RangeFilter.default, {
+        if (option.filterType === 'singleSelect') {
+          var selected = typeof _this2.props.filterStatus[index] === 'undefined' ? false : _this2.props.filterStatus[index];
+          return _react.default.createElement(_SingleSelectFilter.default, {
+            key: index,
+            label: option.text,
+            onSelect: function onSelect(label, newSelected) {
+              return _this2.handleSelectSingleSelectFilter(index, label, newSelected);
+            },
+            selected: selected
+          });
+        }
+
+        var lowerBound = typeof _this2.props.filterStatus === 'undefined' || _this2.props.filterStatus.length !== 2 ? option.min : _this2.props.filterStatus[0];
+        var upperBound = typeof _this2.props.filterStatus === 'undefined' || _this2.props.filterStatus.length !== 2 ? option.max : _this2.props.filterStatus[1];
+        return _react.default.createElement(_RangeFilter.default, {
           key: index,
           label: option.text,
           min: option.min,
           max: option.max,
-          onDrag: _this2.props.onDrag
+          onAfterDrag: function onAfterDrag(lb, ub) {
+            return _this2.handleDragRangeFilter(lb, ub);
+          },
+          lowerBound: lowerBound,
+          upperBound: upperBound
         });
       }) : null));
     }
@@ -107,24 +131,24 @@ function (_React$Component) {
 FilterSection.propTypes = {
   title: _propTypes.default.string,
   options: _propTypes.default.arrayOf(_propTypes.default.shape({
-    text: _propTypes.default.string.isRequired,
     filterType: _propTypes.default.oneOf(['singleSelect', 'range']).isRequired,
-    // for single select
-    selected: _propTypes.default.bool,
+    text: _propTypes.default.string,
     // for range filter
     min: _propTypes.default.number,
     max: _propTypes.default.number
   })),
   onSelect: _propTypes.default.func.isRequired,
-  onDrag: _propTypes.default.func.isRequired,
+  onAfterDrag: _propTypes.default.func.isRequired,
   expanded: _propTypes.default.bool,
-  onToggle: _propTypes.default.func
+  onToggle: _propTypes.default.func,
+  filterStatus: _propTypes.default.arrayOf(_propTypes.default.oneOfType([_propTypes.default.bool, _propTypes.default.number]))
 };
 FilterSection.defaultProps = {
   title: '',
   options: [],
   expanded: false,
-  onToggle: function onToggle() {}
+  onToggle: function onToggle() {},
+  filterStatus: []
 };
 var _default = FilterSection;
 exports.default = _default;

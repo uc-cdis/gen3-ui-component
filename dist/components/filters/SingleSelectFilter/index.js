@@ -36,21 +36,45 @@ var SingleSelectFilter =
 function (_React$Component) {
   _inherits(SingleSelectFilter, _React$Component);
 
-  function SingleSelectFilter() {
+  function SingleSelectFilter(props) {
+    var _this;
+
     _classCallCheck(this, SingleSelectFilter);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SingleSelectFilter).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SingleSelectFilter).call(this, props));
+    _this.state = {
+      selected: props.selected
+    };
+    return _this;
   }
 
   _createClass(SingleSelectFilter, [{
+    key: "handleCheck",
+    value: function handleCheck() {
+      var _this2 = this;
+
+      this.setState(function (prevState) {
+        return {
+          selected: !prevState.selected
+        };
+      }, function () {
+        _this2.props.onSelect(_this2.props.label, _this2.state.selected);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       return _react.default.createElement("div", {
         className: "single-select-filter"
       }, _react.default.createElement("input", {
         className: "single-select-filter__checkbox",
         type: "checkbox",
-        onClick: this.props.onSelect
+        onChange: function onChange() {
+          return _this3.handleCheck();
+        },
+        checked: this.state.selected
       }), _react.default.createElement("p", {
         className: "single-select-filter__label"
       }, this.props.label));
@@ -62,7 +86,11 @@ function (_React$Component) {
 
 SingleSelectFilter.propTypes = {
   label: _propTypes.default.string.isRequired,
-  onSelect: _propTypes.default.func.isRequired
+  onSelect: _propTypes.default.func.isRequired,
+  selected: _propTypes.default.bool
+};
+SingleSelectFilter.defaultProps = {
+  selected: false
 };
 var _default = SingleSelectFilter;
 exports.default = _default;

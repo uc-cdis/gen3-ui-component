@@ -17,8 +17,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -40,51 +38,51 @@ var FilterList =
 function (_React$Component) {
   _inherits(FilterList, _React$Component);
 
-  function FilterList(props) {
-    var _this;
-
+  function FilterList() {
     _classCallCheck(this, FilterList);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(FilterList).call(this, props));
-    var initialExpandedStatus = props.expandedStatus.length > 0 ? props.expandedStatus : props.sections.map(function () {
-      return false;
-    });
-    _this.state = {
-      expandedStatus: initialExpandedStatus
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(FilterList).apply(this, arguments));
   }
 
   _createClass(FilterList, [{
     key: "handleSectionToggle",
-    value: function handleSectionToggle(index) {
-      this.setState(function (prevState) {
-        var tmp = prevState.expandedStatus[index];
-        var newExpandedStatus = prevState.expandedStatus.slice(0);
-        newExpandedStatus.splice(index, 1, !tmp);
-        return {
-          expandedStatus: newExpandedStatus
-        };
-      });
-      this.props.onToggle(index);
+    value: function handleSectionToggle(sectionIndex, newExpanded) {
+      this.props.onToggle(sectionIndex, newExpanded);
+    }
+  }, {
+    key: "handleSelectSingleFilter",
+    value: function handleSelectSingleFilter(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected) {
+      this.props.onSelect(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected);
+    }
+  }, {
+    key: "handleDragRangeFilter",
+    value: function handleDragRangeFilter(sectionIndex, lowerBound, upperBound) {
+      this.props.onAfterDrag(sectionIndex, lowerBound, upperBound);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this = this;
 
       return _react.default.createElement("div", {
         className: "filter-list"
       }, this.props.sections.map(function (section, index) {
-        return _react.default.createElement(_FilterSection.default, _extends({}, _this2.props, {
+        return _react.default.createElement(_FilterSection.default, {
           key: index,
           title: section.title,
           options: section.options,
-          expanded: _this2.state.expandedStatus[index],
-          onToggle: function onToggle() {
-            return _this2.handleSectionToggle(index);
+          expanded: _this.props.expandedStatus[index],
+          onToggle: function onToggle(newExpanded) {
+            return _this.handleSectionToggle(index, newExpanded);
+          },
+          filterStatus: _this.props.filterStatus[index],
+          onSelect: function onSelect(singleFilterIndex, singleFilterLabel, newSelected) {
+            return _this.handleSelectSingleFilter(index, singleFilterIndex, singleFilterLabel, newSelected);
+          },
+          onAfterDrag: function onAfterDrag(lowerBound, upperBound) {
+            return _this.handleDragRangeFilter(index, lowerBound, upperBound);
           }
-        }));
+        });
       }));
     }
   }]);
@@ -101,11 +99,17 @@ FilterList.propTypes = {
     }))
   })).isRequired,
   expandedStatus: _propTypes.default.arrayOf(_propTypes.default.bool),
-  onToggle: _propTypes.default.func
+  onToggle: _propTypes.default.func,
+  filterStatus: _propTypes.default.arrayOf(_propTypes.default.arrayOf(_propTypes.default.oneOfType([_propTypes.default.bool, _propTypes.default.PropTypes.number]))),
+  onSelect: _propTypes.default.func,
+  onAfterDrag: _propTypes.default.func
 };
 FilterList.defaultProps = {
   expandedStatus: [],
-  onToggle: function onToggle() {}
+  onToggle: function onToggle() {},
+  filterStatus: [],
+  onSelect: function onSelect() {},
+  onAfterDrag: function onAfterDrag() {}
 };
 var _default = FilterList;
 exports.default = _default;

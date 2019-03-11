@@ -47,8 +47,8 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(RangeFilter).call(this, props));
     _this.state = {
-      lowerBound: _this.props.min,
-      upperBound: _this.props.max
+      lowerBound: props.lowerBound ? props.lowerBound : props.min,
+      upperBound: props.upperBound ? props.upperBound : props.max
     };
     return _this;
   }
@@ -68,9 +68,23 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "onAfterSliderChange",
+    value: function onAfterSliderChange(range) {
+      var _this3 = this;
+
+      this.setState({
+        lowerBound: range[0],
+        upperBound: range[1]
+      }, function () {
+        if (_this3.props.onAfterDrag) {
+          _this3.props.onAfterDrag(_this3.state.lowerBound, _this3.state.upperBound);
+        }
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react.default.createElement("div", {
         className: "range-filter"
@@ -88,7 +102,10 @@ function (_React$Component) {
         max: this.props.max,
         value: [this.state.lowerBound, this.state.upperBound],
         onChange: function onChange(e) {
-          return _this3.onSliderChange(e);
+          return _this4.onSliderChange(e);
+        },
+        onAfterChange: function onAfterChange(e) {
+          return _this4.onAfterSliderChange(e);
         }
       }));
     }
@@ -98,10 +115,19 @@ function (_React$Component) {
 }(_react.default.Component);
 
 RangeFilter.propTypes = {
-  label: _propTypes.default.string.isRequired,
-  onDrag: _propTypes.default.func.isRequired,
+  label: _propTypes.default.string,
+  onDrag: _propTypes.default.func,
+  onAfterDrag: _propTypes.default.func.isRequired,
   min: _propTypes.default.number.isRequired,
-  max: _propTypes.default.number.isRequired
+  max: _propTypes.default.number.isRequired,
+  lowerBound: _propTypes.default.number,
+  upperBound: _propTypes.default.number
+};
+RangeFilter.defaultProps = {
+  label: '',
+  lowerBound: 0,
+  upperBound: 0,
+  onDrag: function onDrag() {}
 };
 var _default = RangeFilter;
 exports.default = _default;

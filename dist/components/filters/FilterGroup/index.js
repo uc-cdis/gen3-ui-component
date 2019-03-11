@@ -15,10 +15,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -51,9 +47,30 @@ function (_React$Component) {
         return false;
       });
     });
+    var initialFilterStatus = props.filterConfig.tabs.map(function (t) {
+      return t.fields.map(function () {
+        return [];
+      });
+    });
     _this.state = {
       selectedTabIndex: 0,
-      expandedStatus: initialExpandedStatus
+      expandedStatus: initialExpandedStatus,
+      filterStatus: initialFilterStatus,
+
+      /**
+       * Currently filtered items, example:
+       *   {
+       *     'file_format': {
+       *        'selectedValues': ['CSV', 'TAR'],
+       *     },
+       *     'file_count': {
+       *        'lowerBound': 5,
+       *        'upperBound': 30,
+       *     },
+       *     ...
+       *   }
+       */
+      filterResults: {}
     };
     return _this;
   }
@@ -67,19 +84,80 @@ function (_React$Component) {
     }
   }, {
     key: "handleToggle",
-    value: function handleToggle(tabIndex, sectionIndex) {
+    value: function handleToggle(tabIndex, sectionIndex, newSectionExpandedStatus) {
       this.setState(function (prevState) {
         var newExpandedStatus = prevState.expandedStatus.slice(0);
-        newExpandedStatus[tabIndex][sectionIndex] = !newExpandedStatus[tabIndex][sectionIndex];
+        newExpandedStatus[tabIndex][sectionIndex] = newSectionExpandedStatus;
         return {
           expandedStatus: newExpandedStatus
         };
       });
     }
   }, {
+    key: "handleSelect",
+    value: function handleSelect(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected) {
+      var _this2 = this;
+
+      this.setState(function (prevState) {
+        // update filter status
+        var newFilterStatus = prevState.filterStatus.slice(0);
+        newFilterStatus[prevState.selectedTabIndex][sectionIndex][singleFilterIndex] = newSelected; // update filter results
+
+        var newFilterResults = prevState.filterResults;
+        var field = _this2.props.filterConfig.tabs[prevState.selectedTabIndex].fields[sectionIndex];
+
+        if (typeof newFilterResults[field] === 'undefined') {
+          newFilterResults[field] = {
+            selectedValues: [singleFilterLabel]
+          };
+        } else {
+          var findIndex = newFilterResults[field].selectedValues.indexOf(singleFilterLabel);
+
+          if (findIndex >= 0 && !newSelected) {
+            newFilterResults[field].selectedValues.splice(findIndex, 1);
+          } else if (findIndex < 0 && newSelected) {
+            newFilterResults[field].selectedValues.push(singleFilterLabel);
+          }
+        } // update component state
+
+
+        return {
+          filterStatus: newFilterStatus,
+          filterResults: newFilterResults
+        };
+      }, function () {
+        _this2.callOnFilterChange();
+      });
+    }
+  }, {
+    key: "handleDrag",
+    value: function handleDrag(sectionIndex, lowerBound, upperBound) {
+      var _this3 = this;
+
+      this.setState(function (prevState) {
+        // update filter status
+        var newFilterStatus = prevState.filterStatus.slice(0);
+        newFilterStatus[prevState.selectedTabIndex][sectionIndex] = [lowerBound, upperBound]; // update filter results
+
+        var newFilterResults = prevState.filterResults;
+        var field = _this3.props.filterConfig.tabs[prevState.selectedTabIndex].fields[sectionIndex];
+        newFilterResults[field] = {
+          lowerBound: lowerBound,
+          upperBound: upperBound
+        };
+      }, function () {
+        _this3.callOnFilterChange();
+      });
+    }
+  }, {
+    key: "callOnFilterChange",
+    value: function callOnFilterChange() {
+      this.props.onFilterChange(this.state.filterResults);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this4 = this;
 
       return _react.default.createElement("div", {
         className: "filter-group"
@@ -90,24 +168,27 @@ function (_React$Component) {
           key: index,
           role: "button",
           tabIndex: index,
-          className: 'filter-group__tab'.concat(_this2.state.selectedTabIndex === index ? ' filter-group__tab--selected' : ''),
+          className: 'filter-group__tab'.concat(_this4.state.selectedTabIndex === index ? ' filter-group__tab--selected' : ''),
           onClick: function onClick() {
-            return _this2.selectTab(index);
+            return _this4.selectTab(index);
           },
           onKeyDown: function onKeyDown() {
-            return _this2.selectTab(index);
+            return _this4.selectTab(index);
           }
         }, _react.default.createElement("p", {
           className: "filter-group__tab-title"
-        }, _this2.props.filterConfig.tabs[tab.key].title));
+        }, _this4.props.filterConfig.tabs[tab.key].title));
       })), _react.default.createElement("div", {
         className: "filter-group__filter-area"
-      }, _react.default.cloneElement(this.props.tabs[this.state.selectedTabIndex], _objectSpread({}, this.props, {
-        onToggle: function onToggle(sectionIndex) {
-          return _this2.handleToggle(_this2.state.selectedTabIndex, sectionIndex);
+      }, _react.default.cloneElement(this.props.tabs[this.state.selectedTabIndex], {
+        onToggle: function onToggle(sectionIndex, newSectionExpandedStatus) {
+          return _this4.handleToggle(_this4.state.selectedTabIndex, sectionIndex, newSectionExpandedStatus);
         },
-        expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex]
-      }))));
+        expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex],
+        filterStatus: this.state.filterStatus[this.state.selectedTabIndex],
+        onSelect: this.handleSelect.bind(this),
+        onAfterDrag: this.handleDrag.bind(this)
+      })));
     }
   }]);
 
@@ -121,7 +202,11 @@ FilterGroup.propTypes = {
       title: _propTypes.default.string,
       fields: _propTypes.default.arrayOf(_propTypes.default.string)
     }))
-  }).isRequired
+  }).isRequired,
+  onFilterChange: _propTypes.default.func
+};
+FilterGroup.defaultProps = {
+  onFilterChange: function onFilterChange() {}
 };
 var _default = FilterGroup;
 exports.default = _default;

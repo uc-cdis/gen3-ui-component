@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SingleSelectFilter from '../SingleSelectFilter';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
@@ -14,8 +13,16 @@ class FilterSection extends React.Component {
   }
 
   toggleSection() {
-    this.props.onToggle();
+    this.props.onToggle(!this.state.isExpanded);
     this.setState(prevState => ({ isExpanded: !prevState.isExpanded }));
+  }
+
+  handleSelectSingleSelectFilter(index, label, newSelected) {
+    this.props.onSelect(index, label, newSelected);
+  }
+
+  handleDragRangeFilter(lowerBound, upperBound) {
+    this.props.onAfterDrag(lowerBound, upperBound);
   }
 
   render() {
@@ -36,26 +43,40 @@ class FilterSection extends React.Component {
         <div className='filter-section__options'>
           {
             this.state.isExpanded
-              ? this.props.options.map((option, index) => (
-                option.filterType === 'singleSelect'
-                  ? (
+              ? this.props.options.map((option, index) => {
+                if (option.filterType === 'singleSelect') {
+                  const selected = typeof this.props.filterStatus[index] === 'undefined' ? false : this.props.filterStatus[index];
+                  return (
                     <SingleSelectFilter
                       key={index}
                       label={option.text}
-                      onSelect={this.props.onSelect}
+                      onSelect={(label, newSelected) => this.handleSelectSingleSelectFilter(
+                        index,
+                        label,
+                        newSelected,
+                      )}
+                      selected={selected}
                     />
-                  )
-                  : (
-                    <RangeFilter
-                      key={index}
-                      label={option.text}
-                      min={option.min}
-                      max={option.max}
-                      onDrag={this.props.onDrag}
-                    />
-                  )
-              ))
-              : null
+                  );
+                }
+                const lowerBound = (typeof this.props.filterStatus === 'undefined'
+                  || this.props.filterStatus.length !== 2)
+                  ? option.min : this.props.filterStatus[0];
+                const upperBound = (typeof this.props.filterStatus === 'undefined'
+                  || this.props.filterStatus.length !== 2)
+                  ? option.max : this.props.filterStatus[1];
+                return (
+                  <RangeFilter
+                    key={index}
+                    label={option.text}
+                    min={option.min}
+                    max={option.max}
+                    onAfterDrag={(lb, ub) => this.handleDragRangeFilter(lb, ub)}
+                    lowerBound={lowerBound}
+                    upperBound={upperBound}
+                  />
+                );
+              }) : null
           }
         </div>
       </div>
@@ -66,11 +87,8 @@ class FilterSection extends React.Component {
 FilterSection.propTypes = {
   title: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired,
     filterType: PropTypes.oneOf(['singleSelect', 'range']).isRequired,
-
-    // for single select
-    selected: PropTypes.bool,
+    text: PropTypes.string,
 
     // for range filter
     min: PropTypes.number,
@@ -78,9 +96,13 @@ FilterSection.propTypes = {
 
   })),
   onSelect: PropTypes.func.isRequired,
-  onDrag: PropTypes.func.isRequired,
+  onAfterDrag: PropTypes.func.isRequired,
   expanded: PropTypes.bool,
   onToggle: PropTypes.func,
+  filterStatus: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number,
+  ])),
 };
 
 FilterSection.defaultProps = {
@@ -88,6 +110,7 @@ FilterSection.defaultProps = {
   options: [],
   expanded: false,
   onToggle: () => {},
+  filterStatus: [],
 };
 
 export default FilterSection;

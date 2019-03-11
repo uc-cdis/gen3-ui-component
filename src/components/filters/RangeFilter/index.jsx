@@ -8,8 +8,8 @@ class RangeFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lowerBound: this.props.min,
-      upperBound: this.props.max,
+      lowerBound: props.lowerBound ? props.lowerBound : props.min,
+      upperBound: props.upperBound ? props.upperBound : props.max,
     };
   }
 
@@ -17,6 +17,14 @@ class RangeFilter extends React.Component {
     this.setState({ lowerBound: range[0], upperBound: range[1] }, () => {
       if (this.props.onDrag) {
         this.props.onDrag(this.state.lowerBound, this.state.upperBound);
+      }
+    });
+  }
+
+  onAfterSliderChange(range) {
+    this.setState({ lowerBound: range[0], upperBound: range[1] }, () => {
+      if (this.props.onAfterDrag) {
+        this.props.onAfterDrag(this.state.lowerBound, this.state.upperBound);
       }
     });
   }
@@ -35,6 +43,7 @@ class RangeFilter extends React.Component {
           max={this.props.max}
           value={[this.state.lowerBound, this.state.upperBound]}
           onChange={e => this.onSliderChange(e)}
+          onAfterChange={e => this.onAfterSliderChange(e)}
         />
       </div>
     );
@@ -42,10 +51,20 @@ class RangeFilter extends React.Component {
 }
 
 RangeFilter.propTypes = {
-  label: PropTypes.string.isRequired,
-  onDrag: PropTypes.func.isRequired,
+  label: PropTypes.string,
+  onDrag: PropTypes.func,
+  onAfterDrag: PropTypes.func.isRequired,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
+  lowerBound: PropTypes.number,
+  upperBound: PropTypes.number,
+};
+
+RangeFilter.defaultProps = {
+  label: '',
+  lowerBound: 0,
+  upperBound: 0,
+  onDrag: () => {},
 };
 
 export default RangeFilter;
