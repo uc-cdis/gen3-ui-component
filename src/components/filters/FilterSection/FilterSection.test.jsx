@@ -35,6 +35,7 @@ describe('FilterSection', () => {
       options={singleSelectOptions}
       onSelect={onSelect}
       onAfterDrag={onDrag}
+      hideZero={false}
     />,
   );
 
@@ -58,6 +59,7 @@ describe('FilterSection', () => {
         options={mixedOptions}
         onSelect={onSelect}
         onAfterDrag={onDrag}
+        hideZero={false}
       />,
     );
     mixedFilterComponent.find('.filter-section__header').simulate('click');

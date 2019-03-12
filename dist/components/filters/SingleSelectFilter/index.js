@@ -36,35 +36,25 @@ var SingleSelectFilter =
 function (_React$Component) {
   _inherits(SingleSelectFilter, _React$Component);
 
-  function SingleSelectFilter(props) {
-    var _this;
-
+  function SingleSelectFilter() {
     _classCallCheck(this, SingleSelectFilter);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SingleSelectFilter).call(this, props));
-    _this.state = {
-      selected: props.selected
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(SingleSelectFilter).apply(this, arguments));
   }
 
   _createClass(SingleSelectFilter, [{
     key: "handleCheck",
     value: function handleCheck() {
-      var _this2 = this;
-
-      this.setState(function (prevState) {
-        return {
-          selected: !prevState.selected
-        };
-      }, function () {
-        _this2.props.onSelect(_this2.props.label, _this2.state.selected);
-      });
+      this.props.onSelect(this.props.label);
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this = this;
+
+      if (this.props.count === 0 && this.props.hideZero) {
+        return null;
+      }
 
       return _react.default.createElement("div", {
         className: "single-select-filter"
@@ -72,12 +62,12 @@ function (_React$Component) {
         className: "single-select-filter__checkbox",
         type: "checkbox",
         onChange: function onChange() {
-          return _this3.handleCheck();
+          return _this.handleCheck();
         },
-        checked: this.state.selected
+        checked: this.props.selected
       }), _react.default.createElement("p", {
         className: "single-select-filter__label"
-      }, this.props.label), this.props.count === 0 && this.props.hideZero ? null : _react.default.createElement("span", {
+      }, this.props.label), _react.default.createElement("span", {
         className: "g3-badge single-select-filter__count"
       }, this.props.count));
     }

@@ -12,9 +12,8 @@ class FilterList extends React.Component {
     sectionIndex,
     singleFilterIndex,
     singleFilterLabel,
-    newSelected,
   ) {
-    this.props.onSelect(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected);
+    this.props.onSelect(sectionIndex, singleFilterIndex, singleFilterLabel);
   }
 
   handleDragRangeFilter(sectionIndex, lowerBound, upperBound) {
@@ -37,12 +36,10 @@ class FilterList extends React.Component {
                 (
                   singleFilterIndex,
                   singleFilterLabel,
-                  newSelected,
                 ) => this.handleSelectSingleFilter(
                   index,
                   singleFilterIndex,
                   singleFilterLabel,
-                  newSelected,
                 )
               }
               onAfterDrag={
@@ -55,6 +52,7 @@ class FilterList extends React.Component {
                   upperBound,
                 )
               }
+              hideZero={this.props.hideZero}
             />
           ))
         }
@@ -72,6 +70,7 @@ FilterList.propTypes = {
 
       // for single select filter
       count: PropTypes.number,
+      hideZero: PropTypes.bool,
 
       // for range filter
       min: PropTypes.number,
@@ -80,12 +79,13 @@ FilterList.propTypes = {
   })).isRequired,
   expandedStatus: PropTypes.arrayOf(PropTypes.bool),
   onToggle: PropTypes.func,
-  filterStatus: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.PropTypes.number,
-  ]))),
+  filterStatus: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.number),
+  ])),
   onSelect: PropTypes.func,
   onAfterDrag: PropTypes.func,
+  hideZero: PropTypes.bool,
 };
 
 FilterList.defaultProps = {
@@ -94,6 +94,7 @@ FilterList.defaultProps = {
   filterStatus: [],
   onSelect: () => {},
   onAfterDrag: () => {},
+  hideZero: true,
 };
 
 export default FilterList;

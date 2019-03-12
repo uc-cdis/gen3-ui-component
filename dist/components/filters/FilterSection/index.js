@@ -59,7 +59,11 @@ function (_React$Component) {
       var _this2 = this;
 
       if (this.state.isExpanded) {
-        if (this.props.options.length > this.props.initVisibleItemNumber) {
+        var totalCount = this.props.options.filter(function (o) {
+          return o.count > 0 || !_this2.props.hideZero;
+        }).length;
+
+        if (totalCount > this.props.initVisibleItemNumber) {
           if (this.state.showingMore) {
             return _react.default.createElement("div", {
               className: "filter-section__show-more",
@@ -74,6 +78,7 @@ function (_React$Component) {
             }, "less");
           }
 
+          var moreCount = totalCount - this.props.initVisibleItemNumber;
           return _react.default.createElement("div", {
             className: "filter-section__show-more",
             role: "button",
@@ -84,7 +89,7 @@ function (_React$Component) {
               return _this2.toggleShowMore();
             },
             tabIndex: 0
-          }, this.props.options.length - this.props.initVisibleItemNumber, "\xA0more");
+          }, moreCount, "\xA0more");
         }
 
         return null;
@@ -104,8 +109,8 @@ function (_React$Component) {
     }
   }, {
     key: "handleSelectSingleSelectFilter",
-    value: function handleSelectSingleSelectFilter(index, label, newSelected) {
-      this.props.onSelect(index, label, newSelected);
+    value: function handleSelectSingleSelectFilter(index, label) {
+      this.props.onSelect(index, label);
     }
   }, {
     key: "handleDragRangeFilter",
@@ -150,15 +155,16 @@ function (_React$Component) {
         }
 
         if (option.filterType === 'singleSelect') {
-          var selected = typeof _this3.props.filterStatus[index] === 'undefined' ? false : _this3.props.filterStatus[index];
+          var selected = typeof _this3.props.filterStatus[option.text] === 'undefined' ? false : _this3.props.filterStatus[option.text];
           return _react.default.createElement(_SingleSelectFilter.default, {
             key: index,
             label: option.text,
-            onSelect: function onSelect(label, newSelected) {
-              return _this3.handleSelectSingleSelectFilter(index, label, newSelected);
+            onSelect: function onSelect(label) {
+              return _this3.handleSelectSingleSelectFilter(index, label);
             },
             selected: selected,
-            count: option.count
+            count: option.count,
+            hideZero: _this3.props.hideZero
           });
         }
 
@@ -197,8 +203,9 @@ FilterSection.propTypes = {
   onAfterDrag: _propTypes.default.func.isRequired,
   expanded: _propTypes.default.bool,
   onToggle: _propTypes.default.func,
-  filterStatus: _propTypes.default.arrayOf(_propTypes.default.oneOfType([_propTypes.default.bool, _propTypes.default.number])),
-  initVisibleItemNumber: _propTypes.default.number
+  filterStatus: _propTypes.default.oneOfType([_propTypes.default.object, _propTypes.default.arrayOf(_propTypes.default.number)]),
+  initVisibleItemNumber: _propTypes.default.number,
+  hideZero: _propTypes.default.bool
 };
 FilterSection.defaultProps = {
   title: '',
@@ -206,7 +213,8 @@ FilterSection.defaultProps = {
   expanded: false,
   onToggle: function onToggle() {},
   filterStatus: [],
-  initVisibleItemNumber: 5
+  initVisibleItemNumber: 5,
+  hideZero: true
 };
 var _default = FilterSection;
 exports.default = _default;

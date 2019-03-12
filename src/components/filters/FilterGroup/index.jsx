@@ -8,7 +8,7 @@ class FilterGroup extends React.Component {
     const initialExpandedStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => (false)));
     const initialFilterStatus = props.filterConfig.tabs
-      .map(t => t.fields.map(() => ([])));
+      .map(t => t.fields.map(() => ({})));
     this.state = {
       selectedTabIndex: 0,
       expandedStatus: initialExpandedStatus,
@@ -45,15 +45,18 @@ class FilterGroup extends React.Component {
     });
   }
 
-  handleSelect(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected) {
+  handleSelect(sectionIndex, singleFilterIndex, singleFilterLabel) {
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
-      newFilterStatus[prevState.selectedTabIndex][sectionIndex][singleFilterIndex] = newSelected;
+      const tabIndex = prevState.selectedTabIndex;
+      const oldSelected = newFilterStatus[tabIndex][sectionIndex][singleFilterLabel];
+      const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
+      newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] = newSelected;
 
       // update filter results
       const newFilterResults = prevState.filterResults;
-      const field = this.props.filterConfig.tabs[prevState.selectedTabIndex].fields[sectionIndex];
+      const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
       if (typeof newFilterResults[field] === 'undefined') {
         newFilterResults[field] = { selectedValues: [singleFilterLabel] };
       } else {
@@ -129,6 +132,7 @@ class FilterGroup extends React.Component {
                 filterStatus: this.state.filterStatus[this.state.selectedTabIndex],
                 onSelect: this.handleSelect.bind(this),
                 onAfterDrag: this.handleDrag.bind(this),
+                hideZero: this.props.hideZero,
               },
             )
           }
@@ -147,10 +151,12 @@ FilterGroup.propTypes = {
     })),
   }).isRequired,
   onFilterChange: PropTypes.func,
+  hideZero: PropTypes.bool,
 };
 
 FilterGroup.defaultProps = {
   onFilterChange: () => {},
+  hideZero: true,
 };
 
 export default FilterGroup;

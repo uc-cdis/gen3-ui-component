@@ -49,7 +49,7 @@ function (_React$Component) {
     });
     var initialFilterStatus = props.filterConfig.tabs.map(function (t) {
       return t.fields.map(function () {
-        return [];
+        return {};
       });
     });
     _this.state = {
@@ -95,16 +95,19 @@ function (_React$Component) {
     }
   }, {
     key: "handleSelect",
-    value: function handleSelect(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected) {
+    value: function handleSelect(sectionIndex, singleFilterIndex, singleFilterLabel) {
       var _this2 = this;
 
       this.setState(function (prevState) {
         // update filter status
         var newFilterStatus = prevState.filterStatus.slice(0);
-        newFilterStatus[prevState.selectedTabIndex][sectionIndex][singleFilterIndex] = newSelected; // update filter results
+        var tabIndex = prevState.selectedTabIndex;
+        var oldSelected = newFilterStatus[tabIndex][sectionIndex][singleFilterLabel];
+        var newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
+        newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] = newSelected; // update filter results
 
         var newFilterResults = prevState.filterResults;
-        var field = _this2.props.filterConfig.tabs[prevState.selectedTabIndex].fields[sectionIndex];
+        var field = _this2.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
 
         if (typeof newFilterResults[field] === 'undefined') {
           newFilterResults[field] = {
@@ -187,7 +190,8 @@ function (_React$Component) {
         expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex],
         filterStatus: this.state.filterStatus[this.state.selectedTabIndex],
         onSelect: this.handleSelect.bind(this),
-        onAfterDrag: this.handleDrag.bind(this)
+        onAfterDrag: this.handleDrag.bind(this),
+        hideZero: this.props.hideZero
       })));
     }
   }]);
@@ -203,10 +207,12 @@ FilterGroup.propTypes = {
       fields: _propTypes.default.arrayOf(_propTypes.default.string)
     }))
   }).isRequired,
-  onFilterChange: _propTypes.default.func
+  onFilterChange: _propTypes.default.func,
+  hideZero: _propTypes.default.bool
 };
 FilterGroup.defaultProps = {
-  onFilterChange: function onFilterChange() {}
+  onFilterChange: function onFilterChange() {},
+  hideZero: true
 };
 var _default = FilterGroup;
 exports.default = _default;

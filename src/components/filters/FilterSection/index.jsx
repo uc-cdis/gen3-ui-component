@@ -15,7 +15,9 @@ class FilterSection extends React.Component {
 
   getShowMoreButton() {
     if (this.state.isExpanded) {
-      if ((this.props.options.length > this.props.initVisibleItemNumber)) {
+      const totalCount = this.props.options
+        .filter(o => (o.count > 0 || !this.props.hideZero)).length;
+      if ((totalCount > this.props.initVisibleItemNumber)) {
         if (this.state.showingMore) {
           return (
             <div
@@ -29,6 +31,7 @@ class FilterSection extends React.Component {
             </div>
           );
         }
+        const moreCount = totalCount - this.props.initVisibleItemNumber;
         return (
           <div
             className='filter-section__show-more'
@@ -37,7 +40,7 @@ class FilterSection extends React.Component {
             onKeyPress={() => this.toggleShowMore()}
             tabIndex={0}
           >
-            {this.props.options.length - this.props.initVisibleItemNumber}
+            {moreCount}
             &nbsp;more
           </div>
         );
@@ -52,8 +55,8 @@ class FilterSection extends React.Component {
     this.setState(prevState => ({ isExpanded: !prevState.isExpanded }));
   }
 
-  handleSelectSingleSelectFilter(index, label, newSelected) {
-    this.props.onSelect(index, label, newSelected);
+  handleSelectSingleSelectFilter(index, label) {
+    this.props.onSelect(index, label);
   }
 
   handleDragRangeFilter(lowerBound, upperBound) {
@@ -87,18 +90,18 @@ class FilterSection extends React.Component {
                   return null;
                 }
                 if (option.filterType === 'singleSelect') {
-                  const selected = typeof this.props.filterStatus[index] === 'undefined' ? false : this.props.filterStatus[index];
+                  const selected = typeof this.props.filterStatus[option.text] === 'undefined' ? false : this.props.filterStatus[option.text];
                   return (
                     <SingleSelectFilter
                       key={index}
                       label={option.text}
-                      onSelect={(label, newSelected) => this.handleSelectSingleSelectFilter(
+                      onSelect={label => this.handleSelectSingleSelectFilter(
                         index,
                         label,
-                        newSelected,
                       )}
                       selected={selected}
                       count={option.count}
+                      hideZero={this.props.hideZero}
                     />
                   );
                 }
@@ -146,11 +149,12 @@ FilterSection.propTypes = {
   onAfterDrag: PropTypes.func.isRequired,
   expanded: PropTypes.bool,
   onToggle: PropTypes.func,
-  filterStatus: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.number,
-  ])),
+  filterStatus: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.number),
+  ]),
   initVisibleItemNumber: PropTypes.number,
+  hideZero: PropTypes.bool,
 };
 
 FilterSection.defaultProps = {
@@ -160,6 +164,7 @@ FilterSection.defaultProps = {
   onToggle: () => {},
   filterStatus: [],
   initVisibleItemNumber: 5,
+  hideZero: true,
 };
 
 export default FilterSection;

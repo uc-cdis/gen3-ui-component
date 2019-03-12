@@ -51,8 +51,8 @@ function (_React$Component) {
     }
   }, {
     key: "handleSelectSingleFilter",
-    value: function handleSelectSingleFilter(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected) {
-      this.props.onSelect(sectionIndex, singleFilterIndex, singleFilterLabel, newSelected);
+    value: function handleSelectSingleFilter(sectionIndex, singleFilterIndex, singleFilterLabel) {
+      this.props.onSelect(sectionIndex, singleFilterIndex, singleFilterLabel);
     }
   }, {
     key: "handleDragRangeFilter",
@@ -76,12 +76,13 @@ function (_React$Component) {
             return _this.handleSectionToggle(index, newExpanded);
           },
           filterStatus: _this.props.filterStatus[index],
-          onSelect: function onSelect(singleFilterIndex, singleFilterLabel, newSelected) {
-            return _this.handleSelectSingleFilter(index, singleFilterIndex, singleFilterLabel, newSelected);
+          onSelect: function onSelect(singleFilterIndex, singleFilterLabel) {
+            return _this.handleSelectSingleFilter(index, singleFilterIndex, singleFilterLabel);
           },
           onAfterDrag: function onAfterDrag(lowerBound, upperBound) {
             return _this.handleDragRangeFilter(index, lowerBound, upperBound);
-          }
+          },
+          hideZero: _this.props.hideZero
         });
       }));
     }
@@ -98,6 +99,7 @@ FilterList.propTypes = {
       filterType: _propTypes.default.oneOf(['singleSelect', 'range']),
       // for single select filter
       count: _propTypes.default.number,
+      hideZero: _propTypes.default.bool,
       // for range filter
       min: _propTypes.default.number,
       max: _propTypes.default.number
@@ -105,16 +107,18 @@ FilterList.propTypes = {
   })).isRequired,
   expandedStatus: _propTypes.default.arrayOf(_propTypes.default.bool),
   onToggle: _propTypes.default.func,
-  filterStatus: _propTypes.default.arrayOf(_propTypes.default.arrayOf(_propTypes.default.oneOfType([_propTypes.default.bool, _propTypes.default.PropTypes.number]))),
+  filterStatus: _propTypes.default.arrayOf(_propTypes.default.oneOfType([_propTypes.default.object, _propTypes.default.arrayOf(_propTypes.default.number)])),
   onSelect: _propTypes.default.func,
-  onAfterDrag: _propTypes.default.func
+  onAfterDrag: _propTypes.default.func,
+  hideZero: _propTypes.default.bool
 };
 FilterList.defaultProps = {
   expandedStatus: [],
   onToggle: function onToggle() {},
   filterStatus: [],
   onSelect: function onSelect() {},
-  onAfterDrag: function onAfterDrag() {}
+  onAfterDrag: function onAfterDrag() {},
+  hideZero: true
 };
 var _default = FilterList;
 exports.default = _default;
