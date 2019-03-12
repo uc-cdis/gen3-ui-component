@@ -95,7 +95,12 @@ FilterList.propTypes = {
     title: _propTypes.default.string,
     options: _propTypes.default.arrayOf(_propTypes.default.shape({
       text: _propTypes.default.string,
-      filterType: _propTypes.default.oneOf(['singleSelect', 'range'])
+      filterType: _propTypes.default.oneOf(['singleSelect', 'range']),
+      // for single select filter
+      count: _propTypes.default.number,
+      // for range filter
+      min: _propTypes.default.number,
+      max: _propTypes.default.number
     }))
   })).isRequired,
   expandedStatus: _propTypes.default.arrayOf(_propTypes.default.bool),

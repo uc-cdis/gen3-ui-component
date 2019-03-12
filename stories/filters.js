@@ -8,47 +8,48 @@ import FilterList from '../src/components/filters/FilterList';
 import FilterGroup from '../src/components/filters/FilterGroup';
 
 const projectOptions = [
-  { text: 'ndh-CHARLIE', filterType: 'singleSelect' },
-  { text: 'ndh-dait-microbiome', filterType: 'singleSelect' },
-  { text: 'ndh-dmid-LMV', filterType: 'singleSelect' },
-  { text: 'ndh-vir-simulation', filterType: 'singleSelect' },
-  { text: 'ndh-test', filterType: 'singleSelect' },
+  { text: 'ndh-CHARLIE', filterType: 'singleSelect', count: 123 },
+  { text: 'ndh-dait-microbiome', filterType: 'singleSelect', count: 123 },
+  { text: 'ndh-dmid-LMV', filterType: 'singleSelect', count: 123 },
+  { text: 'ndh-vir-simulation', filterType: 'singleSelect', count: 123 },
+  { text: 'ndh-test', filterType: 'singleSelect', count: 123 },
 ];
 
 const studyOptions = [
-  { text: 'MACS', filterType: 'singleSelect' },
-  { text: 'WIHS', filterType: 'singleSelect' },
+  { text: 'MACS', filterType: 'singleSelect', count: 123 },
+  { text: 'WIHS', filterType: 'singleSelect', count: 123 },
 ];
 
 const genderOptions = [
-  { text: 'Male', filterType: 'singleSelect' },
-  { text: 'Female', filterType: 'singleSelect' },
+  { text: 'Male', filterType: 'singleSelect', count: 123 },
+  { text: 'Female', filterType: 'singleSelect', count: 123 },
 ];
 
 const raceOptions = [
-  { text: 'White', filterType: 'singleSelect' },
-  { text: 'Black', filterType: 'singleSelect' },
+  { text: 'White', filterType: 'singleSelect', count: 123 },
+  { text: 'Black', filterType: 'singleSelect', count: 123 },
   {
-    text: 'American Indian or Alaskan Native',
+    text: 'American Indian or Alaskan Nativ',
     filterType: 'singleSelect',
+    count: 123,
   },
-  { text: 'Asian/Pacific Islander', filterType: 'singleSelect' },
-  { text: 'Multiracial', filterType: 'singleSelect' },
-  { text: 'Other', filterType: 'singleSelect' },
+  { text: 'Asian/Pacific Islander', filterType: 'singleSelect', count: 123 },
+  { text: 'Multiracial', filterType: 'singleSelect', count: 123 },
+  { text: 'Other', filterType: 'singleSelect', count: 123 },
 ];
 
 const ethnicityOptions = [
-  { text: 'Hispanic or Latino', filterType: 'singleSelect' },
-  { text: 'Not Hispanic or Latino', filterType: 'singleSelect' },
-  { text: 'Unknown', filterType: 'singleSelect' },
+  { text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123 },
+  { text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123 },
+  { text: 'Unknown', filterType: 'singleSelect', count: 123 },
 ];
 
 const fileTypeOptions = [
-  { text: 'mRNA Array', filterType: 'singleSelect' },
-  { text: 'Unaligned Reads', filterType: 'singleSelect' },
-  { text: 'Lipidomic MS', filterType: 'singleSelect' },
-  { text: 'Proteomic MS', filterType: 'singleSelect' },
-  { text: 'Metabolomic MS', filterType: 'singleSelect' },
+  { text: 'mRNA Array', filterType: 'singleSelect', count: 123 },
+  { text: 'Unaligned Reads', filterType: 'singleSelect', count: 123 },
+  { text: 'Lipidomic MS', filterType: 'singleSelect', count: 123 },
+  { text: 'Proteomic MS', filterType: 'singleSelect', count: 123 },
+  { text: 'Metabolomic MS', filterType: 'singleSelect', count: 123 },
 ];
 
 const fileCountOptions = [

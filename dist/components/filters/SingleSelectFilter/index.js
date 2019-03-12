@@ -77,7 +77,9 @@ function (_React$Component) {
         checked: this.state.selected
       }), _react.default.createElement("p", {
         className: "single-select-filter__label"
-      }, this.props.label));
+      }, this.props.label), this.props.count === 0 && this.props.hideZero ? null : _react.default.createElement("span", {
+        className: "g3-badge single-select-filter__count"
+      }, this.props.count));
     }
   }]);
 
@@ -87,10 +89,14 @@ function (_React$Component) {
 SingleSelectFilter.propTypes = {
   label: _propTypes.default.string.isRequired,
   onSelect: _propTypes.default.func.isRequired,
-  selected: _propTypes.default.bool
+  selected: _propTypes.default.bool,
+  count: _propTypes.default.number,
+  hideZero: _propTypes.default.bool
 };
 SingleSelectFilter.defaultProps = {
-  selected: false
+  selected: false,
+  count: 0,
+  hideZero: true
 };
 var _default = SingleSelectFilter;
 exports.default = _default;

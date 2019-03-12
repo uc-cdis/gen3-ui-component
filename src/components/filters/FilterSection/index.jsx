@@ -9,7 +9,42 @@ class FilterSection extends React.Component {
     super(props);
     this.state = {
       isExpanded: this.props.expanded,
+      showingMore: false,
     };
+  }
+
+  getShowMoreButton() {
+    if (this.state.isExpanded) {
+      if ((this.props.options.length > this.props.initVisibleItemNumber)) {
+        if (this.state.showingMore) {
+          return (
+            <div
+              className='filter-section__show-more'
+              role='button'
+              onClick={() => this.toggleShowMore()}
+              onKeyPress={() => this.toggleShowMore()}
+              tabIndex={0}
+            >
+              less
+            </div>
+          );
+        }
+        return (
+          <div
+            className='filter-section__show-more'
+            role='button'
+            onClick={() => this.toggleShowMore()}
+            onKeyPress={() => this.toggleShowMore()}
+            tabIndex={0}
+          >
+            {this.props.options.length - this.props.initVisibleItemNumber}
+            &nbsp;more
+          </div>
+        );
+      }
+      return null;
+    }
+    return null;
   }
 
   toggleSection() {
@@ -23,6 +58,10 @@ class FilterSection extends React.Component {
 
   handleDragRangeFilter(lowerBound, upperBound) {
     this.props.onAfterDrag(lowerBound, upperBound);
+  }
+
+  toggleShowMore() {
+    this.setState(prevState => ({ showingMore: !prevState.showingMore }));
   }
 
   render() {
@@ -44,6 +83,9 @@ class FilterSection extends React.Component {
           {
             this.state.isExpanded
               ? this.props.options.map((option, index) => {
+                if (index >= this.props.initVisibleItemNumber && !this.state.showingMore) {
+                  return null;
+                }
                 if (option.filterType === 'singleSelect') {
                   const selected = typeof this.props.filterStatus[index] === 'undefined' ? false : this.props.filterStatus[index];
                   return (
@@ -56,6 +98,7 @@ class FilterSection extends React.Component {
                         newSelected,
                       )}
                       selected={selected}
+                      count={option.count}
                     />
                   );
                 }
@@ -78,6 +121,7 @@ class FilterSection extends React.Component {
                 );
               }) : null
           }
+          {this.getShowMoreButton()}
         </div>
       </div>
     );
@@ -89,6 +133,9 @@ FilterSection.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
     filterType: PropTypes.oneOf(['singleSelect', 'range']).isRequired,
     text: PropTypes.string,
+
+    // for single select filter
+    count: PropTypes.number,
 
     // for range filter
     min: PropTypes.number,
@@ -103,6 +150,7 @@ FilterSection.propTypes = {
     PropTypes.bool,
     PropTypes.number,
   ])),
+  initVisibleItemNumber: PropTypes.number,
 };
 
 FilterSection.defaultProps = {
@@ -111,6 +159,7 @@ FilterSection.defaultProps = {
   expanded: false,
   onToggle: () => {},
   filterStatus: [],
+  initVisibleItemNumber: 5,
 };
 
 export default FilterSection;

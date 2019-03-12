@@ -47,12 +47,52 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(FilterSection).call(this, props));
     _this.state = {
-      isExpanded: _this.props.expanded
+      isExpanded: _this.props.expanded,
+      showingMore: false
     };
     return _this;
   }
 
   _createClass(FilterSection, [{
+    key: "getShowMoreButton",
+    value: function getShowMoreButton() {
+      var _this2 = this;
+
+      if (this.state.isExpanded) {
+        if (this.props.options.length > this.props.initVisibleItemNumber) {
+          if (this.state.showingMore) {
+            return _react.default.createElement("div", {
+              className: "filter-section__show-more",
+              role: "button",
+              onClick: function onClick() {
+                return _this2.toggleShowMore();
+              },
+              onKeyPress: function onKeyPress() {
+                return _this2.toggleShowMore();
+              },
+              tabIndex: 0
+            }, "less");
+          }
+
+          return _react.default.createElement("div", {
+            className: "filter-section__show-more",
+            role: "button",
+            onClick: function onClick() {
+              return _this2.toggleShowMore();
+            },
+            onKeyPress: function onKeyPress() {
+              return _this2.toggleShowMore();
+            },
+            tabIndex: 0
+          }, this.props.options.length - this.props.initVisibleItemNumber, "\xA0more");
+        }
+
+        return null;
+      }
+
+      return null;
+    }
+  }, {
     key: "toggleSection",
     value: function toggleSection() {
       this.props.onToggle(!this.state.isExpanded);
@@ -73,19 +113,28 @@ function (_React$Component) {
       this.props.onAfterDrag(lowerBound, upperBound);
     }
   }, {
+    key: "toggleShowMore",
+    value: function toggleShowMore() {
+      this.setState(function (prevState) {
+        return {
+          showingMore: !prevState.showingMore
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _react.default.createElement("div", {
         className: "filter-section"
       }, _react.default.createElement("div", {
         className: "filter-section__header",
         onClick: function onClick() {
-          return _this2.toggleSection();
+          return _this3.toggleSection();
         },
         onKeyPress: function onKeyPress() {
-          return _this2.toggleSection();
+          return _this3.toggleSection();
         },
         tabIndex: 0,
         role: "button"
@@ -96,32 +145,37 @@ function (_React$Component) {
       })), _react.default.createElement("div", {
         className: "filter-section__options"
       }, this.state.isExpanded ? this.props.options.map(function (option, index) {
+        if (index >= _this3.props.initVisibleItemNumber && !_this3.state.showingMore) {
+          return null;
+        }
+
         if (option.filterType === 'singleSelect') {
-          var selected = typeof _this2.props.filterStatus[index] === 'undefined' ? false : _this2.props.filterStatus[index];
+          var selected = typeof _this3.props.filterStatus[index] === 'undefined' ? false : _this3.props.filterStatus[index];
           return _react.default.createElement(_SingleSelectFilter.default, {
             key: index,
             label: option.text,
             onSelect: function onSelect(label, newSelected) {
-              return _this2.handleSelectSingleSelectFilter(index, label, newSelected);
+              return _this3.handleSelectSingleSelectFilter(index, label, newSelected);
             },
-            selected: selected
+            selected: selected,
+            count: option.count
           });
         }
 
-        var lowerBound = typeof _this2.props.filterStatus === 'undefined' || _this2.props.filterStatus.length !== 2 ? option.min : _this2.props.filterStatus[0];
-        var upperBound = typeof _this2.props.filterStatus === 'undefined' || _this2.props.filterStatus.length !== 2 ? option.max : _this2.props.filterStatus[1];
+        var lowerBound = typeof _this3.props.filterStatus === 'undefined' || _this3.props.filterStatus.length !== 2 ? option.min : _this3.props.filterStatus[0];
+        var upperBound = typeof _this3.props.filterStatus === 'undefined' || _this3.props.filterStatus.length !== 2 ? option.max : _this3.props.filterStatus[1];
         return _react.default.createElement(_RangeFilter.default, {
           key: index,
           label: option.text,
           min: option.min,
           max: option.max,
           onAfterDrag: function onAfterDrag(lb, ub) {
-            return _this2.handleDragRangeFilter(lb, ub);
+            return _this3.handleDragRangeFilter(lb, ub);
           },
           lowerBound: lowerBound,
           upperBound: upperBound
         });
-      }) : null));
+      }) : null, this.getShowMoreButton()));
     }
   }]);
 
@@ -133,6 +187,8 @@ FilterSection.propTypes = {
   options: _propTypes.default.arrayOf(_propTypes.default.shape({
     filterType: _propTypes.default.oneOf(['singleSelect', 'range']).isRequired,
     text: _propTypes.default.string,
+    // for single select filter
+    count: _propTypes.default.number,
     // for range filter
     min: _propTypes.default.number,
     max: _propTypes.default.number
@@ -141,14 +197,16 @@ FilterSection.propTypes = {
   onAfterDrag: _propTypes.default.func.isRequired,
   expanded: _propTypes.default.bool,
   onToggle: _propTypes.default.func,
-  filterStatus: _propTypes.default.arrayOf(_propTypes.default.oneOfType([_propTypes.default.bool, _propTypes.default.number]))
+  filterStatus: _propTypes.default.arrayOf(_propTypes.default.oneOfType([_propTypes.default.bool, _propTypes.default.number])),
+  initVisibleItemNumber: _propTypes.default.number
 };
 FilterSection.defaultProps = {
   title: '',
   options: [],
   expanded: false,
   onToggle: function onToggle() {},
-  filterStatus: []
+  filterStatus: [],
+  initVisibleItemNumber: 5
 };
 var _default = FilterSection;
 exports.default = _default;

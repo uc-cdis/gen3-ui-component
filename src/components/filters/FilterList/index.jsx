@@ -69,6 +69,13 @@ FilterList.propTypes = {
     options: PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string,
       filterType: PropTypes.oneOf(['singleSelect', 'range']),
+
+      // for single select filter
+      count: PropTypes.number,
+
+      // for range filter
+      min: PropTypes.number,
+      max: PropTypes.number,
     })),
   })).isRequired,
   expandedStatus: PropTypes.arrayOf(PropTypes.bool),
