@@ -99,7 +99,7 @@ class FilterGroup extends React.Component {
 
   render() {
     return (
-      <div className='filter-group'>
+      <div className={`filter-group ${this.props.className}`}>
         <div className='filter-group__tabs'>
           {
             this.props.tabs.map((tab, index) => (
@@ -152,11 +152,13 @@ FilterGroup.propTypes = {
   }).isRequired,
   onFilterChange: PropTypes.func,
   hideZero: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 FilterGroup.defaultProps = {
   onFilterChange: () => {},
   hideZero: true,
+  className: '',
 };
 
 export default FilterGroup;
