@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import './SingleSelectFilter.css';
 
 class SingleSelectFilter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: props.selected,
+    };
+  }
+
   handleCheck() {
+    this.setState(prevState => ({ selected: !prevState.selected }));
     this.props.onSelect(this.props.label);
   }
 
@@ -35,7 +43,7 @@ SingleSelectFilter.propTypes = {
 };
 
 SingleSelectFilter.defaultProps = {
-  selected: false,
+  selected: undefined,
   count: 0,
   hideZero: true,
 };

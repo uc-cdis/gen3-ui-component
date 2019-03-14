@@ -2,6 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './FilterGroup.css';
 
+const removeEmptyFilter = (filterResults) => {
+  const newFilterResults = {};
+  Object.keys(filterResults).forEach((field) => {
+    if (filterResults[field].lowerBound
+      || (filterResults[field].selectedValues
+        && filterResults[field].selectedValues.length > 0)) {
+      newFilterResults[field] = filterResults[field];
+    }
+  });
+  return newFilterResults;
+};
+
 class FilterGroup extends React.Component {
   constructor(props) {
     super(props);
@@ -55,7 +67,7 @@ class FilterGroup extends React.Component {
       newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] = newSelected;
 
       // update filter results
-      const newFilterResults = prevState.filterResults;
+      let newFilterResults = prevState.filterResults;
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
       if (typeof newFilterResults[field] === 'undefined') {
         newFilterResults[field] = { selectedValues: [singleFilterLabel] };
@@ -68,6 +80,7 @@ class FilterGroup extends React.Component {
         }
       }
 
+      newFilterResults = removeEmptyFilter(newFilterResults);
       // update component state
       return {
         filterStatus: newFilterStatus,
@@ -85,9 +98,15 @@ class FilterGroup extends React.Component {
       newFilterStatus[prevState.selectedTabIndex][sectionIndex] = [lowerBound, upperBound];
 
       // update filter results
-      const newFilterResults = prevState.filterResults;
+      let newFilterResults = prevState.filterResults;
       const field = this.props.filterConfig.tabs[prevState.selectedTabIndex].fields[sectionIndex];
       newFilterResults[field] = { lowerBound, upperBound };
+
+      newFilterResults = removeEmptyFilter(newFilterResults);
+      return {
+        filterStatus: newFilterStatus,
+        filterResults: newFilterResults,
+      };
     }, () => {
       this.callOnFilterChange();
     });

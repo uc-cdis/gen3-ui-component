@@ -98,6 +98,7 @@ const filterConfig = {
     title: 'File',
     fields: [
       'file_type',
+      'file_count',
     ],
   }],
 };
@@ -105,8 +106,8 @@ const filterConfig = {
 storiesOf('Filters', module)
   .add('SingleSelectFilter', () => (
     <div>
-      <SingleSelectFilter label='Male' onSelect={action('checked')} />
-      <SingleSelectFilter label='Female' onSelect={action('checked')} />
+      <SingleSelectFilter label='Male' onSelect={action('checked')} count={1} />
+      <SingleSelectFilter label='Female' onSelect={action('checked')} count={2} />
     </div>
   ))
   .add('RangeFilter', () => (
