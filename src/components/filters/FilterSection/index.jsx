@@ -10,6 +10,7 @@ class FilterSection extends React.Component {
     this.state = {
       isExpanded: this.props.expanded,
       showingMore: false,
+      filterStatus: {},
     };
   }
 
@@ -56,10 +57,25 @@ class FilterSection extends React.Component {
   }
 
   handleSelectSingleSelectFilter(index, label) {
+    this.setState((prevState) => {
+      const newFilterStatus = Object.assign({}, prevState.filterStatus);
+      const oldSelected = newFilterStatus[label];
+      const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
+      newFilterStatus[label] = newSelected;
+      return {
+        filterStatus: newFilterStatus,
+      };
+    });
     this.props.onSelect(index, label);
   }
 
   handleDragRangeFilter(lowerBound, upperBound) {
+    this.setState(() => {
+      const newFilterStatus = [lowerBound, upperBound];
+      return {
+        filterStatus: newFilterStatus,
+      };
+    });
     this.props.onAfterDrag(lowerBound, upperBound);
   }
 
@@ -68,6 +84,9 @@ class FilterSection extends React.Component {
   }
 
   render() {
+    // Takes in parent component's filterStatus or self state's filterStatus
+    const filterStatus = this.props.filterStatus
+      ? this.props.filterStatus : this.state.filterStatus;
     return (
       <div className='filter-section'>
         <div
@@ -90,7 +109,6 @@ class FilterSection extends React.Component {
                   return null;
                 }
                 if (option.filterType === 'singleSelect') {
-                  const selected = typeof this.props.filterStatus[option.text] === 'undefined' ? false : this.props.filterStatus[option.text];
                   return (
                     <SingleSelectFilter
                       key={index}
@@ -99,18 +117,18 @@ class FilterSection extends React.Component {
                         index,
                         label,
                       )}
-                      selected={selected}
+                      selected={filterStatus[option.text]}
                       count={option.count}
                       hideZero={this.props.hideZero}
                     />
                   );
                 }
-                const lowerBound = (typeof this.props.filterStatus === 'undefined'
-                  || this.props.filterStatus.length !== 2)
-                  ? option.min : this.props.filterStatus[0];
-                const upperBound = (typeof this.props.filterStatus === 'undefined'
-                  || this.props.filterStatus.length !== 2)
-                  ? option.max : this.props.filterStatus[1];
+                const lowerBound = (typeof filterStatus === 'undefined'
+                  || filterStatus.length !== 2)
+                  ? option.min : filterStatus[0];
+                const upperBound = (typeof filterStatus === 'undefined'
+                  || filterStatus.length !== 2)
+                  ? option.max : filterStatus[1];
                 return (
                   <RangeFilter
                     key={index}
@@ -162,7 +180,7 @@ FilterSection.defaultProps = {
   options: [],
   expanded: true,
   onToggle: () => {},
-  filterStatus: [],
+  filterStatus: undefined,
   initVisibleItemNumber: 5,
   hideZero: true,
 };

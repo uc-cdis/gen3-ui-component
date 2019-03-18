@@ -6,7 +6,7 @@ class SingleSelectFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: props.selected,
+      selected: typeof props.selected === 'undefined' ? false : props.selected,
     };
   }
 
@@ -19,13 +19,15 @@ class SingleSelectFilter extends React.Component {
     if (this.props.count === 0 && this.props.hideZero) {
       return null;
     }
+    // Takes in parent component's selected or self state's selected
+    const selected = typeof this.props.selected === 'undefined' ? this.state.selected : this.props.selected;
     return (
       <div className='single-select-filter'>
         <input
           className='single-select-filter__checkbox'
           type='checkbox'
           onChange={() => this.handleCheck()}
-          checked={this.props.selected}
+          checked={selected}
         />
         <p className='single-select-filter__label'>{this.props.label}</p>
         <span className='g3-badge single-select-filter__count'>{this.props.count}</span>

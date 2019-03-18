@@ -24,6 +24,11 @@ class FilterGroup extends React.Component {
     this.state = {
       selectedTabIndex: 0,
       expandedStatus: initialExpandedStatus,
+
+      /**
+       * Current selected status for filters,
+       * filterStatus[tabIndex][sectionIndex] = { [field]: true/false/[upperBound,lowerBound]}
+       */
       filterStatus: initialFilterStatus,
 
       /**

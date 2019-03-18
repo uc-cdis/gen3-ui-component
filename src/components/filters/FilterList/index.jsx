@@ -4,6 +4,19 @@ import FilterSection from '../FilterSection';
 import './FilterList.css';
 
 class FilterList extends React.Component {
+  constructor(props) {
+    super(props);
+    const initialFilterStatus = props.sections
+      .map(() => ({}));
+    this.state = {
+      /**
+       * Current selected status for filters,
+       * filterStatus[sectionIndex] = { [field]: true/false/[upperBound,lowerBound]}
+       */
+      filterStatus: initialFilterStatus,
+    };
+  }
+
   handleSectionToggle(sectionIndex, newExpanded) {
     this.props.onToggle(sectionIndex, newExpanded);
   }
@@ -13,14 +26,34 @@ class FilterList extends React.Component {
     singleFilterIndex,
     singleFilterLabel,
   ) {
+    this.setState((prevState) => {
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
+      const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
+      newFilterStatus[sectionIndex][singleFilterLabel] = newSelected;
+      return {
+        filterStatus: newFilterStatus,
+      };
+    });
     this.props.onSelect(sectionIndex, singleFilterIndex, singleFilterLabel);
   }
 
   handleDragRangeFilter(sectionIndex, lowerBound, upperBound) {
+    this.setState((prevState) => {
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      newFilterStatus[sectionIndex] = [lowerBound, upperBound];
+      return {
+        filterStatus: newFilterStatus,
+      };
+    });
     this.props.onAfterDrag(sectionIndex, lowerBound, upperBound);
   }
 
   render() {
+    // Takes in parent component's filterStatus or self state's filterStatus
+    const filterStatus = this.props.filterStatus
+      ? this.props.filterStatus : this.state.filterStatus;
+
     return (
       <div className='filter-list'>
         {
@@ -31,7 +64,7 @@ class FilterList extends React.Component {
               options={section.options}
               expanded={this.props.expandedStatus[index]}
               onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
-              filterStatus={this.props.filterStatus[index]}
+              filterStatus={filterStatus[index]}
               onSelect={
                 (
                   singleFilterIndex,
@@ -91,7 +124,7 @@ FilterList.propTypes = {
 FilterList.defaultProps = {
   expandedStatus: [],
   onToggle: () => {},
-  filterStatus: [],
+  filterStatus: undefined,
   onSelect: () => {},
   onAfterDrag: () => {},
   hideZero: true,

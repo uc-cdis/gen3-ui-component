@@ -44,6 +44,10 @@ const ethnicityOptions = [
   { text: 'Unknown', filterType: 'singleSelect', count: 123 },
 ];
 
+const ageOptions = [
+  { min: 2, max: 97, filterType: 'range' },
+]
+
 const fileTypeOptions = [
   { text: 'mRNA Array', filterType: 'singleSelect', count: 123 },
   { text: 'Unaligned Reads', filterType: 'singleSelect', count: 123 },
@@ -65,6 +69,7 @@ const subjectSections = [
   { title: 'Gender', options: genderOptions },
   { title: 'Race', options: raceOptions },
   { title: 'Ethnicity', options: ethnicityOptions },
+  { title: 'Age', options: ageOptions },
 ];
 
 const fileSections = [
@@ -92,6 +97,7 @@ const filterConfig = {
       'race',
       'ethnicity',
       'gender',
+      'age',
     ],
   },
   {
