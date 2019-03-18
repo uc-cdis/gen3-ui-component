@@ -28,8 +28,6 @@ npm run storybook
 ## For Developers
 Run following scripts before commit:
 ```
-$ npm run prepare
 $ npm version patch
 ```
-This will do some compiling and parsing job and generate result scripts under `dist` directory.
-It will also bump the version of the npm package and commit the change.
+This will bump the version of the npm package and commit the change.
