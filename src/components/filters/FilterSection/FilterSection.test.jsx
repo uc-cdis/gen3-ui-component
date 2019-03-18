@@ -43,13 +43,6 @@ describe('FilterSection', () => {
     expect(component.find(FilterSection).length).toBe(1);
   });
 
-  it('toggles expand on click', () => {
-    expect(component.instance().state.isExpanded).toBe(false);
-    expect(component.find('.filter-section__header').length).toBe(1);
-    component.find('.filter-section__header').simulate('click');
-    expect(component.instance().state.isExpanded).toBe(true);
-  });
-
   it('picks the right kind of filter to display', () => {
     expect(component.find('.single-select-filter').length).toBe(singleSelectOptions.length);
     expect(component.find('.range-filter').length).toBe(0);
@@ -62,8 +55,14 @@ describe('FilterSection', () => {
         hideZero={false}
       />,
     );
-    mixedFilterComponent.find('.filter-section__header').simulate('click');
     expect(mixedFilterComponent.find('.single-select-filter').length).toBe(2);
     expect(mixedFilterComponent.find('.range-filter').length).toBe(2);
+  });
+
+  it('toggles expand on click', () => {
+    expect(component.instance().state.isExpanded).toBe(true);
+    expect(component.find('.filter-section__header').length).toBe(1);
+    component.find('.filter-section__header').simulate('click');
+    expect(component.instance().state.isExpanded).toBe(false);
   });
 });

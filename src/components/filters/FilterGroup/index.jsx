@@ -18,7 +18,7 @@ class FilterGroup extends React.Component {
   constructor(props) {
     super(props);
     const initialExpandedStatus = props.filterConfig.tabs
-      .map(t => t.fields.map(() => (false)));
+      .map(t => t.fields.map(() => (true)));
     const initialFilterStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => ({})));
     this.state = {

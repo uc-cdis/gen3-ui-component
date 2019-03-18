@@ -160,7 +160,7 @@ FilterSection.propTypes = {
 FilterSection.defaultProps = {
   title: '',
   options: [],
-  expanded: false,
+  expanded: true,
   onToggle: () => {},
   filterStatus: [],
   initVisibleItemNumber: 5,
