@@ -4,7 +4,6 @@
   display: inline-block;
   width: 18px;
   height: 18px;
-  background-color: black;
   mask-size: contain;
   mask-repeat: no-repeat;
 }

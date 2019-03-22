@@ -30,4 +30,4 @@ Run following scripts before commit:
 ```
 $ npm version patch
 ```
-This will bump the version of the npm package and commit the change.
+It will bump the version of the npm package and commit the change.
