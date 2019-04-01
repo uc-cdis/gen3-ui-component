@@ -14,6 +14,7 @@ class Toaster extends React.Component {
   }
 }
 
+
 Toaster.propTypes = {
   isEnabled: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
