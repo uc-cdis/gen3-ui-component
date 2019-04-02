@@ -1,0 +1,42 @@
+@import "../../../css/base.css";
+@import "../../../css/icon.css";
+
+.filter-section {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 14px 14px;
+  background-color: var(--g3-color__white);
+  border-top: 1px solid var(--g3-color__silver);
+}
+
+.filter-section__header {
+  display: flex;
+  justify-content: space-between;
+  outline: none;
+  cursor: pointer;
+}
+
+.filter-section__title {
+  font-size: 10px;
+  font-weight: var(--g3-font__semi-bold-weight);
+  color: var(--g3-color__black);
+  margin: 0;
+}
+
+.filter-section__options {
+  font-size: 12px;
+  color: var(--g3-color__gray);
+}
+
+.filter-section__toggle-icon {
+  color: var(--g3-color__lightgray);
+}
+
+.filter-section__show-more {
+  border: none;
+  outline: none;
+  color: var(--g3-color__base-blue);
+  cursor: pointer;
+  margin-top: 15px;
+  text-align: right;
+}

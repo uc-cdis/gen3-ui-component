@@ -50,6 +50,8 @@
 
   --g3-footer-color: var(--g3-color__bg-coal);
 
+  --g3-font__medium-weight: 500;
+  --g3-font__semi-bold-weight: 600;
 }
 
 h1, h2, h3, h4,
@@ -163,4 +165,18 @@ a {
   line-height: 1em;
   letter-spacing: .02rem;
   color: var(--g3-color__base-blue);
+}
+
+.g3-badge {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--g3-color__base-blue);
+  background-color: var(--g3-color__silver);
+  border-radius: 2px;
+  padding: 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+  padding: 0 5px;
 }

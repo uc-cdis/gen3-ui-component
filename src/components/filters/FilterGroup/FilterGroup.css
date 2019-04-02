@@ -1,0 +1,52 @@
+@import "../../../css/base.css";
+
+.filter-group {
+  display: flex;
+  flex-flow: column;
+}
+
+.filter-group__tabs {
+  display: flex;
+  font-size: 14px;
+}
+
+.filter-group__tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--g3-color__base-blue);
+  border-left: 1px solid var(--g3-color__base-blue);
+  border-right: 1px solid var(--g3-color__base-blue);
+  border-bottom: 1px solid var(--g3-color__black);
+  border-radius: 12px 12px 0 0;
+  background-color: var(--g3-color__white);
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: var(--g3-font__semi-bold-weight);
+  color: var(--g3-color__base-blue);
+  min-height: 28px;
+}
+
+.filter-group__tab--selected {
+  background-color: var(--g3-color__base-blue);
+  color: var(--g3-color__white);
+}
+
+.filter-group__tab-title {
+  padding: 3px 10px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1em;
+  font-weight: var(--g3-font__semi-bold-weight);
+  text-align: center;
+}
+
+.filter-group__filter-area {
+  min-width: 170px;
+  border-bottom: 1px solid var(--g3-color__silver);
+  border-left: 1px solid var(--g3-color__silver);
+  border-right: 1px solid var(--g3-color__silver);
+  border-radius: 4px;
+  background-color: var(--g3-color__white);
+}
