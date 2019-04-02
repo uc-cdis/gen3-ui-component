@@ -4,7 +4,7 @@ import './Toaster.css';
 
 class Toaster extends React.Component {
   render() {
-    return this.props.isEnabled()
+    return this.props.isEnabled
       ? (
         <div className='toaster__div'>
           {this.props.children}
@@ -16,7 +16,7 @@ class Toaster extends React.Component {
 
 
 Toaster.propTypes = {
-  isEnabled: PropTypes.func.isRequired,
+  isEnabled: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
