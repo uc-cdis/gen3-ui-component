@@ -1,8 +1,5 @@
 
 .toaster__div {
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
   position: fixed;
   bottom: 0;
   left: 0;

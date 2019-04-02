@@ -13,10 +13,6 @@ class ToasterWrapper extends React.Component {
       };
     }
 
-    isToasterEnabled = () => {
-      return this.state.toasterEnabled;
-    }
-
     enableToaster = () => {
       this.setState({toasterEnabled: true});
     }
@@ -38,7 +34,7 @@ class ToasterWrapper extends React.Component {
             label='Close Toaster'
             onClick={this.disableToaster}
           />
-          <Toaster isEnabled={this.isToasterEnabled}>
+          <Toaster isEnabled={this.state.toasterEnabled}>
             <Button
               buttonType='secondary'
               label='Close'
