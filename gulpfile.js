@@ -25,6 +25,7 @@ gulp.task('css', function(){
 
 gulp.task('js', function(){
   return gulp.src([
+      'src/components/**/*.js',
       'src/components/**/*.jsx',
       '!src/**/*.test.js',
       '!src/**/*.test.jsx',
