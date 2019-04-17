@@ -14,7 +14,7 @@ class DropdownButton extends Component {
   }
 
   render() {
-    console.log('yuh');
+    console.log('yuh', this.props.rightIcon);
     const wrapperDisableStatusClassName = this.props.disabled ? 'g3-dropdown-button__wrapper--disabled' : '';
 
     const buttonTypeClassName = `g3-dropdown-button__button--${this.props.buttonType}`;
@@ -49,9 +49,9 @@ class DropdownButton extends Component {
               className={`g3-dropdown-button__menu-trigger ${menuTriggerButtonTypeClassName}`}
               onClick={this.props.handleTriggerMenu}
             >
-              <i className={`
-                  ${this.props.rightIcon === '' ? 'g3-dropdown-button__icon' : 'g3-icon--' + this.props.rightIcon} 
-                  ${this.props.menuOpen ? 'g3-dropdown-button__icon--menu-opened' : ''}
+              <i className={` yuh 
+                  ${this.props.rightIcon === '' ? 'g3-dropdown-button__icon' : ('g3-icon--' + this.props.rightIcon)} 
+                  ${this.props.menuOpen ? 'g3-dropdown-button__icon--menu-openedjj' : ''}
                 `}
               />
             </button>
