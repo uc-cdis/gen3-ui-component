@@ -15,7 +15,7 @@
   outline: 0;
   background: var(--g3-color__white);
   height: 18px;
-  width: 18px;
+  min-width: 18px;
   border: 1px solid var(--g3-color__lightgray);
   border-radius: 2px;
 }
