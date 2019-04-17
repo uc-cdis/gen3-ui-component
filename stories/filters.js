@@ -119,10 +119,17 @@ storiesOf('Filters', module)
   .add('RangeFilter', () => (
     <div>
       <RangeFilter
-        label='Age'
+        label='Ranger slider from 0-100 with step 1'
         onAfterDrag={action('range change')}
         min={0}
         max={100}
+      />
+      <RangeFilter
+        label='Range slider from 0.11111111111 to 99.9999999999, with default fixed precision(2), and rangeStep=0.1'
+        onAfterDrag={action('range change')}
+        min={0.11111111111}
+        max={99.9999999999}
+        rangeStep={0.1}
       />
     </div>
   ))

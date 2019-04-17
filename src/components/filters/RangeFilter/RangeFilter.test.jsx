@@ -19,4 +19,8 @@ describe('RangeFilter', () => {
     expect(component.instance().state.lowerBound).toBe(30);
     expect(component.instance().state.upperBound).toBe(55);
   });
+
+  it('calculates fixed length after decimal point correctly', () => {
+    expect(component.instance().getNumberToFixed(1.234567)).toBe(1.23);
+  });
 });
