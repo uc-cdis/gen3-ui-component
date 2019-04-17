@@ -39,7 +39,7 @@ class DropdownButton extends Component {
           {this.props.children}
           {
             this.props.split || <i className={` 
-              ${this.props.rightIcon === '' ? 'g3-dropdown-button__icon' : ('g3-icon--' + this.props.rightIcon)} 
+              ${this.props.rightIcon === '' ? 'g3-dropdown-button__icon' : ('g3-icon g3-icon--' + this.props.rightIcon)} 
             `} />
           }
         </button>
@@ -53,7 +53,7 @@ class DropdownButton extends Component {
               onClick={this.props.handleTriggerMenu}
             >
               <i className={`
-                  ${this.props.rightIcon === '' ? 'g3-dropdown-button__icon' : ('g3-icon--' + this.props.rightIcon)} 
+                  ${this.props.rightIcon === '' ? 'g3-dropdown-button__icon' : ('g3-icon g3-icon--' + this.props.rightIcon)} 
                   ${this.props.menuOpen ? 'g3-dropdown-button__icon--menu-openedjj' : ''}
                 `}
               />
