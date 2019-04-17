@@ -47,7 +47,7 @@ class DropdownButton extends Component {
               onClick={this.props.handleTriggerMenu}
             >
               <i className=
-                { ${this.props.rightIcon} == '' ? `g3-dropdown-button__icon : g3-icon--${this.props.rightIcon} 
+                {${this.props.rightIcon} == '' ? `g3-dropdown-button__icon : g3-icon--${this.props.rightIcon} 
                   ${this.props.menuOpen ? 'g3-dropdown-button__icon--menu-opened' : ''}`}
               />
             </button>
