@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './DropdownButton.css';
 
+/* eslint-disable */
+
 class DropdownButton extends Component {
   handleClick() {
     if (this.props.disabled) {
@@ -48,7 +50,7 @@ class DropdownButton extends Component {
               onClick={this.props.handleTriggerMenu}
             >
               <i className={`
-                  ${this.props.rightIcon == '' ? 'g3-dropdown-button__icon' : 'g3-icon--' + this.props.rightIcon} 
+                  ${this.props.rightIcon === '' ? 'g3-dropdown-button__icon' : 'g3-icon--' + this.props.rightIcon} 
                   ${this.props.menuOpen ? 'g3-dropdown-button__icon--menu-opened' : ''}
                 `}
               />
