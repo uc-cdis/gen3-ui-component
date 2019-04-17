@@ -125,9 +125,9 @@ storiesOf('Filters', module)
         max={100}
       />
       <RangeFilter
-        label='Range slider from 0.11111111111 to 99.9999999999, with default fixed precision(2), and rangeStep=0.1'
+        label='Range slider from 0.00000000001 to 99.9999999999, with default fixed precision(2), and rangeStep=0.1'
         onAfterDrag={action('range change')}
-        min={0.11111111111}
+        min={0.00000000001}
         max={99.9999999999}
         rangeStep={0.1}
       />
