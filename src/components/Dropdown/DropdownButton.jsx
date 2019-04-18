@@ -90,7 +90,6 @@ DropdownButton.defaultProps = {
   onClick: () => {},
   buttonType: 'primary',
   rightIcon: '',
-
   // override by Dropdown component:
   handleTriggerMenu: () => {},
   menuOpen: false,

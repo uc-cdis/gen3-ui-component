@@ -62,11 +62,9 @@
 .g3-dropdown-button__wrapper .g3-icon {
   background-color: var(--g3-color__white);
   position: absolute;
-  top: 12px;
+  top: 13px;
   right: 10px;
 }
-
-
 
 .g3-dropdown__item-icon {
   position: absolute;

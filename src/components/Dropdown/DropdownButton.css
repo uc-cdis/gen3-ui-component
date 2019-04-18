@@ -84,6 +84,10 @@
   background-color: var(--g3-secondary-btn__bg-color--hover);
 }
 
+.g3-dropdown-button__button--secondary  .g3-dropdown__item:hover {
+  background-color: var(--g3-secondary-btn__bg-color--hover);
+}
+
 .g3-dropdown-button__button--secondary:active {
   border: 1px solid var(--g3-secondary-btn__border-color--active);
 }
