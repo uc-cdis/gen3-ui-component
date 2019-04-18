@@ -89,12 +89,12 @@
   background-color: var(--g3-dropdown-item__color);
 }
 
-.g3-dropdown-button__button--secondary .g3-dropdown__item:hover .g3-dropdown__item-icon,
-.g3-dropdown-button__button--secondary .g3-dropdown__item:hover .g3-icon {
-  background-color: var(--g3-secondary-btn__bg-color--hover);
-}
-
 .g3-dropdown__item--disabled:hover .g3-dropdown__item-icon,
 .g3-dropdown__item--disabled:hover .g3-icon {
   background-color: var(--g3-disabled-btn__color);
+}
+
+.g3-dropdown-button__button--secondary .g3-dropdown__item:hover .g3-dropdown__item-icon,
+.g3-dropdown-button__button--secondary .g3-dropdown__item:hover .g3-icon {
+  background-color: var(--g3-secondary-btn__bg-color--hover);
 }
