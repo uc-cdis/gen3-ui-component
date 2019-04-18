@@ -97,4 +97,5 @@
 .g3-dropdown--secondary .g3-dropdown__item:hover .g3-dropdown__item-icon,
 .g3-dropdown--secondary .g3-dropdown__item:hover .g3-icon {
   background-color: var(--g3-secondary-btn__bg-color--hover);
+  border:solid 2px red;
 }
