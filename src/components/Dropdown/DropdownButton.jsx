@@ -14,8 +14,6 @@ class DropdownButton extends Component {
   }
 
   render() {
-    console.log('yuh', this.props.rightIcon);
-    console.log('props received: ', this.props);
     const wrapperDisableStatusClassName = this.props.disabled ? 'g3-dropdown-button__wrapper--disabled' : '';
 
     const buttonTypeClassName = `g3-dropdown-button__button--${this.props.buttonType}`;
