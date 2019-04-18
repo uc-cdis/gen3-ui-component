@@ -3,6 +3,7 @@
 .g3-dropdown-button__wrapper {
   height: 40px;
   z-index: 1;
+  position:relative;
 }
 
 .g3-dropdown-button__button {
