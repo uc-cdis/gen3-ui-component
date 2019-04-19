@@ -53,7 +53,8 @@ class Dropdown extends Component {
     }
     return (
       <div className={`g3-dropdown ${this.props.disabled ? 'g3-dropdown--disabled' : ''} ${this.props.className || ''} 
-                                   ${this.props.buttonType === 'secondary' ? 'g3-dropdown--secondary' : '' }`}>
+                                   ${this.props.buttonType === 'secondary' ? 'g3-dropdown--secondary' : ''}`}
+      >
         {
           React.Children.map(this.props.children, child => React.cloneElement(child, {
             handleTriggerMenu: e => this.handleTriggerMenu(e),
