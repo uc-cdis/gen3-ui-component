@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './DropdownButton.css';
 
-/* eslint-disable */
-
 class DropdownButton extends Component {
   handleClick() {
     if (this.props.disabled) {
