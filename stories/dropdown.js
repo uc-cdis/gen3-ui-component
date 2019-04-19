@@ -43,4 +43,17 @@ storiesOf('Dropdown', module)
         <Dropdown.Item onClick={action('item4 clicked')} leftIcon='workspace'>item4</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
+  )).add('Custom Icon Dropdown', () => (
+    <Dropdown buttonType='secondary' className='my-dropdown'>
+      <Dropdown.Button onClick={action('item0 clicked')} rightIcon='files'>
+          Dropdown
+      </Dropdown.Button>
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={action('item1 clicked')} leftIcon='datafile'>item1</Dropdown.Item>
+        <Dropdown.Item onClick={action('item2 clicked')} leftIcon='upload'>item2</Dropdown.Item>
+        <Dropdown.Item onClick={action('item3 clicked')} leftIcon='clinical' disabled>Disabled item</Dropdown.Item>
+        <Dropdown.MenuDivider />
+        <Dropdown.Item onClick={action('item4 clicked')} leftIcon='workspace'>item4</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   ));
