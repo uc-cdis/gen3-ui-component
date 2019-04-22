@@ -199,6 +199,10 @@
   mask-image: svg-load(../images/icons/chevron-down.svg);
 }
 
+.g3-icon--dropdown {
+  mask-image: svg-load(../images/icons/dropdown.svg);
+}
+
 .g3-icon--more {
   mask-image: svg-load(../images/icons/more.svg);
 }

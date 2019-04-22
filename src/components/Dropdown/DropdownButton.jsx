@@ -34,7 +34,9 @@ class DropdownButton extends Component {
         >
           {this.props.children}
           {
-            this.props.split || <i className='g3-dropdown-button__icon' />
+            this.props.split || <i className={
+              `${this.props.rightIcon === '' ? 'g3-dropdown-button__icon' : ('g3-icon g3-icon--' + this.props.rightIcon)}`
+            } />
           }
         </button>
 
@@ -65,6 +67,7 @@ DropdownButton.propTypes = {
   afterClick: PropTypes.func,
   menuTriggerElementRef: PropTypes.object,
   buttonType: PropTypes.oneOf(['primary', 'secondary']),
+  rightIcon: PropTypes.string,
   disabled: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -78,7 +81,7 @@ DropdownButton.defaultProps = {
   label: 'Dropdown Button',
   onClick: () => {},
   buttonType: 'primary',
-
+  rightIcon: '',
   // override by Dropdown component:
   handleTriggerMenu: () => {},
   menuOpen: false,

@@ -59,6 +59,19 @@
   border-width: 1px 0 0 0;
 }
 
+.g3-dropdown-button__button .g3-icon {
+  background-color: var(--g3-color__white);
+  position: absolute;
+  top: 13px;
+  right: 10px;
+}
+
+.g3-dropdown__menu .g3-icon {
+  background-color: var(--g3-color__lightgray);
+}
+
+
+
 .g3-dropdown__item-icon {
   position: absolute;
   top: 15px;
@@ -85,4 +98,9 @@
 .g3-dropdown__item--disabled:hover .g3-dropdown__item-icon,
 .g3-dropdown__item--disabled:hover .g3-icon {
   background-color: var(--g3-disabled-btn__color);
+}
+
+.g3-dropdown--secondary .g3-dropdown__item:hover,
+.g3-dropdown--secondary .g3-dropdown__item:active {
+  background-color: var(--g3-secondary-btn__bg-color--hover);  
 }

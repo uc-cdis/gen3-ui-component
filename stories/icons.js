@@ -22,6 +22,7 @@ const iconClassList = [
   'g3-icon g3-icon--chevron-right',
   'g3-icon g3-icon--chevron-up',
   'g3-icon g3-icon--chevron-down',
+  'g3-icon g3-icon--dropdown',
   'g3-icon g3-icon--external-link',
   'g3-icon g3-icon--folder',
   'g3-icon g3-icon--forward',
