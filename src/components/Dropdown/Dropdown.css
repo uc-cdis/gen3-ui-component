@@ -59,12 +59,18 @@
   border-width: 1px 0 0 0;
 }
 
-.g3-dropdown-button__wrapper .g3-icon {
+.g3-dropdown-button__button .g3-icon {
   background-color: var(--g3-color__white);
   position: absolute;
   top: 13px;
   right: 10px;
 }
+
+.g3-dropdown__menu .g3-icon {
+  background-color: var(--g3-color__lightgray);
+}
+
+
 
 .g3-dropdown__item-icon {
   position: absolute;
