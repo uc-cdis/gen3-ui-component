@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/uc-cdis/gen3-ui-component#readme",
   "dependencies": {
-    "acorn": "^6.1.1",
     "babel-loader": "^8.0.5",
     "postcss-loader": "^3.0.0",
     "postcss-svgo": "^4.0.2",
@@ -41,10 +40,11 @@
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/polyfill": "^7.2.5",
-    "@storybook/addon-actions": "^5.0.0",
-    "@storybook/react": "^5.0.0",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^5.0.0",
+    "@storybook/react": "^5.0.0",
+    "acorn": "^6.1.1",
     "autoprefixer": "^9.4.10",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.1.0",
