@@ -151,6 +151,8 @@ const getCharts = (data, dataExplorerConfig, sqon) => {
 
 const parseParamWidth = width => ((typeof width === 'number') ? `${width}px` : width);
 
+const shouldHideChart = (data, lockValue) => data.find(item => item.value === lockValue);
+
 const helper = {
   percentageFormatter,
   addPercentage,
@@ -166,6 +168,7 @@ const helper = {
   getSQONValues,
   parseParamWidth,
   categoricalColors,
+  shouldHideChart,
 };
 
 export default helper;
