@@ -6,12 +6,18 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import helper from '../helper';
 import './PercentageStackedBarChart.css';
+import LockedContent from '../LockedContent';
 
 const getPercentageDataLabels = chartData => chartData.map(entry => entry.name);
 
 // FIXME: add back in animation (https://github.com/recharts/recharts/issues/1083)
 class PercentageStackedBarChart extends React.Component {
   render() {
+    if (helper.shouldHideChart(this.props.data, this.props.lockValue)) {
+      return (
+        <LockedContent lockMessage={this.props.lockMessage} />
+      );
+    }
     const percentageData = helper.getPercentageData(
       this.props.data,
       this.props.percentageFixedPoint,
@@ -88,6 +94,8 @@ PercentageStackedBarChart.propTypes = {
   barChartStyle: PropTypes.object,
   xAxisStyle: PropTypes.object,
   labelListStyle: PropTypes.object,
+  lockValue: PropTypes.number, // if one of the value is equal to `lockValue`, lock the chart
+  lockMessage: PropTypes.string,
 };
 
 PercentageStackedBarChart.defaultProps = {
@@ -122,6 +130,8 @@ PercentageStackedBarChart.defaultProps = {
     fontWeight: 600,
     position: 'center',
   },
+  lockValue: -1,
+  lockMessage: 'You cannot see this chart because it contains cohort under 1000 subjects',
 };
 
 export default PercentageStackedBarChart;

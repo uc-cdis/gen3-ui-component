@@ -4,6 +4,7 @@ import {
 } from 'recharts';
 import PropTypes from 'prop-types';
 import React from 'react';
+import LockedContent from '../LockedContent';
 import helper from '../helper';
 import './SummaryHorizontalBarChart.css';
 
@@ -30,61 +31,66 @@ class SummaryBarChart extends React.Component {
             {this.props.title}
           </p>
         </div>
-        <div>
-          <div className='summary-horizontal-bar-chart__legend'>
-            {
-              barChartData.map((entry, i) => (
-                <div
-                  key={i}
-                  className='summary-horizontal-bar-chart__legend-item'
-                >
-                  {entry.name}
-                </div>
-              ))
-            }
-          </div>
-          <div className='summary-horizontal-bar-chart__responsive-container'>
-            <ResponsiveContainer width='100%' height={barChartHeight}>
-              <BarChart
-                layout={barChartStyle.layout}
-                data={barChartData}
-                barCategoryGap={barChartStyle.barGap}
-                barSize={barChartStyle.barSize}
-                margin={barChartStyle.margins}
-              >
-                <Tooltip
-                  formatter={helper.percentageFormatter(this.props.showPercentage)}
-                />
-                <XAxis {...xAxisStyle} type='number' hide />
-                <YAxis
-                  axisLine={false}
-                  tickLine={false}
-                  dataKey='name'
-                  type='category'
-                  hide
-                />
-                <Bar dataKey={dataKey} isAnimationActive={false}>
+        {
+          helper.shouldHideChart(this.props.data, this.props.lockValue)
+            ? <LockedContent lockMessage={this.props.lockMessage} /> : (
+              <div>
+                <div className='summary-horizontal-bar-chart__legend'>
                   {
-                    barChartData.map((entry, index) => (
-                      <Cell
-                        key={dataKey}
-                        fill={this.props.color
-                          || helper.getCategoryColor(index)}
-                      />
+                    barChartData.map((entry, i) => (
+                      <div
+                        key={i}
+                        className='summary-horizontal-bar-chart__legend-item'
+                      >
+                        {entry.name}
+                      </div>
                     ))
                   }
-                  <LabelList
-                    dataKey={dataKey}
-                    position={labelValueStyle.position}
-                    offset={labelValueStyle.offset}
-                    style={labelValueStyle}
-                    formatter={helper.percentageFormatter(this.props.showPercentage)}
-                  />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
+                </div>
+                <div className='summary-horizontal-bar-chart__responsive-container'>
+                  <ResponsiveContainer width='100%' height={barChartHeight}>
+                    <BarChart
+                      layout={barChartStyle.layout}
+                      data={barChartData}
+                      barCategoryGap={barChartStyle.barGap}
+                      barSize={barChartStyle.barSize}
+                      margin={barChartStyle.margins}
+                    >
+                      <Tooltip
+                        formatter={helper.percentageFormatter(this.props.showPercentage)}
+                      />
+                      <XAxis {...xAxisStyle} type='number' hide />
+                      <YAxis
+                        axisLine={false}
+                        tickLine={false}
+                        dataKey='name'
+                        type='category'
+                        hide
+                      />
+                      <Bar dataKey={dataKey} isAnimationActive={false}>
+                        {
+                          barChartData.map((entry, index) => (
+                            <Cell
+                              key={dataKey}
+                              fill={this.props.color
+                                || helper.getCategoryColor(index)}
+                            />
+                          ))
+                        }
+                        <LabelList
+                          dataKey={dataKey}
+                          position={labelValueStyle.position}
+                          offset={labelValueStyle.offset}
+                          style={labelValueStyle}
+                          formatter={helper.percentageFormatter(this.props.showPercentage)}
+                        />
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            )
+        }
       </div>
     );
   }
@@ -104,6 +110,8 @@ SummaryBarChart.propTypes = {
   xAxisStyle: PropTypes.object,
   labelValueStyle: PropTypes.object,
   barChartStyle: PropTypes.object,
+  lockValue: PropTypes.number, // if one of the value is equal to `lockValue`, lock the chart
+  lockMessage: PropTypes.string,
 };
 
 SummaryBarChart.defaultProps = {
@@ -133,6 +141,8 @@ SummaryBarChart.defaultProps = {
     barSize: 11,
     barGap: 8,
   },
+  lockValue: -1,
+  lockMessage: 'You cannot see this chart because it contains cohort under 1000 subjects',
 };
 
 export default SummaryBarChart;
