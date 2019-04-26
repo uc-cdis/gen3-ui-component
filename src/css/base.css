@@ -96,6 +96,10 @@ a {
   text-decoration: none;
 }
 
+input[type='checkbox']:disabled {
+  background: var(--g3-color__smoke);
+}
+
 .introduction {
   font-size: 18px;
   font-weight: normal;

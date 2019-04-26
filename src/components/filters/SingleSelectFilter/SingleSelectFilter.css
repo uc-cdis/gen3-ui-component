@@ -1,4 +1,5 @@
 @import "../../../css/base.css";
+@import "../../../css/icon.css";
 
 .single-select-filter {
   display: flex;
