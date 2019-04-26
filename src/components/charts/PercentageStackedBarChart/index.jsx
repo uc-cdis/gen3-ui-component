@@ -15,7 +15,9 @@ class PercentageStackedBarChart extends React.Component {
   render() {
     if (helper.shouldHideChart(this.props.data, this.props.lockValue)) {
       return (
-        <LockedContent lockMessage={this.props.lockMessage} />
+        <div className='percentage-bar-chart__locked'>
+          <LockedContent lockMessage={this.props.lockMessage} />
+        </div>
       );
     }
     const percentageData = helper.getPercentageData(
