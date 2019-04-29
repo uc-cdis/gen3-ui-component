@@ -37,7 +37,7 @@ class SingleSelectFilter extends React.Component {
     }
 
     if (this.props.displayLock) {
-      rightIcon = <i className='g3-icon g3-icon--md g3-icon--lock' />;
+      rightIcon = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__black' />;
     }
 
     return (
