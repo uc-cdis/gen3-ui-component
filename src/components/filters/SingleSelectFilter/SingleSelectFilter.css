@@ -25,6 +25,10 @@
   background: var(--g3-color__highlight-orange);
 }
 
+.single-select-filter__checkbox:disabled {
+  background: var(--g3-color__smoke);
+}
+
 .single-select-filter__checkbox:after {
   content: '';
   position: relative;
@@ -45,4 +49,14 @@
 .single-select-filter__label {
   margin: 0;
   flex-grow: 1;
+}
+
+.single-select-filter__icon-background {
+  height: 14px;
+  align-items: center;
+  width: 14px;
+  background-color: var(--g3-color__silver);
+  border-radius: 2px;
+  line-height: 0;
+  border: 2px solid var(--g3-color__silver);
 }

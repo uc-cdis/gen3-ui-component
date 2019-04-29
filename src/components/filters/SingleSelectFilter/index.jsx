@@ -28,7 +28,7 @@ class SingleSelectFilter extends React.Component {
       rightIcon = (
         <React.Fragment>
           <span className='g3-badge single-select-filter__count'>{this.props.hideLimit}</span>
-          <i className='g3-icon g3-icon--md g3-icon--under g3-color__black' />
+          <div className='single-select-filter__icon-background'><i className='g3-icon--under g3-icon g3-icon--sm g3-icon-color__base-blue' /></div>
         </React.Fragment>
       );
       inputDisabled = true;
@@ -37,7 +37,7 @@ class SingleSelectFilter extends React.Component {
     }
 
     if (this.props.displayLock) {
-      rightIcon = <i className='g3-icon g3-icon--md g3-icon--lock g3-color__black' />;
+      rightIcon = <i className='g3-icon g3-icon--md g3-icon--lock' />;
     }
 
     return (
