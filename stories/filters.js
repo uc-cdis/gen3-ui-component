@@ -114,6 +114,9 @@ storiesOf('Filters', module)
     <div>
       <SingleSelectFilter label='Male' onSelect={action('checked')} count={1} />
       <SingleSelectFilter label='Female' onSelect={action('checked')} count={2} />
+      <SingleSelectFilter label='Option3' onSelect={action('checked')} count={-1} displayLock={0} />
+      <SingleSelectFilter label='Option4' onSelect={action('checked')} count={4} displayLock={1} />
+      <SingleSelectFilter label='Option5' onSelect={action('checked')} count={-1} displayLock={1} />
     </div>
   ))
   .add('RangeFilter', () => (
