@@ -36,7 +36,7 @@ class SingleSelectFilter extends React.Component {
       rightIcon = <span className='g3-badge single-select-filter__count'>{this.props.count}</span>;
     }
 
-    if (this.props.displayLock) {
+    if (!this.props.accessible) {
       rightIcon = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__black' />;
     }
 
@@ -64,7 +64,7 @@ SingleSelectFilter.propTypes = {
   hideZero: PropTypes.bool,
   hideValue: PropTypes.number,
   hideLimit: PropTypes.number,
-  displayLock: PropTypes.number,
+  accessible: PropTypes.bool,
 };
 
 SingleSelectFilter.defaultProps = {
@@ -73,7 +73,7 @@ SingleSelectFilter.defaultProps = {
   hideZero: true,
   hideValue: -1,
   hideLimit: 1000,
-  displayLock: 0,
+  accessible: true,
 };
 
 export default SingleSelectFilter;

@@ -104,6 +104,7 @@ FilterList.propTypes = {
       // for single select filter
       count: PropTypes.number,
       hideZero: PropTypes.bool,
+      accessible: PropTypes.bool,
 
       // for range filter
       min: PropTypes.number,

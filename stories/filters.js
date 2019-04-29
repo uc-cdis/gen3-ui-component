@@ -39,9 +39,10 @@ const raceOptions = [
 ];
 
 const ethnicityOptions = [
-  { text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123 },
-  { text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123 },
-  { text: 'Unknown', filterType: 'singleSelect', count: 123 },
+  { text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: true },
+  { text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: false },
+  { text: 'Unknown', filterType: 'singleSelect', count: 123, accessible: true },
+  { text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true },
 ];
 
 const ageOptions = [
@@ -112,11 +113,11 @@ const filterConfig = {
 storiesOf('Filters', module)
   .add('SingleSelectFilter', () => (
     <div>
-      <SingleSelectFilter label='Male' onSelect={action('checked')} count={1} />
-      <SingleSelectFilter label='Female' onSelect={action('checked')} count={2} />
-      <SingleSelectFilter label='Option3' onSelect={action('checked')} count={-1} displayLock={0} />
-      <SingleSelectFilter label='Option4' onSelect={action('checked')} count={4} displayLock={1} />
-      <SingleSelectFilter label='Option5' onSelect={action('checked')} count={-1} displayLock={1} />
+      <SingleSelectFilter label='Male' onSelect={action('checked')} count={1} accessible />
+      <SingleSelectFilter label='Female' onSelect={action('checked')} count={2} accessible />
+      <SingleSelectFilter label='Option3' onSelect={action('checked')} count={-1} accessible />
+      <SingleSelectFilter label='Option4' onSelect={action('checked')} count={4} accessible={false} />
+      <SingleSelectFilter label='Option5' onSelect={action('checked')} count={-1} accessible={false} />
     </div>
   ))
   .add('RangeFilter', () => (
