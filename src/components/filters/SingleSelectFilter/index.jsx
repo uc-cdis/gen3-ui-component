@@ -25,13 +25,15 @@ class SingleSelectFilter extends React.Component {
     let inputDisabled = false;
 
     if (this.props.count === this.props.hideValue) {
-      rightIcon = (
-        <React.Fragment>
-          {
-            (this.props.tierAccessLimit) ? (<span className='g3-badge single-select-filter__count'>{this.props.tierAccessLimit}</span>) : (<React.Fragment />)
-          }
-          <div className='single-select-filter__icon-background'><i className='g3-icon--under g3-icon g3-icon--sm g3-icon-color__base-blue' /></div>
-        </React.Fragment>
+      rightIcon = this.props.tierAccessLimit ? (
+        <span className='g3-badge single-select-filter__count'>
+          {this.props.tierAccessLimit}
+          <i className='g3-icon--under g3-icon g3-icon--sm g3-icon-color__base-blue' />
+        </span>
+      ) : (
+        <span className='single-select-filter__icon-background'>
+          <i className='g3-icon--under g3-icon g3-icon--sm g3-icon-color__base-blue' />
+        </span>
       );
       inputDisabled = true;
     } else {
