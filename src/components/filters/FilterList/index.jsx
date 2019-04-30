@@ -105,6 +105,7 @@ FilterList.propTypes = {
       count: PropTypes.number,
       hideZero: PropTypes.bool,
       accessible: PropTypes.bool,
+      tierAccessLimit: PropTypes.number,
 
       // for range filter
       min: PropTypes.number,
