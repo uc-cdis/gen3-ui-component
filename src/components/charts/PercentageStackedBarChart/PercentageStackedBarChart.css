@@ -39,3 +39,8 @@
 .recharts-wrapper {
   width: 60%;
 }
+
+.percentage-bar-chart__locked {
+  background-color: var(--g3-color__white);
+  padding: 20px;
+}

@@ -44,6 +44,7 @@ const iconClassList = [
   'g3-icon g3-icon--stacked-bar',
   'g3-icon g3-icon--undefined',
   'g3-icon g3-icon--list',
+  'g3-icon g3-icon--lock',
   'g3-icon g3-icon--profile g3-icon--lg',
   'g3-icon g3-icon--query g3-icon--lg',
   'g3-icon g3-icon--workspace g3-icon--lg',
