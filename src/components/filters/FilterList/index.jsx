@@ -86,6 +86,7 @@ class FilterList extends React.Component {
                 )
               }
               hideZero={this.props.hideZero}
+              tierAccessLimit={this.props.tierAccessLimit}
             />
           ))
         }
@@ -105,7 +106,6 @@ FilterList.propTypes = {
       count: PropTypes.number,
       hideZero: PropTypes.bool,
       accessible: PropTypes.bool,
-      tierAccessLimit: PropTypes.number,
 
       // for range filter
       min: PropTypes.number,
@@ -121,6 +121,7 @@ FilterList.propTypes = {
   onSelect: PropTypes.func,
   onAfterDrag: PropTypes.func,
   hideZero: PropTypes.bool,
+  tierAccessLimit: PropTypes.number,
 };
 
 FilterList.defaultProps = {
@@ -130,6 +131,7 @@ FilterList.defaultProps = {
   onSelect: () => {},
   onAfterDrag: () => {},
   hideZero: true,
+  tierAccessLimit: undefined,
 };
 
 export default FilterList;

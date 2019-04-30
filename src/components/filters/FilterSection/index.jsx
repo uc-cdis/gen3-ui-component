@@ -121,7 +121,7 @@ class FilterSection extends React.Component {
                       count={option.count}
                       hideZero={this.props.hideZero}
                       accessible={option.accessible}
-                      tierAccessLimit={option.tierAccessLimit}
+                      tierAccessLimit={this.props.tierAccessLimit}
                     />
                   );
                 }
@@ -160,7 +160,6 @@ FilterSection.propTypes = {
     // for single select filter
     count: PropTypes.number,
     accessible: PropTypes.bool,
-    tierAccessLimit: PropTypes.number,
 
     // for range filter
     min: PropTypes.number,
@@ -177,6 +176,7 @@ FilterSection.propTypes = {
   ]),
   initVisibleItemNumber: PropTypes.number,
   hideZero: PropTypes.bool,
+  tierAccessLimit: PropTypes.number,
 };
 
 FilterSection.defaultProps = {
@@ -187,6 +187,7 @@ FilterSection.defaultProps = {
   filterStatus: undefined,
   initVisibleItemNumber: 5,
   hideZero: true,
+  tierAccessLimit: undefined,
 };
 
 export default FilterSection;

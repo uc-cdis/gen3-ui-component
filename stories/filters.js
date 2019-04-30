@@ -42,7 +42,7 @@ const ethnicityOptions = [
   { text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: true },
   { text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: false },
   { text: 'Unknown', filterType: 'singleSelect', count: 123, accessible: true },
-  { text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true, tierAccessLimit: 1000 },
+  { text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true },
 ];
 
 const ageOptions = [
@@ -143,6 +143,7 @@ storiesOf('Filters', module)
       options={ethnicityOptions}
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
     />
   ))
   .add('FilterList', () => (
@@ -150,6 +151,7 @@ storiesOf('Filters', module)
       sections={subjectSections}
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
     />
   ))
   .add('FilterGroup', () => (
