@@ -42,7 +42,7 @@ const ethnicityOptions = [
   { text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: true },
   { text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: false },
   { text: 'Unknown', filterType: 'singleSelect', count: 123, accessible: true },
-  { text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true },
+  { text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true, tierAccessLimit: 1000 },
 ];
 
 const ageOptions = [
@@ -115,7 +115,7 @@ storiesOf('Filters', module)
     <div>
       <SingleSelectFilter label='Male' onSelect={action('checked')} count={1} accessible />
       <SingleSelectFilter label='Female' onSelect={action('checked')} count={2} accessible />
-      <SingleSelectFilter label='Option3' onSelect={action('checked')} count={-1} accessible />
+      <SingleSelectFilter label='Option3' onSelect={action('checked')} count={-1} accessible tierAccessLimit={1000} />
       <SingleSelectFilter label='Option4' onSelect={action('checked')} count={4} accessible={false} />
       <SingleSelectFilter label='Option5' onSelect={action('checked')} count={-1} accessible={false} />
     </div>
