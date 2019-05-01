@@ -6,6 +6,7 @@ import RangeFilter from '../src/components/filters/RangeFilter';
 import FilterSection from '../src/components/filters/FilterSection';
 import FilterList from '../src/components/filters/FilterList';
 import FilterGroup from '../src/components/filters/FilterGroup';
+import Button from '../src/components/Button';
 
 const projectOptions = [
   { text: 'ndh-CHARLIE', filterType: 'singleSelect', count: 123 },
@@ -47,7 +48,7 @@ const ethnicityOptions = [
 
 const ageOptions = [
   { min: 2, max: 97, filterType: 'range' },
-]
+];
 
 const fileTypeOptions = [
   { text: 'mRNA Array', filterType: 'singleSelect', count: 123 },
@@ -110,6 +111,33 @@ const filterConfig = {
   }],
 };
 
+class ExampleFilterGroup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.filterRef = React.createRef();
+  }
+
+  resetFilter = () => {
+    this.filterRef.current.resetFilter();
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Button
+          label='reset filter'
+          onClick={this.resetFilter}
+        />
+        <FilterGroup
+          ref={this.filterRef}
+          tabs={tabs}
+          filterConfig={filterConfig}
+        />
+      </React.Fragment>
+    );
+  }
+}
+
 storiesOf('Filters', module)
   .add('SingleSelectFilter', () => (
     <div>
@@ -160,4 +188,7 @@ storiesOf('Filters', module)
       filterConfig={filterConfig}
       onFilterChange={action('filter change')}
     />
+  ))
+  .add('FilterGroup that could be reset', () => (
+    <ExampleFilterGroup />
   ));

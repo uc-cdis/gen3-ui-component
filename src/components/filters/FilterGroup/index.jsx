@@ -52,6 +52,23 @@ class FilterGroup extends React.Component {
     this.setState({ selectedTabIndex: index });
   }
 
+  resetFilter() {
+    const oldFilterStatus = this.state.filterStatus;
+    const resetStatus = oldFilterStatus.map((oldSectionStatus) => {
+      const sectionStatus = oldSectionStatus.map((oldEntry) => {
+        if (!oldEntry || Object.keys(oldEntry).length === 0) return oldEntry;
+        const key = Object.keys(oldEntry)[0];
+        const value = Object.values(oldEntry)[0];
+        return (typeof value === 'boolean') ? { [key]: false } : [];
+      });
+      return sectionStatus;
+    });
+    this.setState({
+      filterStatus: resetStatus,
+      filterResults: {},
+    });
+  }
+
   handleToggle(tabIndex, sectionIndex, newSectionExpandedStatus) {
     this.setState((prevState) => {
       const newExpandedStatus = prevState.expandedStatus.slice(0);
