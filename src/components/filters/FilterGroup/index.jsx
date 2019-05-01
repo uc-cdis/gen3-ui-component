@@ -53,19 +53,23 @@ class FilterGroup extends React.Component {
   }
 
   resetFilter() {
-    const oldFilterStatus = this.state.filterStatus;
-    const resetStatus = oldFilterStatus.map((oldSectionStatus) => {
-      const sectionStatus = oldSectionStatus.map((oldEntry) => {
-        if (!oldEntry || Object.keys(oldEntry).length === 0) return oldEntry;
-        const key = Object.keys(oldEntry)[0];
-        const value = Object.values(oldEntry)[0];
-        return (typeof value === 'boolean') ? { [key]: false } : [];
+    this.setState((prevState) => {
+      const oldFilterStatus = prevState.filterStatus;
+      const resetStatus = oldFilterStatus.map((oldSectionStatus) => {
+        const sectionStatus = oldSectionStatus.map((oldEntry) => {
+          if (!oldEntry || Object.keys(oldEntry).length === 0) return oldEntry;
+          const newEntry = Object.keys(oldEntry).reduce((res, key) => {
+            res[key] = false;
+            return res;
+          }, {});
+          return newEntry;
+        });
+        return sectionStatus;
       });
-      return sectionStatus;
-    });
-    this.setState({
-      filterStatus: resetStatus,
-      filterResults: {},
+      return {
+        filterStatus: resetStatus,
+        filterResults: {},
+      };
     });
   }
 
