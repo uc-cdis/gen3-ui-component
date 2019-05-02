@@ -27,6 +27,7 @@
 
 .single-select-filter__checkbox:disabled {
   background: var(--g3-color__smoke);
+  cursor: default;
 }
 
 .single-select-filter__checkbox:after {
