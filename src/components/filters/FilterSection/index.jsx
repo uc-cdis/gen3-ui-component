@@ -17,7 +17,7 @@ class FilterSection extends React.Component {
   getShowMoreButton() {
     if (this.state.isExpanded) {
       const totalCount = this.props.options
-        .filter(o => (o.count > 0 || !this.props.hideZero)).length;
+        .filter(o => (o.count > 0 || !this.props.hideZero || o.count === -1)).length;
       if ((totalCount > this.props.initVisibleItemNumber)) {
         if (this.state.showingMore) {
           return (
