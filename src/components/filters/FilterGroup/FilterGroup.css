@@ -44,9 +44,24 @@
 
 .filter-group__filter-area {
   min-width: 170px;
-  border-bottom: 1px solid var(--g3-color__silver);
+  background-color: var(--g3-color__white);
+}
+
+.filter-group__collapse {
+  line-height: 27px;
+  background-color: var(--g3-color__white);
+  border-top: 1px solid var(--g3-color__silver);
   border-left: 1px solid var(--g3-color__silver);
   border-right: 1px solid var(--g3-color__silver);
-  border-radius: 4px;
-  background-color: var(--g3-color__white);
+}
+
+.filter-group__collapse-link {
+  text-decoration: underline;
+  padding: 0 10px;
+  border-right: 1px solid var(--g3-color__silver);
+  font-size: 14px;
+}
+
+.filter-group__collapse-link:last-child {
+  border-right: none;
 }

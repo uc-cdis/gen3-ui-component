@@ -46,6 +46,7 @@ class FilterGroup extends React.Component {
        */
       filterResults: {},
     };
+    this.currentFilterListRef = React.createRef();
   }
 
   selectTab(index) {
@@ -142,6 +143,13 @@ class FilterGroup extends React.Component {
     this.props.onFilterChange(this.state.filterResults);
   }
 
+  toggleFilters(openAll) {
+    const newExpandedStatus = this.props.filterConfig.tabs
+      .map(t => t.fields.map(() => (openAll)));
+    this.setState({ expandedStatus: newExpandedStatus });
+    this.currentFilterListRef.current.toggleFilters(openAll);
+  }
+
   render() {
     return (
       <div className={`filter-group ${this.props.className}`}>
@@ -163,6 +171,26 @@ class FilterGroup extends React.Component {
             ))
           }
         </div>
+        <div className='filter-group__collapse'>
+          <span
+            className='g3-link filter-group__collapse-link'
+            onClick={() => this.toggleFilters(true)}
+            onKeyPress={() => this.toggleFilters(true)}
+            role='button'
+            tabIndex={0}
+          >
+            Show all
+          </span>
+          <span
+            className='g3-link filter-group__collapse-link'
+            onClick={() => this.toggleFilters(false)}
+            onKeyPress={() => this.toggleFilters(false)}
+            role='button'
+            tabIndex={0}
+          >
+            Collapse all
+          </span>
+        </div>
         <div className='filter-group__filter-area'>
           {
             React.cloneElement(
@@ -178,6 +206,7 @@ class FilterGroup extends React.Component {
                 onSelect: this.handleSelect.bind(this),
                 onAfterDrag: this.handleDrag.bind(this),
                 hideZero: this.props.hideZero,
+                ref: this.currentFilterListRef,
               },
             )
           }

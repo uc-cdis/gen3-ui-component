@@ -50,6 +50,7 @@
 .single-select-filter__label {
   margin: 0;
   flex-grow: 1;
+  cursor: pointer;
 }
 
 .single-select-filter__icon-background {

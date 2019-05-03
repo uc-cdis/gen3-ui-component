@@ -51,9 +51,15 @@ class FilterSection extends React.Component {
     return null;
   }
 
-  toggleSection() {
-    this.props.onToggle(!this.state.isExpanded);
-    this.setState(prevState => ({ isExpanded: !prevState.isExpanded }));
+  toggleSection(open) {
+    let targetStatus;
+    if (typeof open === 'undefined') {
+      targetStatus = !this.state.isExpanded;
+    } else {
+      targetStatus = open;
+    }
+    this.props.onToggle(targetStatus);
+    this.setState({ isExpanded: targetStatus });
   }
 
   handleSelectSingleSelectFilter(index, label) {

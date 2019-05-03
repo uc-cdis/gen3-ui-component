@@ -2,9 +2,5 @@
 
 .filter-list {
   width: 100%;
-  border-bottom: 1px solid var(--g3-color__silver);
-  border-left: 1px solid var(--g3-color__silver);
-  border-right: 1px solid var(--g3-color__silver);
-  border-radius: 4px;
   background-color: var(--g3-color__white);
 }

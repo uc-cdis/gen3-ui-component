@@ -15,6 +15,7 @@ class FilterList extends React.Component {
        */
       filterStatus: initialFilterStatus,
     };
+    this.sectionRefs = props.sections.map(() => React.createRef());
   }
 
   handleSectionToggle(sectionIndex, newExpanded) {
@@ -49,6 +50,12 @@ class FilterList extends React.Component {
     this.props.onAfterDrag(sectionIndex, lowerBound, upperBound);
   }
 
+  toggleFilters(openAll) {
+    this.sectionRefs.forEach((ref) => {
+      ref.current.toggleSection(openAll);
+    });
+  }
+
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
@@ -60,6 +67,7 @@ class FilterList extends React.Component {
           this.props.sections.map((section, index) => (
             <FilterSection
               key={index}
+              ref={this.sectionRefs[index]}
               title={section.title}
               options={section.options}
               expanded={this.props.expandedStatus[index]}

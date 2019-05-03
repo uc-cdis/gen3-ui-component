@@ -6,6 +6,12 @@
   width: 100%;
   padding: 14px 14px;
   background-color: var(--g3-color__white);
+  border-left: 1px solid var(--g3-color__silver);
+  border-right: 1px solid var(--g3-color__silver);
+  border-bottom: 1px solid var(--g3-color__silver);
+}
+
+.filter-section:first-child {
   border-top: 1px solid var(--g3-color__silver);
 }
 
@@ -29,7 +35,7 @@
 }
 
 .filter-section__toggle-icon {
-  color: var(--g3-color__lightgray);
+  background-color: var(--g3-color__lightgray);
 }
 
 .filter-section__show-more {
