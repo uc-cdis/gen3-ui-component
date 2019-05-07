@@ -60,6 +60,7 @@
   padding: 0 10px;
   border-right: 1px solid var(--g3-color__silver);
   font-size: 14px;
+  outline: none;
 }
 
 .filter-group__collapse-link:last-child {

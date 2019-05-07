@@ -51,11 +51,10 @@
   margin: 0;
   flex-grow: 1;
   cursor: pointer;
+  outline: none;
 }
 
-.single-select-filter__label-disabled {
-  margin: 0;
-  flex-grow: 1;
+.single-select-filter__label--disabled {
   cursor: not-allowed;
 }
 

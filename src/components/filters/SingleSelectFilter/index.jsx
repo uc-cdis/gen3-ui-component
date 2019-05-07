@@ -41,7 +41,7 @@ class SingleSelectFilter extends React.Component {
     }
 
     if (!this.props.accessible) {
-      rightIcon = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__black' />;
+      rightIcon = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__gray' />;
     }
 
     return (
@@ -56,7 +56,7 @@ class SingleSelectFilter extends React.Component {
         {
           inputDisabled ? (
             <span
-              className='single-select-filter__label-disabled'
+              className='single-select-filter__label single-select-filter__label--disabled'
               role='button'
               tabIndex={0}
             >
