@@ -53,15 +53,27 @@ class SingleSelectFilter extends React.Component {
           checked={selected}
           disabled={inputDisabled}
         />
-        <span
-          className='single-select-filter__label'
-          onClick={() => this.handleCheck()}
-          onKeyPress={() => this.handleCheck()}
-          role='button'
-          tabIndex={0}
-        >
-          {this.props.label}
-        </span>
+        {
+          inputDisabled ? (
+            <span
+              className='single-select-filter__label-disabled'
+              role='button'
+              tabIndex={0}
+            >
+              {this.props.label}
+            </span>
+          ) : (
+            <span
+              className='single-select-filter__label'
+              onClick={() => this.handleCheck()}
+              onKeyPress={() => this.handleCheck()}
+              role='button'
+              tabIndex={0}
+            >
+              {this.props.label}
+            </span>
+          )
+        }
         { rightIcon }
       </div>
     );

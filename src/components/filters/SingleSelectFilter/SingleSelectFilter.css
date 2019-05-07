@@ -27,7 +27,7 @@
 
 .single-select-filter__checkbox:disabled {
   background: var(--g3-color__smoke);
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .single-select-filter__checkbox:after {
@@ -51,6 +51,12 @@
   margin: 0;
   flex-grow: 1;
   cursor: pointer;
+}
+
+.single-select-filter__label-disabled {
+  margin: 0;
+  flex-grow: 1;
+  cursor: not-allowed;
 }
 
 .single-select-filter__icon-background {
