@@ -82,7 +82,7 @@ storiesOf('Chart', module)
     <SummaryChartGroup summaries={summaries} width={1010} />
   ))
   .add('SummaryChartGroup with a Locked Chart', () => (
-    <SummaryChartGroup summaries={lockedSummaries} width={1010} />
+    <SummaryChartGroup summaries={lockedSummaries} width={1010} lockValue={-1} lockMessage='This chart is locked!' />
   ))
   .add('PercentageStackedBarChart', () => (
     <PercentageStackedBarChart data={virusData} />

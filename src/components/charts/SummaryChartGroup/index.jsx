@@ -22,6 +22,8 @@ class SummaryChartGroup extends Component {
                     <SummaryPieChart
                       data={item.data}
                       title={item.title}
+                      lockValue={this.props.lockValue}
+                      lockMessage={this.props.lockMessage}
                     />
                   ) : (
                     <SummaryHorizontalBarChart
@@ -29,6 +31,8 @@ class SummaryChartGroup extends Component {
                       title={item.title}
                       vertical
                       color={this.props.barChartColor}
+                      lockValue={this.props.lockValue}
+                      lockMessage={this.props.lockMessage}
                     />
                   )
               }
@@ -44,11 +48,15 @@ SummaryChartGroup.propTypes = {
   summaries: PropTypes.arrayOf(PropTypes.object).isRequired,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   barChartColor: PropTypes.string,
+  lockValue: PropTypes.number, // if one of the value is equal to `lockValue`, lock the chart
+  lockMessage: PropTypes.string,
 };
 
 SummaryChartGroup.defaultProps = {
   width: '100%',
   barChartColor: '#3283c8',
+  lockValue: -1,
+  lockMessage: 'You cannot see this chart because it contains items under 1000 subjects',
 };
 
 export default SummaryChartGroup;
