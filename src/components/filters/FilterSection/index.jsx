@@ -62,7 +62,7 @@ class FilterSection extends React.Component {
     this.setState({ isExpanded: targetStatus });
   }
 
-  handleSelectSingleSelectFilter(index, label) {
+  handleSelectSingleSelectFilter(label) {
     this.setState((prevState) => {
       const newFilterStatus = Object.assign({}, prevState.filterStatus);
       const oldSelected = newFilterStatus[label];
@@ -72,7 +72,7 @@ class FilterSection extends React.Component {
         filterStatus: newFilterStatus,
       };
     });
-    this.props.onSelect(index, label);
+    this.props.onSelect(label);
   }
 
   handleDragRangeFilter(lowerBound, upperBound) {
@@ -117,12 +117,9 @@ class FilterSection extends React.Component {
                 if (option.filterType === 'singleSelect') {
                   return (
                     <SingleSelectFilter
-                      key={index}
+                      key={option.text}
                       label={option.text}
-                      onSelect={label => this.handleSelectSingleSelectFilter(
-                        index,
-                        label,
-                      )}
+                      onSelect={label => this.handleSelectSingleSelectFilter(label)}
                       selected={filterStatus[option.text]}
                       count={option.count}
                       hideZero={this.props.hideZero}
@@ -139,7 +136,7 @@ class FilterSection extends React.Component {
                   ? option.max : filterStatus[1];
                 return (
                   <RangeFilter
-                    key={index}
+                    key={option.text}
                     label={option.text}
                     min={option.min}
                     max={option.max}
