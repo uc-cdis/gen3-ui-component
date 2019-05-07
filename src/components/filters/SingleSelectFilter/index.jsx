@@ -20,7 +20,7 @@ class SingleSelectFilter extends React.Component {
       return null;
     }
     // Takes in parent component's selected or self state's selected
-    const selected = typeof this.props.selected === 'undefined' ? this.state.selected : this.props.selected;
+    const selected = (typeof this.props.selected === 'undefined') ? this.state.selected : this.props.selected;
     let rightIcon;
     let inputDisabled = false;
 

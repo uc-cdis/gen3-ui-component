@@ -24,7 +24,6 @@ class FilterList extends React.Component {
 
   handleSelectSingleFilter(
     sectionIndex,
-    singleFilterIndex,
     singleFilterLabel,
   ) {
     this.setState((prevState) => {
@@ -36,7 +35,7 @@ class FilterList extends React.Component {
         filterStatus: newFilterStatus,
       };
     });
-    this.props.onSelect(sectionIndex, singleFilterIndex, singleFilterLabel);
+    this.props.onSelect(sectionIndex, singleFilterLabel);
   }
 
   handleDragRangeFilter(sectionIndex, lowerBound, upperBound) {
@@ -74,12 +73,8 @@ class FilterList extends React.Component {
               onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
               filterStatus={filterStatus[index]}
               onSelect={
-                (
-                  singleFilterIndex,
-                  singleFilterLabel,
-                ) => this.handleSelectSingleFilter(
+                singleFilterLabel => this.handleSelectSingleFilter(
                   index,
-                  singleFilterIndex,
                   singleFilterLabel,
                 )
               }

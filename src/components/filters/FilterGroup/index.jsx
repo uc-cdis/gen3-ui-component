@@ -84,7 +84,7 @@ class FilterGroup extends React.Component {
     });
   }
 
-  handleSelect(sectionIndex, singleFilterIndex, singleFilterLabel) {
+  handleSelect(sectionIndex, singleFilterLabel) {
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
