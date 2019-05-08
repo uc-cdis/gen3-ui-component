@@ -21,11 +21,17 @@ class SingleSelectFilter extends React.Component {
     }
     // Takes in parent component's selected or self state's selected
     const selected = (typeof this.props.selected === 'undefined') ? this.state.selected : this.props.selected;
-    let rightIcon;
     let inputDisabled = false;
+    let lockIconComponent = <React.Fragment />;
+    let countIconComponent = <React.Fragment />;
+
+
+    if (!this.props.accessible) {
+      lockIconComponent = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__gray' />;
+    }
 
     if (this.props.count === this.props.hideValue) {
-      rightIcon = this.props.tierAccessLimit ? (
+      countIconComponent = this.props.tierAccessLimit ? (
         <span className='g3-badge single-select-filter__count'>
           {this.props.tierAccessLimit}
           <i className='g3-icon--under g3-icon g3-icon--sm g3-icon-color__base-blue' />
@@ -36,12 +42,8 @@ class SingleSelectFilter extends React.Component {
         </span>
       );
       inputDisabled = true;
-    } else {
-      rightIcon = <span className='g3-badge single-select-filter__count'>{this.props.count}</span>;
-    }
-
-    if (!this.props.accessible) {
-      rightIcon = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__gray' />;
+    } else if (this.props.accessible) {
+      countIconComponent = <span className='g3-badge single-select-filter__count'>{this.props.count}</span>;
     }
 
     return (
@@ -74,7 +76,8 @@ class SingleSelectFilter extends React.Component {
             </span>
           )
         }
-        { rightIcon }
+        { countIconComponent }
+        { lockIconComponent }
       </div>
     );
   }
