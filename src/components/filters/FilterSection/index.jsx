@@ -143,6 +143,7 @@ class FilterSection extends React.Component {
                     onAfterDrag={(lb, ub) => this.handleDragRangeFilter(lb, ub)}
                     lowerBound={lowerBound}
                     upperBound={upperBound}
+                    count={option.count}
                   />
                 );
               }) : null
@@ -159,9 +160,9 @@ FilterSection.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
     filterType: PropTypes.oneOf(['singleSelect', 'range']).isRequired,
     text: PropTypes.string,
+    count: PropTypes.number, // both filters need this for access control
 
     // for single select filter
-    count: PropTypes.number,
     accessible: PropTypes.bool,
 
     // for range filter

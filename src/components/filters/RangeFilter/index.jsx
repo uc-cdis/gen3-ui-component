@@ -15,12 +15,18 @@ class RangeFilter extends React.Component {
   }
 
   onSliderChange(range) {
-    this.setState({ isDragging: true, lowerBound: range[0], upperBound: range[1] },
-      () => {
-        if (this.props.onDrag) {
-          this.props.onDrag(this.state.lowerBound, this.state.upperBound);
-        }
-      },
+    this.setState(prevState => ({
+      isDragging: true,
+      lowerBound: (this.props.count === this.props.hideValue
+        && prevState.lowerBound < range[0]) ? prevState.lowerBound : range[0],
+      upperBound: (this.props.count === this.props.hideValue
+        && prevState.upperBound > range[1]) ? prevState.upperBound : range[1],
+    }),
+    () => {
+      if (this.props.onDrag) {
+        this.props.onDrag(this.state.lowerBound, this.state.upperBound);
+      }
+    },
     );
   }
 
@@ -76,6 +82,8 @@ RangeFilter.propTypes = {
   upperBound: PropTypes.number,
   decimalDigitsLen: PropTypes.number,
   rangeStep: PropTypes.number,
+  hideValue: PropTypes.number,
+  count: PropTypes.number,
 };
 
 RangeFilter.defaultProps = {
@@ -85,6 +93,8 @@ RangeFilter.defaultProps = {
   onDrag: () => {},
   decimalDigitsLen: 2,
   rangeStep: 1,
+  hideValue: -1,
+  count: 0,
 };
 
 export default RangeFilter;
