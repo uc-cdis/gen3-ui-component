@@ -22,7 +22,7 @@ class FilterSection extends React.Component {
         if (this.state.showingMore) {
           return (
             <div
-              className='filter-section__show-more'
+              className='g3-filter-section__show-more'
               role='button'
               onClick={() => this.toggleShowMore()}
               onKeyPress={() => this.toggleShowMore()}
@@ -35,7 +35,7 @@ class FilterSection extends React.Component {
         const moreCount = totalCount - this.props.initVisibleItemNumber;
         return (
           <div
-            className='filter-section__show-more'
+            className='g3-filter-section__show-more'
             role='button'
             onClick={() => this.toggleShowMore()}
             onKeyPress={() => this.toggleShowMore()}
@@ -94,20 +94,20 @@ class FilterSection extends React.Component {
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
     return (
-      <div className='filter-section'>
+      <div className='g3-filter-section'>
         <div
-          className='filter-section__header'
+          className='g3-filter-section__header'
           onClick={() => this.toggleSection()}
           onKeyPress={() => this.toggleSection()}
           tabIndex={0}
           role='button'
         >
-          <p className='filter-section__title'>{this.props.title}</p>
+          <p className='g3-filter-section__title'>{this.props.title}</p>
           <i
-            className={`filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
+            className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
           />
         </div>
-        <div className='filter-section__options'>
+        <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
               ? this.props.options.map((option, index) => {

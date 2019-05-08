@@ -61,7 +61,7 @@ class FilterList extends React.Component {
       ? this.props.filterStatus : this.state.filterStatus;
 
     return (
-      <div className='filter-list'>
+      <div className='g3-filter-list'>
         {
           this.props.sections.map((section, index) => (
             <FilterSection

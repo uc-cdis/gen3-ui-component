@@ -32,24 +32,24 @@ class SingleSelectFilter extends React.Component {
 
     if (this.props.count === this.props.hideValue) {
       countIconComponent = this.props.tierAccessLimit ? (
-        <span className='g3-badge single-select-filter__count'>
+        <span className='g3-badge g3-single-select-filter__count'>
           {this.props.tierAccessLimit}
           <i className='g3-icon--under g3-icon g3-icon--sm g3-icon-color__base-blue' />
         </span>
       ) : (
-        <span className='single-select-filter__icon-background'>
+        <span className='g3-single-select-filter__icon-background'>
           <i className='g3-icon--under g3-icon g3-icon--sm g3-icon-color__base-blue' />
         </span>
       );
       inputDisabled = true;
     } else if (this.props.accessible) {
-      countIconComponent = <span className='g3-badge single-select-filter__count'>{this.props.count}</span>;
+      countIconComponent = <span className='g3-badge g3-single-select-filter__count'>{this.props.count}</span>;
     }
 
     return (
-      <div className='single-select-filter'>
+      <div className='g3-single-select-filter'>
         <input
-          className='single-select-filter__checkbox'
+          className='g3-single-select-filter__checkbox'
           type='checkbox'
           onChange={() => this.handleCheck()}
           checked={selected}
@@ -58,7 +58,7 @@ class SingleSelectFilter extends React.Component {
         {
           inputDisabled ? (
             <span
-              className='single-select-filter__label single-select-filter__label--disabled'
+              className='g3-single-select-filter__label g3-single-select-filter__label--disabled'
               role='button'
               tabIndex={0}
             >
@@ -66,7 +66,7 @@ class SingleSelectFilter extends React.Component {
             </span>
           ) : (
             <span
-              className='single-select-filter__label'
+              className='g3-single-select-filter__label'
               onClick={() => this.handleCheck()}
               onKeyPress={() => this.handleCheck()}
               role='button'

@@ -1,16 +1,16 @@
 @import "../../../css/base.css";
 
-.filter-group {
+.g3-filter-group {
   display: flex;
   flex-flow: column;
 }
 
-.filter-group__tabs {
+.g3-filter-group__tabs {
   display: flex;
   font-size: 14px;
 }
 
-.filter-group__tab {
+.g3-filter-group__tab {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,12 +28,12 @@
   min-height: 28px;
 }
 
-.filter-group__tab--selected {
+.g3-filter-group__tab--selected {
   background-color: var(--g3-color__base-blue);
   color: var(--g3-color__white);
 }
 
-.filter-group__tab-title {
+.g3-filter-group__tab-title {
   padding: 3px 10px;
   margin: 0;
   font-size: 14px;
@@ -42,12 +42,12 @@
   text-align: center;
 }
 
-.filter-group__filter-area {
+.g3-filter-group__filter-area {
   min-width: 170px;
   background-color: var(--g3-color__white);
 }
 
-.filter-group__collapse {
+.g3-filter-group__collapse {
   line-height: 27px;
   background-color: var(--g3-color__white);
   border-top: 1px solid var(--g3-color__silver);
@@ -55,7 +55,7 @@
   border-right: 1px solid var(--g3-color__silver);
 }
 
-.filter-group__collapse-link {
+.g3-filter-group__collapse-link {
   text-decoration: underline;
   padding: 0 10px;
   border-right: 1px solid var(--g3-color__silver);
@@ -63,6 +63,6 @@
   outline: none;
 }
 
-.filter-group__collapse-link:last-child {
+.g3-filter-group__collapse-link:last-child {
   border-right: none;
 }
