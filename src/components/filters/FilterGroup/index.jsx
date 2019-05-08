@@ -158,28 +158,28 @@ class FilterGroup extends React.Component {
 
   render() {
     return (
-      <div className={`filter-group ${this.props.className}`}>
-        <div className='filter-group__tabs'>
+      <div className={`g3-filter-group ${this.props.className}`}>
+        <div className='g3-filter-group__tabs'>
           {
             this.props.tabs.map((tab, index) => (
               <div
                 key={index}
                 role='button'
                 tabIndex={index}
-                className={'filter-group__tab'.concat(this.state.selectedTabIndex === index ? ' filter-group__tab--selected' : '')}
+                className={'g3-filter-group__tab'.concat(this.state.selectedTabIndex === index ? ' g3-filter-group__tab--selected' : '')}
                 onClick={() => this.selectTab(index)}
                 onKeyDown={() => this.selectTab(index)}
               >
-                <p className='filter-group__tab-title'>
+                <p className='g3-filter-group__tab-title'>
                   {this.props.filterConfig.tabs[tab.key].title}
                 </p>
               </div>
             ))
           }
         </div>
-        <div className='filter-group__collapse'>
+        <div className='g3-filter-group__collapse'>
           <span
-            className='g3-link filter-group__collapse-link'
+            className='g3-link g3-filter-group__collapse-link'
             onClick={() => this.toggleFilters()}
             onKeyPress={() => this.toggleFilters()}
             role='button'
@@ -188,7 +188,7 @@ class FilterGroup extends React.Component {
             {this.state.expandedStatusText}
           </span>
         </div>
-        <div className='filter-group__filter-area'>
+        <div className='g3-filter-group__filter-area'>
           {
             React.cloneElement(
               this.props.tabs[this.state.selectedTabIndex],

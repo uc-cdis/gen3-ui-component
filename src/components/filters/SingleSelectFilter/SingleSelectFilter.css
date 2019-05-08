@@ -1,13 +1,13 @@
 @import "../../../css/base.css";
 @import "../../../css/icon.css";
 
-.single-select-filter {
+.g3-single-select-filter {
   display: flex;
   align-items: center;
   margin-top: 14px;
 }
 
-.single-select-filter__checkbox {
+.g3-single-select-filter__checkbox {
   margin: 0 14px;
   cursor: pointer;
   -webkit-appearance: none;
@@ -21,16 +21,16 @@
   border-radius: 2px;
 }
 
-.single-select-filter__checkbox:checked {
+.g3-single-select-filter__checkbox:checked {
   background: var(--g3-color__highlight-orange);
 }
 
-.single-select-filter__checkbox:disabled {
+.g3-single-select-filter__checkbox:disabled {
   background: var(--g3-color__smoke);
   cursor: not-allowed;
 }
 
-.single-select-filter__checkbox:after {
+.g3-single-select-filter__checkbox:after {
   content: '';
   position: relative;
   left: 40%;
@@ -43,22 +43,22 @@
   display: none;
 }
 
-.single-select-filter__checkbox:checked:after {
+.g3-single-select-filter__checkbox:checked:after {
   display: block;
 }
 
-.single-select-filter__label {
+.g3-single-select-filter__label {
   margin: 0;
   flex-grow: 1;
   cursor: pointer;
   outline: none;
 }
 
-.single-select-filter__label--disabled {
+.g3-single-select-filter__label--disabled {
   cursor: not-allowed;
 }
 
-.single-select-filter__icon-background {
+.g3-single-select-filter__icon-background {
   height: 14px;
   align-items: center;
   width: 14px;

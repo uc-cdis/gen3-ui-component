@@ -52,14 +52,14 @@ class RangeFilter extends React.Component {
     const prettifiedLowerBound = this.getNumberToFixed(lowerBound);
     const prettifiedUpperBound = this.getNumberToFixed(upperBound);
     return (
-      <div className='range-filter'>
-        <p className='range-filter__title'>{this.props.label}</p>
-        <div className='range-filter__bounds'>
-          <p className='range-filter__bound range-filter__bound--lower'>{prettifiedLowerBound}</p>
-          <p className='range-filter__bound range-filter__bound--higher'>{prettifiedUpperBound}</p>
+      <div className='g3-range-filter'>
+        <p className='g3-range-filter__title'>{this.props.label}</p>
+        <div className='g3-range-filter__bounds'>
+          <p className='g3-range-filter__bound g3-range-filter__bound--lower'>{prettifiedLowerBound}</p>
+          <p className='g3-range-filter__bound g3-range-filter__bound--higher'>{prettifiedUpperBound}</p>
         </div>
         <Range
-          className='range-filter__slider'
+          className='g3-range-filter__slider'
           min={rangeMin}
           max={rangeMax}
           value={[prettifiedLowerBound, prettifiedUpperBound]}
