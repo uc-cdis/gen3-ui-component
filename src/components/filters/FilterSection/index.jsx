@@ -136,7 +136,7 @@ class FilterSection extends React.Component {
                   ? option.max : filterStatus[1];
                 return (
                   <RangeFilter
-                    key={option.text}
+                    key={this.props.title}
                     label={option.text}
                     min={option.min}
                     max={option.max}
