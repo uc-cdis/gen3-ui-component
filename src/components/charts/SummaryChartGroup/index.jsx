@@ -56,7 +56,7 @@ SummaryChartGroup.defaultProps = {
   width: '100%',
   barChartColor: '#3283c8',
   lockValue: -1,
-  lockMessage: 'You cannot see this chart because it contains items under 1000 subjects',
+  lockMessage: 'This chart is hidden because it contains fewer than 1000 subjects',
 };
 
 export default SummaryChartGroup;
