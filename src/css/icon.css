@@ -298,3 +298,7 @@
 .g3-icon--lock {
   mask-image: svg-load(../images/icons/lock.svg);
 }
+
+.g3-icon--under {
+  mask-image: svg-load(../images/icons/under.svg);
+}

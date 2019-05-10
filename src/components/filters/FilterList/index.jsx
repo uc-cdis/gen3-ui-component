@@ -15,6 +15,7 @@ class FilterList extends React.Component {
        */
       filterStatus: initialFilterStatus,
     };
+    this.sectionRefs = props.sections.map(() => React.createRef());
   }
 
   handleSectionToggle(sectionIndex, newExpanded) {
@@ -23,7 +24,6 @@ class FilterList extends React.Component {
 
   handleSelectSingleFilter(
     sectionIndex,
-    singleFilterIndex,
     singleFilterLabel,
   ) {
     this.setState((prevState) => {
@@ -35,7 +35,7 @@ class FilterList extends React.Component {
         filterStatus: newFilterStatus,
       };
     });
-    this.props.onSelect(sectionIndex, singleFilterIndex, singleFilterLabel);
+    this.props.onSelect(sectionIndex, singleFilterLabel);
   }
 
   handleDragRangeFilter(sectionIndex, lowerBound, upperBound) {
@@ -49,29 +49,32 @@ class FilterList extends React.Component {
     this.props.onAfterDrag(sectionIndex, lowerBound, upperBound);
   }
 
+  toggleFilters(openAll) {
+    this.sectionRefs.forEach((ref) => {
+      ref.current.toggleSection(openAll);
+    });
+  }
+
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
 
     return (
-      <div className='filter-list'>
+      <div className='g3-filter-list'>
         {
           this.props.sections.map((section, index) => (
             <FilterSection
               key={index}
+              ref={this.sectionRefs[index]}
               title={section.title}
               options={section.options}
               expanded={this.props.expandedStatus[index]}
               onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
               filterStatus={filterStatus[index]}
               onSelect={
-                (
-                  singleFilterIndex,
-                  singleFilterLabel,
-                ) => this.handleSelectSingleFilter(
+                singleFilterLabel => this.handleSelectSingleFilter(
                   index,
-                  singleFilterIndex,
                   singleFilterLabel,
                 )
               }
@@ -86,6 +89,7 @@ class FilterList extends React.Component {
                 )
               }
               hideZero={this.props.hideZero}
+              tierAccessLimit={this.props.tierAccessLimit}
             />
           ))
         }
@@ -104,6 +108,7 @@ FilterList.propTypes = {
       // for single select filter
       count: PropTypes.number,
       hideZero: PropTypes.bool,
+      accessible: PropTypes.bool,
 
       // for range filter
       min: PropTypes.number,
@@ -119,6 +124,7 @@ FilterList.propTypes = {
   onSelect: PropTypes.func,
   onAfterDrag: PropTypes.func,
   hideZero: PropTypes.bool,
+  tierAccessLimit: PropTypes.number,
 };
 
 FilterList.defaultProps = {
@@ -128,6 +134,7 @@ FilterList.defaultProps = {
   onSelect: () => {},
   onAfterDrag: () => {},
   hideZero: true,
+  tierAccessLimit: undefined,
 };
 
 export default FilterList;

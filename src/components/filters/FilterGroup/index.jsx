@@ -17,13 +17,16 @@ const removeEmptyFilter = (filterResults) => {
 class FilterGroup extends React.Component {
   constructor(props) {
     super(props);
+    const initialExpandedStatusControl = true;
     const initialExpandedStatus = props.filterConfig.tabs
-      .map(t => t.fields.map(() => (true)));
+      .map(t => t.fields.map(() => (initialExpandedStatusControl)));
     const initialFilterStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => ({})));
     this.state = {
       selectedTabIndex: 0,
       expandedStatus: initialExpandedStatus,
+      expandedStatusText: 'Collapse all',
+      expandedStatusControl: initialExpandedStatusControl,
 
       /**
        * Current selected status for filters,
@@ -46,10 +49,32 @@ class FilterGroup extends React.Component {
        */
       filterResults: {},
     };
+    this.currentFilterListRef = React.createRef();
   }
 
   selectTab(index) {
     this.setState({ selectedTabIndex: index });
+  }
+
+  resetFilter() {
+    this.setState((prevState) => {
+      const oldFilterStatus = prevState.filterStatus;
+      const resetStatus = oldFilterStatus.map((oldSectionStatus) => {
+        const sectionStatus = oldSectionStatus.map((oldEntry) => {
+          if (!oldEntry || Object.keys(oldEntry).length === 0) return oldEntry;
+          const newEntry = Object.keys(oldEntry).reduce((res, key) => {
+            res[key] = false;
+            return res;
+          }, {});
+          return newEntry;
+        });
+        return sectionStatus;
+      });
+      return {
+        filterStatus: resetStatus,
+        filterResults: {},
+      };
+    });
   }
 
   handleToggle(tabIndex, sectionIndex, newSectionExpandedStatus) {
@@ -62,7 +87,7 @@ class FilterGroup extends React.Component {
     });
   }
 
-  handleSelect(sectionIndex, singleFilterIndex, singleFilterLabel) {
+  handleSelect(sectionIndex, singleFilterLabel) {
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
@@ -121,28 +146,49 @@ class FilterGroup extends React.Component {
     this.props.onFilterChange(this.state.filterResults);
   }
 
+  toggleFilters() {
+    this.setState(prevState => ({
+      expandedStatus: this.props.filterConfig.tabs
+        .map(t => t.fields.map(() => (!prevState.expandedStatusControl))),
+      expandedStatusText: (!prevState.expandedStatusControl) ? 'Collapse all' : 'Open all',
+      expandedStatusControl: !prevState.expandedStatusControl,
+    }));
+    this.currentFilterListRef.current.toggleFilters();
+  }
+
   render() {
     return (
-      <div className={`filter-group ${this.props.className}`}>
-        <div className='filter-group__tabs'>
+      <div className={`g3-filter-group ${this.props.className}`}>
+        <div className='g3-filter-group__tabs'>
           {
             this.props.tabs.map((tab, index) => (
               <div
                 key={index}
                 role='button'
                 tabIndex={index}
-                className={'filter-group__tab'.concat(this.state.selectedTabIndex === index ? ' filter-group__tab--selected' : '')}
+                className={'g3-filter-group__tab'.concat(this.state.selectedTabIndex === index ? ' g3-filter-group__tab--selected' : '')}
                 onClick={() => this.selectTab(index)}
                 onKeyDown={() => this.selectTab(index)}
               >
-                <p className='filter-group__tab-title'>
+                <p className='g3-filter-group__tab-title'>
                   {this.props.filterConfig.tabs[tab.key].title}
                 </p>
               </div>
             ))
           }
         </div>
-        <div className='filter-group__filter-area'>
+        <div className='g3-filter-group__collapse'>
+          <span
+            className='g3-link g3-filter-group__collapse-link'
+            onClick={() => this.toggleFilters()}
+            onKeyPress={() => this.toggleFilters()}
+            role='button'
+            tabIndex={0}
+          >
+            {this.state.expandedStatusText}
+          </span>
+        </div>
+        <div className='g3-filter-group__filter-area'>
           {
             React.cloneElement(
               this.props.tabs[this.state.selectedTabIndex],
@@ -157,6 +203,7 @@ class FilterGroup extends React.Component {
                 onSelect: this.handleSelect.bind(this),
                 onAfterDrag: this.handleDrag.bind(this),
                 hideZero: this.props.hideZero,
+                ref: this.currentFilterListRef,
               },
             )
           }

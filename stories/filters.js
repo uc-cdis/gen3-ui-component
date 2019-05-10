@@ -6,6 +6,7 @@ import RangeFilter from '../src/components/filters/RangeFilter';
 import FilterSection from '../src/components/filters/FilterSection';
 import FilterList from '../src/components/filters/FilterList';
 import FilterGroup from '../src/components/filters/FilterGroup';
+import Button from '../src/components/Button';
 
 const projectOptions = [
   { text: 'ndh-CHARLIE', filterType: 'singleSelect', count: 123 },
@@ -39,14 +40,15 @@ const raceOptions = [
 ];
 
 const ethnicityOptions = [
-  { text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123 },
-  { text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123 },
-  { text: 'Unknown', filterType: 'singleSelect', count: 123 },
+  { text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: true },
+  { text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: false },
+  { text: 'Unknown', filterType: 'singleSelect', count: 123, accessible: true },
+  { text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true },
 ];
 
 const ageOptions = [
   { min: 2, max: 97, filterType: 'range' },
-]
+];
 
 const fileTypeOptions = [
   { text: 'mRNA Array', filterType: 'singleSelect', count: 123 },
@@ -109,11 +111,41 @@ const filterConfig = {
   }],
 };
 
+class ExampleFilterGroup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.filterRef = React.createRef();
+  }
+
+  resetFilter = () => {
+    this.filterRef.current.resetFilter();
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Button
+          label='reset filter'
+          onClick={this.resetFilter}
+        />
+        <FilterGroup
+          ref={this.filterRef}
+          tabs={tabs}
+          filterConfig={filterConfig}
+        />
+      </React.Fragment>
+    );
+  }
+}
+
 storiesOf('Filters', module)
   .add('SingleSelectFilter', () => (
     <div>
-      <SingleSelectFilter label='Male' onSelect={action('checked')} count={1} />
-      <SingleSelectFilter label='Female' onSelect={action('checked')} count={2} />
+      <SingleSelectFilter label='Male' onSelect={action('checked')} count={1} accessible />
+      <SingleSelectFilter label='Female' onSelect={action('checked')} count={2} accessible />
+      <SingleSelectFilter label='Option3' onSelect={action('checked')} count={-1} accessible tierAccessLimit={1000} />
+      <SingleSelectFilter label='Option4' onSelect={action('checked')} count={4} accessible={false} />
+      <SingleSelectFilter label='Option5' onSelect={action('checked')} count={-1} accessible={false} tierAccessLimit={1000} />
     </div>
   ))
   .add('RangeFilter', () => (
@@ -139,6 +171,7 @@ storiesOf('Filters', module)
       options={ethnicityOptions}
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
     />
   ))
   .add('FilterList', () => (
@@ -146,6 +179,7 @@ storiesOf('Filters', module)
       sections={subjectSections}
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
     />
   ))
   .add('FilterGroup', () => (
@@ -154,4 +188,7 @@ storiesOf('Filters', module)
       filterConfig={filterConfig}
       onFilterChange={action('filter change')}
     />
+  ))
+  .add('FilterGroup that could be reset', () => (
+    <ExampleFilterGroup />
   ));

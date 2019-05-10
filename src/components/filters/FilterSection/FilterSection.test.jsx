@@ -44,8 +44,8 @@ describe('FilterSection', () => {
   });
 
   it('picks the right kind of filter to display', () => {
-    expect(component.find('.single-select-filter').length).toBe(singleSelectOptions.length);
-    expect(component.find('.range-filter').length).toBe(0);
+    expect(component.find('.g3-single-select-filter').length).toBe(singleSelectOptions.length);
+    expect(component.find('.g3-range-filter').length).toBe(0);
     const mixedFilterComponent = mount(
       <FilterSection
         title='Section Title'
@@ -55,14 +55,14 @@ describe('FilterSection', () => {
         hideZero={false}
       />,
     );
-    expect(mixedFilterComponent.find('.single-select-filter').length).toBe(2);
-    expect(mixedFilterComponent.find('.range-filter').length).toBe(2);
+    expect(mixedFilterComponent.find('.g3-single-select-filter').length).toBe(2);
+    expect(mixedFilterComponent.find('.g3-range-filter').length).toBe(2);
   });
 
   it('toggles expand on click', () => {
     expect(component.instance().state.isExpanded).toBe(true);
-    expect(component.find('.filter-section__header').length).toBe(1);
-    component.find('.filter-section__header').simulate('click');
+    expect(component.find('.g3-filter-section__header').length).toBe(1);
+    component.find('.g3-filter-section__header').simulate('click');
     expect(component.instance().state.isExpanded).toBe(false);
   });
 });

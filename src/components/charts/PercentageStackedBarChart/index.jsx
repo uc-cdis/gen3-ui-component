@@ -133,7 +133,7 @@ PercentageStackedBarChart.defaultProps = {
     position: 'center',
   },
   lockValue: -1,
-  lockMessage: 'You cannot see this chart because it contains cohort under 1000 subjects',
+  lockMessage: 'This chart is hidden because it contains fewer than 1000 subjects',
 };
 
 export default PercentageStackedBarChart;

@@ -17,12 +17,12 @@ class FilterSection extends React.Component {
   getShowMoreButton() {
     if (this.state.isExpanded) {
       const totalCount = this.props.options
-        .filter(o => (o.count > 0 || !this.props.hideZero)).length;
+        .filter(o => (o.count > 0 || !this.props.hideZero || o.count === -1)).length;
       if ((totalCount > this.props.initVisibleItemNumber)) {
         if (this.state.showingMore) {
           return (
             <div
-              className='filter-section__show-more'
+              className='g3-filter-section__show-more'
               role='button'
               onClick={() => this.toggleShowMore()}
               onKeyPress={() => this.toggleShowMore()}
@@ -35,7 +35,7 @@ class FilterSection extends React.Component {
         const moreCount = totalCount - this.props.initVisibleItemNumber;
         return (
           <div
-            className='filter-section__show-more'
+            className='g3-filter-section__show-more'
             role='button'
             onClick={() => this.toggleShowMore()}
             onKeyPress={() => this.toggleShowMore()}
@@ -51,12 +51,18 @@ class FilterSection extends React.Component {
     return null;
   }
 
-  toggleSection() {
-    this.props.onToggle(!this.state.isExpanded);
-    this.setState(prevState => ({ isExpanded: !prevState.isExpanded }));
+  toggleSection(open) {
+    let targetStatus;
+    if (typeof open === 'undefined') {
+      targetStatus = !this.state.isExpanded;
+    } else {
+      targetStatus = open;
+    }
+    this.props.onToggle(targetStatus);
+    this.setState({ isExpanded: targetStatus });
   }
 
-  handleSelectSingleSelectFilter(index, label) {
+  handleSelectSingleSelectFilter(label) {
     this.setState((prevState) => {
       const newFilterStatus = Object.assign({}, prevState.filterStatus);
       const oldSelected = newFilterStatus[label];
@@ -66,7 +72,7 @@ class FilterSection extends React.Component {
         filterStatus: newFilterStatus,
       };
     });
-    this.props.onSelect(index, label);
+    this.props.onSelect(label);
   }
 
   handleDragRangeFilter(lowerBound, upperBound) {
@@ -88,20 +94,20 @@ class FilterSection extends React.Component {
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
     return (
-      <div className='filter-section'>
+      <div className='g3-filter-section'>
         <div
-          className='filter-section__header'
+          className='g3-filter-section__header'
           onClick={() => this.toggleSection()}
           onKeyPress={() => this.toggleSection()}
           tabIndex={0}
           role='button'
         >
-          <p className='filter-section__title'>{this.props.title}</p>
+          <p className='g3-filter-section__title'>{this.props.title}</p>
           <i
-            className={`filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
+            className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
           />
         </div>
-        <div className='filter-section__options'>
+        <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
               ? this.props.options.map((option, index) => {
@@ -111,15 +117,14 @@ class FilterSection extends React.Component {
                 if (option.filterType === 'singleSelect') {
                   return (
                     <SingleSelectFilter
-                      key={index}
+                      key={option.text}
                       label={option.text}
-                      onSelect={label => this.handleSelectSingleSelectFilter(
-                        index,
-                        label,
-                      )}
+                      onSelect={label => this.handleSelectSingleSelectFilter(label)}
                       selected={filterStatus[option.text]}
                       count={option.count}
                       hideZero={this.props.hideZero}
+                      accessible={option.accessible}
+                      tierAccessLimit={this.props.tierAccessLimit}
                     />
                   );
                 }
@@ -131,13 +136,14 @@ class FilterSection extends React.Component {
                   ? option.max : filterStatus[1];
                 return (
                   <RangeFilter
-                    key={index}
+                    key={this.props.title}
                     label={option.text}
                     min={option.min}
                     max={option.max}
                     onAfterDrag={(lb, ub) => this.handleDragRangeFilter(lb, ub)}
                     lowerBound={lowerBound}
                     upperBound={upperBound}
+                    count={option.count}
                   />
                 );
               }) : null
@@ -154,9 +160,10 @@ FilterSection.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
     filterType: PropTypes.oneOf(['singleSelect', 'range']).isRequired,
     text: PropTypes.string,
+    count: PropTypes.number, // both filters need this for access control
 
     // for single select filter
-    count: PropTypes.number,
+    accessible: PropTypes.bool,
 
     // for range filter
     min: PropTypes.number,
@@ -173,6 +180,7 @@ FilterSection.propTypes = {
   ]),
   initVisibleItemNumber: PropTypes.number,
   hideZero: PropTypes.bool,
+  tierAccessLimit: PropTypes.number,
 };
 
 FilterSection.defaultProps = {
@@ -183,6 +191,7 @@ FilterSection.defaultProps = {
   filterStatus: undefined,
   initVisibleItemNumber: 5,
   hideZero: true,
+  tierAccessLimit: undefined,
 };
 
 export default FilterSection;

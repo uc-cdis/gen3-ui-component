@@ -180,3 +180,12 @@ a {
   margin-left: 6px;
   padding: 0 5px;
 }
+
+.g3-link {
+  color: var(--g3-color__base-blue);
+  cursor: pointer;
+}
+
+.g3-link:hover {
+  color: var(--g3-color__base-blue-light);
+}

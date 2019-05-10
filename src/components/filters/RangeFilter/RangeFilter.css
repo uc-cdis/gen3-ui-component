@@ -1,22 +1,22 @@
 @import "../../../css/base.css";
 
-.range-filter {
+.g3-range-filter {
   width: 100%;
   padding: 14px 14px;
   box-sizing: border-box;
 }
 
-.range-filter__title {
+.g3-range-filter__title {
   margin: 0;
 }
 
-.range-filter__bounds {
+.g3-range-filter__bounds {
   display: flex;
   justify-content: space-between;
   margin: 14px 0;
 }
 
-.range-filter__bound {
+.g3-range-filter__bound {
   margin: 0;
 }
 

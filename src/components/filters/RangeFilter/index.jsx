@@ -10,23 +10,31 @@ class RangeFilter extends React.Component {
     this.state = {
       lowerBound: props.lowerBound ? props.lowerBound : props.min,
       upperBound: props.upperBound ? props.upperBound : props.max,
+      isDragging: false,
     };
   }
 
   onSliderChange(range) {
-    this.setState({ lowerBound: range[0], upperBound: range[1] }, () => {
+    this.setState(prevState => ({
+      isDragging: true,
+      lowerBound: (this.props.count === this.props.hideValue
+        && prevState.lowerBound < range[0]) ? prevState.lowerBound : range[0],
+      upperBound: (this.props.count === this.props.hideValue
+        && prevState.upperBound > range[1]) ? prevState.upperBound : range[1],
+    }),
+    () => {
       if (this.props.onDrag) {
         this.props.onDrag(this.state.lowerBound, this.state.upperBound);
       }
-    });
+    },
+    );
   }
 
-  onAfterSliderChange(range) {
-    this.setState({ lowerBound: range[0], upperBound: range[1] }, () => {
-      if (this.props.onAfterDrag) {
-        this.props.onAfterDrag(this.state.lowerBound, this.state.upperBound);
-      }
-    });
+  onAfterSliderChange() {
+    this.setState({ isDragging: false });
+    if (this.props.onAfterDrag) {
+      this.props.onAfterDrag(this.state.lowerBound, this.state.upperBound);
+    }
   }
 
   getNumberToFixed(num) {
@@ -37,22 +45,26 @@ class RangeFilter extends React.Component {
   render() {
     const rangeMin = this.getNumberToFixed(this.props.min);
     const rangeMax = this.getNumberToFixed(this.props.max);
-    const lowerBound = this.getNumberToFixed(this.state.lowerBound);
-    const upperBound = this.getNumberToFixed(this.state.upperBound);
+    const lowerBound = this.state.isDragging ? this.state.lowerBound // eslint-disable-line
+      : (this.props.lowerBound ? this.props.lowerBound : this.state.lowerBound);
+    const upperBound = this.state.isDragging ? this.state.upperBound // eslint-disable-line
+      : (this.props.upperBound ? this.props.upperBound : this.state.upperBound);
+    const prettifiedLowerBound = this.getNumberToFixed(lowerBound);
+    const prettifiedUpperBound = this.getNumberToFixed(upperBound);
     return (
-      <div className='range-filter'>
-        <p className='range-filter__title'>{this.props.label}</p>
-        <div className='range-filter__bounds'>
-          <p className='range-filter__bound range-filter__bound--lower'>{lowerBound}</p>
-          <p className='range-filter__bound range-filter__bound--higher'>{upperBound}</p>
+      <div className='g3-range-filter'>
+        <p className='g3-range-filter__title'>{this.props.label}</p>
+        <div className='g3-range-filter__bounds'>
+          <p className='g3-range-filter__bound g3-range-filter__bound--lower'>{prettifiedLowerBound}</p>
+          <p className='g3-range-filter__bound g3-range-filter__bound--higher'>{prettifiedUpperBound}</p>
         </div>
         <Range
-          className='range-filter__slider'
+          className='g3-range-filter__slider'
           min={rangeMin}
           max={rangeMax}
-          value={[lowerBound, upperBound]}
+          value={[prettifiedLowerBound, prettifiedUpperBound]}
           onChange={e => this.onSliderChange(e)}
-          onAfterChange={e => this.onAfterSliderChange(e)}
+          onAfterChange={() => this.onAfterSliderChange()}
           step={this.props.rangeStep}
         />
       </div>
@@ -70,6 +82,8 @@ RangeFilter.propTypes = {
   upperBound: PropTypes.number,
   decimalDigitsLen: PropTypes.number,
   rangeStep: PropTypes.number,
+  hideValue: PropTypes.number,
+  count: PropTypes.number,
 };
 
 RangeFilter.defaultProps = {
@@ -79,6 +93,8 @@ RangeFilter.defaultProps = {
   onDrag: () => {},
   decimalDigitsLen: 2,
   rangeStep: 1,
+  hideValue: -1,
+  count: 0,
 };
 
 export default RangeFilter;
