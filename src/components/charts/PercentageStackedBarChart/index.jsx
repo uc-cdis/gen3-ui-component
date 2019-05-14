@@ -12,6 +12,13 @@ const getPercentageDataLabels = chartData => chartData.map(entry => entry.name);
 
 // FIXME: add back in animation (https://github.com/recharts/recharts/issues/1083)
 class PercentageStackedBarChart extends React.Component {
+  getItemColor(index) {
+    if (this.props.useCustomizedColorMap) {
+      return this.props.customizedColorMap[index % this.props.customizedColorMap.length];
+    }
+    return helper.getCategoryColor(index);
+  }
+
   render() {
     if (helper.shouldHideChart(this.props.data, this.props.lockValue)) {
       return (
@@ -45,7 +52,7 @@ class PercentageStackedBarChart extends React.Component {
                 dataKey={name}
                 stackId='a'
                 isAnimationActive={false}
-                fill={helper.getCategoryColor(index)}
+                fill={this.getItemColor(index)}
               >
                 <LabelList
                   dataKey={name}
@@ -66,7 +73,7 @@ class PercentageStackedBarChart extends React.Component {
                   <span
                     className='percentage-bar-chart__legend-color'
                     style={{
-                      background: helper.getCategoryColor(index),
+                      background: this.getItemColor(index),
                     }}
                   />
                   <span className='percentage-bar-chart__legend-name'>
@@ -98,6 +105,8 @@ PercentageStackedBarChart.propTypes = {
   labelListStyle: PropTypes.object,
   lockValue: PropTypes.number, // if one of the value is equal to `lockValue`, lock the chart
   lockMessage: PropTypes.string,
+  useCustomizedColorMap: PropTypes.bool,
+  customizedColorMap: PropTypes.arrayOf(PropTypes.string),
 };
 
 PercentageStackedBarChart.defaultProps = {
@@ -134,6 +143,8 @@ PercentageStackedBarChart.defaultProps = {
   },
   lockValue: -1,
   lockMessage: 'This chart is hidden because it contains fewer than 1000 subjects',
+  useCustomizedColorMap: false,
+  customizedColorMap: ['#3283c8'],
 };
 
 export default PercentageStackedBarChart;

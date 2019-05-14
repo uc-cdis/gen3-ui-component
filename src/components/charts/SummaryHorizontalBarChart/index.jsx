@@ -10,6 +10,16 @@ import './SummaryHorizontalBarChart.css';
 
 // FIXME: add back in animation (https://github.com/recharts/recharts/issues/1083)
 class SummaryBarChart extends React.Component {
+  getItemColor(index) {
+    if (this.props.color) {
+      return this.props.color;
+    }
+    if (this.props.useCustomizedColorMap) {
+      return this.props.customizedColorMap[index % this.props.customizedColorMap.length];
+    }
+    return helper.getCategoryColor(index);
+  }
+
   render() {
     const {
       barChartStyle,
@@ -72,8 +82,7 @@ class SummaryBarChart extends React.Component {
                           barChartData.map((entry, index) => (
                             <Cell
                               key={dataKey}
-                              fill={this.props.color
-                                || helper.getCategoryColor(index)}
+                              fill={this.getItemColor(index)}
                             />
                           ))
                         }
@@ -105,6 +114,8 @@ SummaryBarChart.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(ChartDataShape).isRequired,
   color: PropTypes.string,
+  useCustomizedColorMap: PropTypes.bool,
+  customizedColorMap: PropTypes.arrayOf(PropTypes.string),
   showPercentage: PropTypes.bool,
   percentageFixedPoint: PropTypes.number,
   xAxisStyle: PropTypes.object,
@@ -116,6 +127,8 @@ SummaryBarChart.propTypes = {
 
 SummaryBarChart.defaultProps = {
   color: undefined,
+  useCustomizedColorMap: false,
+  customizedColorMap: ['#3283c8'],
   showPercentage: true,
   percentageFixedPoint: 2,
   xAxisStyle: {
