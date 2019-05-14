@@ -11,11 +11,11 @@ import './SummaryHorizontalBarChart.css';
 // FIXME: add back in animation (https://github.com/recharts/recharts/issues/1083)
 class SummaryBarChart extends React.Component {
   getItemColor(index) {
-    if (this.props.color) {
-      return this.props.color;
-    }
     if (this.props.useCustomizedColorMap) {
       return this.props.customizedColorMap[index % this.props.customizedColorMap.length];
+    }
+    if (this.props.color) {
+      return this.props.color;
     }
     return helper.getCategoryColor(index);
   }
