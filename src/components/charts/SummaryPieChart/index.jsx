@@ -8,11 +8,18 @@ import helper from '../helper';
 import './SummaryPieChart.css';
 
 class SummaryPieChart extends React.Component {
-  render() {
+  getItemColor(index) {
     const useTwoColors = this.props.data.length === 2;
-    const getColor = useTwoColors
-      ? helper.getCategoryColorFrom2Colors
-      : helper.getCategoryColor;
+    if (useTwoColors) {
+      return helper.getCategoryColorFrom2Colors(index);
+    }
+    if (this.props.useCustomizedColorMap) {
+      return this.props.customizedColorMap[index % this.props.customizedColorMap.length];
+    }
+    return helper.getCategoryColor(index);
+  }
+
+  render() {
     const pieChartData = helper.calculateChartData(
       this.props.data,
       this.props.showPercentage,
@@ -63,7 +70,7 @@ class SummaryPieChart extends React.Component {
                         <Cell
                           key={dataKey}
                           dataKey={dataKey}
-                          fill={getColor(index)}
+                          fill={this.getItemColor(index)}
                         />
                       ))
                     }
@@ -93,6 +100,8 @@ SummaryPieChart.propTypes = {
   pieChartStyle: PropTypes.object,
   lockValue: PropTypes.number, // if one of the value is equal to `lockValue`, lock the chart
   lockMessage: PropTypes.string,
+  useCustomizedColorMap: PropTypes.bool,
+  customizedColorMap: PropTypes.arrayOf(PropTypes.string),
 };
 
 SummaryPieChart.defaultProps = {
@@ -109,6 +118,8 @@ SummaryPieChart.defaultProps = {
   },
   lockValue: -1,
   lockMessage: 'This chart is hidden because it contains fewer than 1000 subjects',
+  useCustomizedColorMap: false,
+  customizedColorMap: ['#3283c8'],
 };
 
 export default SummaryPieChart;

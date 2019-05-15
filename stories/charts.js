@@ -68,6 +68,18 @@ const lockedSummaries = [
   { type: 'bar', title: 'Virus', data: lockedVirus },
 ];
 
+const customizedColorMap = [
+  '#c02f42',
+  '#175676',
+  '#59CD90',
+  '#F2DC5D',
+  '#40476D',
+  '#FFA630',
+  '#AE8799',
+  '#1A535C',
+  '#462255',
+];
+
 storiesOf('Chart', module)
   .add('SummaryHorizontalBarChart', () => (
     <SummaryHorizontalBarChart data={virusData} title='bar chart title' showPercentage={false} />
@@ -75,8 +87,14 @@ storiesOf('Chart', module)
   .add('SummaryHorizontalBarChart with single color and percentage', () => (
     <SummaryHorizontalBarChart data={virusData} title='bar chart title' color='#3283c8' />
   ))
+  .add('SummaryHorizontalBarChart with customized colors', () => (
+    <SummaryHorizontalBarChart data={virusData} title='bar chart title' showPercentage={false} useCustomizedColorMap customizedColorMap={customizedColorMap} />
+  ))
   .add('SummaryPieChart', () => (
     <SummaryPieChart data={virusData} title='pie chart title' showPercentage />
+  ))
+  .add('SummaryPieChart with customized colors', () => (
+    <SummaryPieChart data={virusData} title='pie chart title' showPercentage useCustomizedColorMap customizedColorMap={customizedColorMap} />
   ))
   .add('SummaryChartGroup', () => (
     <SummaryChartGroup summaries={summaries} width={1010} />
@@ -86,6 +104,9 @@ storiesOf('Chart', module)
   ))
   .add('PercentageStackedBarChart', () => (
     <PercentageStackedBarChart data={virusData} />
+  ))
+  .add('PercentageStackedBarChart with customized colors', () => (
+    <PercentageStackedBarChart data={virusData} useCustomizedColorMap customizedColorMap={customizedColorMap} />
   ))
   .add('PercentageStackedBarChart Locked', () => (
     <PercentageStackedBarChart data={lockedVirus} />

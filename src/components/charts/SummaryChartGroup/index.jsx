@@ -24,15 +24,20 @@ class SummaryChartGroup extends Component {
                       title={item.title}
                       lockValue={this.props.lockValue}
                       lockMessage={this.props.lockMessage}
+                      useCustomizedColorMap={this.props.useCustomizedColorMap}
+                      customizedColorMap={this.props.customizedColorMap}
                     />
                   ) : (
                     <SummaryHorizontalBarChart
                       data={item.data}
                       title={item.title}
                       vertical
-                      color={this.props.barChartColor}
+                      color={this.props.useCustomizedColorMap ? undefined
+                        : this.props.barChartColor}
                       lockValue={this.props.lockValue}
                       lockMessage={this.props.lockMessage}
+                      useCustomizedColorMap={this.props.useCustomizedColorMap}
+                      customizedColorMap={this.props.customizedColorMap}
                     />
                   )
               }
@@ -50,6 +55,8 @@ SummaryChartGroup.propTypes = {
   barChartColor: PropTypes.string,
   lockValue: PropTypes.number, // if one of the value is equal to `lockValue`, lock the chart
   lockMessage: PropTypes.string,
+  useCustomizedColorMap: PropTypes.bool,
+  customizedColorMap: PropTypes.arrayOf(PropTypes.string),
 };
 
 SummaryChartGroup.defaultProps = {
@@ -57,6 +64,8 @@ SummaryChartGroup.defaultProps = {
   barChartColor: '#3283c8',
   lockValue: -1,
   lockMessage: 'This chart is hidden because it contains fewer than 1000 subjects',
+  useCustomizedColorMap: false,
+  customizedColorMap: ['#3283c8'],
 };
 
 export default SummaryChartGroup;
