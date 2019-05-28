@@ -65,7 +65,7 @@ class SummaryPieChart extends React.Component {
                           </div>
                         );
                       }
-                      return (<React.Fragment />);
+                      return (<React.Fragment key={'text'.concat(entry.name)} />);
                     })
                   }
                   {

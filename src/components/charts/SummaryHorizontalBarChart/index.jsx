@@ -64,7 +64,7 @@ class SummaryBarChart extends React.Component {
                         </div>
                       );
                     }
-                    return (<React.Fragment />);
+                    return (<React.Fragment key={item.name} />);
                   })
                 }
                 {

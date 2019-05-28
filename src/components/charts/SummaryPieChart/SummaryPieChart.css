@@ -52,5 +52,6 @@
 }
 
 .summary-pie-chart__toggle {
-  float: right;
+  text-align: right;
+  font-size: 14px;
 }
