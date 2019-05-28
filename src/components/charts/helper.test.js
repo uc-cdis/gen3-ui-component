@@ -16,14 +16,23 @@ describe('helper', () => {
   ];
 
   it('calculate chart data', () => {
-    expect(helper.calculateChartData(chartData, true, 0)).toEqual([
-      { percentage: 20, name: 'H1N1', value: 4000 },
-      { percentage: 15, name: 'VN1203', value: 3000 },
-      { percentage: 10, name: 'HIV', value: 2000 },
-      { percentage: 5, name: 'HuCoV_EMC', value: 1000 },
-      { percentage: 50, name: 'SARS_CoV', value: 10000 },
+    expect(helper.calculateChartData(chartData, 0)).toEqual([
+      {
+        percentage: 20, name: 'H1N1', value: 4000, widthPercentage: 40,
+      },
+      {
+        percentage: 15, name: 'VN1203', value: 3000, widthPercentage: 30,
+      },
+      {
+        percentage: 10, name: 'HIV', value: 2000, widthPercentage: 20,
+      },
+      {
+        percentage: 5, name: 'HuCoV_EMC', value: 1000, widthPercentage: 10,
+      },
+      {
+        percentage: 50, name: 'SARS_CoV', value: 10000, widthPercentage: 100,
+      },
     ]);
-    expect(helper.calculateChartData(chartData, false, 0)).toEqual(chartData);
     expect(helper.getPercentageData(chartData, 0)).toEqual([{
       H1N1: 20,
       VN1203: 15,

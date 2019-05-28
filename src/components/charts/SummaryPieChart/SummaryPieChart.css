@@ -50,3 +50,7 @@
 #recharts_measurement_span {
   display: none;
 }
+
+.summary-pie-chart__toggle {
+  float: right;
+}

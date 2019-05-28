@@ -8,6 +8,13 @@ import helper from '../helper';
 import './SummaryPieChart.css';
 
 class SummaryPieChart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMore: false,
+    };
+  }
+
   getItemColor(index) {
     const useTwoColors = this.props.data.length === 2;
     if (useTwoColors) {
@@ -17,6 +24,10 @@ class SummaryPieChart extends React.Component {
       return this.props.customizedColorMap[index % this.props.customizedColorMap.length];
     }
     return helper.getCategoryColor(index);
+  }
+
+  toggle() {
+    this.setState(prevState => ({ showMore: !prevState.showMore }));
   }
 
   render() {
@@ -38,18 +49,53 @@ class SummaryPieChart extends React.Component {
               <div className='summary-pie-chart__body'>
                 <div className='summary-pie-chart__legend'>
                   {
-                    pieChartData.map(entry => (
-                      <div className='summary-pie-chart__legend-item' key={'text'.concat(entry.name)}>
-                        <div className='summary-pie-chart__legend-item-name'>
-                          {entry.name}
-                        </div>
-                        <div className='summary-pie-chart__legend-item-value form-special-number'>
-                          {
-                            helper.percentageFormatter(this.props.showPercentage)(entry[dataKey])
-                          }
-                        </div>
-                      </div>
-                    ))
+                    pieChartData.map((entry, index) => {
+                      if (this.state.showMore || index < this.props.maximumDisplayItem) {
+                        return (
+                          <div className='summary-pie-chart__legend-item' key={'text'.concat(entry.name)}>
+                            <div className='summary-pie-chart__legend-item-name'>
+                              {entry.name}
+                            </div>
+                            <div className='summary-pie-chart__legend-item-value form-special-number'>
+                              {
+                                helper
+                                  .percentageFormatter(this.props.showPercentage)(entry[dataKey])
+                              }
+                            </div>
+                          </div>
+                        );
+                      }
+                      return (<React.Fragment />);
+                    })
+                  }
+                  {
+                    pieChartData.length > this.props.maximumDisplayItem ? (
+                      <React.Fragment>
+                        {
+                          this.state.showMore ? (
+                            <div
+                              className='summary-pie-chart__toggle g3-link'
+                              onClick={() => this.toggle()}
+                              onKeyPress={() => this.toggle()}
+                              role='button'
+                              tabIndex={0}
+                            >
+                              <span>Show less</span>
+                            </div>
+                          ) : (
+                            <div
+                              className='summary-pie-chart__toggle g3-link'
+                              onClick={() => this.toggle()}
+                              onKeyPress={() => this.toggle()}
+                              role='button'
+                              tabIndex={0}
+                            >
+                              {`And ${pieChartData.length - this.props.maximumDisplayItem} more`}
+                            </div>
+                          )
+                        }
+                      </React.Fragment>
+                    ) : (<React.Fragment />)
                   }
                 </div>
                 <PieChart
@@ -102,6 +148,7 @@ SummaryPieChart.propTypes = {
   lockMessage: PropTypes.string,
   useCustomizedColorMap: PropTypes.bool,
   customizedColorMap: PropTypes.arrayOf(PropTypes.string),
+  maximumDisplayItem: PropTypes.number,
 };
 
 SummaryPieChart.defaultProps = {
@@ -120,6 +167,7 @@ SummaryPieChart.defaultProps = {
   lockMessage: 'This chart is hidden because it contains fewer than 1000 subjects',
   useCustomizedColorMap: false,
   customizedColorMap: ['#3283c8'],
+  maximumDisplayItem: 15,
 };
 
 export default SummaryPieChart;
