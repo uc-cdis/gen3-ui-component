@@ -99,6 +99,9 @@ storiesOf('Chart', module)
   .add('SummaryChartGroup', () => (
     <SummaryChartGroup summaries={summaries} width={1010} />
   ))
+  .add('SummaryChartGroup with only showing 2 at first', () => (
+    <SummaryChartGroup summaries={summaries} width={1010} maximumDisplayItem={2} />
+  ))
   .add('SummaryChartGroup with a Locked Chart', () => (
     <SummaryChartGroup summaries={lockedSummaries} width={1010} lockValue={-1} lockMessage='This chart is locked!' />
   ))

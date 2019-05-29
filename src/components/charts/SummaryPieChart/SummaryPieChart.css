@@ -50,3 +50,8 @@
 #recharts_measurement_span {
   display: none;
 }
+
+.summary-pie-chart__toggle {
+  text-align: right;
+  font-size: 14px;
+}
