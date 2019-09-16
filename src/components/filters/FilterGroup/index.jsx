@@ -5,7 +5,7 @@ import './FilterGroup.css';
 const removeEmptyFilter = (filterResults) => {
   const newFilterResults = {};
   Object.keys(filterResults).forEach((field) => {
-    if (filterResults[field].lowerBound
+    if (typeof filterResults[field].lowerBound !== 'undefined'
       || (filterResults[field].selectedValues
         && filterResults[field].selectedValues.length > 0)) {
       newFilterResults[field] = filterResults[field];
