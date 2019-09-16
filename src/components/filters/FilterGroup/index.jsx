@@ -4,13 +4,15 @@ import './FilterGroup.css';
 
 const removeEmptyFilter = (filterResults) => {
   const newFilterResults = {};
+  console.log('in gen3-ui-component removeEmptyFilter with ', filterResults);
   Object.keys(filterResults).forEach((field) => {
-    if (filterResults[field].lowerBound
+    if (typeof filterResults[field].lowerBound !== 'undefined'
       || (filterResults[field].selectedValues
         && filterResults[field].selectedValues.length > 0)) {
       newFilterResults[field] = filterResults[field];
     }
   });
+  console.log('gen3-ui-component returning ', newFilterResults);
   return newFilterResults;
 };
 
