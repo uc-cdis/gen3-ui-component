@@ -8,6 +8,7 @@
 .g3-filter-group__tabs {
   display: flex;
   font-size: 14px;
+  flex-wrap: wrap-reverse;
 }
 
 .g3-filter-group__tab {

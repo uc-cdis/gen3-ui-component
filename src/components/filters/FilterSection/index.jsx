@@ -125,6 +125,7 @@ class FilterSection extends React.Component {
                       hideZero={this.props.hideZero}
                       accessible={option.accessible}
                       tierAccessLimit={this.props.tierAccessLimit}
+                      disabled={option.disabled}
                     />
                   );
                 }
@@ -164,6 +165,7 @@ FilterSection.propTypes = {
 
     // for single select filter
     accessible: PropTypes.bool,
+    disabled: PropTypes.bool,
 
     // for range filter
     min: PropTypes.number,

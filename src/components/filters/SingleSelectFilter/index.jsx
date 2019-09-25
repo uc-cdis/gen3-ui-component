@@ -21,10 +21,9 @@ class SingleSelectFilter extends React.Component {
     }
     // Takes in parent component's selected or self state's selected
     const selected = (typeof this.props.selected === 'undefined') ? this.state.selected : this.props.selected;
-    let inputDisabled = false;
+    let inputDisabled = this.props.disabled;
     let lockIconComponent = <React.Fragment />;
     let countIconComponent = <React.Fragment />;
-
 
     if (!this.props.accessible) {
       lockIconComponent = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__gray' />;
@@ -92,6 +91,7 @@ SingleSelectFilter.propTypes = {
   hideValue: PropTypes.number,
   tierAccessLimit: PropTypes.number,
   accessible: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 SingleSelectFilter.defaultProps = {
@@ -101,6 +101,7 @@ SingleSelectFilter.defaultProps = {
   hideValue: -1,
   tierAccessLimit: undefined,
   accessible: true,
+  disabled: false,
 };
 
 export default SingleSelectFilter;
