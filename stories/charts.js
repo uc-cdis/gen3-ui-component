@@ -68,6 +68,14 @@ const lockedSummaries = [
   { type: 'bar', title: 'Virus', data: lockedVirus },
 ];
 
+const summariesWithOneEmpty = [
+  { type: 'bar', title: 'Gender', data: genderData, chartIsEmpty: true },
+  { type: 'pie', title: 'Birth-Year', data: lockedBirth },
+  { type: 'pie', title: 'Species', data: speciesData },
+  { type: 'bar', title: 'Race', data: raceData },
+  { type: 'bar', title: 'Virus', data: virusData },
+];
+
 const customizedColorMap = [
   '#c02f42',
   '#175676',
@@ -105,11 +113,18 @@ storiesOf('Chart', module)
   .add('SummaryChartGroup with a Locked Chart', () => (
     <SummaryChartGroup summaries={lockedSummaries} width={1010} lockValue={-1} lockMessage='This chart is locked!' />
   ))
+  .add('SummaryChartGroup with an Empty Chart', () => (
+    <SummaryChartGroup summaries={summariesWithOneEmpty} width={1010} chartEmptyMessage='This chart is empty!' />
+  ))
   .add('PercentageStackedBarChart', () => (
     <PercentageStackedBarChart data={virusData} />
   ))
   .add('PercentageStackedBarChart with customized colors', () => (
-    <PercentageStackedBarChart data={virusData} useCustomizedColorMap customizedColorMap={customizedColorMap} />
+    <PercentageStackedBarChart
+      data={virusData}
+      useCustomizedColorMap
+      customizedColorMap={customizedColorMap}
+    />
   ))
   .add('PercentageStackedBarChart Locked', () => (
     <PercentageStackedBarChart data={lockedVirus} />

@@ -302,3 +302,7 @@
 .g3-icon--under {
   mask-image: svg-load(../images/icons/under.svg);
 }
+
+.g3-icon--not-apply {
+  mask-image: svg-load(../images/icons/na.svg);
+}
