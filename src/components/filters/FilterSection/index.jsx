@@ -75,14 +75,14 @@ class FilterSection extends React.Component {
     this.props.onSelect(label);
   }
 
-  handleDragRangeFilter(lowerBound, upperBound) {
+  handleDragRangeFilter(lowerBound, upperBound, minValue, maxValue, rangeStep) {
     this.setState(() => {
       const newFilterStatus = [lowerBound, upperBound];
       return {
         filterStatus: newFilterStatus,
       };
     });
-    this.props.onAfterDrag(lowerBound, upperBound);
+    this.props.onAfterDrag(lowerBound, upperBound, minValue, maxValue, rangeStep);
   }
 
   toggleShowMore() {
@@ -141,7 +141,8 @@ class FilterSection extends React.Component {
                     label={option.text}
                     min={option.min}
                     max={option.max}
-                    onAfterDrag={(lb, ub) => this.handleDragRangeFilter(lb, ub)}
+                    onAfterDrag={(lb, ub, min, max, step) => this.handleDragRangeFilter(
+                      lb, ub, min, max, step)}
                     lowerBound={lowerBound}
                     upperBound={upperBound}
                     count={option.count}
@@ -170,6 +171,7 @@ FilterSection.propTypes = {
     // for range filter
     min: PropTypes.number,
     max: PropTypes.number,
+    rangeStep: PropTypes.number, // by default 1
 
   })),
   onSelect: PropTypes.func.isRequired,

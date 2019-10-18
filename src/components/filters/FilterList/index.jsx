@@ -38,7 +38,7 @@ class FilterList extends React.Component {
     this.props.onSelect(sectionIndex, singleFilterLabel);
   }
 
-  handleDragRangeFilter(sectionIndex, lowerBound, upperBound) {
+  handleDragRangeFilter(sectionIndex, lowerBound, upperBound, minValue, maxValue, rangeStep) {
     this.setState((prevState) => {
       const newFilterStatus = prevState.filterStatus.slice(0);
       newFilterStatus[sectionIndex] = [lowerBound, upperBound];
@@ -46,7 +46,7 @@ class FilterList extends React.Component {
         filterStatus: newFilterStatus,
       };
     });
-    this.props.onAfterDrag(sectionIndex, lowerBound, upperBound);
+    this.props.onAfterDrag(sectionIndex, lowerBound, upperBound, minValue, maxValue, rangeStep);
   }
 
   toggleFilters(openAll) {
@@ -79,14 +79,7 @@ class FilterList extends React.Component {
                 )
               }
               onAfterDrag={
-                (
-                  lowerBound,
-                  upperBound,
-                ) => this.handleDragRangeFilter(
-                  index,
-                  lowerBound,
-                  upperBound,
-                )
+                (...args) => this.handleDragRangeFilter(index, ...args)
               }
               hideZero={this.props.hideZero}
               tierAccessLimit={this.props.tierAccessLimit}
