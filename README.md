@@ -1,4 +1,5 @@
 # Gen3 UI Component Library
+[![npm (scoped)](https://img.shields.io/npm/v/@gen3/ui-component?color=green&style=flat-square)](https://www.npmjs.com/package/@gen3/ui-component)
 
 UI library for Gen3 apps
 
