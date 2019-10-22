@@ -33,7 +33,13 @@ class RangeFilter extends React.Component {
   onAfterSliderChange() {
     this.setState({ isDragging: false });
     if (this.props.onAfterDrag) {
-      this.props.onAfterDrag(this.state.lowerBound, this.state.upperBound);
+      this.props.onAfterDrag(
+        this.state.lowerBound,
+        this.state.upperBound,
+        this.props.min,
+        this.props.max,
+        this.props.rangeStep,
+      );
     }
   }
 

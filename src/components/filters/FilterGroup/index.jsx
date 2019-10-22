@@ -121,7 +121,7 @@ class FilterGroup extends React.Component {
     });
   }
 
-  handleDrag(sectionIndex, lowerBound, upperBound) {
+  handleDrag(sectionIndex, lowerBound, upperBound, minValue, maxValue, rangeStep = 1) {
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
@@ -131,6 +131,13 @@ class FilterGroup extends React.Component {
       let newFilterResults = prevState.filterResults;
       const field = this.props.filterConfig.tabs[prevState.selectedTabIndex].fields[sectionIndex];
       newFilterResults[field] = { lowerBound, upperBound };
+
+      // if lowerbound and upperbound values are min and max,
+      // remove this range from filter
+      const jsEqual = (a, b) => (Math.abs(a - b) < rangeStep);
+      if (jsEqual(lowerBound, minValue) && jsEqual(upperBound, maxValue)) {
+        delete newFilterResults[field];
+      }
 
       newFilterResults = removeEmptyFilter(newFilterResults);
       return {
