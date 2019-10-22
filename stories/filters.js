@@ -40,10 +40,21 @@ const raceOptions = [
 ];
 
 const ethnicityOptions = [
-  { text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: true },
-  { text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: false },
-  { text: 'Unknown', filterType: 'singleSelect', count: 123, accessible: true },
-  { text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true },
+  {
+    text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: true,
+  },
+  {
+    text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: false,
+  },
+  {
+    text: 'Unknown', filterType: 'singleSelect', count: 123, accessible: true,
+  },
+  {
+    text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true,
+  },
+  {
+    text: 'Test Value', filterType: 'singleSelect', count: -1, accessible: false,
+  },
 ];
 
 const ageOptions = [

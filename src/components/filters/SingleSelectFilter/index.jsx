@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Tooltip from 'rc-tooltip';
 import './SingleSelectFilter.css';
 
 class SingleSelectFilter extends React.Component {
@@ -45,7 +46,20 @@ class SingleSelectFilter extends React.Component {
       countIconComponent = <span className='g3-badge g3-single-select-filter__count'>{this.props.count}</span>;
     }
 
-    return (
+    const showToolTip = inputDisabled || !this.props.accessible;
+    const newLineComponent = (inputDisabled && !this.props.accessible)
+      ? <br /> : <React.Fragment />;
+    const lockTooltipComponent = (!this.props.accessible) ? <span>{'Access to this resource is limited because you don\'t have permission'}</span> : <React.Fragment />;
+    const disabledTooltipComponent = (inputDisabled) ? <span>{'Access to this resource is disabled because you don\'t have permission and it\'s total count is less than the access limit value'}</span> : <React.Fragment />;
+    const tooltipOverlayComponent = (
+      <div>
+        {lockTooltipComponent}
+        {newLineComponent}
+        {disabledTooltipComponent}
+      </div>
+    );
+
+    const singleSelectFilter = (
       <div className='g3-single-select-filter'>
         <input
           className='g3-single-select-filter__checkbox'
@@ -78,6 +92,22 @@ class SingleSelectFilter extends React.Component {
         { countIconComponent }
         { lockIconComponent }
       </div>
+    );
+
+    return (
+      <React.Fragment>
+        {
+          showToolTip ? (
+            <Tooltip
+              placement='top'
+              overlay={tooltipOverlayComponent}
+              arrowContent={<div className='rc-tooltip-arrow-inner' />}
+            >
+              {singleSelectFilter}
+            </Tooltip>
+          ) : singleSelectFilter
+        }
+      </React.Fragment>
     );
   }
 }
