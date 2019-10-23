@@ -80,20 +80,20 @@ const fileSections = [
 ];
 
 const projectSectionsWithTooltips = [
-  { title: 'Project', options: projectOptions, tooltip: 'Project' },
-  { title: 'Study', options: studyOptions, tooltip: 'Study' },
+  { title: 'Project', options: projectOptions, tooltip: 'Project name' },
+  { title: 'Study', options: studyOptions, tooltip: 'Study name' },
 ];
 
 const subjectSectionsWithTooltips = [
-  { title: 'Gender', options: genderOptions, tooltip: 'Gender' },
-  { title: 'Race', options: raceOptions, tooltip: 'Race' },
-  { title: 'Ethnicity', options: ethnicityOptions, tooltip: 'Ethnicity' },
-  { title: 'Age', options: ageOptions, tooltip: 'Age' },
+  { title: 'Gender', options: genderOptions, tooltip: 'Gender of subject' },
+  { title: 'Race', options: raceOptions, tooltip: 'Race of subject' },
+  { title: 'Ethnicity', options: ethnicityOptions, tooltip: 'Ethnicity of subject' },
+  { title: 'Age', options: ageOptions, tooltip: 'Age at visit' },
 ];
 
 const fileSectionsWithTooltips = [
-  { title: 'File Types', options: fileTypeOptions, tooltip: 'File' },
-  { title: 'File Counts', options: fileCountOptions, tooltip: 'File' },
+  { title: 'File Types', options: fileTypeOptions, tooltip: 'File type of the data' },
+  { title: 'File Counts', options: fileCountOptions, tooltip: 'File counts of the subjects' },
 ];
 
 const tabs = [
