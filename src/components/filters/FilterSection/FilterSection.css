@@ -47,11 +47,14 @@
   text-align: right;
 }
 
-/* override tooltip component style */
-.__react_component_tooltip.type-light.border.g3-filter-section__tooltip {
+.g3-filter-section__tooltip .rc-tooltip-inner {
+  min-height: unset;
   border: 1px solid var(--g3-color__silver);
+  border-radius: 4px;
 }
 
-.__react_component_tooltip.type-light.border.g3-filter-section__tooltip::before {
-  border-top: 8px solid var(--g3-color__silver);
+.g3-filter-section .rc-tooltip-placement-top .rc-tooltip-arrow,
+.g3-filter-section .rc-tooltip-placement-topLeft .rc-tooltip-arrow,
+.g3-filter-section .rc-tooltip-placement-topRight .rc-tooltip-arrow {
+  border-top-color: var(--g3-color__silver);
 }

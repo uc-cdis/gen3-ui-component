@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactTooltip from 'react-tooltip';
+import Tooltip from 'rc-tooltip';
 import SingleSelectFilter from '../SingleSelectFilter';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
@@ -101,22 +101,25 @@ class FilterSection extends React.Component {
     }
     return (
       <div className='g3-filter-section'>
-        <div
-          className='g3-filter-section__header'
-          onClick={() => this.toggleSection()}
-          onKeyPress={() => this.toggleSection()}
-          tabIndex={0}
-          role='button'
-          {...tooltipConf}
+        <Tooltip
+          placement='topLeft'
+          overlay={(<span>{this.props.tooltip}</span>)}
+          arrowContent={<div className='rc-tooltip-arrow-inner' />}
+          overlayClassName='g3-filter-section__tooltip'
         >
-          <p className='g3-filter-section__title'>{this.props.title}</p>
-          <i
-            className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
-          />
-        </div>
-        <ReactTooltip className='g3-filter-section__tooltip' id={this.props.title} type='light' place='top' border>
-          <span>{this.props.tooltip}</span>
-        </ReactTooltip>
+          <div
+            className='g3-filter-section__header'
+            onClick={() => this.toggleSection()}
+            onKeyPress={() => this.toggleSection()}
+            tabIndex={0}
+            role='button'
+          >
+            <p className='g3-filter-section__title'>{this.props.title}</p>
+            <i
+              className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
+            />
+          </div>
+        </Tooltip>
         <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
