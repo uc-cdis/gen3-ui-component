@@ -46,3 +46,12 @@
   margin-top: 15px;
   text-align: right;
 }
+
+/* override tooltip component style */
+.__react_component_tooltip.type-light.border.g3-filter-section__tooltip {
+  border: 1px solid var(--g3-color__silver);
+}
+
+.__react_component_tooltip.type-light.border.g3-filter-section__tooltip::before {
+  border-top: 8px solid var(--g3-color__silver);
+}

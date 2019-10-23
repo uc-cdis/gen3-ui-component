@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 import SingleSelectFilter from '../SingleSelectFilter';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
@@ -93,6 +94,11 @@ class FilterSection extends React.Component {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
+    const tooltipConf = {};
+    if (this.props.tooltip) {
+      tooltipConf['data-tip'] = true;
+      tooltipConf['data-for'] = this.props.tooltip;
+    }
     return (
       <div className='g3-filter-section'>
         <div
@@ -101,12 +107,16 @@ class FilterSection extends React.Component {
           onKeyPress={() => this.toggleSection()}
           tabIndex={0}
           role='button'
+          {...tooltipConf}
         >
           <p className='g3-filter-section__title'>{this.props.title}</p>
           <i
             className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
           />
         </div>
+        <ReactTooltip className='g3-filter-section__tooltip' id={this.props.title} type='light' place='top' border>
+          <span>{this.props.tooltip}</span>
+        </ReactTooltip>
         <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
@@ -159,6 +169,7 @@ class FilterSection extends React.Component {
 
 FilterSection.propTypes = {
   title: PropTypes.string,
+  tooltip: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.shape({
     filterType: PropTypes.oneOf(['singleSelect', 'range']).isRequired,
     text: PropTypes.string,
@@ -189,6 +200,7 @@ FilterSection.propTypes = {
 
 FilterSection.defaultProps = {
   title: '',
+  tooltip: null,
   options: [],
   expanded: true,
   onToggle: () => {},

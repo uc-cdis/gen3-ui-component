@@ -68,6 +68,7 @@ class FilterList extends React.Component {
               key={index}
               ref={this.sectionRefs[index]}
               title={section.title}
+              tooltip={section.tooltip}
               options={section.options}
               expanded={this.props.expandedStatus[index]}
               onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
@@ -94,6 +95,7 @@ class FilterList extends React.Component {
 FilterList.propTypes = {
   sections: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
+    tooltip: PropTypes.string,
     options: PropTypes.arrayOf(PropTypes.shape({
       text: PropTypes.string,
       filterType: PropTypes.oneOf(['singleSelect', 'range']),
