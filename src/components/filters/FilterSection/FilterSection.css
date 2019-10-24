@@ -46,3 +46,15 @@
   margin-top: 15px;
   text-align: right;
 }
+
+.g3-filter-section__tooltip .rc-tooltip-inner {
+  min-height: unset;
+  border: 1px solid var(--g3-color__silver);
+  border-radius: 4px;
+}
+
+.g3-filter-section .rc-tooltip-placement-top .rc-tooltip-arrow,
+.g3-filter-section .rc-tooltip-placement-topLeft .rc-tooltip-arrow,
+.g3-filter-section .rc-tooltip-placement-topRight .rc-tooltip-arrow {
+  border-top-color: var(--g3-color__silver);
+}
