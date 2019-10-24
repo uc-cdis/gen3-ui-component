@@ -94,11 +94,6 @@ class FilterSection extends React.Component {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
-    const tooltipConf = {};
-    if (this.props.tooltip) {
-      tooltipConf['data-tip'] = true;
-      tooltipConf['data-for'] = this.props.tooltip;
-    }
     const sectionHeader = (
       <div
         className='g3-filter-section__header'
