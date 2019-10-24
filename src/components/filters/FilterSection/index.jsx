@@ -99,27 +99,34 @@ class FilterSection extends React.Component {
       tooltipConf['data-tip'] = true;
       tooltipConf['data-for'] = this.props.tooltip;
     }
+    const sectionHeader = (
+      <div
+        className='g3-filter-section__header'
+        onClick={() => this.toggleSection()}
+        onKeyPress={() => this.toggleSection()}
+        tabIndex={0}
+        role='button'
+      >
+        <p className='g3-filter-section__title'>{this.props.title}</p>
+        <i
+          className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
+        />
+      </div>
+    );
     return (
       <div className='g3-filter-section'>
-        <Tooltip
-          placement='topLeft'
-          overlay={(<span>{this.props.tooltip}</span>)}
-          arrowContent={<div className='rc-tooltip-arrow-inner' />}
-          overlayClassName='g3-filter-section__tooltip'
-        >
-          <div
-            className='g3-filter-section__header'
-            onClick={() => this.toggleSection()}
-            onKeyPress={() => this.toggleSection()}
-            tabIndex={0}
-            role='button'
-          >
-            <p className='g3-filter-section__title'>{this.props.title}</p>
-            <i
-              className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
-            />
-          </div>
-        </Tooltip>
+        {
+          this.props.tooltip ? (
+            <Tooltip
+              placement='topLeft'
+              overlay={(<span>{this.props.tooltip}</span>)}
+              arrowContent={<div className='rc-tooltip-arrow-inner' />}
+              overlayClassName='g3-filter-section__tooltip'
+            >
+              {sectionHeader}
+            </Tooltip>
+          ) : sectionHeader
+        }
         <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
