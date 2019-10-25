@@ -43,7 +43,7 @@
 
 .summary-pie-chart__legend-item-name {
   white-space: nowrap;
-  overflow-x: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
