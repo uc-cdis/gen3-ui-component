@@ -21,7 +21,7 @@
 
 .summary-horizontal-bar-chart__item-label {
   white-space: nowrap;
-  overflow-x: hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   font-size: 14px;
   font-weight: normal;
