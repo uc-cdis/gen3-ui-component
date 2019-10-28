@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Tooltip from 'rc-tooltip';
 import SingleSelectFilter from '../SingleSelectFilter';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
@@ -93,20 +94,34 @@ class FilterSection extends React.Component {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
+    const sectionHeader = (
+      <div
+        className='g3-filter-section__header'
+        onClick={() => this.toggleSection()}
+        onKeyPress={() => this.toggleSection()}
+        tabIndex={0}
+        role='button'
+      >
+        <p className='g3-filter-section__title'>{this.props.title}</p>
+        <i
+          className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
+        />
+      </div>
+    );
     return (
       <div className='g3-filter-section'>
-        <div
-          className='g3-filter-section__header'
-          onClick={() => this.toggleSection()}
-          onKeyPress={() => this.toggleSection()}
-          tabIndex={0}
-          role='button'
-        >
-          <p className='g3-filter-section__title'>{this.props.title}</p>
-          <i
-            className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
-          />
-        </div>
+        {
+          this.props.tooltip ? (
+            <Tooltip
+              placement='topLeft'
+              overlay={(<span>{this.props.tooltip}</span>)}
+              arrowContent={<div className='rc-tooltip-arrow-inner' />}
+              overlayClassName='g3-filter-section__tooltip'
+            >
+              {sectionHeader}
+            </Tooltip>
+          ) : sectionHeader
+        }
         <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
@@ -159,6 +174,7 @@ class FilterSection extends React.Component {
 
 FilterSection.propTypes = {
   title: PropTypes.string,
+  tooltip: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.shape({
     filterType: PropTypes.oneOf(['singleSelect', 'range']).isRequired,
     text: PropTypes.string,
@@ -189,6 +205,7 @@ FilterSection.propTypes = {
 
 FilterSection.defaultProps = {
   title: '',
+  tooltip: null,
   options: [],
   expanded: true,
   onToggle: () => {},

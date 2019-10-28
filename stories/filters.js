@@ -90,10 +90,33 @@ const fileSections = [
   { title: 'File Counts', options: fileCountOptions },
 ];
 
+const projectSectionsWithTooltips = [
+  { title: 'Project', options: projectOptions, tooltip: 'Project name' },
+  { title: 'Study', options: studyOptions, tooltip: 'Study name' },
+];
+
+const subjectSectionsWithTooltips = [
+  { title: 'Gender', options: genderOptions, tooltip: 'Gender of subject' },
+  { title: 'Race', options: raceOptions, tooltip: 'Race of subject' },
+  { title: 'Ethnicity', options: ethnicityOptions, tooltip: 'Ethnicity of subject' },
+  { title: 'Age', options: ageOptions, tooltip: 'Age at visit' },
+];
+
+const fileSectionsWithTooltips = [
+  { title: 'File Types', options: fileTypeOptions, tooltip: 'File type of the data' },
+  { title: 'File Counts', options: fileCountOptions, tooltip: 'File counts of the subjects' },
+];
+
 const tabs = [
   <FilterList key={0} sections={projectSections} />,
   <FilterList key={1} sections={subjectSections} />,
   <FilterList key={2} sections={fileSections} />,
+];
+
+const tabsWithTooltips = [
+  <FilterList key={0} sections={projectSectionsWithTooltips} />,
+  <FilterList key={1} sections={subjectSectionsWithTooltips} />,
+  <FilterList key={2} sections={fileSectionsWithTooltips} />,
 ];
 
 const filterConfig = {
@@ -202,4 +225,11 @@ storiesOf('Filters', module)
   ))
   .add('FilterGroup that could be reset', () => (
     <ExampleFilterGroup />
+  ))
+  .add('FilterGroup with tooptips', () => (
+    <FilterGroup
+      tabs={tabsWithTooltips}
+      filterConfig={filterConfig}
+      onFilterChange={action('filter change')}
+    />
   ));
