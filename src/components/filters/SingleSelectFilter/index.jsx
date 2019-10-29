@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
+import { FaInfoCircle } from 'react-icons/fa/';
 import './SingleSelectFilter.css';
 
 class SingleSelectFilter extends React.Component {
@@ -25,6 +26,7 @@ class SingleSelectFilter extends React.Component {
     let inputDisabled = this.props.disabled;
     let lockIconComponent = <React.Fragment />;
     let countIconComponent = <React.Fragment />;
+    let tooltipComponent = <React.Fragment />;
 
     if (!this.props.accessible) {
       lockIconComponent = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__gray' />;
@@ -58,8 +60,24 @@ class SingleSelectFilter extends React.Component {
         {disabledTooltipComponent}
       </div>
     );
+    if (showToolTip) {
+      tooltipComponent = (
+        <React.Fragment>
+          {
+            <Tooltip
+              placement='right'
+              overlay={tooltipOverlayComponent}
+              arrowContent={<div className='rc-tooltip-arrow-inner' />}
+              trigger={['hover', 'focus']}
+            >
+              <FaInfoCircle style={{ cursor: 'pointer', verticalAlign: 'none' }} />
+            </Tooltip>
+          }
+        </React.Fragment>
+      );
+    }
 
-    const singleSelectFilter = (
+    return (
       <div className='g3-single-select-filter'>
         <input
           className='g3-single-select-filter__checkbox'
@@ -91,23 +109,8 @@ class SingleSelectFilter extends React.Component {
         }
         { countIconComponent }
         { lockIconComponent }
+        { tooltipComponent }
       </div>
-    );
-
-    return (
-      <React.Fragment>
-        {
-          showToolTip ? (
-            <Tooltip
-              placement='top'
-              overlay={tooltipOverlayComponent}
-              arrowContent={<div className='rc-tooltip-arrow-inner' />}
-            >
-              {singleSelectFilter}
-            </Tooltip>
-          ) : singleSelectFilter
-        }
-      </React.Fragment>
     );
   }
 }
