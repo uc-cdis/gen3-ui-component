@@ -70,7 +70,7 @@ class SingleSelectFilter extends React.Component {
               arrowContent={<div className='rc-tooltip-arrow-inner' />}
               trigger={['hover', 'focus']}
             >
-              <FaInfoCircle style={{ cursor: 'pointer', verticalAlign: 'none' }} />
+              <FaInfoCircle className='g3-icon g3-icon--md g3-single-select-filter__tooltip-icon' style={{ cursor: 'pointer', verticalAlign: 'none' }} />
             </Tooltip>
           }
         </React.Fragment>
