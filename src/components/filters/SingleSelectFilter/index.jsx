@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
-import { FaInfoCircle } from 'react-icons/fa/';
 import './SingleSelectFilter.css';
 
 class SingleSelectFilter extends React.Component {
@@ -26,13 +25,31 @@ class SingleSelectFilter extends React.Component {
     let inputDisabled = this.props.disabled;
     let lockIconComponent = <React.Fragment />;
     let countIconComponent = <React.Fragment />;
-    let tooltipComponent = <React.Fragment />;
+
+    const showLockedTooltip = !this.props.accessible && this.props.lockedTooltipMessage !== '';
 
     if (!this.props.accessible) {
       lockIconComponent = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__gray' />;
+      if (showLockedTooltip) {
+        lockIconComponent = (
+          <React.Fragment>
+            {
+              <Tooltip
+                placement='right'
+                overlay={<span>{this.props.lockedTooltipMessage}</span>}
+                arrowContent={<div className='rc-tooltip-arrow-inner' />}
+                trigger={['hover', 'focus']}
+              >
+                {lockIconComponent}
+              </Tooltip>
+            }
+          </React.Fragment>
+        );
+      }
     }
 
     if (this.props.count === this.props.hideValue) {
+      inputDisabled = true;
       countIconComponent = this.props.tierAccessLimit ? (
         <span className='g3-badge g3-single-select-filter__count'>
           {this.props.tierAccessLimit}
@@ -43,38 +60,25 @@ class SingleSelectFilter extends React.Component {
           <i className='g3-icon--under g3-icon g3-icon--sm g3-icon-color__base-blue' />
         </span>
       );
-      inputDisabled = true;
+      const showDisabledTooltip = inputDisabled && this.props.disabledTooltipMessage !== '';
+      if (showDisabledTooltip) {
+        countIconComponent = (
+          <React.Fragment>
+            {
+              <Tooltip
+                placement='right'
+                overlay={<span>{this.props.disabledTooltipMessage}</span>}
+                arrowContent={<div className='rc-tooltip-arrow-inner' />}
+                trigger={['hover', 'focus']}
+              >
+                {countIconComponent}
+              </Tooltip>
+            }
+          </React.Fragment>
+        );
+      }
     } else if (this.props.accessible) {
       countIconComponent = <span className='g3-badge g3-single-select-filter__count'>{this.props.count}</span>;
-    }
-
-    const showToolTip = inputDisabled || !this.props.accessible;
-    const newLineComponent = (inputDisabled && !this.props.accessible)
-      ? <br /> : <React.Fragment />;
-    const lockTooltipComponent = (!this.props.accessible) ? <span>{'Access to this resource is limited because you don\'t have permission'}</span> : <React.Fragment />;
-    const disabledTooltipComponent = (inputDisabled) ? <span>{'Access to this resource is disabled because you don\'t have permission and it\'s total count is less than the access limit value'}</span> : <React.Fragment />;
-    const tooltipOverlayComponent = (
-      <div>
-        {lockTooltipComponent}
-        {newLineComponent}
-        {disabledTooltipComponent}
-      </div>
-    );
-    if (showToolTip) {
-      tooltipComponent = (
-        <React.Fragment>
-          {
-            <Tooltip
-              placement='right'
-              overlay={tooltipOverlayComponent}
-              arrowContent={<div className='rc-tooltip-arrow-inner' />}
-              trigger={['hover', 'focus']}
-            >
-              <FaInfoCircle className='g3-icon g3-icon--md g3-single-select-filter__tooltip-icon' style={{ cursor: 'pointer', verticalAlign: 'none' }} />
-            </Tooltip>
-          }
-        </React.Fragment>
-      );
     }
 
     return (
@@ -109,7 +113,6 @@ class SingleSelectFilter extends React.Component {
         }
         { countIconComponent }
         { lockIconComponent }
-        { tooltipComponent }
       </div>
     );
   }
@@ -125,6 +128,8 @@ SingleSelectFilter.propTypes = {
   tierAccessLimit: PropTypes.number,
   accessible: PropTypes.bool,
   disabled: PropTypes.bool,
+  lockedTooltipMessage: PropTypes.string,
+  disabledTooltipMessage: PropTypes.string,
 };
 
 SingleSelectFilter.defaultProps = {
@@ -135,6 +140,8 @@ SingleSelectFilter.defaultProps = {
   tierAccessLimit: undefined,
   accessible: true,
   disabled: false,
+  lockedTooltipMessage: '',
+  disabledTooltipMessage: '',
 };
 
 export default SingleSelectFilter;

@@ -61,3 +61,7 @@
 .g3-single-select-filter__tooltip-icon {
   color: var(--g3-color__gray);
 }
+
+.g3-single-select-filter__count, .g3-single-select-filter__icon-background {
+  cursor: default;
+}
