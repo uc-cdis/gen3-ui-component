@@ -141,6 +141,8 @@ class FilterSection extends React.Component {
                       accessible={option.accessible}
                       tierAccessLimit={this.props.tierAccessLimit}
                       disabled={option.disabled}
+                      lockedTooltipMessage={this.props.lockedTooltipMessage}
+                      disabledTooltipMessage={this.props.disabledTooltipMessage}
                     />
                   );
                 }
@@ -201,6 +203,8 @@ FilterSection.propTypes = {
   initVisibleItemNumber: PropTypes.number,
   hideZero: PropTypes.bool,
   tierAccessLimit: PropTypes.number,
+  lockedTooltipMessage: PropTypes.string,
+  disabledTooltipMessage: PropTypes.string,
 };
 
 FilterSection.defaultProps = {
@@ -213,6 +217,8 @@ FilterSection.defaultProps = {
   initVisibleItemNumber: 5,
   hideZero: true,
   tierAccessLimit: undefined,
+  lockedTooltipMessage: '',
+  disabledTooltipMessage: '',
 };
 
 export default FilterSection;
