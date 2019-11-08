@@ -135,8 +135,8 @@ FilterList.defaultProps = {
   onAfterDrag: () => {},
   hideZero: true,
   tierAccessLimit: undefined,
-  lockedTooltipMessage: 'l',
-  disabledTooltipMessage: 'd',
+  lockedTooltipMessage: '',
+  disabledTooltipMessage: '',
 };
 
 export default FilterList;
