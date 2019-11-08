@@ -216,6 +216,16 @@ storiesOf('Filters', module)
       tierAccessLimit={1000}
     />
   ))
+  .add('FilterList with icon tooltips', () => (
+    <FilterList
+      sections={subjectSections}
+      onSelect={action('checked')}
+      onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
+      lockedTooltipMessage='locked'
+      disabledTooltipMessage='disabled'
+    />
+  ))
   .add('FilterGroup', () => (
     <FilterGroup
       tabs={tabs}
@@ -226,7 +236,7 @@ storiesOf('Filters', module)
   .add('FilterGroup that could be reset', () => (
     <ExampleFilterGroup />
   ))
-  .add('FilterGroup with tooptips', () => (
+  .add('FilterGroup with tooltips', () => (
     <FilterGroup
       tabs={tabsWithTooltips}
       filterConfig={filterConfig}
