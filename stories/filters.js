@@ -40,10 +40,21 @@ const raceOptions = [
 ];
 
 const ethnicityOptions = [
-  { text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: true },
-  { text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: false },
-  { text: 'Unknown', filterType: 'singleSelect', count: 123, accessible: true },
-  { text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true },
+  {
+    text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: true,
+  },
+  {
+    text: 'Not Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: false,
+  },
+  {
+    text: 'Unknown', filterType: 'singleSelect', count: 123, accessible: true,
+  },
+  {
+    text: 'Not Specified', filterType: 'singleSelect', count: -1, accessible: true,
+  },
+  {
+    text: 'Test Value', filterType: 'singleSelect', count: -1, accessible: false,
+  },
 ];
 
 const ageOptions = [
@@ -205,6 +216,16 @@ storiesOf('Filters', module)
       tierAccessLimit={1000}
     />
   ))
+  .add('FilterList with icon tooltips', () => (
+    <FilterList
+      sections={subjectSections}
+      onSelect={action('checked')}
+      onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
+      lockedTooltipMessage='locked'
+      disabledTooltipMessage='disabled'
+    />
+  ))
   .add('FilterGroup', () => (
     <FilterGroup
       tabs={tabs}
@@ -215,7 +236,7 @@ storiesOf('Filters', module)
   .add('FilterGroup that could be reset', () => (
     <ExampleFilterGroup />
   ))
-  .add('FilterGroup with tooptips', () => (
+  .add('FilterGroup with tooltips', () => (
     <FilterGroup
       tabs={tabsWithTooltips}
       filterConfig={filterConfig}

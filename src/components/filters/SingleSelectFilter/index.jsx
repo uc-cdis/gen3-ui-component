@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Tooltip from 'rc-tooltip';
 import './SingleSelectFilter.css';
 
 class SingleSelectFilter extends React.Component {
@@ -25,11 +26,30 @@ class SingleSelectFilter extends React.Component {
     let lockIconComponent = <React.Fragment />;
     let countIconComponent = <React.Fragment />;
 
+    const showLockedTooltip = !this.props.accessible && this.props.lockedTooltipMessage !== '';
+
     if (!this.props.accessible) {
       lockIconComponent = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__gray' />;
+      if (showLockedTooltip) {
+        lockIconComponent = (
+          <React.Fragment>
+            {
+              <Tooltip
+                placement='right'
+                overlay={<span>{this.props.lockedTooltipMessage}</span>}
+                arrowContent={<div className='rc-tooltip-arrow-inner' />}
+                trigger={['hover', 'focus']}
+              >
+                {lockIconComponent}
+              </Tooltip>
+            }
+          </React.Fragment>
+        );
+      }
     }
 
     if (this.props.count === this.props.hideValue) {
+      inputDisabled = true;
       countIconComponent = this.props.tierAccessLimit ? (
         <span className='g3-badge g3-single-select-filter__count'>
           {this.props.tierAccessLimit}
@@ -40,7 +60,23 @@ class SingleSelectFilter extends React.Component {
           <i className='g3-icon--under g3-icon g3-icon--sm g3-icon-color__base-blue' />
         </span>
       );
-      inputDisabled = true;
+      const showDisabledTooltip = inputDisabled && this.props.disabledTooltipMessage !== '';
+      if (showDisabledTooltip) {
+        countIconComponent = (
+          <React.Fragment>
+            {
+              <Tooltip
+                placement='right'
+                overlay={<span>{this.props.disabledTooltipMessage}</span>}
+                arrowContent={<div className='rc-tooltip-arrow-inner' />}
+                trigger={['hover', 'focus']}
+              >
+                {countIconComponent}
+              </Tooltip>
+            }
+          </React.Fragment>
+        );
+      }
     } else if (this.props.accessible) {
       countIconComponent = <span className='g3-badge g3-single-select-filter__count'>{this.props.count}</span>;
     }
@@ -92,6 +128,8 @@ SingleSelectFilter.propTypes = {
   tierAccessLimit: PropTypes.number,
   accessible: PropTypes.bool,
   disabled: PropTypes.bool,
+  lockedTooltipMessage: PropTypes.string,
+  disabledTooltipMessage: PropTypes.string,
 };
 
 SingleSelectFilter.defaultProps = {
@@ -102,6 +140,8 @@ SingleSelectFilter.defaultProps = {
   tierAccessLimit: undefined,
   accessible: true,
   disabled: false,
+  lockedTooltipMessage: '',
+  disabledTooltipMessage: '',
 };
 
 export default SingleSelectFilter;

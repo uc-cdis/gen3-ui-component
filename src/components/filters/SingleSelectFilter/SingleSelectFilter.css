@@ -58,12 +58,10 @@
   cursor: not-allowed;
 }
 
-.g3-single-select-filter__icon-background {
-  height: 14px;
-  align-items: center;
-  width: 14px;
-  background-color: var(--g3-color__silver);
-  border-radius: 2px;
-  line-height: 0;
-  border: 2px solid var(--g3-color__silver);
+.g3-single-select-filter__tooltip-icon {
+  color: var(--g3-color__gray);
+}
+
+.g3-single-select-filter__count, .g3-single-select-filter__icon-background {
+  cursor: default;
 }

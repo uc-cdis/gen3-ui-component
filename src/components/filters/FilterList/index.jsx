@@ -84,6 +84,8 @@ class FilterList extends React.Component {
               }
               hideZero={this.props.hideZero}
               tierAccessLimit={this.props.tierAccessLimit}
+              lockedTooltipMessage={this.props.lockedTooltipMessage}
+              disabledTooltipMessage={this.props.disabledTooltipMessage}
             />
           ))
         }
@@ -121,6 +123,8 @@ FilterList.propTypes = {
   onAfterDrag: PropTypes.func,
   hideZero: PropTypes.bool,
   tierAccessLimit: PropTypes.number,
+  lockedTooltipMessage: PropTypes.string,
+  disabledTooltipMessage: PropTypes.string,
 };
 
 FilterList.defaultProps = {
@@ -131,6 +135,8 @@ FilterList.defaultProps = {
   onAfterDrag: () => {},
   hideZero: true,
   tierAccessLimit: undefined,
+  lockedTooltipMessage: '',
+  disabledTooltipMessage: '',
 };
 
 export default FilterList;
