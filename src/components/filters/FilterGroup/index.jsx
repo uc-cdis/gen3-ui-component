@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './FilterGroup.css';
 
 const removeEmptyFilter = (filterResults) => {
+  console.log('inside removeEmptyFilter with ', filterResults);
   const newFilterResults = {};
   Object.keys(filterResults).forEach((field) => {
     if (typeof filterResults[field].lowerBound !== 'undefined'
@@ -11,6 +12,7 @@ const removeEmptyFilter = (filterResults) => {
       newFilterResults[field] = filterResults[field];
     }
   });
+  console.log('returning from removeEmptyFilter with ', newFilterResults);
   return newFilterResults;
 };
 
@@ -88,6 +90,7 @@ class FilterGroup extends React.Component {
   }
 
   handleSelect(sectionIndex, singleFilterLabel) {
+    console.log('inside handleSelect with ', sectionIndex, ' and ', singleFilterLabel);
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
@@ -122,6 +125,7 @@ class FilterGroup extends React.Component {
   }
 
   handleDrag(sectionIndex, lowerBound, upperBound, minValue, maxValue, rangeStep = 1) {
+    console.log('inside handleDrag with lowerBound ', lowerBound, ' upperBound ', upperBound, ' minValue ', minValue, ' maxValue ', maxValue);
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
