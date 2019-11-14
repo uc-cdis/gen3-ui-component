@@ -116,6 +116,7 @@ const getCharts = (data, dataExplorerConfig, sqon) => {
           break;
         case 'pie':
         case 'bar':
+          console.log('inside getCharts with fields ', fields, ' fieldConfig ', fieldConfig, ' field:  ', field);
           summaries.push(
             transformArrangerDataToSummary(
               fields[field],
