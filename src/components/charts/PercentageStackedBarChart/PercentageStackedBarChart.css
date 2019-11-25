@@ -1,7 +1,7 @@
 @import "../../../css/base.css";
 
 .percentage-bar-chart {
-  display: flex;
+  box-sizing: border-box;
   background-color: var(--g3-color__white);
   padding: 12px 12px;
   font-size: 14px;
@@ -10,16 +10,36 @@
   color: var(--g3-color__gray);
 }
 
-.percentage-bar-chart__legend {
+.percentage-bar-chart__title-box {
+  text-align: center;
+  border-bottom: solid var(--g3-color__black) 1px;
+}
+
+.percentage-bar-chart__title {
+  line-height: 10px;
+  margin-bottom: 12px;
+}
+
+.percentage-bar-chart__content {
+  display: flex;
+  padding-top: 8px;
+}
+
+ul {
   -webkit-column-count: 2; /* Chrome, Safari, Opera */
   -moz-column-count: 2; /* Firefox */
   column-count: 2;
+  margin: 0;
+  padding: 0;
+}
+
+.percentage-bar-chart__legend {
   width: 40%;
   margin-left: 25px;
 }
 
 .percentage-bar-chart__legend-item {
-  margin-top: 8px;
+  padding-top: 8px;
 }
 
 .percentage-bar-chart__legend-color {

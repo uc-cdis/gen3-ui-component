@@ -20,72 +20,84 @@ class PercentageStackedBarChart extends React.Component {
   }
 
   render() {
+    let chart = null;
     if (helper.shouldHideChart(this.props.data, this.props.lockValue)) {
-      return (
+      chart = (
         <div className='percentage-bar-chart__locked'>
           <LockedContent lockMessage={this.props.lockMessage} />
         </div>
       );
-    }
-    const percentageData = helper.getPercentageData(
-      this.props.data,
-      this.props.percentageFixedPoint,
-    );
-    const percentageDataLabels = getPercentageDataLabels(this.props.data);
-    const { barChartStyle, xAxisStyle, labelListStyle } = this.props;
-    return (
-      <div className='percentage-bar-chart'>
-        <BarChart data={percentageData} {...barChartStyle}>
-          <Tooltip />
-          <CartesianGrid />
-          <XAxis
-            type='number'
-            style={xAxisStyle}
-            tickFormatter={helper.addPercentage}
-            {...xAxisStyle}
-          />
-          <YAxis axisLine={false} tickLine={false} dataKey='name' type='category' hide />
-          {
-            percentageDataLabels.map((name, index) => (
-              <Bar
-                key={name}
-                dataKey={name}
-                stackId='a'
-                isAnimationActive={false}
-                fill={this.getItemColor(index)}
-              >
-                <LabelList
-                  dataKey={name}
-                  position={labelListStyle.position}
-                  style={labelListStyle}
-                  formatter={helper.addPercentage}
-                  className='percentage-bar-chart__label-list'
-                />
-              </Bar>
-            ))
-          }
-        </BarChart>
-        <div className='percentage-bar-chart__legend'>
-          <ul>
+    } else {
+      const percentageData = helper.getPercentageData(
+        this.props.data,
+        this.props.percentageFixedPoint,
+      );
+      const percentageDataLabels = getPercentageDataLabels(this.props.data);
+      const { barChartStyle, xAxisStyle, labelListStyle } = this.props;
+      chart = (
+        <div className='percentage-bar-chart__content'>
+          <BarChart data={percentageData} {...barChartStyle}>
+            <Tooltip />
+            <CartesianGrid />
+            <XAxis
+              type='number'
+              style={xAxisStyle}
+              tickFormatter={helper.addPercentage}
+              {...xAxisStyle}
+            />
+            <YAxis axisLine={false} tickLine={false} dataKey='name' type='category' hide />
             {
               percentageDataLabels.map((name, index) => (
-                <li className='percentage-bar-chart__legend-item' key={`label-${name}`}>
-                  <span
-                    className='percentage-bar-chart__legend-color'
-                    style={{
-                      background: this.getItemColor(index),
-                    }}
+                <Bar
+                  key={name}
+                  dataKey={name}
+                  stackId='a'
+                  isAnimationActive={false}
+                  fill={this.getItemColor(index)}
+                >
+                  <LabelList
+                    dataKey={name}
+                    position={labelListStyle.position}
+                    style={labelListStyle}
+                    formatter={helper.addPercentage}
+                    className='percentage-bar-chart__label-list'
                   />
-                  <span className='percentage-bar-chart__legend-name'>
-                    {name}
-                  </span>
-                  <span className='percentage-bar-chart__legend-value'>
-                    {'('.concat(Number(this.props.data[index].value).toLocaleString()).concat(')')}
-                  </span>
-                </li>
+                </Bar>
               ))
             }
-          </ul>
+          </BarChart>
+          <div className='percentage-bar-chart__legend'>
+            <ul>
+              {
+                percentageDataLabels.map((name, index) => (
+                  <li className='percentage-bar-chart__legend-item' key={`label-${name}`}>
+                    <span
+                      className='percentage-bar-chart__legend-color'
+                      style={{
+                        background: this.getItemColor(index),
+                      }}
+                    />
+                    <span className='percentage-bar-chart__legend-name'>
+                      {name}
+                    </span>
+                    <span className='percentage-bar-chart__legend-value'>
+                      {'('.concat(Number(this.props.data[index].value).toLocaleString()).concat(')')}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className='percentage-bar-chart'>
+        <div className='percentage-bar-chart__title-box'>
+          <p className='percentage-bar-chart__title h4-typo'>{this.props.title}</p>
+        </div>
+        <div className='percentage-bar-chart__content-box'>
+          {chart}
         </div>
       </div>
     );
@@ -98,6 +110,7 @@ const ChartDataShape = PropTypes.shape({
 });
 
 PercentageStackedBarChart.propTypes = {
+  title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(ChartDataShape).isRequired,
   percentageFixedPoint: PropTypes.number,
   barChartStyle: PropTypes.object,
