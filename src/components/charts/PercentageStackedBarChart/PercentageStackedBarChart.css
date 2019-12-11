@@ -34,12 +34,16 @@ ul {
 }
 
 .percentage-bar-chart__legend {
-  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
   margin-left: 25px;
 }
 
 .percentage-bar-chart__legend-item {
   padding-top: 8px;
+  flex: 1 0 100px;
+  box-sizing: border-box;
+
 }
 
 .percentage-bar-chart__legend-color {
@@ -49,10 +53,14 @@ ul {
 }
 
 .percentage-bar-chart__legend-name {
+  display: inline-block;
+  vertical-align: text-top;
   margin-left: 6px;
 }
 
 .percentage-bar-chart__legend-value {
+  display: inline-block;
+  vertical-align: text-top;
   margin-left: 6px;
 }
 
