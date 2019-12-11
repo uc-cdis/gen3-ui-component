@@ -36,36 +36,38 @@ class PercentageStackedBarChart extends React.Component {
       const { barChartStyle, xAxisStyle, labelListStyle } = this.props;
       chart = (
         <div className='percentage-bar-chart__content'>
-          <BarChart data={percentageData} {...barChartStyle}>
-            <Tooltip />
-            <CartesianGrid />
-            <XAxis
-              type='number'
-              style={xAxisStyle}
-              tickFormatter={helper.addPercentage}
-              {...xAxisStyle}
-            />
-            <YAxis axisLine={false} tickLine={false} dataKey='name' type='category' hide />
-            {
-              percentageDataLabels.map((name, index) => (
-                <Bar
-                  key={name}
-                  dataKey={name}
-                  stackId='a'
-                  isAnimationActive={false}
-                  fill={this.getItemColor(index)}
-                >
-                  <LabelList
+          <div className='percentage-bar-chart__chart'>
+            <BarChart data={percentageData} {...barChartStyle}>
+              <Tooltip />
+              <CartesianGrid />
+              <XAxis
+                type='number'
+                style={xAxisStyle}
+                tickFormatter={helper.addPercentage}
+                {...xAxisStyle}
+              />
+              <YAxis axisLine={false} tickLine={false} dataKey='name' type='category' hide />
+              {
+                percentageDataLabels.map((name, index) => (
+                  <Bar
+                    key={name}
                     dataKey={name}
-                    position={labelListStyle.position}
-                    style={labelListStyle}
-                    formatter={helper.addPercentage}
-                    className='percentage-bar-chart__label-list'
-                  />
-                </Bar>
-              ))
-            }
-          </BarChart>
+                    stackId='a'
+                    isAnimationActive={false}
+                    fill={this.getItemColor(index)}
+                  >
+                    <LabelList
+                      dataKey={name}
+                      position={labelListStyle.position}
+                      style={labelListStyle}
+                      formatter={helper.addPercentage}
+                      className='percentage-bar-chart__label-list'
+                    />
+                  </Bar>
+                ))
+              }
+            </BarChart>
+          </div>
           <div className='percentage-bar-chart__legend'>
             <ul>
               {
