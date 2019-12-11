@@ -128,7 +128,7 @@ PercentageStackedBarChart.defaultProps = {
     width: 510,
     height: 155,
     layout: 'vertical',
-    margins: {
+    margin: {
       top: 28,
       right: 12,
       bottom: 8,
