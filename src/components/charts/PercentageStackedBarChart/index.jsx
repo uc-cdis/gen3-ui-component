@@ -1,6 +1,6 @@
 import {
   BarChart, Bar, Tooltip, XAxis, YAxis,
-  CartesianGrid, LabelList,
+  CartesianGrid, LabelList, ResponsiveContainer,
 } from 'recharts';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -37,36 +37,38 @@ class PercentageStackedBarChart extends React.Component {
       chart = (
         <div className='percentage-bar-chart__content'>
           <div className='percentage-bar-chart__chart'>
-            <BarChart data={percentageData} {...barChartStyle}>
-              <Tooltip />
-              <CartesianGrid />
-              <XAxis
-                type='number'
-                style={xAxisStyle}
-                tickFormatter={helper.addPercentage}
-                {...xAxisStyle}
-              />
-              <YAxis axisLine={false} tickLine={false} dataKey='name' type='category' hide />
-              {
-                percentageDataLabels.map((name, index) => (
-                  <Bar
-                    key={name}
-                    dataKey={name}
-                    stackId='a'
-                    isAnimationActive={false}
-                    fill={this.getItemColor(index)}
-                  >
-                    <LabelList
+            <ResponsiveContainer width='100%' height='100%'>
+              <BarChart data={percentageData} {...barChartStyle}>
+                <Tooltip />
+                <CartesianGrid />
+                <XAxis
+                  type='number'
+                  style={xAxisStyle}
+                  tickFormatter={helper.addPercentage}
+                  {...xAxisStyle}
+                />
+                <YAxis axisLine={false} tickLine={false} dataKey='name' type='category' hide />
+                {
+                  percentageDataLabels.map((name, index) => (
+                    <Bar
+                      key={name}
                       dataKey={name}
-                      position={labelListStyle.position}
-                      style={labelListStyle}
-                      formatter={helper.addPercentage}
-                      className='percentage-bar-chart__label-list'
-                    />
-                  </Bar>
-                ))
-              }
-            </BarChart>
+                      stackId='a'
+                      isAnimationActive={false}
+                      fill={this.getItemColor(index)}
+                    >
+                      <LabelList
+                        dataKey={name}
+                        position={labelListStyle.position}
+                        style={labelListStyle}
+                        formatter={helper.addPercentage}
+                        className='percentage-bar-chart__label-list'
+                      />
+                    </Bar>
+                  ))
+                }
+              </BarChart>
+            </ResponsiveContainer>
           </div>
           <div className='percentage-bar-chart__legend'>
             <ul>
@@ -127,8 +129,6 @@ PercentageStackedBarChart.propTypes = {
 PercentageStackedBarChart.defaultProps = {
   percentageFixedPoint: 2,
   barChartStyle: {
-    width: 510,
-    height: 155,
     layout: 'vertical',
     margin: {
       top: 28,

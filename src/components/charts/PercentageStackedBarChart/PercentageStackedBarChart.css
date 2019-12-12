@@ -79,6 +79,7 @@ ul {
   flex: 1 1 50%;
   min-width: 0;
   max-width: 50%;
+  height: 155px;
 }
 
 .percentage-bar-chart__locked {
