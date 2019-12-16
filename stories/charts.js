@@ -117,15 +117,16 @@ storiesOf('Chart', module)
     <SummaryChartGroup summaries={summariesWithOneEmpty} width={1010} chartEmptyMessage='This chart is empty!' />
   ))
   .add('PercentageStackedBarChart', () => (
-    <PercentageStackedBarChart data={virusData} />
+    <PercentageStackedBarChart data={virusData} title='percentage stacked bar chart title' />
   ))
   .add('PercentageStackedBarChart with customized colors', () => (
     <PercentageStackedBarChart
       data={virusData}
+      title='percentage stacked bar chart title'
       useCustomizedColorMap
       customizedColorMap={customizedColorMap}
     />
   ))
   .add('PercentageStackedBarChart Locked', () => (
-    <PercentageStackedBarChart data={lockedVirus} />
+    <PercentageStackedBarChart data={lockedVirus} title='percentage stacked bar chart title' />
   ));
