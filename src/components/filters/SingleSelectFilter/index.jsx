@@ -82,7 +82,7 @@ class SingleSelectFilter extends React.Component {
     }
 
     return (
-      <div className='g3-single-select-filter'>
+      <div className='g3-single-select-filter' data-count={this.props.count}>
         <input
           className='g3-single-select-filter__checkbox'
           type='checkbox'
@@ -106,7 +106,6 @@ class SingleSelectFilter extends React.Component {
               onKeyPress={() => this.handleCheck()}
               role='button'
               tabIndex={0}
-              data-label={this.props.label}
             >
               {this.props.label}
             </span>
