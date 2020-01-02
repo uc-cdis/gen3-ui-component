@@ -106,6 +106,7 @@ class SingleSelectFilter extends React.Component {
               onKeyPress={() => this.handleCheck()}
               role='button'
               tabIndex={0}
+              data-label={this.props.label}
             >
               {this.props.label}
             </span>
