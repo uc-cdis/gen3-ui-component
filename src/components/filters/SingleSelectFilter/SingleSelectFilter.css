@@ -47,6 +47,10 @@
   display: block;
 }
 
+.g3-single-select-filter[data-count='0'] {
+  opacity: 0.6;
+}
+
 .g3-single-select-filter__label {
   margin: 0;
   flex-grow: 1;
