@@ -1,6 +1,6 @@
 import {
   BarChart, Bar, Tooltip, XAxis, YAxis,
-  CartesianGrid, LabelList,
+  CartesianGrid, LabelList, ResponsiveContainer,
 } from 'recharts';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -20,72 +20,88 @@ class PercentageStackedBarChart extends React.Component {
   }
 
   render() {
+    let chart = null;
     if (helper.shouldHideChart(this.props.data, this.props.lockValue)) {
-      return (
+      chart = (
         <div className='percentage-bar-chart__locked'>
           <LockedContent lockMessage={this.props.lockMessage} />
         </div>
       );
+    } else {
+      const percentageData = helper.getPercentageData(
+        this.props.data,
+        this.props.percentageFixedPoint,
+      );
+      const percentageDataLabels = getPercentageDataLabels(this.props.data);
+      const { barChartStyle, xAxisStyle, labelListStyle } = this.props;
+      chart = (
+        <div className='percentage-bar-chart__content'>
+          <div className='percentage-bar-chart__chart'>
+            <ResponsiveContainer width='100%' height='100%'>
+              <BarChart data={percentageData} {...barChartStyle}>
+                <Tooltip />
+                <CartesianGrid />
+                <XAxis
+                  type='number'
+                  style={xAxisStyle}
+                  tickFormatter={helper.addPercentage}
+                  {...xAxisStyle}
+                />
+                <YAxis axisLine={false} tickLine={false} dataKey='name' type='category' hide />
+                {
+                  percentageDataLabels.map((name, index) => (
+                    <Bar
+                      key={name}
+                      dataKey={name}
+                      stackId='a'
+                      isAnimationActive={false}
+                      fill={this.getItemColor(index)}
+                    >
+                      <LabelList
+                        dataKey={name}
+                        position={labelListStyle.position}
+                        style={labelListStyle}
+                        formatter={helper.addPercentage}
+                        className='percentage-bar-chart__label-list'
+                      />
+                    </Bar>
+                  ))
+                }
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className='percentage-bar-chart__legend'>
+            <div className='percentage-bar-chart__ul'>
+              {
+                percentageDataLabels.map((name, index) => (
+                  <li className='percentage-bar-chart__legend-item' key={`label-${name}`}>
+                    <span
+                      className='percentage-bar-chart__legend-color'
+                      style={{
+                        background: this.getItemColor(index),
+                      }}
+                    />
+                    <span className='percentage-bar-chart__legend-name'>
+                      {name}
+                    </span>
+                    <span className='percentage-bar-chart__legend-value'>
+                      {'('.concat(Number(this.props.data[index].value).toLocaleString()).concat(')')}
+                    </span>
+                  </li>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      );
     }
-    const percentageData = helper.getPercentageData(
-      this.props.data,
-      this.props.percentageFixedPoint,
-    );
-    const percentageDataLabels = getPercentageDataLabels(this.props.data);
-    const { barChartStyle, xAxisStyle, labelListStyle } = this.props;
     return (
       <div className='percentage-bar-chart'>
-        <BarChart data={percentageData} {...barChartStyle}>
-          <Tooltip />
-          <CartesianGrid />
-          <XAxis
-            type='number'
-            style={xAxisStyle}
-            tickFormatter={helper.addPercentage}
-            {...xAxisStyle}
-          />
-          <YAxis axisLine={false} tickLine={false} dataKey='name' type='category' hide />
-          {
-            percentageDataLabels.map((name, index) => (
-              <Bar
-                key={name}
-                dataKey={name}
-                stackId='a'
-                isAnimationActive={false}
-                fill={this.getItemColor(index)}
-              >
-                <LabelList
-                  dataKey={name}
-                  position={labelListStyle.position}
-                  style={labelListStyle}
-                  formatter={helper.addPercentage}
-                  className='percentage-bar-chart__label-list'
-                />
-              </Bar>
-            ))
-          }
-        </BarChart>
-        <div className='percentage-bar-chart__legend'>
-          <ul>
-            {
-              percentageDataLabels.map((name, index) => (
-                <li className='percentage-bar-chart__legend-item' key={`label-${name}`}>
-                  <span
-                    className='percentage-bar-chart__legend-color'
-                    style={{
-                      background: this.getItemColor(index),
-                    }}
-                  />
-                  <span className='percentage-bar-chart__legend-name'>
-                    {name}
-                  </span>
-                  <span className='percentage-bar-chart__legend-value'>
-                    {'('.concat(Number(this.props.data[index].value).toLocaleString()).concat(')')}
-                  </span>
-                </li>
-              ))
-            }
-          </ul>
+        <div className='percentage-bar-chart__title-box'>
+          <p className='percentage-bar-chart__title h4-typo'>{this.props.title}</p>
+        </div>
+        <div className='percentage-bar-chart__content-box'>
+          {chart}
         </div>
       </div>
     );
@@ -98,6 +114,7 @@ const ChartDataShape = PropTypes.shape({
 });
 
 PercentageStackedBarChart.propTypes = {
+  title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(ChartDataShape).isRequired,
   percentageFixedPoint: PropTypes.number,
   barChartStyle: PropTypes.object,
@@ -112,10 +129,8 @@ PercentageStackedBarChart.propTypes = {
 PercentageStackedBarChart.defaultProps = {
   percentageFixedPoint: 2,
   barChartStyle: {
-    width: 510,
-    height: 155,
     layout: 'vertical',
-    margins: {
+    margin: {
       top: 28,
       right: 12,
       bottom: 8,
