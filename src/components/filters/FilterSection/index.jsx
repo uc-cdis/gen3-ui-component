@@ -12,7 +12,32 @@ class FilterSection extends React.Component {
       isExpanded: this.props.expanded,
       showingMore: false,
       filterStatus: {},
+      searchInputEmpty: true,
+
+      // option visible status filtered by the search inputbox
+      optionsVisibleStatus: this.props.options.map(o => o.text)
+        .reduce((acc, cur) => ({ ...acc, [cur]: true }), {}),
     };
+    this.inputElem = React.createRef();
+  }
+
+  getSearchInput() {
+    return (
+      <div className='g3-filter-section__search-input'>
+        <input
+          className='g3-filter-section__search-input-box body'
+          onChange={() => { this.handleSearchInputChange(); }}
+          ref={this.inputElem}
+        />
+        <i
+          className={`g3-icon g3-icon--${this.state.searchInputEmpty ? 'search' : 'cross'} g3-filter-section__search-input-close`}
+          onClick={() => this.state.searchInputEmpty || this.clearSearchInput()}
+          onKeyPress={() => this.state.searchInputEmpty || this.clearSearchInput()}
+          role='button'
+          tabIndex={0}
+        />
+      </div>
+    );
   }
 
   getShowMoreButton() {
@@ -50,6 +75,41 @@ class FilterSection extends React.Component {
       return null;
     }
     return null;
+  }
+
+  handleSearchInputChange() {
+    const currentInput = this.inputElem.current.value;
+    this.setState({
+      searchInputEmpty: !currentInput || currentInput.length === 0,
+    });
+    this.updateVisibleOptions(currentInput);
+  }
+
+  clearSearchInput() {
+    this.inputElem.current.value = '';
+    this.setState({
+      searchInputEmpty: true,
+    });
+    this.updateVisibleOptions();
+  }
+
+  updateVisibleOptions(inputText) {
+    // if empty input, all should be visible
+    if (typeof inputText === 'undefined' || inputText.trim === '') {
+      this.setState({
+        optionsVisibleStatus: this.props.options.map(o => o.text)
+          .reduce((acc, cur) => ({ ...acc, [cur]: true }), {}),
+      });
+    }
+
+    // if not empty, filter out those matched
+    this.setState({
+      optionsVisibleStatus: this.props.options.map(o => o.text)
+        .reduce((acc, cur) => {
+          acc[cur] = cur.toLowerCase().indexOf(inputText.toLowerCase()) >= 0;
+          return acc;
+        }, {}),
+    });
   }
 
   toggleSection(open) {
@@ -90,6 +150,7 @@ class FilterSection extends React.Component {
     this.setState(prevState => ({ showingMore: !prevState.showingMore }));
   }
 
+
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
@@ -122,10 +183,17 @@ class FilterSection extends React.Component {
             </Tooltip>
           ) : sectionHeader
         }
+        {this.getSearchInput()}
         <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
-              ? this.props.options.map((option, index) => {
+              ? this.props.options
+              .filter((option) => {
+                console.log(option.text);
+                console.log(this.state.optionsVisibleStatus);
+                return this.state.optionsVisibleStatus[option.text];
+              })
+              .map((option, index) => {
                 if (index >= this.props.initVisibleItemNumber && !this.state.showingMore) {
                   return null;
                 }
