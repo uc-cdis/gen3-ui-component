@@ -188,52 +188,48 @@ class FilterSection extends React.Component {
           {
             this.state.isExpanded
               ? this.props.options
-              .filter((option) => {
-                console.log(option.text);
-                console.log(this.state.optionsVisibleStatus);
-                return this.state.optionsVisibleStatus[option.text];
-              })
-              .map((option, index) => {
-                if (index >= this.props.initVisibleItemNumber && !this.state.showingMore) {
-                  return null;
-                }
-                if (option.filterType === 'singleSelect') {
+                .filter(option => this.state.optionsVisibleStatus[option.text])
+                .map((option, index) => {
+                  if (index >= this.props.initVisibleItemNumber && !this.state.showingMore) {
+                    return null;
+                  }
+                  if (option.filterType === 'singleSelect') {
+                    return (
+                      <SingleSelectFilter
+                        key={option.text}
+                        label={option.text}
+                        onSelect={label => this.handleSelectSingleSelectFilter(label)}
+                        selected={filterStatus[option.text]}
+                        count={option.count}
+                        hideZero={this.props.hideZero}
+                        accessible={option.accessible}
+                        tierAccessLimit={this.props.tierAccessLimit}
+                        disabled={option.disabled}
+                        lockedTooltipMessage={this.props.lockedTooltipMessage}
+                        disabledTooltipMessage={this.props.disabledTooltipMessage}
+                      />
+                    );
+                  }
+                  const lowerBound = (typeof filterStatus === 'undefined'
+                  || filterStatus.length !== 2)
+                    ? option.min : filterStatus[0];
+                  const upperBound = (typeof filterStatus === 'undefined'
+                  || filterStatus.length !== 2)
+                    ? option.max : filterStatus[1];
                   return (
-                    <SingleSelectFilter
-                      key={option.text}
+                    <RangeFilter
+                      key={this.props.title}
                       label={option.text}
-                      onSelect={label => this.handleSelectSingleSelectFilter(label)}
-                      selected={filterStatus[option.text]}
+                      min={option.min}
+                      max={option.max}
+                      onAfterDrag={(lb, ub, min, max, step) => this.handleDragRangeFilter(
+                        lb, ub, min, max, step)}
+                      lowerBound={lowerBound}
+                      upperBound={upperBound}
                       count={option.count}
-                      hideZero={this.props.hideZero}
-                      accessible={option.accessible}
-                      tierAccessLimit={this.props.tierAccessLimit}
-                      disabled={option.disabled}
-                      lockedTooltipMessage={this.props.lockedTooltipMessage}
-                      disabledTooltipMessage={this.props.disabledTooltipMessage}
                     />
                   );
-                }
-                const lowerBound = (typeof filterStatus === 'undefined'
-                  || filterStatus.length !== 2)
-                  ? option.min : filterStatus[0];
-                const upperBound = (typeof filterStatus === 'undefined'
-                  || filterStatus.length !== 2)
-                  ? option.max : filterStatus[1];
-                return (
-                  <RangeFilter
-                    key={this.props.title}
-                    label={option.text}
-                    min={option.min}
-                    max={option.max}
-                    onAfterDrag={(lb, ub, min, max, step) => this.handleDragRangeFilter(
-                      lb, ub, min, max, step)}
-                    lowerBound={lowerBound}
-                    upperBound={upperBound}
-                    count={option.count}
-                  />
-                );
-              }) : null
+                }) : null
           }
           {this.getShowMoreButton()}
         </div>
