@@ -26,6 +26,8 @@
   "homepage": "https://github.com/uc-cdis/gen3-ui-component#readme",
   "dependencies": {
     "babel-loader": "^8.0.5",
+    "echarts": "^4.6.0",
+    "echarts-for-react": "^2.0.15-beta.1",
     "postcss-loader": "^3.0.0",
     "postcss-svgo": "^4.0.2",
     "prop-types": "^15.7.2",

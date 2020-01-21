@@ -4,8 +4,80 @@ import SummaryPieChart from '../SummaryPieChart';
 import SummaryHorizontalBarChart from '../SummaryHorizontalBarChart';
 import './SummaryChartGroup.css';
 import helper from '../helper.js';
+import VerticalBarChart from '../VerticalBarChart';
+import LineChart from '../LineChart';
 
 class SummaryChartGroup extends Component {
+  getChart(item) {
+    if (item.type === 'pie') {
+      return (
+        <SummaryPieChart
+          data={item.data}
+          title={item.title}
+          lockValue={this.props.lockValue}
+          lockMessage={this.props.lockMessage}
+          useCustomizedColorMap={this.props.useCustomizedColorMap}
+          customizedColorMap={this.props.customizedColorMap}
+          maximumDisplayItem={this.props.maximumDisplayItem}
+          chartIsEmpty={item.chartIsEmpty}
+          chartEmptyMessage={this.props.chartEmptyMessage}
+        />
+      );
+    }
+    if (item.type === 'bar') {
+      return (
+        <SummaryHorizontalBarChart
+          data={item.data}
+          title={item.title}
+          color={this.props.useCustomizedColorMap ? undefined
+            : this.props.barChartColor}
+          lockValue={this.props.lockValue}
+          lockMessage={this.props.lockMessage}
+          useCustomizedColorMap={this.props.useCustomizedColorMap}
+          customizedColorMap={this.props.customizedColorMap}
+          maximumDisplayItem={this.props.maximumDisplayItem}
+          chartIsEmpty={item.chartIsEmpty}
+          chartEmptyMessage={this.props.chartEmptyMessage}
+        />
+      );
+    }
+    if (item.type === 'bar-vertical') {
+      return (
+        <VerticalBarChart
+          data={item.data}
+          title={item.title}
+          color={this.props.useCustomizedColorMap ? undefined
+            : this.props.barChartColor}
+          lockValue={this.props.lockValue}
+          lockMessage={this.props.lockMessage}
+          useCustomizedColorMap={this.props.useCustomizedColorMap}
+          customizedColorMap={this.props.customizedColorMap}
+          maximumDisplayItem={this.props.maximumDisplayItem}
+          chartIsEmpty={item.chartIsEmpty}
+          chartEmptyMessage={this.props.chartEmptyMessage}
+        />
+      );
+    }
+    if (item.type === 'line') {
+      return (
+        <LineChart
+          data={item.data}
+          title={item.title}
+          color={this.props.useCustomizedColorMap ? undefined
+            : this.props.barChartColor}
+          lockValue={this.props.lockValue}
+          lockMessage={this.props.lockMessage}
+          useCustomizedColorMap={this.props.useCustomizedColorMap}
+          customizedColorMap={this.props.customizedColorMap}
+          maximumDisplayItem={this.props.maximumDisplayItem}
+          chartIsEmpty={item.chartIsEmpty}
+          chartEmptyMessage={this.props.chartEmptyMessage}
+        />
+      );
+    }
+    return null;
+  }
+
   render() {
     const width = helper.parseParamWidth(this.props.width);
     return (
@@ -16,37 +88,7 @@ class SummaryChartGroup extends Component {
               {
                 index > 0 && <div className='summary-chart-group__column-left-border' />
               }
-              {
-                item.type === 'pie'
-                  ? (
-                    <SummaryPieChart
-                      data={item.data}
-                      title={item.title}
-                      lockValue={this.props.lockValue}
-                      lockMessage={this.props.lockMessage}
-                      useCustomizedColorMap={this.props.useCustomizedColorMap}
-                      customizedColorMap={this.props.customizedColorMap}
-                      maximumDisplayItem={this.props.maximumDisplayItem}
-                      chartIsEmpty={item.chartIsEmpty}
-                      chartEmptyMessage={this.props.chartEmptyMessage}
-                    />
-                  ) : (
-                    <SummaryHorizontalBarChart
-                      data={item.data}
-                      title={item.title}
-                      vertical
-                      color={this.props.useCustomizedColorMap ? undefined
-                        : this.props.barChartColor}
-                      lockValue={this.props.lockValue}
-                      lockMessage={this.props.lockMessage}
-                      useCustomizedColorMap={this.props.useCustomizedColorMap}
-                      customizedColorMap={this.props.customizedColorMap}
-                      maximumDisplayItem={this.props.maximumDisplayItem}
-                      chartIsEmpty={item.chartIsEmpty}
-                      chartEmptyMessage={this.props.chartEmptyMessage}
-                    />
-                  )
-              }
+              { this.getChart(item) }
             </div>
           ))
         }
