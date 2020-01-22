@@ -25,6 +25,9 @@ class LineChart extends React.Component {
       yAxis: {
         type: 'value',
       },
+      grid: {
+        left: 40,
+      },
       tooltip: {},
       series: [{
         data: this.props.data.map(d => d.value),

@@ -63,8 +63,6 @@ class SummaryChartGroup extends Component {
         <LineChart
           data={item.data}
           title={item.title}
-          color={this.props.useCustomizedColorMap ? undefined
-            : this.props.barChartColor}
           lockValue={this.props.lockValue}
           lockMessage={this.props.lockMessage}
           useCustomizedColorMap={this.props.useCustomizedColorMap}

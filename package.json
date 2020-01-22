@@ -28,6 +28,7 @@
     "babel-loader": "^8.0.5",
     "echarts": "^4.6.0",
     "echarts-for-react": "^2.0.15-beta.1",
+    "lodash": "^4.17.15",
     "postcss-loader": "^3.0.0",
     "postcss-svgo": "^4.0.2",
     "prop-types": "^15.7.2",

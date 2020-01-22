@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
+import _ from 'lodash';
 import LockedContent from '../LockedContent';
 import EmptyContent from '../EmptyContent';
 import helper from '../helper';
@@ -21,6 +22,9 @@ class VerticalBarChart extends React.Component {
       xAxis: {
         type: 'category',
         data: this.props.data.map(d => d.name),
+        axisLabel: {
+          rotate: 45,
+        },
       },
       yAxis: {
         type: 'value',
@@ -29,9 +33,19 @@ class VerticalBarChart extends React.Component {
         data: this.props.data.map(d => d.value),
         type: 'bar',
       }],
+      grid: {
+        left: 40,
+      },
       tooltip: {},
       color: this.props.color,
     };
+    const maxVal = _.max(this.props.data.map(d => d.value));
+    const minVal = _.min(this.props.data.map(d => d.value));
+    if (maxVal - minVal > 5000) {
+      option.yAxis.type = 'log';
+      option.yAxis.logBase = 10;
+      option.grid.left = 50;
+    }
     let chart;
     if (this.props.chartIsEmpty) {
       chart = (<EmptyContent message={this.props.chartEmptyMessage} />);
