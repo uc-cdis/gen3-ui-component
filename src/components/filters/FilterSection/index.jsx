@@ -5,6 +5,19 @@ import SingleSelectFilter from '../SingleSelectFilter';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
 
+const filterVisibleStatusObj = (optionList, inputText) => {
+  const res = {};
+  optionList.forEach((o) => {
+    if (typeof inputText === 'undefined') {
+      res[o.text] = true;
+    } else {
+      const matched = o.text.toLowerCase().indexOf(inputText.toLowerCase()) >= 0;
+      res[o.text] = matched;
+    }
+  });
+  return res;
+};
+
 class FilterSection extends React.Component {
   constructor(props) {
     super(props);
@@ -15,8 +28,7 @@ class FilterSection extends React.Component {
       searchInputEmpty: true,
 
       // option visible status filtered by the search inputbox
-      optionsVisibleStatus: this.props.options.map(o => o.text)
-        .reduce((acc, cur) => ({ ...acc, [cur]: true }), {}),
+      optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
     };
     this.inputElem = React.createRef();
   }
@@ -43,7 +55,9 @@ class FilterSection extends React.Component {
   getShowMoreButton() {
     if (this.state.isExpanded) {
       const totalCount = this.props.options
-        .filter(o => (o.count > 0 || !this.props.hideZero || o.count === -1)).length;
+        .filter(o => (o.count > 0 || !this.props.hideZero || o.count === -1))
+        .filter(o => this.state.optionsVisibleStatus[o.text])
+        .length;
       if ((totalCount > this.props.initVisibleItemNumber)) {
         if (this.state.showingMore) {
           return (
@@ -97,18 +111,13 @@ class FilterSection extends React.Component {
     // if empty input, all should be visible
     if (typeof inputText === 'undefined' || inputText.trim === '') {
       this.setState({
-        optionsVisibleStatus: this.props.options.map(o => o.text)
-          .reduce((acc, cur) => ({ ...acc, [cur]: true }), {}),
+        optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
       });
     }
 
     // if not empty, filter out those matched
     this.setState({
-      optionsVisibleStatus: this.props.options.map(o => o.text)
-        .reduce((acc, cur) => {
-          acc[cur] = cur.toLowerCase().indexOf(inputText.toLowerCase()) >= 0;
-          return acc;
-        }, {}),
+      optionsVisibleStatus: filterVisibleStatusObj(this.props.options, inputText),
     });
   }
 
