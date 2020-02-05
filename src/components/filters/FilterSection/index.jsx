@@ -178,6 +178,7 @@ class FilterSection extends React.Component {
         />
       </div>
     );
+    const isTextFilter = this.props.options[0].filterType === 'singleSelect';
     return (
       <div className='g3-filter-section'>
         {
@@ -192,7 +193,7 @@ class FilterSection extends React.Component {
             </Tooltip>
           ) : sectionHeader
         }
-        {this.getSearchInput()}
+        { isTextFilter && this.getSearchInput() }
         <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
