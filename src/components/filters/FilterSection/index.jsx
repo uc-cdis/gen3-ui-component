@@ -170,6 +170,7 @@ class FilterSection extends React.Component {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
+    const isTextFilter = this.props.options[0].filterType === 'singleSelect';
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div
@@ -181,13 +182,17 @@ class FilterSection extends React.Component {
         >
           {this.props.title}
         </div>
-        <i
-          className='g3-filter-section__search-icon g3-icon g3-icon--sm g3-icon--search'
-          onClick={() => this.toggleShowSearch()}
-          onKeyPress={() => this.toggleShowSearch()}
-          tabIndex={0}
-          role='button'
-        />
+        {
+          isTextFilter && (
+            <i
+              className='g3-filter-section__search-icon g3-icon g3-icon--sm g3-icon--search'
+              onClick={() => this.toggleShowSearch()}
+              onKeyPress={() => this.toggleShowSearch()}
+              tabIndex={0}
+              role='button'
+            />
+          )
+        }
         <i
           onClick={() => this.toggleSection()}
           onKeyPress={() => this.toggleSection()}
@@ -197,7 +202,6 @@ class FilterSection extends React.Component {
         />
       </div>
     );
-    const isTextFilter = this.props.options[0].filterType === 'singleSelect';
     return (
       <div className='g3-filter-section'>
         {
@@ -249,7 +253,7 @@ class FilterSection extends React.Component {
                     ? option.max : filterStatus[1];
                   return (
                     <RangeFilter
-                      key={this.props.title}
+                      key={option.text}
                       label={option.text}
                       min={option.min}
                       max={option.max}

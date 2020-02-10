@@ -62,7 +62,7 @@ describe('FilterSection', () => {
   it('toggles expand on click', () => {
     expect(component.instance().state.isExpanded).toBe(true);
     expect(component.find('.g3-filter-section__header').length).toBe(1);
-    component.find('.g3-filter-section__header').simulate('click');
+    component.find('.g3-filter-section__title').simulate('click');
     expect(component.instance().state.isExpanded).toBe(false);
   });
 });
