@@ -58,3 +58,48 @@
 .g3-filter-section .rc-tooltip-placement-topRight .rc-tooltip-arrow {
   border-top-color: var(--g3-color__silver);
 }
+
+.g3-filter-section__search-input {
+  border: 1px solid var(--g3-color__lightgray);
+  border-radius: var(--g3-auto-complete__border-radius);
+  padding: 5px 8px;
+  position: relative;
+  display: flex;
+  margin-top: 8px;
+}
+
+.g3-filter-section__search-input-box {
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+.g3-filter-section__search-input:active {
+  border-color: var(--g3-color__base-blue);
+}
+
+
+.g3-filter-section__search-input-close {
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 6px;
+  right: 6px;
+  background-color: var(--g3-color__gray);
+  cursor: pointer;
+}
+
+.g3-filter-section__search-input-separator {
+  width: 1px;
+  border-left: 1px solid var(--g3-color__lightgray);
+  margin: 0 10px;
+}
+
+.g3-filter-section__search-input-icon {
+  background-color: var(--g3-color__gray);
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+}
+
+
