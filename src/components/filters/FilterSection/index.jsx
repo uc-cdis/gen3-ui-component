@@ -35,7 +35,7 @@ class FilterSection extends React.Component {
 
   getSearchInput() {
     return (
-      <div className='g3-filter-section__search-input'>
+      <div className={`g3-filter-section__search-input ${this.state.isExpanded || 'g3-filter-section__search-input--hidden'}`}>
         <input
           className='g3-filter-section__search-input-box body'
           onChange={() => { this.handleSearchInputChange(); }}
@@ -194,7 +194,7 @@ class FilterSection extends React.Component {
           ) : sectionHeader
         }
         {
-          this.state.isExpanded && isTextFilter && this.getSearchInput()
+          isTextFilter && this.getSearchInput()
         }
         <div className='g3-filter-section__options'>
           {
