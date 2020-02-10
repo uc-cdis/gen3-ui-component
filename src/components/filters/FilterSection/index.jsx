@@ -193,7 +193,9 @@ class FilterSection extends React.Component {
             </Tooltip>
           ) : sectionHeader
         }
-        { isTextFilter && this.getSearchInput() }
+        {
+          this.state.isExpanded && isTextFilter && this.getSearchInput()
+        }
         <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
