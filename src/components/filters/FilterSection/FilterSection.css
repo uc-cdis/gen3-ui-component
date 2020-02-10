@@ -18,8 +18,6 @@
 .g3-filter-section__header {
   display: flex;
   justify-content: space-between;
-  outline: none;
-  cursor: pointer;
 }
 
 .g3-filter-section__title {
@@ -27,6 +25,9 @@
   font-weight: var(--g3-font__semi-bold-weight);
   color: var(--g3-color__black);
   margin: 0;
+  flex-grow: 1;
+  outline: none;
+  cursor: pointer;
 }
 
 .g3-filter-section__options {
@@ -34,8 +35,13 @@
   color: var(--g3-color__gray);
 }
 
-.g3-filter-section__toggle-icon {
+.g3-filter-section__toggle-icon,
+.g3-filter-section__search-icon {
   background-color: var(--g3-color__lightgray);
+  flex-grow: 0;
+  margin-left: 10px;
+  outline: none;
+  cursor: pointer;
 }
 
 .g3-filter-section__show-more {
