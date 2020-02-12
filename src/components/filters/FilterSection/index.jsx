@@ -26,6 +26,7 @@ class FilterSection extends React.Component {
       showingMore: false,
       filterStatus: {},
       searchInputEmpty: true,
+      showingSearch: false,
 
       // option visible status filtered by the search inputbox
       optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
@@ -34,8 +35,9 @@ class FilterSection extends React.Component {
   }
 
   getSearchInput() {
+    const isHidden = !this.state.showingSearch || !this.state.isExpanded;
     return (
-      <div className='g3-filter-section__search-input'>
+      <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__search-input--hidden'}`}>
         <input
           className='g3-filter-section__search-input-box body'
           onChange={() => { this.handleSearchInputChange(); }}
@@ -155,6 +157,10 @@ class FilterSection extends React.Component {
     this.props.onAfterDrag(lowerBound, upperBound, minValue, maxValue, rangeStep);
   }
 
+  toggleShowSearch() {
+    this.setState(prevState => ({ showingSearch: !prevState.showingSearch }));
+  }
+
   toggleShowMore() {
     this.setState(prevState => ({ showingMore: !prevState.showingMore }));
   }
@@ -164,21 +170,38 @@ class FilterSection extends React.Component {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
+    const isTextFilter = this.props.options[0].filterType === 'singleSelect';
     const sectionHeader = (
-      <div
-        className='g3-filter-section__header'
-        onClick={() => this.toggleSection()}
-        onKeyPress={() => this.toggleSection()}
-        tabIndex={0}
-        role='button'
-      >
-        <p className='g3-filter-section__title'>{this.props.title}</p>
+      <div className='g3-filter-section__header'>
+        <div
+          className='g3-filter-section__title'
+          onClick={() => this.toggleSection()}
+          onKeyPress={() => this.toggleSection()}
+          tabIndex={0}
+          role='button'
+        >
+          {this.props.title}
+        </div>
+        {
+          isTextFilter && (
+            <i
+              className='g3-filter-section__search-icon g3-icon g3-icon--sm g3-icon--search'
+              onClick={() => this.toggleShowSearch()}
+              onKeyPress={() => this.toggleShowSearch()}
+              tabIndex={0}
+              role='button'
+            />
+          )
+        }
         <i
+          onClick={() => this.toggleSection()}
+          onKeyPress={() => this.toggleSection()}
+          tabIndex={0}
+          role='button'
           className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
         />
       </div>
     );
-    const isTextFilter = this.props.options[0].filterType === 'singleSelect';
     return (
       <div className='g3-filter-section'>
         {
@@ -193,7 +216,9 @@ class FilterSection extends React.Component {
             </Tooltip>
           ) : sectionHeader
         }
-        { isTextFilter && this.getSearchInput() }
+        {
+          isTextFilter && this.getSearchInput()
+        }
         <div className='g3-filter-section__options'>
           {
             this.state.isExpanded
@@ -228,7 +253,7 @@ class FilterSection extends React.Component {
                     ? option.max : filterStatus[1];
                   return (
                     <RangeFilter
-                      key={this.props.title}
+                      key={option.text}
                       label={option.text}
                       min={option.min}
                       max={option.max}

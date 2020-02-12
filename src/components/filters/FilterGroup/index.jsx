@@ -154,13 +154,15 @@ class FilterGroup extends React.Component {
   }
 
   toggleFilters() {
-    this.setState(prevState => ({
-      expandedStatus: this.props.filterConfig.tabs
-        .map(t => t.fields.map(() => (!prevState.expandedStatusControl))),
-      expandedStatusText: (!prevState.expandedStatusControl) ? 'Collapse all' : 'Open all',
-      expandedStatusControl: !prevState.expandedStatusControl,
-    }));
-    this.currentFilterListRef.current.toggleFilters();
+    this.setState((prevState) => {
+      this.currentFilterListRef.current.toggleFilters(!prevState.expandedStatusControl);
+      return {
+        expandedStatus: this.props.filterConfig.tabs
+          .map(t => t.fields.map(() => (!prevState.expandedStatusControl))),
+        expandedStatusText: (!prevState.expandedStatusControl) ? 'Collapse all' : 'Open all',
+        expandedStatusControl: !prevState.expandedStatusControl,
+      };
+    });
   }
 
   render() {
