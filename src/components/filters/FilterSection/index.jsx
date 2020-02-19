@@ -170,7 +170,7 @@ class FilterSection extends React.Component {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
-    const isTextFilter = this.props.options[0].filterType === 'singleSelect';
+    const isTextFilter = this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect';
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div
