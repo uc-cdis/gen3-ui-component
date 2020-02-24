@@ -48,9 +48,9 @@ class SingleSelectFilter extends React.Component {
       }
     }
 
-    if ((this.props.count === this.props.hideValue) && !selected) {
+    if (this.props.count === this.props.hideValue) {
       // we don't disable selected filters
-      inputDisabled = true;
+      inputDisabled = !selected;
       countIconComponent = this.props.tierAccessLimit ? (
         <span className='g3-badge g3-single-select-filter__count'>
           {this.props.tierAccessLimit}
