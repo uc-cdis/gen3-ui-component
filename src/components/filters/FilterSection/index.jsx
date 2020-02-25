@@ -93,6 +93,18 @@ class FilterSection extends React.Component {
     return null;
   }
 
+  // hasAnyValueSelected returns true if any values are selected in this filterStatus.
+  hasAnyValueSelected = (filterStatus) => {
+    const filterValues = Object.keys(filterStatus);
+    for (let i = 0; i < filterValues.length; i += 1) {
+      const value = filterValues[i];
+      if (filterStatus[value] === true) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   handleSearchInputChange() {
     const currentInput = this.inputElem.current.value;
     this.setState({
@@ -174,13 +186,15 @@ class FilterSection extends React.Component {
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div
-          className='g3-filter-section__title'
+          className='g3-filter-section__title-container'
           onClick={() => this.toggleSection()}
           onKeyPress={() => this.toggleSection()}
           tabIndex={0}
           role='button'
         >
-          {this.props.title}
+          <span className={`g3-filter-section__title ${this.hasAnyValueSelected(filterStatus) ? 'g3-filter-section__title--active' : ''}`}>
+            {this.props.title}
+          </span>
         </div>
         {
           isTextFilter && (

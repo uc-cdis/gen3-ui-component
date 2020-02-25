@@ -20,14 +20,22 @@
   justify-content: space-between;
 }
 
-.g3-filter-section__title {
-  font-size: 14px;
-  font-weight: var(--g3-font__semi-bold-weight);
-  color: var(--g3-color__black);
+.g3-filter-section__title-container {
   margin: 0;
   flex-grow: 1;
   outline: none;
   cursor: pointer;
+}
+
+.g3-filter-section__title {
+  font-size: 14px;
+  font-weight: var(--g3-font__semi-bold-weight);
+  color: var(--g3-color__black);
+  border-bottom: 2px solid transparent;
+}
+
+.g3-filter-section__title--active {
+  border-bottom: 2px solid var(--g3-primary-btn__bg-color);
 }
 
 .g3-filter-section__options {
