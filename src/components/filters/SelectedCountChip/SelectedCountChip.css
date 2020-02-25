@@ -1,0 +1,31 @@
+.g3-selected-count-chip {
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    color: var(--g3-color__gray);
+    background-color: var(--g3-color__bg-cloud);
+    border-radius: 4px;
+    padding: 4px 6px;
+}
+
+.g3-selected-count-chip__left {
+    margin-right: 4px;
+    flex: 1 0 40px;
+    text-align: center;
+}
+
+.g3-selected-count-chip__text-emphasis {
+    font-weight: 800;
+}
+
+
+.g3-selected-count-chip__clear-btn {
+    flex: 0 0 18px;
+    border: none;
+    border-left: 1px solid var(--g3-color__gray);
+    background-color: inherit;
+    padding: 0;
+    padding-left: 4px;
+    display: flex;
+}

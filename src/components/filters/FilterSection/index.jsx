@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
 import SingleSelectFilter from '../SingleSelectFilter';
+import SelectedCountChip from '../SelectedCountChip';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
 
@@ -94,15 +95,25 @@ class FilterSection extends React.Component {
   }
 
   // hasAnyValueSelected returns true if any values are selected in this filterStatus.
-  hasAnyValueSelected = (filterStatus) => {
+  getNumValuesSelected = (filterStatus) => {
+    let numSelected = 0;
     const filterValues = Object.keys(filterStatus);
     for (let i = 0; i < filterValues.length; i += 1) {
       const value = filterValues[i];
       if (filterStatus[value] === true) {
-        return true;
+        numSelected += 1;
       }
     }
-    return false;
+    return numSelected;
+  }
+
+  handleClearButtonClick = (ev) => {
+    // Prevent this click from triggering any onClick events in parent component
+    ev.stopPropagation();
+    // Clear the filters
+    this.setState({
+      filterStatus: {},
+    });
   }
 
   handleSearchInputChange() {
@@ -183,6 +194,7 @@ class FilterSection extends React.Component {
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
     const isTextFilter = this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect';
+    const numSelected = this.getNumValuesSelected(filterStatus);
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div
@@ -192,28 +204,35 @@ class FilterSection extends React.Component {
           tabIndex={0}
           role='button'
         >
-          <span className={`g3-filter-section__title ${this.hasAnyValueSelected(filterStatus) ? 'g3-filter-section__title--active' : ''}`}>
+          <span className={`g3-filter-section__title ${numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}>
             {this.props.title}
           </span>
         </div>
+        <div className='g3-filter-section__selected-count-chip'>
+          {numSelected !== 0 && <SelectedCountChip count={numSelected} onClearButtonClick={this.handleClearButtonClick} />}
+        </div>
         {
           isTextFilter && (
-            <i
-              className='g3-filter-section__search-icon g3-icon g3-icon--sm g3-icon--search'
-              onClick={() => this.toggleShowSearch()}
-              onKeyPress={() => this.toggleShowSearch()}
-              tabIndex={0}
-              role='button'
-            />
+            <div>
+              <i
+                className='g3-filter-section__search-icon g3-icon g3-icon--sm g3-icon--search'
+                onClick={() => this.toggleShowSearch()}
+                onKeyPress={() => this.toggleShowSearch()}
+                tabIndex={0}
+                role='button'
+              />
+            </div>
           )
         }
-        <i
-          onClick={() => this.toggleSection()}
-          onKeyPress={() => this.toggleSection()}
-          tabIndex={0}
-          role='button'
-          className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
-        />
+        <div>
+          <i
+            onClick={() => this.toggleSection()}
+            onKeyPress={() => this.toggleSection()}
+            tabIndex={0}
+            role='button'
+            className={`g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'up' : 'down'}`}
+          />
+        </div>
       </div>
     );
     return (
@@ -243,6 +262,7 @@ class FilterSection extends React.Component {
                     return null;
                   }
                   if (option.filterType === 'singleSelect') {
+                    console.log(`filterStatus[${option.text}]`, filterStatus[option.text]);
                     return (
                       <SingleSelectFilter
                         key={option.text}

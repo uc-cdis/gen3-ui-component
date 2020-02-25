@@ -15,10 +15,13 @@
   border-top: 1px solid var(--g3-color__silver);
 }
 
+
 .g3-filter-section__header {
   display: flex;
   justify-content: space-between;
+  height: 25px;
 }
+
 
 .g3-filter-section__title-container {
   margin: 0;
@@ -46,7 +49,6 @@
 .g3-filter-section__toggle-icon,
 .g3-filter-section__search-icon {
   background-color: var(--g3-color__lightgray);
-  flex-grow: 0;
   margin-left: 10px;
   outline: none;
   cursor: pointer;

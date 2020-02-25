@@ -107,6 +107,14 @@ const fileSectionsWithTooltips = [
   { title: 'File Counts', options: fileCountOptions, tooltip: 'File counts of the subjects' },
 ];
 
+let perfTestingOptions = [];
+const PERF_TESTING_OPTIONS_COUNT = 1000;
+for (let i = 0; i < PERF_TESTING_OPTIONS_COUNT; i += 1) {
+  perfTestingOptions.push({
+    text: `Option ${i}`, filterType: 'singleSelect', count: 123, accessible: true,
+  });
+}
+
 const tabs = [
   <FilterList key={0} sections={projectSections} />,
   <FilterList key={1} sections={subjectSections} />,
@@ -173,15 +181,6 @@ class ExampleFilterGroup extends React.Component {
 }
 
 storiesOf('Filters', module)
-  .add('SingleSelectFilter', () => (
-    <div>
-      <SingleSelectFilter label='Male' onSelect={action('checked')} count={1} accessible />
-      <SingleSelectFilter label='Female' onSelect={action('checked')} count={2} accessible />
-      <SingleSelectFilter label='Option3' onSelect={action('checked')} count={-1} accessible tierAccessLimit={1000} />
-      <SingleSelectFilter label='Option4' onSelect={action('checked')} count={4} accessible={false} />
-      <SingleSelectFilter label='Option5' onSelect={action('checked')} count={-1} accessible={false} tierAccessLimit={1000} />
-    </div>
-  ))
   .add('RangeFilter', () => (
     <div>
       <RangeFilter
@@ -203,6 +202,15 @@ storiesOf('Filters', module)
     <FilterSection
       title={'Ethnicity'}
       options={ethnicityOptions}
+      onSelect={action('checked')}
+      onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
+    />
+  ))
+  .add('FilterSection--Performance Test', () => (
+    <FilterSection
+      title={'Lots of Options'}
+      options={perfTestingOptions}
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
       tierAccessLimit={1000}
