@@ -19,6 +19,7 @@
 .g3-filter-section__header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 25px;
 }
 
@@ -46,9 +47,13 @@
   color: var(--g3-color__gray);
 }
 
+.g3-filter-section__toggle-icon-container {
+  margin-right: 5px;
+}
+
 .g3-filter-section__toggle-icon,
 .g3-filter-section__search-icon {
-  background-color: var(--g3-color__lightgray);
+  background-color: var(--g3-color__gray);
   margin-left: 10px;
   outline: none;
   cursor: pointer;
