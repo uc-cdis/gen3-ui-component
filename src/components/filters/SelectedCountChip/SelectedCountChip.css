@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    color: var(--g3-color__gray);
+    color: var(--g3-color__lightgray);
     background-color: var(--g3-color__bg-cloud);
     border-radius: 4px;
     padding: 4px 6px;
@@ -16,6 +16,7 @@
 }
 
 .g3-selected-count-chip__text-emphasis {
+    color: var(--g3-color__gray);
     font-weight: 800;
 }
 
@@ -23,7 +24,7 @@
 .g3-selected-count-chip__clear-btn {
     flex: 0 0 18px;
     border: none;
-    border-left: 1px solid var(--g3-color__gray);
+    border-left: 1px solid var(--g3-color__lightgray);
     background-color: inherit;
     padding: 0;
     padding-left: 4px;

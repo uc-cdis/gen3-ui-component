@@ -10,7 +10,7 @@ const SelectedCountChip = props => (
       &nbsp;selected
     </div>
     <button className='g3-selected-count-chip__clear-btn' type='button' onClick={props.onClearButtonClick}>
-      <i className='g3-icon g3-icon-color__gray g3-icon--sm g3-icon--cross' />
+      <i className='g3-icon g3-icon--sm g3-icon-color__lightgray g3-icon--sm g3-icon--cross' />
     </button>
   </div>
 );
