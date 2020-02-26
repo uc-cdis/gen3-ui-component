@@ -266,7 +266,6 @@ class FilterSection extends React.Component {
                     return null;
                   }
                   if (option.filterType === 'singleSelect') {
-                    console.log(`filterStatus[${option.text}]`, filterStatus[option.text]);
                     return (
                       <SingleSelectFilter
                         key={option.text}
