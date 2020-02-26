@@ -194,7 +194,10 @@ class FilterSection extends React.Component {
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
     const isTextFilter = this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect';
-    const numSelected = this.getNumValuesSelected(filterStatus);
+    let numSelected = 0;
+    if (isTextFilter) {
+      numSelected = this.getNumValuesSelected(filterStatus);
+    }
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div className='g3-filter-section__toggle-icon-container'>
@@ -213,28 +216,27 @@ class FilterSection extends React.Component {
           tabIndex={0}
           role='button'
         >
-          <span className={`g3-filter-section__title ${numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}>
+          <div className={`g3-filter-section__title ${numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}>
             {this.props.title}
-          </span>
-        </div>
-        <div className='g3-filter-section__selected-count-chip'>
-          {numSelected !== 0 && <SelectedCountChip count={numSelected} onClearButtonClick={this.handleClearButtonClick} />}
+          </div>
+          <div className='g3-filter-section__selected-count-chip'>
+            {numSelected !== 0 && <SelectedCountChip count={numSelected} onClearButtonClick={this.handleClearButtonClick} />}
+          </div>
         </div>
         {
           isTextFilter && (
-            <div>
+            <div
+              tabIndex={0}
+              role='button'
+              onClick={() => this.toggleShowSearch()}
+              onKeyPress={() => this.toggleShowSearch()}
+            >
               <i
                 className='g3-filter-section__search-icon g3-icon g3-icon--sm g3-icon--search'
-                onClick={() => this.toggleShowSearch()}
-                onKeyPress={() => this.toggleShowSearch()}
-                tabIndex={0}
-                role='button'
               />
             </div>
           )
         }
-        <div>
-        </div>
       </div>
     );
     return (
