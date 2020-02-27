@@ -58,11 +58,4 @@ describe('FilterSection', () => {
     expect(mixedFilterComponent.find('.g3-single-select-filter').length).toBe(2);
     expect(mixedFilterComponent.find('.g3-range-filter').length).toBe(2);
   });
-
-  it('toggles expand on click', () => {
-    expect(component.instance().state.isExpanded).toBe(true);
-    expect(component.find('.g3-filter-section__header').length).toBe(1);
-    component.find('.g3-filter-section__title').simulate('click');
-    expect(component.instance().state.isExpanded).toBe(false);
-  });
 });
