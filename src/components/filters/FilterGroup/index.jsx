@@ -87,6 +87,16 @@ class FilterGroup extends React.Component {
     });
   }
 
+  handleSectionClear(tabIndex, sectionIndex) {
+    this.setState((prevState) => {
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      newFilterStatus[tabIndex][sectionIndex] = {};
+      return {
+        filterStatus: newFilterStatus,
+      };
+    });
+  }
+
   handleSelect(sectionIndex, singleFilterLabel) {
     this.setState((prevState) => {
       // update filter status
@@ -206,6 +216,10 @@ class FilterGroup extends React.Component {
                   this.state.selectedTabIndex,
                   sectionIndex,
                   newSectionExpandedStatus,
+                ),
+                onClear: sectionIndex => this.handleSectionClear(
+                  this.state.selectedTabIndex,
+                  sectionIndex,
                 ),
                 expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex],
                 filterStatus: this.state.filterStatus[this.state.selectedTabIndex],

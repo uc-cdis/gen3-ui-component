@@ -114,6 +114,7 @@ class FilterSection extends React.Component {
     this.setState({
       filterStatus: {},
     });
+    this.props.onClear();
   }
 
   handleSearchInputChange() {
@@ -220,7 +221,14 @@ class FilterSection extends React.Component {
             {this.props.title}
           </div>
           <div className='g3-filter-section__selected-count-chip'>
-            {numSelected !== 0 && <SelectedCountChip count={numSelected} onClearButtonClick={this.handleClearButtonClick} />}
+            {numSelected !== 0
+              && (
+                <SelectedCountChip
+                  count={numSelected}
+                  onClearButtonClick={this.handleClearButtonClick}
+                />
+              )
+            }
           </div>
         </div>
         {
@@ -330,6 +338,7 @@ FilterSection.propTypes = {
   })),
   onSelect: PropTypes.func.isRequired,
   onAfterDrag: PropTypes.func.isRequired,
+  onClear: PropTypes.func,
   expanded: PropTypes.bool,
   onToggle: PropTypes.func,
   filterStatus: PropTypes.oneOfType([
@@ -349,6 +358,7 @@ FilterSection.defaultProps = {
   options: [],
   expanded: true,
   onToggle: () => {},
+  onClear: () => {},
   filterStatus: undefined,
   initVisibleItemNumber: 5,
   hideZero: true,
