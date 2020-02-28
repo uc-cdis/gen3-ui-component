@@ -4,15 +4,7 @@ import Tooltip from 'rc-tooltip';
 import './SingleSelectFilter.css';
 
 class SingleSelectFilter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: typeof props.selected === 'undefined' ? false : props.selected,
-    };
-  }
-
   handleCheck() {
-    this.setState(prevState => ({ selected: !prevState.selected }));
     this.props.onSelect(this.props.label);
   }
 
@@ -20,8 +12,6 @@ class SingleSelectFilter extends React.Component {
     if (this.props.count === 0 && this.props.hideZero) {
       return null;
     }
-    // Takes in parent component's selected or self state's selected
-    const selected = (typeof this.props.selected === 'undefined') ? this.state.selected : this.props.selected;
     let inputDisabled = this.props.disabled;
     let lockIconComponent = <React.Fragment />;
     let countIconComponent = <React.Fragment />;
@@ -49,8 +39,7 @@ class SingleSelectFilter extends React.Component {
     }
 
     if (this.props.count === this.props.hideValue) {
-      // we don't disable selected filters
-      inputDisabled = !selected;
+      inputDisabled = true;
       countIconComponent = this.props.tierAccessLimit ? (
         <span className='g3-badge g3-single-select-filter__count'>
           {this.props.tierAccessLimit}
@@ -88,7 +77,7 @@ class SingleSelectFilter extends React.Component {
           className='g3-single-select-filter__checkbox'
           type='checkbox'
           onChange={() => this.handleCheck()}
-          checked={selected}
+          checked={this.props.selected ? this.props.selected : false}
           disabled={inputDisabled}
         />
         {

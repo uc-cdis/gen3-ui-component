@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
-import SingleSelectFilter from '../SingleSelectFilter';
+import StatelessSingleSelectFilter from '../StatelessSingleSelectFilter';
 import SelectedCountChip from '../SelectedCountChip';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
@@ -276,7 +276,7 @@ class FilterSection extends React.Component {
                   }
                   if (option.filterType === 'singleSelect') {
                     return (
-                      <SingleSelectFilter
+                      <StatelessSingleSelectFilter
                         key={option.text}
                         label={option.text}
                         onSelect={label => this.handleSelectSingleSelectFilter(label)}
