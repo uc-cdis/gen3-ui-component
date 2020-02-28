@@ -19,6 +19,19 @@ const filterVisibleStatusObj = (optionList, inputText) => {
   return res;
 };
 
+// hasAnyValueSelected returns true if any values are selected in this filterStatus.
+const getNumValuesSelected = (filterStatus) => {
+  let numSelected = 0;
+  const filterValues = Object.keys(filterStatus);
+  for (let i = 0; i < filterValues.length; i += 1) {
+    const value = filterValues[i];
+    if (filterStatus[value] === true) {
+      numSelected += 1;
+    }
+  }
+  return numSelected;
+};
+
 class FilterSection extends React.Component {
   constructor(props) {
     super(props);
@@ -94,20 +107,8 @@ class FilterSection extends React.Component {
     return null;
   }
 
-  // hasAnyValueSelected returns true if any values are selected in this filterStatus.
-  getNumValuesSelected = (filterStatus) => {
-    let numSelected = 0;
-    const filterValues = Object.keys(filterStatus);
-    for (let i = 0; i < filterValues.length; i += 1) {
-      const value = filterValues[i];
-      if (filterStatus[value] === true) {
-        numSelected += 1;
-      }
-    }
-    return numSelected;
-  }
 
-  handleClearButtonClick = (ev) => {
+  handleClearButtonClick(ev) {
     // Prevent this click from triggering any onClick events in parent component
     ev.stopPropagation();
     // Clear the filters
@@ -197,7 +198,7 @@ class FilterSection extends React.Component {
     const isTextFilter = this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect';
     let numSelected = 0;
     if (isTextFilter) {
-      numSelected = this.getNumValuesSelected(filterStatus);
+      numSelected = getNumValuesSelected(filterStatus);
     }
     const sectionHeader = (
       <div className='g3-filter-section__header'>
@@ -225,7 +226,7 @@ class FilterSection extends React.Component {
               && (
                 <SelectedCountChip
                   count={numSelected}
-                  onClearButtonClick={this.handleClearButtonClick}
+                  onClearButtonClick={ev => this.handleClearButtonClick(ev)}
                 />
               )
             }
