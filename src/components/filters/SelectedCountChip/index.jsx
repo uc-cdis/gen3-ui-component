@@ -9,9 +9,15 @@ const SelectedCountChip = props => (
       <span className='g3-selected-count-chip__text-emphasis'>{props.count}</span>
       &nbsp;selected
     </div>
-    <button className='g3-selected-count-chip__clear-btn' type='button' onClick={props.onClearButtonClick}>
+    <div
+      className='g3-selected-count-chip__clear-btn'
+      role='button'
+      tabIndex={0}
+      onClick={props.onClearButtonClick}
+      onKeyPress={props.onClearButtonClick}
+    >
       <i className='g3-icon g3-icon--sm g3-icon-color__lightgray g3-icon--sm g3-icon--cross' />
-    </button>
+    </div>
   </div>
 );
 
