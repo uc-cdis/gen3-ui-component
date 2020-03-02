@@ -1,4 +1,5 @@
 .g3-selected-count-chip {
+  box-sizing: border-box;
   font-size: 14px;
   display: flex;
   flex-direction: row;
@@ -6,6 +7,10 @@
   color: var(--g3-color__lightgray);
   background-color: var(--g3-color__bg-cloud);
   border-radius: 4px;
+}
+
+.g3-selected-count-chip * {
+  box-sizing: inherit;
 }
 
 .g3-selected-count-chip__left {
