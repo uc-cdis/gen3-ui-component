@@ -13,8 +13,8 @@ describe('RangeFilter', () => {
   });
 
   it('sets bounds on slider change', () => {
-    expect(component.instance().state.lowerBound).toBe(0);
-    expect(component.instance().state.upperBound).toBe(100);
+    expect(component.instance().state.lowerBound).toBe(undefined);
+    expect(component.instance().state.upperBound).toBe(undefined);
     component.instance().onSliderChange([30, 55]);
     expect(component.instance().state.lowerBound).toBe(30);
     expect(component.instance().state.upperBound).toBe(55);
