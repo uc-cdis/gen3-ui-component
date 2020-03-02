@@ -21,6 +21,7 @@
   justify-content: flex-end;
   align-items: center;
   height: 25px;
+  width: 100%;
 }
 
 
@@ -28,6 +29,8 @@
   user-select: none;
   margin: 0;
   height: 100%;
+  width: 100%;
+  overflow: hidden;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -40,6 +43,16 @@
   font-weight: var(--g3-font__semi-bold-weight);
   color: var(--g3-color__bg-coal);
   border-bottom: 2px solid transparent;
+  max-height: 25px;
+  min-width: 20px;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.g3-filter-section__title:hover {
+  min-width: fit-content;
 }
 
 .g3-filter-section__title--active {
