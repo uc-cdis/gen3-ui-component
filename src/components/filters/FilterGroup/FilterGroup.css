@@ -35,12 +35,17 @@
 }
 
 .g3-filter-group__tab-title {
-  padding: 3px 10px;
-  margin: 0;
+  padding: 2px;
+  margin: 3px 10px;
   font-size: 14px;
   line-height: 1em;
   font-weight: var(--g3-font__semi-bold-weight);
   text-align: center;
+  border-bottom: 2px solid transparent;
+}
+
+.g3-filter-group__tab-title--has-active-filters {
+  border-bottom: 2px solid var(--g3-primary-btn__bg-color);
 }
 
 .g3-filter-group__filter-area {

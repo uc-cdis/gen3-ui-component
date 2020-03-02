@@ -14,6 +14,20 @@ const removeEmptyFilter = (filterResults) => {
   return newFilterResults;
 };
 
+const tabHasActiveFilters = (tabFilterStatus) => {
+  /**
+   * tabFilterStatus[sectionIndex] = { [field]: true/false/[upperBound,lowerBound]}
+   */
+  let hasActiveFilters = false;
+  tabFilterStatus.forEach((section) => {
+    const fieldStatuses = Object.values(section);
+    if (fieldStatuses.some(status => status !== undefined && status !== false)) {
+      hasActiveFilters = true;
+    }
+  });
+  return hasActiveFilters;
+};
+
 class FilterGroup extends React.Component {
   constructor(props) {
     super(props);
@@ -189,7 +203,7 @@ class FilterGroup extends React.Component {
                 onClick={() => this.selectTab(index)}
                 onKeyDown={() => this.selectTab(index)}
               >
-                <p className='g3-filter-group__tab-title'>
+                <p className={`g3-filter-group__tab-title ${tabHasActiveFilters(this.state.filterStatus[index]) ? 'g3-filter-group__tab-title--has-active-filters' : ''}`}>
                   {this.props.filterConfig.tabs[tab.key].title}
                 </p>
               </div>
