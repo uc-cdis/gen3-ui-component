@@ -44,7 +44,7 @@ class FilterGroup extends React.Component {
 
       /**
        * Current selected status for filters,
-       * filterStatus[tabIndex][sectionIndex] = { [field]: true/false/[upperBound,lowerBound]}
+       * filterStatus[tabIndex][sectionIndex] = { [field]: true | false } | [upperBound,lowerBound]
        */
       filterStatus: initialFilterStatus,
 

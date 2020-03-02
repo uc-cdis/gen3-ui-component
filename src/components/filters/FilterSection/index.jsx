@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
 import StatelessSingleSelectFilter from '../StatelessSingleSelectFilter';
-import SelectedCountChip from '../SelectedCountChip';
+import Chip from '../Chip';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
 
@@ -21,14 +21,18 @@ const filterVisibleStatusObj = (optionList, inputText) => {
 
 // hasAnyValueSelected returns true if any values are selected in this filterStatus.
 const getNumValuesSelected = (filterStatus) => {
+  // filterStatus shape: { [fieldName]: true | false } | [number, number]
   let numSelected = 0;
-  const filterValues = Object.keys(filterStatus);
-  for (let i = 0; i < filterValues.length; i += 1) {
-    const value = filterValues[i];
-    if (filterStatus[value] === true) {
+  if (Array.isArray(filterStatus)) {
+    numSelected = 1;
+    return numSelected;
+  }
+  const statuses = Object.values(filterStatus);
+  statuses.forEach((status) => {
+    if (status === true || Array.isArray(status)) {
       numSelected += 1;
     }
-  }
+  });
   return numSelected;
 };
 
@@ -196,10 +200,8 @@ class FilterSection extends React.Component {
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
     const isTextFilter = this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect';
-    let numSelected = 0;
-    if (isTextFilter) {
-      numSelected = getNumValuesSelected(filterStatus);
-    }
+    const isRangeFilter = !isTextFilter;
+    const numSelected = getNumValuesSelected(filterStatus);
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div className='g3-filter-section__toggle-icon-container'>
@@ -222,10 +224,25 @@ class FilterSection extends React.Component {
             {this.props.title}
           </div>
           <div className='g3-filter-section__selected-count-chip'>
-            {numSelected !== 0
+            { (isRangeFilter && numSelected !== 0)
               && (
-                <SelectedCountChip
-                  count={numSelected}
+                <Chip
+                  text='reset'
+                  onClearButtonClick={ev => this.handleClearButtonClick(ev)}
+                />
+              )
+            }
+            { (isTextFilter && numSelected !== 0)
+              && (
+                <Chip
+                  text={
+                    (
+                      <React.Fragment>
+                        <span className='g3-filter-section__selected-count-chip-text-emphasis'>{numSelected}</span>
+                        &nbsp;selected
+                      </React.Fragment>
+                    )
+                  }
                   onClearButtonClick={ev => this.handleClearButtonClick(ev)}
                 />
               )
@@ -293,10 +310,10 @@ class FilterSection extends React.Component {
                   }
                   const lowerBound = (typeof filterStatus === 'undefined'
                   || filterStatus.length !== 2)
-                    ? option.min : filterStatus[0];
+                    ? undefined : filterStatus[0];
                   const upperBound = (typeof filterStatus === 'undefined'
                   || filterStatus.length !== 2)
-                    ? option.max : filterStatus[1];
+                    ? undefined : filterStatus[1];
                   return (
                     <RangeFilter
                       key={option.text}

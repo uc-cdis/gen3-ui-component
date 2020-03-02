@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import './node_modules/rc-slider/assets/index.css';
 import './RangeFilter.css';
 
 class RangeFilter extends React.Component {
@@ -12,17 +12,6 @@ class RangeFilter extends React.Component {
       upperBound: props.upperBound,
       isDragging: false,
     };
-  }
-
-  // When component receives new props, update state.lowerBound and state.upperBound
-  static getDerivedStateFromProps(props, prevState) {
-    if (!prevState.isDragging) {
-      return {
-        lowerBound: props.lowerBound,
-        upperBound: props.upperBound,
-      };
-    }
-    return null;
   }
 
   onSliderChange(range) {

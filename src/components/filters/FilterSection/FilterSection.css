@@ -63,6 +63,11 @@
   margin-left: 10px;
 }
 
+.g3-filter-section__selected-count-chip-text-emphasis {
+  color: var(--g3-color__gray);
+  font-weight: 800;
+}
+
 
 .g3-filter-section__options {
   font-size: 14px;

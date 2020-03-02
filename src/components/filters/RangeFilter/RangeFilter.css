@@ -41,3 +41,7 @@
   background-color: var(--g3-color__highlight-orange);
   border-radius: 2px;
 }
+
+.g3-range-filter__slider--inactive .rc-slider-track {
+  background-color: var(--g3-color__lightgray);
+}

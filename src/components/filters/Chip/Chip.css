@@ -1,4 +1,4 @@
-.g3-selected-count-chip {
+.g3-chip {
   box-sizing: border-box;
   font-size: 14px;
   display: flex;
@@ -9,22 +9,16 @@
   border-radius: 4px;
 }
 
-.g3-selected-count-chip * {
+.g3-chip * {
   box-sizing: inherit;
 }
 
-.g3-selected-count-chip__left {
+.g3-chip__text {
   margin: 4px;
-  flex: 1 0 40px;
   text-align: center;
 }
 
-.g3-selected-count-chip__text-emphasis {
-  color: var(--g3-color__gray);
-  font-weight: 800;
-}
-
-.g3-selected-count-chip__clear-btn {
+.g3-chip__clear-btn {
   flex: 0 0 18px;
   border-left: 1px solid var(--g3-color__silver);
   padding: 4px 6px;
