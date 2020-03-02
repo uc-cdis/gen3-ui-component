@@ -19,7 +19,7 @@
   align-items: center;
   border: 1px solid var(--g3-color__silver);
   border-radius: 12px 12px 0 0;
-  background-color: var(--g3-color__bg-cloud);
+  background-color: var(--g3-color__silver);
   outline: none;
   cursor: pointer;
   font-size: 14px;
