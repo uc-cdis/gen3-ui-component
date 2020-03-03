@@ -59,6 +59,27 @@ class RangeFilter extends React.Component {
       : Number.parseFloat((Number.parseFloat(num).toFixed(this.props.decimalDigitsLen)));
   }
 
+  handleLowerBoundInputChange(ev) {
+    const lowerBound = Number.parseFloat(ev.currentTarget.value);
+    this.setState({
+      isDragging: true,
+      lowerBound,
+    });
+  }
+
+  handleLowerBoundInputBlur() {
+    this.setState({
+      isDragging: false,
+    });
+    this.props.onAfterDrag(
+      this.state.lowerBound,
+      this.state.upperBound,
+      this.props.min,
+      this.props.max,
+      this.props.rangeStep,
+    );
+  }
+
   render() {
     const rangeMin = this.getNumberToFixed(this.props.min);
     const rangeMax = this.getNumberToFixed(this.props.max);
@@ -85,8 +106,14 @@ class RangeFilter extends React.Component {
           && <p className='g3-range-filter__title'>{this.props.label}</p>
         }
         <div className='g3-range-filter__bounds'>
-          <p className='g3-range-filter__bound g3-range-filter__bound--lower'>{displayLowerBound}</p>
-          <p className='g3-range-filter__bound g3-range-filter__bound--higher'>{displayUpperBound}</p>
+          <input
+            type='number'
+            value={displayLowerBound}
+            onChange={ev => this.handleLowerBoundInputChange(ev)}
+            onBlur={() => this.handleLowerBoundInputBlur()}
+            className='g3-range-filter__bound g3-range-filter__bound--lower'
+          />
+          <input type='number' value={displayUpperBound} onBlur={() => this.handleLowerBoundInputBlur()} className='g3-range-filter__bound g3-range-filter__bound--higher' />
         </div>
         <Range
           className={`g3-range-filter__slider ${boundsAreUndefined ? 'g3-range-filter__slider--inactive' : ''}`}
