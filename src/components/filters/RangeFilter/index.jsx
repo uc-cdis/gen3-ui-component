@@ -8,8 +8,10 @@ class RangeFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lowerBound: props.lowerBound,
-      upperBound: props.upperBound,
+      lowerBound: props.lowerBound ? props.lowerBound : props.min,
+      upperBound: props.upperBound ? props.upperBound : props.max,
+      lowerBoundInputValue: props.lowerBound,
+      upperBoundInputValue: props.upperBound,
       isDragging: false,
     };
   }
@@ -60,24 +62,37 @@ class RangeFilter extends React.Component {
   }
 
   handleLowerBoundInputChange(ev) {
-    const lowerBound = Number.parseFloat(ev.currentTarget.value);
     this.setState({
       isDragging: true,
-      lowerBound,
+      lowerBoundInputValue: ev.currentTarget.value,
     });
   }
 
   handleLowerBoundInputBlur() {
-    this.setState({
+    // Try to convert lowerBoundInputValue to number.
+    // If the conversion succeeds, update state.lowerBound and call props.onAfterDrag.
+    // If the conversion fails, reset state.lowerBoundInputValue to state.lowerBound.
+    const newLowerBound = this.getNumberToFixed(this.state.lowerBoundInputValue);
+    if (Number.isNaN(newLowerBound)) {
+      this.setState(prevState => ({
+        isDragging: false,
+        lowerBoundInputValue: prevState.lowerBound,
+      }));
+      return;
+    }
+
+    this.setState(prevState => ({
       isDragging: false,
+      lowerBound: this.getNumberToFixed(prevState.lowerBoundInputValue),
+    }), () => {
+      this.props.onAfterDrag(
+        this.state.lowerBound,
+        this.state.upperBound,
+        this.props.min,
+        this.props.max,
+        this.props.rangeStep,
+      );
     });
-    this.props.onAfterDrag(
-      this.state.lowerBound,
-      this.state.upperBound,
-      this.props.min,
-      this.props.max,
-      this.props.rangeStep,
-    );
   }
 
   render() {
