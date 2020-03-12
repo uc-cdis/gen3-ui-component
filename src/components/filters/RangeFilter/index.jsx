@@ -7,34 +7,39 @@ import './RangeFilter.css';
 class RangeFilter extends React.Component {
   constructor(props) {
     super(props);
+    // Set lowerBound and upperBound inputs to min or max if lower/upper bounds are
+    // undefined or outside the range of [min, max]
+    const lowerBoundInputValue = (props.lowerBound && props.lowerBound >= props.min)
+      ? props.lowerBound
+      : props.min;
+    const upperBoundInputValue = (props.upperBound && props.upperBound <= props.max)
+      ? props.upperBound
+      : props.max;
     this.state = {
-      lowerBound: props.lowerBound ? props.lowerBound : props.min,
-      upperBound: props.upperBound ? props.upperBound : props.max,
-      lowerBoundInputValue: props.lowerBound,
-      upperBoundInputValue: props.upperBound,
-      isDragging: false,
+      lowerBound: props.lowerBound,
+      upperBound: props.upperBound,
+      lowerBoundInputValue,
+      upperBoundInputValue,
     };
   }
 
-  // When component receives new props, update state.lowerBound and state.upperBound
-  static getDerivedStateFromProps(props, prevState) {
-    if (!prevState.isDragging) {
-      return {
-        lowerBound: props.lowerBound,
-        upperBound: props.upperBound,
-      };
-    }
-    return null;
-  }
-
   onSliderChange(range) {
-    this.setState(prevState => ({
-      isDragging: true,
-      lowerBound: (this.props.count === this.props.hideValue
-        && prevState.lowerBound < range[0]) ? prevState.lowerBound : range[0],
-      upperBound: (this.props.count === this.props.hideValue
-        && prevState.upperBound > range[1]) ? prevState.upperBound : range[1],
-    }),
+    this.setState((prevState) => {
+      const lowerBound = (this.props.count === this.props.hideValue
+        && prevState.lowerBound < range[0])
+        ? prevState.lowerBound
+        : range[0];
+      const upperBound = (this.props.count === this.props.hideValue
+        && prevState.upperBound > range[1])
+        ? prevState.upperBound
+        : range[1];
+      return {
+        lowerBound,
+        upperBound,
+        lowerBoundInputValue: lowerBound,
+        upperBoundInputValue: upperBound,
+      };
+    },
     () => {
       if (this.props.onDrag) {
         this.props.onDrag(this.state.lowerBound, this.state.upperBound);
@@ -44,7 +49,6 @@ class RangeFilter extends React.Component {
   }
 
   onAfterSliderChange() {
-    this.setState({ isDragging: false });
     if (this.props.onAfterDrag) {
       this.props.onAfterDrag(
         this.state.lowerBound,
@@ -63,31 +67,79 @@ class RangeFilter extends React.Component {
 
   handleLowerBoundInputChange(ev) {
     this.setState({
-      isDragging: true,
       lowerBoundInputValue: ev.currentTarget.value,
     });
   }
 
+  handleUpperBoundInputChange(ev) {
+    this.setState({
+      upperBoundInputValue: ev.currentTarget.value,
+    });
+  }
+
   handleLowerBoundInputBlur() {
-    // Try to convert lowerBoundInputValue to number.
-    // If the conversion succeeds, update state.lowerBound and call props.onAfterDrag.
-    // If the conversion fails, reset state.lowerBoundInputValue to state.lowerBound.
-    const newLowerBound = this.getNumberToFixed(this.state.lowerBoundInputValue);
+    // Validate that this.state.lowerBound is a number
+    let newLowerBound = Number.parseFloat(this.state.lowerBoundInputValue);
     if (Number.isNaN(newLowerBound)) {
+      // If the validation fails, set lowerBoundInputValue to current lowerBound.
       this.setState(prevState => ({
-        isDragging: false,
         lowerBoundInputValue: prevState.lowerBound,
       }));
       return;
     }
+    // Clamp newLowerBound to [min, upperBound]
+    if (newLowerBound < this.props.min) {
+      newLowerBound = this.props.min;
+    }
+    const upperBound = this.state.upperBound === undefined
+      ? this.props.max
+      : this.state.upperBound;
+    if (newLowerBound > upperBound) {
+      newLowerBound = upperBound;
+    }
 
-    this.setState(prevState => ({
-      isDragging: false,
-      lowerBound: this.getNumberToFixed(prevState.lowerBoundInputValue),
-    }), () => {
+    // Set state.lowerBound to newLowerBound and call onAfterDrag
+    this.setState({
+      lowerBound: newLowerBound,
+    }, () => {
+      this.props.onAfterDrag(
+        newLowerBound,
+        this.state.upperBound,
+        this.props.min,
+        this.props.max,
+        this.props.rangeStep,
+      );
+    });
+  }
+
+  handleUpperBoundInputBlur() {
+    // Validate that this.state.upperBound is a number
+    let newUpperBound = Number.parseFloat(this.state.upperBoundInputValue);
+    if (Number.isNaN(newUpperBound)) {
+      // If the validation fails, set upperBoundInputValue to current upperBound.
+      this.setState(prevState => ({
+        upperBoundInputValue: prevState.upperBound,
+      }));
+      return;
+    }
+    // Clamp newUpperBound to [lowerBound, max]
+    const lowerBound = this.state.lowerBound === undefined
+      ? this.props.min
+      : this.state.lowerBound;
+    if (newUpperBound < lowerBound) {
+      newUpperBound = lowerBound;
+    }
+    if (newUpperBound > this.props.max) {
+      newUpperBound = this.props.max;
+    }
+
+    // Set state.lowerBound to newLowerBound and call onAfterDrag
+    this.setState({
+      upperBound: newUpperBound,
+    }, () => {
       this.props.onAfterDrag(
         this.state.lowerBound,
-        this.state.upperBound,
+        newUpperBound,
         this.props.min,
         this.props.max,
         this.props.rangeStep,
@@ -99,21 +151,15 @@ class RangeFilter extends React.Component {
     const rangeMin = this.getNumberToFixed(this.props.min);
     const rangeMax = this.getNumberToFixed(this.props.max);
 
-    let displayLowerBound = '';
-    let displayUpperBound = '';
+    const displayLowerBound = this.state.lowerBound === undefined
+      ? rangeMin
+      : this.getNumberToFixed(this.state.lowerBound);
+    const displayUpperBound = this.state.upperBound === undefined
+      ? rangeMax
+      : this.getNumberToFixed(this.state.upperBound);
+
     const boundsAreUndefined = this.state.lowerBound === undefined
-      || this.state.upperBound === undefined;
-    if (boundsAreUndefined) {
-      displayLowerBound = rangeMin;
-      displayUpperBound = rangeMax;
-    } else {
-      const lowerBound = this.state.isDragging ? this.state.lowerBound // eslint-disable-line
-        : (this.props.lowerBound ? this.props.lowerBound : this.state.lowerBound);
-      const upperBound = this.state.isDragging ? this.state.upperBound // eslint-disable-line
-        : (this.props.upperBound ? this.props.upperBound : this.state.upperBound);
-      displayLowerBound = this.getNumberToFixed(lowerBound);
-      displayUpperBound = this.getNumberToFixed(upperBound);
-    }
+      && this.state.upperBound === undefined;
 
     return (
       <div className='g3-range-filter'>
@@ -123,12 +169,18 @@ class RangeFilter extends React.Component {
         <div className='g3-range-filter__bounds'>
           <input
             type='number'
-            value={displayLowerBound}
+            value={this.state.lowerBoundInputValue}
             onChange={ev => this.handleLowerBoundInputChange(ev)}
             onBlur={() => this.handleLowerBoundInputBlur()}
             className='g3-range-filter__bound g3-range-filter__bound--lower'
           />
-          <input type='number' value={displayUpperBound} onBlur={() => this.handleLowerBoundInputBlur()} className='g3-range-filter__bound g3-range-filter__bound--higher' />
+          <input
+            type='number'
+            value={this.state.upperBoundInputValue}
+            onChange={ev => this.handleUpperBoundInputChange(ev)}
+            onBlur={() => this.handleUpperBoundInputBlur()}
+            className='g3-range-filter__bound g3-range-filter__bound--lower'
+          />
         </div>
         <Range
           className={`g3-range-filter__slider ${boundsAreUndefined ? 'g3-range-filter__slider--inactive' : ''}`}

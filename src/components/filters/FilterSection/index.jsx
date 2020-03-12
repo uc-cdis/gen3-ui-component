@@ -314,9 +314,16 @@ class FilterSection extends React.Component {
                   const upperBound = (typeof filterStatus === 'undefined'
                   || filterStatus.length !== 2)
                     ? undefined : filterStatus[1];
+                  /**
+                  * NOTE: We set the `key` prop on RangeFilter so that when the filterState changes,
+                  * the RangeFilter is reset, even though it manages its own internal state.
+                  * See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+                  * NOTE: We set hideValue={-1} here because Guppy returns a count of -1
+                  * when the count is hidden from the end user.
+                  */
                   return (
                     <RangeFilter
-                      key={option.text}
+                      key={`${this.props.title}-${lowerBound}-${upperBound}`}
                       label={option.text}
                       min={option.min}
                       max={option.max}
@@ -325,6 +332,7 @@ class FilterSection extends React.Component {
                       lowerBound={lowerBound}
                       upperBound={upperBound}
                       count={option.count}
+                      hideValue={-1}
                     />
                   );
                 }) : null
