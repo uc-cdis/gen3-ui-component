@@ -101,6 +101,7 @@ class RangeFilter extends React.Component {
     // Set state.lowerBound to newLowerBound and call onAfterDrag
     this.setState({
       lowerBound: newLowerBound,
+      lowerBoundInputValue: newLowerBound,
     }, () => {
       this.props.onAfterDrag(
         newLowerBound,
@@ -113,10 +114,10 @@ class RangeFilter extends React.Component {
   }
 
   handleUpperBoundInputBlur() {
-    // Validate that this.state.upperBound is a number
     let newUpperBound = Number.parseFloat(this.state.upperBoundInputValue);
     if (Number.isNaN(newUpperBound)) {
-      // If the validation fails, set upperBoundInputValue to current upperBound.
+      // If the value of the input cannot be parsed to a number,
+      // reset upperBoundInputValue to previous upperBound.
       this.setState(prevState => ({
         upperBoundInputValue: prevState.upperBound,
       }));
@@ -133,9 +134,10 @@ class RangeFilter extends React.Component {
       newUpperBound = this.props.max;
     }
 
-    // Set state.lowerBound to newLowerBound and call onAfterDrag
+    // Set state.upperBound to newUpperBound and call onAfterDrag
     this.setState({
       upperBound: newUpperBound,
+      upperBoundInputValue: newUpperBound,
     }, () => {
       this.props.onAfterDrag(
         this.state.lowerBound,
