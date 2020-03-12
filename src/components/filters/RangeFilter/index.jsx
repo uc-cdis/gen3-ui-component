@@ -65,15 +65,15 @@ class RangeFilter extends React.Component {
       : Number.parseFloat((Number.parseFloat(num).toFixed(this.props.decimalDigitsLen)));
   }
 
-  handleLowerBoundInputChange(ev) {
+  handleLowerBoundInputChange(value) {
     this.setState({
-      lowerBoundInputValue: ev.currentTarget.value,
+      lowerBoundInputValue: value,
     });
   }
 
-  handleUpperBoundInputChange(ev) {
+  handleUpperBoundInputChange(value) {
     this.setState({
-      upperBoundInputValue: ev.currentTarget.value,
+      upperBoundInputValue: value,
     });
   }
 
@@ -87,6 +87,18 @@ class RangeFilter extends React.Component {
       }));
       return;
     }
+
+    // If count === hideValue, prevent lowerBound from increasing any further
+    const tieredAccessLockEnabled = this.props.count === this.props.hideValue;
+    if (tieredAccessLockEnabled) {
+      if (newLowerBound > this.state.lowerBound) {
+        this.setState(prevState => ({
+          lowerBoundInputValue: prevState.lowerBound,
+        }));
+        return;
+      }
+    }
+
     // Clamp newLowerBound to [min, upperBound]
     if (newLowerBound < this.props.min) {
       newLowerBound = this.props.min;
@@ -123,6 +135,18 @@ class RangeFilter extends React.Component {
       }));
       return;
     }
+
+    // If count === hideValue, prevent lowerBound from increasing any further
+    const tieredAccessLockEnabled = this.props.count === this.props.hideValue;
+    if (tieredAccessLockEnabled) {
+      if (newUpperBound < this.state.upperBound) {
+        this.setState(prevState => ({
+          upperBoundInputValue: prevState.upperBound,
+        }));
+        return;
+      }
+    }
+
     // Clamp newUpperBound to [lowerBound, max]
     const lowerBound = this.state.lowerBound === undefined
       ? this.props.min
@@ -172,14 +196,14 @@ class RangeFilter extends React.Component {
           <input
             type='number'
             value={this.state.lowerBoundInputValue}
-            onChange={ev => this.handleLowerBoundInputChange(ev)}
+            onChange={ev => this.handleLowerBoundInputChange(ev.currentTarget.value)}
             onBlur={() => this.handleLowerBoundInputBlur()}
             className='g3-range-filter__bound g3-range-filter__bound--lower'
           />
           <input
             type='number'
             value={this.state.upperBoundInputValue}
-            onChange={ev => this.handleUpperBoundInputChange(ev)}
+            onChange={ev => this.handleUpperBoundInputChange(ev.currentTarget.value)}
             onBlur={() => this.handleUpperBoundInputBlur()}
             className='g3-range-filter__bound g3-range-filter__bound--lower'
           />
