@@ -13,6 +13,7 @@ const iconClassList = [
   'g3-icon g3-icon--cross',
   'g3-icon g3-icon--delete',
   'g3-icon g3-icon--exit',
+  'g3-icon g3-icon--undo',
   'g3-icon g3-icon--link',
   'g3-icon g3-icon--doctor',
   'g3-icon g3-icon--datafile',

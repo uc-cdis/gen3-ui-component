@@ -226,10 +226,24 @@ class FilterSection extends React.Component {
           <div className='g3-filter-section__selected-count-chip'>
             { (isRangeFilter && numSelected !== 0)
               && (
-                <Chip
-                  text='reset'
-                  onClearButtonClick={ev => this.handleClearButtonClick(ev)}
-                />
+                <div
+                  tabIndex={0}
+                  role='button'
+                  onClick={ev => this.handleClearButtonClick(ev)}
+                  onKeyPress={ev => this.handleClearButtonClick(ev)}
+                  className='g3-filter-section__range-filter-clear-btn'
+                >
+                  <div
+                    className='g3-filter-section__range-filter-clear-btn-text'
+                  >
+                    reset
+                  </div>
+                  <div
+                    className='g3-filter-section__range-filter-clear-btn-icon'
+                  >
+                    <i className='g3-icon g3-icon--sm g3-icon-color__lightgray g3-icon--sm g3-icon--undo' />
+                  </div>
+                </div>
               )
             }
             { (isTextFilter && numSelected !== 0)
