@@ -68,7 +68,6 @@
   font-weight: 800;
 }
 
-
 .g3-filter-section__options {
   font-size: 14px;
   color: var(--g3-color__gray);
@@ -175,7 +174,7 @@
 
 .g3-filter-section__range-filter-clear-btn-icon {
   flex: 0 0 18px;
-  padding: 4px 6px;
+  padding: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
