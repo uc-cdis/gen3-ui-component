@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
-import StatelessSingleSelectFilter from '../StatelessSingleSelectFilter';
+import SingleSelectFilter from '../SingleSelectFilter';
 import Chip from '../Chip';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
@@ -291,8 +291,11 @@ class FilterSection extends React.Component {
                   }
                   if (option.filterType === 'singleSelect') {
                     return (
-                      <StatelessSingleSelectFilter
-                        key={option.text}
+                      // We use the 'key' prop to force the SingleSelectFilter
+                      // to rerender on filterStatus change.
+                      // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+                      <SingleSelectFilter
+                        key={`${option.text}-${filterStatus[option.text] ? 'enabled' : 'disabled'}`}
                         label={option.text}
                         onSelect={label => this.handleSelectSingleSelectFilter(label)}
                         selected={filterStatus[option.text]}
