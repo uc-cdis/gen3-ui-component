@@ -19,9 +19,7 @@ const filterVisibleStatusObj = (optionList, inputText) => {
   return res;
 };
 
-// hasAnyValueSelected returns true if any values are selected in this filterStatus.
 const getNumValuesSelected = (filterStatus) => {
-  // filterStatus shape: { [fieldName]: true | false } | [number, number]
   let numSelected = 0;
   if (Array.isArray(filterStatus)) {
     numSelected = 1;
@@ -42,7 +40,7 @@ class FilterSection extends React.Component {
     this.state = {
       isExpanded: this.props.expanded,
       showingMore: false,
-      filterStatus: {},
+      filterStatus: {}, // shape: { [fieldName]: true | false } | [number, number]
       searchInputEmpty: true,
       showingSearch: false,
 
