@@ -221,17 +221,19 @@ class FilterSection extends React.Component {
           <div className={`g3-filter-section__title ${numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}>
             {this.props.title}
           </div>
-          <div className='g3-filter-section__selected-count-chip'>
-            { (isRangeFilter && numSelected !== 0)
-              && (
+          { (isRangeFilter && numSelected !== 0)
+            && (
+              <div className='g3-filter-section__selected-count-chip'>
                 <Chip
                   text='reset'
                   onClearButtonClick={ev => this.handleClearButtonClick(ev)}
                 />
-              )
-            }
-            { (isTextFilter && numSelected !== 0)
-              && (
+              </div>
+            )
+          }
+          { (isTextFilter && numSelected !== 0)
+            && (
+              <div className='g3-filter-section__selected-count-chip'>
                 <Chip
                   text={
                     (
@@ -243,9 +245,9 @@ class FilterSection extends React.Component {
                   }
                   onClearButtonClick={ev => this.handleClearButtonClick(ev)}
                 />
-              )
-            }
-          </div>
+              </div>
+            )
+          }
         </div>
         {
           isTextFilter && (
