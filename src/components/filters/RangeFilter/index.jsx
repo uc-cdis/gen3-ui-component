@@ -77,7 +77,7 @@ class RangeFilter extends React.Component {
     });
   }
 
-  handleLowerBoundInputBlur() {
+  handleLowerBoundInputSubmit() {
     // Validate that this.state.lowerBound is a number
     let newLowerBound = Number.parseFloat(this.state.lowerBoundInputValue);
     if (Number.isNaN(newLowerBound)) {
@@ -125,11 +125,11 @@ class RangeFilter extends React.Component {
     });
   }
 
-  handleUpperBoundInputBlur() {
+  handleUpperBoundInputSubmit() {
+    // Validate that this.state.lowerBound is a number
     let newUpperBound = Number.parseFloat(this.state.upperBoundInputValue);
     if (Number.isNaN(newUpperBound)) {
-      // If the value of the input cannot be parsed to a number,
-      // reset upperBoundInputValue to previous upperBound.
+      // If the validation fails, set lowerBoundInputValue to current lowerBound.
       this.setState(prevState => ({
         upperBoundInputValue: prevState.upperBound,
       }));
@@ -197,14 +197,24 @@ class RangeFilter extends React.Component {
             type='number'
             value={this.state.lowerBoundInputValue}
             onChange={ev => this.handleLowerBoundInputChange(ev.currentTarget.value)}
-            onBlur={() => this.handleLowerBoundInputBlur()}
+            onKeyPress={(ev) => {
+              if (ev.key === 'Enter') {
+                this.handleLowerBoundInputSubmit();
+              }
+            }}
+            onBlur={() => this.handleLowerBoundInputSubmit()}
             className='g3-range-filter__bound g3-range-filter__bound--lower'
           />
           <input
             type='number'
             value={this.state.upperBoundInputValue}
             onChange={ev => this.handleUpperBoundInputChange(ev.currentTarget.value)}
-            onBlur={() => this.handleUpperBoundInputBlur()}
+            onKeyPress={(ev) => {
+              if (ev.key === 'Enter') {
+                this.handleUpperBoundInputSubmit();
+              }
+            }}
+            onBlur={() => this.handleUpperBoundInputSubmit()}
             className='g3-range-filter__bound g3-range-filter__bound--lower'
           />
         </div>
