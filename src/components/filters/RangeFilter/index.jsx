@@ -8,8 +8,8 @@ class RangeFilter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lowerBound: props.lowerBound ? props.lowerBound : props.min,
-      upperBound: props.upperBound ? props.upperBound : props.max,
+      lowerBound: props.lowerBound,
+      upperBound: props.upperBound,
       isDragging: false,
     };
   }
@@ -51,24 +51,37 @@ class RangeFilter extends React.Component {
   render() {
     const rangeMin = this.getNumberToFixed(this.props.min);
     const rangeMax = this.getNumberToFixed(this.props.max);
-    const lowerBound = this.state.isDragging ? this.state.lowerBound // eslint-disable-line
-      : (this.props.lowerBound ? this.props.lowerBound : this.state.lowerBound);
-    const upperBound = this.state.isDragging ? this.state.upperBound // eslint-disable-line
-      : (this.props.upperBound ? this.props.upperBound : this.state.upperBound);
-    const prettifiedLowerBound = this.getNumberToFixed(lowerBound);
-    const prettifiedUpperBound = this.getNumberToFixed(upperBound);
+
+    let displayLowerBound = '';
+    let displayUpperBound = '';
+    const boundsAreUndefined = this.state.lowerBound === undefined
+      || this.state.upperBound === undefined;
+    if (boundsAreUndefined) {
+      displayLowerBound = rangeMin;
+      displayUpperBound = rangeMax;
+    } else {
+      const lowerBound = this.state.isDragging ? this.state.lowerBound // eslint-disable-line
+        : (this.props.lowerBound ? this.props.lowerBound : this.state.lowerBound);
+      const upperBound = this.state.isDragging ? this.state.upperBound // eslint-disable-line
+        : (this.props.upperBound ? this.props.upperBound : this.state.upperBound);
+      displayLowerBound = this.getNumberToFixed(lowerBound);
+      displayUpperBound = this.getNumberToFixed(upperBound);
+    }
+
     return (
       <div className='g3-range-filter'>
-        <p className='g3-range-filter__title'>{this.props.label}</p>
+        { this.props.label
+          && <p className='g3-range-filter__title'>{this.props.label}</p>
+        }
         <div className='g3-range-filter__bounds'>
-          <p className='g3-range-filter__bound g3-range-filter__bound--lower'>{prettifiedLowerBound}</p>
-          <p className='g3-range-filter__bound g3-range-filter__bound--higher'>{prettifiedUpperBound}</p>
+          <p className='g3-range-filter__bound g3-range-filter__bound--lower'>{displayLowerBound}</p>
+          <p className='g3-range-filter__bound g3-range-filter__bound--higher'>{displayUpperBound}</p>
         </div>
         <Range
-          className='g3-range-filter__slider'
+          className={`g3-range-filter__slider ${boundsAreUndefined ? 'g3-range-filter__slider--inactive' : ''}`}
           min={rangeMin}
           max={rangeMax}
-          value={[prettifiedLowerBound, prettifiedUpperBound]}
+          value={[displayLowerBound, displayUpperBound]}
           onChange={e => this.onSliderChange(e)}
           onAfterChange={() => this.onAfterSliderChange()}
           step={this.props.rangeStep}
@@ -94,8 +107,8 @@ RangeFilter.propTypes = {
 
 RangeFilter.defaultProps = {
   label: '',
-  lowerBound: 0,
-  upperBound: 0,
+  lowerBound: undefined,
+  upperBound: undefined,
   onDrag: () => {},
   decimalDigitsLen: 2,
   rangeStep: 1,

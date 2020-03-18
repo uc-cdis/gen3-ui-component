@@ -14,6 +14,20 @@ const removeEmptyFilter = (filterResults) => {
   return newFilterResults;
 };
 
+const tabHasActiveFilters = (tabFilterStatus) => {
+  /**
+   * tabFilterStatus[sectionIndex] = { [field]: true/false/[upperBound,lowerBound]}
+   */
+  let hasActiveFilters = false;
+  tabFilterStatus.forEach((section) => {
+    const fieldStatuses = Object.values(section);
+    if (fieldStatuses.some(status => status !== undefined && status !== false)) {
+      hasActiveFilters = true;
+    }
+  });
+  return hasActiveFilters;
+};
+
 class FilterGroup extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +44,7 @@ class FilterGroup extends React.Component {
 
       /**
        * Current selected status for filters,
-       * filterStatus[tabIndex][sectionIndex] = { [field]: true/false/[upperBound,lowerBound]}
+       * filterStatus[tabIndex][sectionIndex] = { [field]: true | false } | [upperBound,lowerBound]
        */
       filterStatus: initialFilterStatus,
 
@@ -83,6 +97,16 @@ class FilterGroup extends React.Component {
       newExpandedStatus[tabIndex][sectionIndex] = newSectionExpandedStatus;
       return {
         expandedStatus: newExpandedStatus,
+      };
+    });
+  }
+
+  handleSectionClear(tabIndex, sectionIndex) {
+    this.setState((prevState) => {
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      newFilterStatus[tabIndex][sectionIndex] = {};
+      return {
+        filterStatus: newFilterStatus,
       };
     });
   }
@@ -179,7 +203,7 @@ class FilterGroup extends React.Component {
                 onClick={() => this.selectTab(index)}
                 onKeyDown={() => this.selectTab(index)}
               >
-                <p className='g3-filter-group__tab-title'>
+                <p className={`g3-filter-group__tab-title ${tabHasActiveFilters(this.state.filterStatus[index]) ? 'g3-filter-group__tab-title--has-active-filters' : ''}`}>
                   {this.props.filterConfig.tabs[tab.key].title}
                 </p>
               </div>
@@ -206,6 +230,10 @@ class FilterGroup extends React.Component {
                   this.state.selectedTabIndex,
                   sectionIndex,
                   newSectionExpandedStatus,
+                ),
+                onClear: sectionIndex => this.handleSectionClear(
+                  this.state.selectedTabIndex,
+                  sectionIndex,
                 ),
                 expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex],
                 filterStatus: this.state.filterStatus[this.state.selectedTabIndex],
