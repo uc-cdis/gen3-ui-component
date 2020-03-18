@@ -319,7 +319,7 @@ class FilterSection extends React.Component {
                     ? undefined : filterStatus[1];
                   return (
                     <RangeFilter
-                      key={option.text}
+                      key={`${option.text}-${lowerBound}-${upperBound}`}
                       label={option.text}
                       min={option.min}
                       max={option.max}

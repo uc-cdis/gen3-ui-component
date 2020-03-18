@@ -14,17 +14,6 @@ class RangeFilter extends React.Component {
     };
   }
 
-  // When component receives new props, update state.lowerBound and state.upperBound
-  static getDerivedStateFromProps(props, prevState) {
-    if (!prevState.isDragging) {
-      return {
-        lowerBound: props.lowerBound,
-        upperBound: props.upperBound,
-      };
-    }
-    return null;
-  }
-
   onSliderChange(range) {
     this.setState(prevState => ({
       isDragging: true,
