@@ -317,6 +317,11 @@ class FilterSection extends React.Component {
                   const upperBound = (typeof filterStatus === 'undefined'
                   || filterStatus.length !== 2)
                     ? undefined : filterStatus[1];
+                  // We use the 'key' prop to force the SingleSelectFilter
+                  // to rerender on filterStatus change
+                  // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+                  // NOTE: We set hideValue={-1} here because Guppy returns a count of -1
+                  // when the count is hidden from the end user.
                   return (
                     <RangeFilter
                       key={`${option.text}-${lowerBound}-${upperBound}`}
@@ -328,6 +333,7 @@ class FilterSection extends React.Component {
                       lowerBound={lowerBound}
                       upperBound={upperBound}
                       count={option.count}
+                      hideValue={-1}
                     />
                   );
                 }) : null

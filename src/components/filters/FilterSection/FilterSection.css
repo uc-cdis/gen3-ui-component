@@ -68,7 +68,6 @@
   font-weight: 800;
 }
 
-
 .g3-filter-section__options {
   font-size: 14px;
   color: var(--g3-color__gray);
@@ -151,4 +150,32 @@
   position: relative;
   top: 3px;
   cursor: pointer;
+}
+
+.g3-filter-section__range-filter-clear-btn {
+  box-sizing: border-box;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  color: var(--g3-color__lightgray);
+  background-color: var(--g3-color__bg-cloud);
+  border-radius: 4px;
+}
+
+.g3-filter-section__range-filter-clear-btn * {
+  box-sizing: inherit;
+}
+
+.g3-filter-section__range-filter-clear-btn-text {
+  margin: 4px;
+  text-align: center
+}
+
+.g3-filter-section__range-filter-clear-btn-icon {
+  flex: 0 0 18px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

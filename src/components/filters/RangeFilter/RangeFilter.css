@@ -18,6 +18,7 @@
 
 .g3-range-filter__bound {
   margin: 0;
+  width: 4em;
 }
 
 /* Overrides for rc-slider */
