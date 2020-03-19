@@ -35,23 +35,23 @@ describe('RangeFilter', () => {
     expect(component.instance().state.upperBoundInputValue).toBe(55);
   });
 
-  it('updates sliders on input blur', () => {
+  it('updates sliders on input submit', () => {
     component.instance().handleLowerBoundInputChange(30);
-    component.instance().handleLowerBoundInputBlur();
+    component.instance().handleLowerBoundInputSubmit();
     expect(component.instance().state.lowerBound).toBe(30);
   });
 
   it('should clamp lowerBound to between [min, upperBound] (or [min, max] if upperBound is undefined', () => {
     // lowerBound should be clamped to min
     component.instance().handleLowerBoundInputChange(min - 1);
-    component.instance().handleLowerBoundInputBlur();
+    component.instance().handleLowerBoundInputSubmit();
     expect(component.instance().state.lowerBound).toBe(min);
     expect(component.instance().state.lowerBoundInputValue).toBe(min);
 
     // upperBound is undefined, lowerBound should be clamped to max
     expect(component.instance().state.upperBound).toBe(undefined);
     component.instance().handleLowerBoundInputChange(max + 1);
-    component.instance().handleLowerBoundInputBlur();
+    component.instance().handleLowerBoundInputSubmit();
     expect(component.instance().state.lowerBound).toBe(max);
     expect(component.instance().state.lowerBoundInputValue).toBe(max);
 
@@ -59,7 +59,7 @@ describe('RangeFilter', () => {
     const upperBound = 30;
     component.instance().setState({ upperBound });
     component.instance().handleLowerBoundInputChange(upperBound + 1);
-    component.instance().handleLowerBoundInputBlur();
+    component.instance().handleLowerBoundInputSubmit();
     expect(component.instance().state.lowerBound).toBe(upperBound);
     expect(component.instance().state.lowerBoundInputValue).toBe(upperBound);
   });
@@ -67,14 +67,14 @@ describe('RangeFilter', () => {
   it('should clamp upperBound to between [lowerBound, max] (or [min, max] if lowerBound is undefined', () => {
     // upperBound should be clamped to max
     component.instance().handleUpperBoundInputChange(max + 1);
-    component.instance().handleUpperBoundInputBlur();
+    component.instance().handleUpperBoundInputSubmit();
     expect(component.instance().state.upperBound).toBe(max);
     expect(component.instance().state.upperBoundInputValue).toBe(max);
 
     // lowerBound is undefined, upperBound should be clamped to min
     expect(component.instance().state.lowerBound).toBe(undefined);
     component.instance().handleUpperBoundInputChange(min - 1);
-    component.instance().handleUpperBoundInputBlur();
+    component.instance().handleUpperBoundInputSubmit();
     expect(component.instance().state.upperBound).toBe(min);
     expect(component.instance().state.upperBoundInputValue).toBe(min);
 
@@ -82,7 +82,7 @@ describe('RangeFilter', () => {
     const lowerBound = 30;
     component.instance().setState({ lowerBound });
     component.instance().handleUpperBoundInputChange(lowerBound - 1);
-    component.instance().handleUpperBoundInputBlur();
+    component.instance().handleUpperBoundInputSubmit();
     expect(component.instance().state.upperBound).toBe(lowerBound);
     expect(component.instance().state.upperBoundInputValue).toBe(lowerBound);
   });
@@ -116,20 +116,20 @@ describe('RangeFilter', () => {
     );
     // increasing lb should have no effect
     component.instance().handleLowerBoundInputChange(lb + 1);
-    component.instance().handleLowerBoundInputBlur();
+    component.instance().handleLowerBoundInputSubmit();
     expect(component.instance().state.lowerBound).toBe(lb);
     // decreasing ub should have no effect
     component.instance().handleUpperBoundInputChange(ub - 1);
-    component.instance().handleUpperBoundInputBlur();
+    component.instance().handleUpperBoundInputSubmit();
     expect(component.instance().state.upperBound).toBe(ub);
 
     // lb should still decrease like normal
     component.instance().handleLowerBoundInputChange(lb - 1);
-    component.instance().handleLowerBoundInputBlur();
+    component.instance().handleLowerBoundInputSubmit();
     expect(component.instance().state.lowerBound).toBe(lb - 1);
     // ub should still increase like normal
     component.instance().handleUpperBoundInputChange(ub + 1);
-    component.instance().handleUpperBoundInputBlur();
+    component.instance().handleUpperBoundInputSubmit();
     expect(component.instance().state.upperBound).toBe(ub + 1);
   });
 });
