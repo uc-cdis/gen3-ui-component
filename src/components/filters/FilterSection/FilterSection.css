@@ -163,6 +163,11 @@
   border-radius: 4px;
 }
 
+.g3-filter-section__range-filter-clear-btn:hover {
+  background-color: var(--g3-color__silver);
+}
+
+
 .g3-filter-section__range-filter-clear-btn * {
   box-sizing: inherit;
 }
