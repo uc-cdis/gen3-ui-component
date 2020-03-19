@@ -195,6 +195,8 @@ class RangeFilter extends React.Component {
         <div className='g3-range-filter__bounds'>
           <input
             type='number'
+            min={this.props.min}
+            max={this.state.upperBound !== undefined ? this.state.upperBound : this.props.max}
             value={this.state.lowerBoundInputValue}
             onChange={ev => this.handleLowerBoundInputChange(ev.currentTarget.value)}
             onKeyPress={(ev) => {
@@ -207,6 +209,8 @@ class RangeFilter extends React.Component {
           />
           <input
             type='number'
+            min={this.state.lowerBound !== undefined ? this.state.lowerBound : this.props.min}
+            max={this.props.max}
             value={this.state.upperBoundInputValue}
             onChange={ev => this.handleUpperBoundInputChange(ev.currentTarget.value)}
             onKeyPress={(ev) => {
