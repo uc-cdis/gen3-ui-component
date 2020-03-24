@@ -346,6 +346,7 @@ class FilterSection extends React.Component {
                         lb, ub, min, max, step)}
                       lowerBound={lowerBound}
                       upperBound={upperBound}
+                      inactive={lowerBound === undefined && upperBound === undefined}
                       count={option.count}
                       hideValue={-1}
                     />
