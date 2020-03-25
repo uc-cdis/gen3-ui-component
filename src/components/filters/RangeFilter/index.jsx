@@ -23,7 +23,6 @@ class RangeFilter extends React.Component {
   }
 
   onSliderChange(range) {
-    console.log('onSliderChange called!');
     this.setState((prevState) => {
       const lowerBound = (this.props.count === this.props.hideValue
         && prevState.lowerBound < range[0])
@@ -187,34 +186,46 @@ class RangeFilter extends React.Component {
           && <p className='g3-range-filter__title'>{this.props.label}</p>
         }
         <div className='g3-range-filter__bounds'>
-          <input
-            type='number'
-            min={this.props.min}
-            max={this.state.upperBound !== undefined ? this.state.upperBound : this.props.max}
-            value={this.state.lowerBoundInputValue}
-            onChange={ev => this.handleLowerBoundInputChange(ev.currentTarget.value)}
-            onKeyPress={(ev) => {
-              if (ev.key === 'Enter') {
-                this.handleLowerBoundInputSubmit();
-              }
-            }}
-            onBlur={() => this.handleLowerBoundInputSubmit()}
-            className='g3-range-filter__bound g3-range-filter__bound--lower'
-          />
-          <input
-            type='number'
-            min={this.state.lowerBound !== undefined ? this.state.lowerBound : this.props.min}
-            max={this.props.max}
-            value={this.state.upperBoundInputValue}
-            onChange={ev => this.handleUpperBoundInputChange(ev.currentTarget.value)}
-            onKeyPress={(ev) => {
-              if (ev.key === 'Enter') {
-                this.handleUpperBoundInputSubmit();
-              }
-            }}
-            onBlur={() => this.handleUpperBoundInputSubmit()}
-            className='g3-range-filter__bound g3-range-filter__bound--lower'
-          />
+          <label
+            htmlFor={`${this.props.label}-lower-bound-input`}
+          >
+            Min:&nbsp;
+            <input
+              type='number'
+              id={`${this.props.label}-lower-bound-input`}
+              min={this.props.min}
+              max={this.state.upperBound !== undefined ? this.state.upperBound : this.props.max}
+              value={this.state.lowerBoundInputValue}
+              onChange={ev => this.handleLowerBoundInputChange(ev.currentTarget.value)}
+              onKeyPress={(ev) => {
+                if (ev.key === 'Enter') {
+                  this.handleLowerBoundInputSubmit();
+                }
+              }}
+              onBlur={() => this.handleLowerBoundInputSubmit()}
+              className='g3-range-filter__bound g3-range-filter__bound--lower'
+            />
+          </label>
+          <label
+            htmlFor={`${this.props.label}-upper-bound-input`}
+          >
+            Max:&nbsp;
+            <input
+              type='number'
+              id={`${this.props.label}-upper-bound-input`}
+              min={this.state.lowerBound !== undefined ? this.state.lowerBound : this.props.min}
+              max={this.props.max}
+              value={this.state.upperBoundInputValue}
+              onChange={ev => this.handleUpperBoundInputChange(ev.currentTarget.value)}
+              onKeyPress={(ev) => {
+                if (ev.key === 'Enter') {
+                  this.handleUpperBoundInputSubmit();
+                }
+              }}
+              onBlur={() => this.handleUpperBoundInputSubmit()}
+              className='g3-range-filter__bound g3-range-filter__bound--lower'
+            />
+          </label>
         </div>
         <Range
           className={`g3-range-filter__slider ${this.props.inactive ? 'g3-range-filter__slider--inactive' : ''}`}
