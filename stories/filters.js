@@ -39,6 +39,17 @@ const raceOptions = [
   { text: 'Other', filterType: 'singleSelect', count: 123 },
 ];
 
+const guidOptions = [];
+const NUM_GUID_OPTIONS = 500000; // 500,000
+for (let i = 0; i < NUM_GUID_OPTIONS; i += 1) {
+  guidOptions.push({
+    text: `guid-${i}`,
+    filterType: 'singleSelect',
+    count: i,
+    accessible: true,
+  });
+}
+
 const ethnicityOptions = [
   {
     text: 'Hispanic or Latino', filterType: 'singleSelect', count: 123, accessible: true,
@@ -205,6 +216,14 @@ storiesOf('Filters', module)
       options={ethnicityOptions}
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
+    />
+  ))
+  .add('FilterSection with very large numbers of items', () => (
+    <FilterSection
+      title={'File GUIDs'}
+      options={guidOptions}
+      onSelect={action('checked')}
       tierAccessLimit={1000}
     />
   ))

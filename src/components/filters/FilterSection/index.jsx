@@ -1,23 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
+import { FixedSizeList } from 'react-window';
+import debounce from 'lodash.debounce';
 import SingleSelectFilter from '../SingleSelectFilter';
 import Chip from '../Chip';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
 
-const filterVisibleStatusObj = (optionList, inputText) => {
-  const res = {};
-  optionList.forEach((o) => {
-    if (typeof inputText === 'undefined') {
-      res[o.text] = true;
-    } else {
-      const matched = o.text.toLowerCase().indexOf(inputText.toLowerCase()) >= 0;
-      res[o.text] = matched;
-    }
-  });
-  return res;
-};
 
 const getNumValuesSelected = (filterStatus) => {
   let numSelected = 0;
@@ -45,10 +35,40 @@ class FilterSection extends React.Component {
       showingSearch: false,
 
       // option visible status filtered by the search inputbox
-      optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
+      visibleOptions: this.getVisibleOptions(this.props.options),
     };
     this.inputElem = React.createRef();
+    const SEARCH_DEBOUNCE_INTERVAL = 750; // ms
+    this.debouncedUpdateVisibleOptions = debounce(
+      this.updateVisibleOptions,
+      SEARCH_DEBOUNCE_INTERVAL,
+    );
   }
+
+  // getVisibleOptions returns the indices of the elements in optionList that are visible.
+  getVisibleOptions = (optionList, inputText) => {
+    const options = [];
+    optionList.forEach((o, i) => {
+      // Options with count of 0 are not visible if props.hideZero is true,
+      // and options with count of -1 are never visible.
+      if (this.props.hideZero && o.count === 0) {
+        return;
+      }
+      if (o.count === -1) {
+        return;
+      }
+      // If the input text is empty, all other options are visible.
+      if (typeof inputText === 'undefined') {
+        options.push(i);
+      } else {
+        const matched = o.text.toLowerCase().indexOf(inputText.toLowerCase()) >= 0;
+        if (matched) {
+          options.push(i);
+        }
+      }
+    });
+    return options;
+  };
 
   getSearchInput() {
     const isHidden = !this.state.showingSearch || !this.state.isExpanded;
@@ -72,10 +92,7 @@ class FilterSection extends React.Component {
 
   getShowMoreButton() {
     if (this.state.isExpanded) {
-      const totalCount = this.props.options
-        .filter(o => (o.count > 0 || !this.props.hideZero || o.count === -1))
-        .filter(o => this.state.optionsVisibleStatus[o.text])
-        .length;
+      const totalCount = this.state.visibleOptions.length;
       if ((totalCount > this.props.initVisibleItemNumber)) {
         if (this.state.showingMore) {
           return (
@@ -125,7 +142,7 @@ class FilterSection extends React.Component {
     this.setState({
       searchInputEmpty: !currentInput || currentInput.length === 0,
     });
-    this.updateVisibleOptions(currentInput);
+    this.debouncedUpdateVisibleOptions(currentInput);
   }
 
   clearSearchInput() {
@@ -133,20 +150,22 @@ class FilterSection extends React.Component {
     this.setState({
       searchInputEmpty: true,
     });
+    // We don't use the debounced version of updateVisibleOptions here
+    // because we don't expect the clear button to be pressed repeatedly.
     this.updateVisibleOptions();
   }
 
   updateVisibleOptions(inputText) {
     // if empty input, all should be visible
-    if (typeof inputText === 'undefined' || inputText.trim === '') {
+    if (typeof inputText === 'undefined' || inputText.trim() === '') {
       this.setState({
-        optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
+        visibleOptions: this.getVisibleOptions(this.props.options),
       });
     }
 
     // if not empty, filter out those matched
     this.setState({
-      optionsVisibleStatus: filterVisibleStatusObj(this.props.options, inputText),
+      visibleOptions: this.getVisibleOptions(this.props.options, inputText),
     });
   }
 
@@ -265,6 +284,33 @@ class FilterSection extends React.Component {
         }
       </div>
     );
+
+    const FixedSizeListItem = ({ style, index }) => {
+      const optionIndex = this.state.visibleOptions[index];
+      const option = this.props.options[optionIndex];
+      return (
+        // We use the 'key' prop to force the SingleSelectFilter
+        // to rerender on filterStatus change.
+        // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+        <div style={style}>
+          <SingleSelectFilter
+            key={`${option.text}-${filterStatus[option.text] ? 'enabled' : 'disabled'}`}
+            label={option.text}
+            onSelect={label => this.handleSelectSingleSelectFilter(label)}
+            selected={filterStatus[option.text]}
+            count={option.count}
+            hideZero={this.props.hideZero}
+            accessible={option.accessible}
+            tierAccessLimit={this.props.tierAccessLimit}
+            disabled={option.disabled}
+            lockedTooltipMessage={this.props.lockedTooltipMessage}
+            disabledTooltipMessage={this.props.disabledTooltipMessage}
+          />
+        </div>
+      );
+    };
+    const fixedSizeListItemHeight = 25; // px
+
     return (
       <div className='g3-filter-section'>
         {
@@ -283,55 +329,36 @@ class FilterSection extends React.Component {
           isTextFilter && this.getSearchInput()
         }
         <div className='g3-filter-section__options'>
-          {
-            this.state.isExpanded
-              ? this.props.options
-                .filter(option => this.state.optionsVisibleStatus[option.text])
-                .map((option, index) => {
-                  if (index >= this.props.initVisibleItemNumber && !this.state.showingMore) {
-                    return null;
-                  }
-                  if (option.filterType === 'singleSelect') {
-                    return (
-                      // We use the 'key' prop to force the SingleSelectFilter
-                      // to rerender on filterStatus change.
-                      // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
-                      <SingleSelectFilter
-                        key={`${option.text}-${filterStatus[option.text] ? 'enabled' : 'disabled'}`}
-                        label={option.text}
-                        onSelect={label => this.handleSelectSingleSelectFilter(label)}
-                        selected={filterStatus[option.text]}
-                        count={option.count}
-                        hideZero={this.props.hideZero}
-                        accessible={option.accessible}
-                        tierAccessLimit={this.props.tierAccessLimit}
-                        disabled={option.disabled}
-                        lockedTooltipMessage={this.props.lockedTooltipMessage}
-                        disabledTooltipMessage={this.props.disabledTooltipMessage}
-                      />
-                    );
-                  }
-                  const lowerBound = (typeof filterStatus === 'undefined'
-                  || filterStatus.length !== 2)
-                    ? undefined : filterStatus[0];
-                  const upperBound = (typeof filterStatus === 'undefined'
-                  || filterStatus.length !== 2)
-                    ? undefined : filterStatus[1];
-                  return (
-                    <RangeFilter
-                      key={`${option.text}-${lowerBound}-${upperBound}`}
-                      label={option.text}
-                      min={option.min}
-                      max={option.max}
-                      onAfterDrag={(lb, ub, min, max, step) => this.handleDragRangeFilter(
-                        lb, ub, min, max, step)}
-                      lowerBound={lowerBound}
-                      upperBound={upperBound}
-                      count={option.count}
-                    />
-                  );
-                }) : null
-          }
+          { isTextFilter && (
+            <FixedSizeList
+              itemCount={this.state.visibleOptions.length}
+              itemSize={fixedSizeListItemHeight}
+              height={fixedSizeListItemHeight * this.props.initVisibleItemNumber}
+            >
+              {FixedSizeListItem}
+            </FixedSizeList>
+          )}
+          { !isTextFilter && (
+            <RangeFilter
+              key={`${this.props.options[0].text}`}
+              label={this.props.options[0].text}
+              min={this.props.options[0].min}
+              max={this.props.options[0].max}
+              onAfterDrag={(lb, ub, min, max, step) => this.handleDragRangeFilter(
+                lb, ub, min, max, step)}
+              lowerBound={
+                (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
+                  ? undefined
+                  : filterStatus[0]
+              }
+              upperBound={
+                (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
+                  ? undefined
+                  : filterStatus[1]
+              }
+              count={this.props.options[0].count}
+            />
+          )}
           {this.getShowMoreButton()}
         </div>
       </div>
