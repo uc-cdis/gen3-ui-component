@@ -306,3 +306,7 @@
 .g3-icon--not-apply {
   mask-image: svg-load(../images/icons/na.svg);
 }
+
+.g3-icon--undo {
+  mask-image: svg-load(../images/icons/undo.svg);
+}
