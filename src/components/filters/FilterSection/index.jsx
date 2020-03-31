@@ -310,6 +310,10 @@ class FilterSection extends React.Component {
       );
     };
     const fixedSizeListItemHeight = 25; // px
+    const numItemsWhenExpanded = 15;
+    const expandedListHeight = this.state.visibleOptions.length <= numItemsWhenExpanded
+      ? fixedSizeListItemHeight * this.state.visibleOptions.legnth
+      : fixedSizeListItemHeight * numItemsWhenExpanded;
 
     return (
       <div className='g3-filter-section'>
@@ -333,7 +337,10 @@ class FilterSection extends React.Component {
             <FixedSizeList
               itemCount={this.state.visibleOptions.length}
               itemSize={fixedSizeListItemHeight}
-              height={fixedSizeListItemHeight * this.props.initVisibleItemNumber}
+              height={this.state.showingMore
+                ? expandedListHeight
+                : fixedSizeListItemHeight * this.props.initVisibleItemNumber
+              }
             >
               {FixedSizeListItem}
             </FixedSizeList>
