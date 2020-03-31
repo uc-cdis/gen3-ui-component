@@ -37,6 +37,7 @@ class SummaryPieChart extends React.Component {
       this.props.showPercentage,
       this.props.percentageFixedPoint,
     );
+    console.log(pieChartData);
     const dataKey = helper.getDataKey(this.props.showPercentage);
     let chart = null;
     if (this.props.chartIsEmpty) {
@@ -56,10 +57,11 @@ class SummaryPieChart extends React.Component {
                         {entry.name}
                       </div>
                       <div className='summary-pie-chart__legend-item-value form-special-number'>
-                        {
+                      <span className='summary-pie-chart__legend-item-value-number'>{entry.value}</span> 
+                      <span className='summary-pie-chart__legend-item-value-percentage'> ({
                           helper
                             .percentageFormatter(this.props.showPercentage)(entry[dataKey])
-                        }
+                      })</span>
                       </div>
                     </div>
                   );
