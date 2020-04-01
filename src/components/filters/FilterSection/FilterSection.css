@@ -87,11 +87,14 @@
 
 .g3-filter-section__show-more {
   border: none;
-  outline: none;
   color: var(--g3-color__base-blue);
   cursor: pointer;
   margin-top: 15px;
-  text-align: right;
+  text-align: center;
+}
+
+.g3-filter-section__show-more:hover {
+  background-color: var(--g3-color__silver);
 }
 
 .g3-filter-section__tooltip .rc-tooltip-inner {

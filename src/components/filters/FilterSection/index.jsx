@@ -115,20 +115,6 @@ class FilterSection extends React.Component {
     if (this.state.isExpanded) {
       const totalCount = this.state.visibleOptions.length;
       if ((totalCount > this.props.initVisibleItemNumber)) {
-        if (this.state.showingMore) {
-          return (
-            <div
-              className='g3-filter-section__show-more'
-              role='button'
-              onClick={() => this.toggleShowMore()}
-              onKeyPress={() => this.toggleShowMore()}
-              tabIndex={0}
-            >
-              less
-            </div>
-          );
-        }
-        const moreCount = totalCount - this.props.initVisibleItemNumber;
         return (
           <div
             className='g3-filter-section__show-more'
@@ -137,8 +123,7 @@ class FilterSection extends React.Component {
             onKeyPress={() => this.toggleShowMore()}
             tabIndex={0}
           >
-            {moreCount}
-            &nbsp;more
+            {this.state.showingMore ? 'collapse' : 'expand'}
           </div>
         );
       }
