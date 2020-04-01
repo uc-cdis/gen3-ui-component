@@ -44,6 +44,9 @@ class FilterSection extends React.Component {
       searchInputEmpty: true,
       showingSearch: false,
 
+      // used for rerendering child components when reset button is clicked
+      resetClickCounter: 0,
+
       // option visible status filtered by the search inputbox
       optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
     };
@@ -114,9 +117,10 @@ class FilterSection extends React.Component {
     // Prevent this click from triggering any onClick events in parent component
     ev.stopPropagation();
     // Clear the filters
-    this.setState({
+    this.setState(prevState => ({
       filterStatus: {},
-    });
+      resetClickCounter: prevState.resetClickCounter + 1,
+    }));
     this.props.onClear();
   }
 
@@ -224,10 +228,24 @@ class FilterSection extends React.Component {
           { (isRangeFilter && numSelected !== 0)
             && (
               <div className='g3-filter-section__selected-count-chip'>
-                <Chip
-                  text='reset'
-                  onClearButtonClick={ev => this.handleClearButtonClick(ev)}
-                />
+                <div
+                  tabIndex={0}
+                  role='button'
+                  onClick={ev => this.handleClearButtonClick(ev)}
+                  onKeyPress={ev => this.handleClearButtonClick(ev)}
+                  className='g3-filter-section__range-filter-clear-btn'
+                >
+                  <div
+                    className='g3-filter-section__range-filter-clear-btn-text'
+                  >
+                    reset
+                  </div>
+                  <div
+                    className='g3-filter-section__range-filter-clear-btn-icon'
+                  >
+                    <i className='g3-icon g3-icon--sm g3-icon-color__lightgray g3-icon--sm g3-icon--undo' />
+                  </div>
+                </div>
               </div>
             )
           }
@@ -317,9 +335,17 @@ class FilterSection extends React.Component {
                   const upperBound = (typeof filterStatus === 'undefined'
                   || filterStatus.length !== 2)
                     ? undefined : filterStatus[1];
+                  // We use the 'key' prop to force the SingleSelectFilter
+                  // to rerender if the `reset` button is clicked.
+                  // Each reset button click increments the counter and changes the key.
+                  // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+                  const key = `${option.text}-${this.state.resetClickCounter}`;
+                  // NOTE: We set hideValue={-1} here because Guppy returns a count of -1
+                  // when the count is hidden from the end user.
+                  const hideValue = -1;
                   return (
                     <RangeFilter
-                      key={`${option.text}-${lowerBound}-${upperBound}`}
+                      key={key}
                       label={option.text}
                       min={option.min}
                       max={option.max}
@@ -327,7 +353,9 @@ class FilterSection extends React.Component {
                         lb, ub, min, max, step)}
                       lowerBound={lowerBound}
                       upperBound={upperBound}
+                      inactive={lowerBound === undefined && upperBound === undefined}
                       count={option.count}
+                      hideValue={hideValue}
                     />
                   );
                 }) : null
