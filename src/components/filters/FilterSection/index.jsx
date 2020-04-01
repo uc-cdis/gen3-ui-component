@@ -332,42 +332,46 @@ class FilterSection extends React.Component {
         {
           isTextFilter && this.getSearchInput()
         }
-        <div className='g3-filter-section__options'>
-          { isTextFilter && (
-            <FixedSizeList
-              itemCount={this.state.visibleOptions.length}
-              itemSize={fixedSizeListItemHeight}
-              height={this.state.showingMore
-                ? expandedListHeight
-                : fixedSizeListItemHeight * this.props.initVisibleItemNumber
-              }
-            >
-              {FixedSizeListItem}
-            </FixedSizeList>
-          )}
-          { !isTextFilter && (
-            <RangeFilter
-              key={`${this.props.options[0].text}`}
-              label={this.props.options[0].text}
-              min={this.props.options[0].min}
-              max={this.props.options[0].max}
-              onAfterDrag={(lb, ub, min, max, step) => this.handleDragRangeFilter(
-                lb, ub, min, max, step)}
-              lowerBound={
-                (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
-                  ? undefined
-                  : filterStatus[0]
-              }
-              upperBound={
-                (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
-                  ? undefined
-                  : filterStatus[1]
-              }
-              count={this.props.options[0].count}
-            />
-          )}
-          {this.getShowMoreButton()}
-        </div>
+        { this.state.isExpanded
+          && (
+            <div className='g3-filter-section__options'>
+              { isTextFilter && (
+                <FixedSizeList
+                  itemCount={this.state.visibleOptions.length}
+                  itemSize={fixedSizeListItemHeight}
+                  height={this.state.showingMore
+                    ? expandedListHeight
+                    : fixedSizeListItemHeight * this.props.initVisibleItemNumber
+                  }
+                >
+                  {FixedSizeListItem}
+                </FixedSizeList>
+              )}
+              { !isTextFilter && (
+                <RangeFilter
+                  key={`${this.props.options[0].text}`}
+                  label={this.props.options[0].text}
+                  min={this.props.options[0].min}
+                  max={this.props.options[0].max}
+                  onAfterDrag={(lb, ub, min, max, step) => this.handleDragRangeFilter(
+                    lb, ub, min, max, step)}
+                  lowerBound={
+                    (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
+                      ? undefined
+                      : filterStatus[0]
+                  }
+                  upperBound={
+                    (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
+                      ? undefined
+                      : filterStatus[1]
+                  }
+                  count={this.props.options[0].count}
+                />
+              )}
+              {this.getShowMoreButton()}
+            </div>
+          )
+        }
       </div>
     );
   }
