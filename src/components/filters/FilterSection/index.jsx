@@ -309,11 +309,17 @@ class FilterSection extends React.Component {
         </div>
       );
     };
-    const fixedSizeListItemHeight = 25; // px
+    const listItemHeight = 25; // px
     const numItemsWhenExpanded = 15;
+
+    // If there are more items than can be displayed, show half of the next item as
+    // an indicator that the list can be scrolled.
+    const listHeight = this.state.visibleOptions.length <= this.props.initVisibleItemNumber
+      ? listItemHeight * this.props.initVisibleItemNumber
+      : (listItemHeight * this.props.initVisibleItemNumber) + (listItemHeight / 2);
     const expandedListHeight = this.state.visibleOptions.length <= numItemsWhenExpanded
-      ? fixedSizeListItemHeight * this.state.visibleOptions.legnth
-      : fixedSizeListItemHeight * numItemsWhenExpanded;
+      ? listItemHeight * this.state.visibleOptions.length
+      : (listItemHeight * numItemsWhenExpanded) + (listItemHeight / 2);
 
     return (
       <div className='g3-filter-section'>
@@ -338,10 +344,10 @@ class FilterSection extends React.Component {
               { isTextFilter && (
                 <FixedSizeList
                   itemCount={this.state.visibleOptions.length}
-                  itemSize={fixedSizeListItemHeight}
+                  itemSize={listItemHeight}
                   height={this.state.showingMore
                     ? expandedListHeight
-                    : fixedSizeListItemHeight * this.props.initVisibleItemNumber
+                    : listHeight
                   }
                 >
                   {FixedSizeListItem}
