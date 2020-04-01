@@ -38,11 +38,28 @@ class FilterSection extends React.Component {
       visibleOptions: this.getVisibleOptions(this.props.options),
     };
     this.inputElem = React.createRef();
-    const SEARCH_DEBOUNCE_INTERVAL = 750; // ms
+
+    // If there are a lot of options, debounce the search input for performance.
+    const debounceTime = this.state.visibleOptions.length < 100
+      ? 0
+      : 750; // ms
     this.debouncedUpdateVisibleOptions = debounce(
       this.updateVisibleOptions,
-      SEARCH_DEBOUNCE_INTERVAL,
+      debounceTime,
     );
+
+    // Calculate the height of the list element:
+    // When collapsed, show up to initVisibleItemNumber elements. When expanded, show up to
+    // numItemsWhenExpanded elements. If there are more items than can be displayed,
+    // show half of the next item as an indicator that the list can be scrolled.
+    this.listItemHeight = 25; // px
+    const numItemsWhenExpanded = 15;
+    this.listHeight = this.state.visibleOptions.length <= this.props.initVisibleItemNumber
+      ? this.listItemHeight * this.state.visibleOptions.length
+      : (this.listItemHeight * this.props.initVisibleItemNumber) + (this.listItemHeight / 2);
+    this.expandedListHeight = this.state.visibleOptions.length <= numItemsWhenExpanded
+      ? this.listItemHeight * this.state.visibleOptions.length
+      : (this.listItemHeight * numItemsWhenExpanded) + (this.listItemHeight / 2);
   }
 
   // getVisibleOptions returns the indices of the elements in optionList that are visible.
@@ -309,17 +326,6 @@ class FilterSection extends React.Component {
         </div>
       );
     };
-    const listItemHeight = 25; // px
-    const numItemsWhenExpanded = 15;
-
-    // If there are more items than can be displayed, show half of the next item as
-    // an indicator that the list can be scrolled.
-    const listHeight = this.state.visibleOptions.length <= this.props.initVisibleItemNumber
-      ? listItemHeight * this.props.initVisibleItemNumber
-      : (listItemHeight * this.props.initVisibleItemNumber) + (listItemHeight / 2);
-    const expandedListHeight = this.state.visibleOptions.length <= numItemsWhenExpanded
-      ? listItemHeight * this.state.visibleOptions.length
-      : (listItemHeight * numItemsWhenExpanded) + (listItemHeight / 2);
 
     return (
       <div className='g3-filter-section'>
@@ -344,10 +350,10 @@ class FilterSection extends React.Component {
               { isTextFilter && (
                 <FixedSizeList
                   itemCount={this.state.visibleOptions.length}
-                  itemSize={listItemHeight}
+                  itemSize={this.listItemHeight}
                   height={this.state.showingMore
-                    ? expandedListHeight
-                    : listHeight
+                    ? this.expandedListHeight
+                    : this.listHeight
                   }
                 >
                   {FixedSizeListItem}
