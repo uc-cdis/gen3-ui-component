@@ -34,6 +34,9 @@ class FilterSection extends React.Component {
       searchInputEmpty: true,
       showingSearch: false,
 
+      // used for rerendering child components when reset button is clicked
+      resetClickCounter: 0,
+
       // option visible status filtered by the search inputbox
       visibleOptions: this.getVisibleOptions(this.props.options),
     };
@@ -50,16 +53,17 @@ class FilterSection extends React.Component {
 
     // Calculate the height of the list element:
     // When collapsed, show up to initVisibleItemNumber elements. When expanded, show up to
-    // numItemsWhenExpanded elements. If there are more items than can be displayed,
+    // expandedVisibleItemNumber elements.
+    // If there are more items than can be displayed,
     // show half of the next item as an indicator that the list can be scrolled.
     this.listItemHeight = 25; // px
-    const numItemsWhenExpanded = 15;
+    const expandedVisibleItemNumber = 15;
     this.listHeight = this.state.visibleOptions.length <= this.props.initVisibleItemNumber
       ? this.listItemHeight * this.state.visibleOptions.length
       : (this.listItemHeight * this.props.initVisibleItemNumber) + (this.listItemHeight / 2);
-    this.expandedListHeight = this.state.visibleOptions.length <= numItemsWhenExpanded
+    this.expandedListHeight = this.state.visibleOptions.length <= expandedVisibleItemNumber
       ? this.listItemHeight * this.state.visibleOptions.length
-      : (this.listItemHeight * numItemsWhenExpanded) + (this.listItemHeight / 2);
+      : (this.listItemHeight * expandedVisibleItemNumber) + (this.listItemHeight / 2);
   }
 
   // getVisibleOptions returns the indices of the elements in optionList that are visible.
@@ -148,9 +152,10 @@ class FilterSection extends React.Component {
     // Prevent this click from triggering any onClick events in parent component
     ev.stopPropagation();
     // Clear the filters
-    this.setState({
+    this.setState(prevState => ({
       filterStatus: {},
-    });
+      resetClickCounter: prevState.resetClickCounter + 1,
+    }));
     this.props.onClear();
   }
 
@@ -235,6 +240,12 @@ class FilterSection extends React.Component {
       ? this.props.filterStatus : this.state.filterStatus;
     const isTextFilter = this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect';
     const isRangeFilter = !isTextFilter;
+    const lowerBound = (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
+      ? undefined
+      : filterStatus[0];
+    const upperBound = (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
+      ? undefined
+      : filterStatus[1];
     const numSelected = getNumValuesSelected(filterStatus);
     const sectionHeader = (
       <div className='g3-filter-section__header'>
@@ -260,10 +271,24 @@ class FilterSection extends React.Component {
           { (isRangeFilter && numSelected !== 0)
             && (
               <div className='g3-filter-section__selected-count-chip'>
-                <Chip
-                  text='reset'
-                  onClearButtonClick={ev => this.handleClearButtonClick(ev)}
-                />
+                <div
+                  tabIndex={0}
+                  role='button'
+                  onClick={ev => this.handleClearButtonClick(ev)}
+                  onKeyPress={ev => this.handleClearButtonClick(ev)}
+                  className='g3-filter-section__range-filter-clear-btn'
+                >
+                  <div
+                    className='g3-filter-section__range-filter-clear-btn-text'
+                  >
+                    reset
+                  </div>
+                  <div
+                    className='g3-filter-section__range-filter-clear-btn-icon'
+                  >
+                    <i className='g3-icon g3-icon--sm g3-icon-color__lightgray g3-icon--sm g3-icon--undo' />
+                  </div>
+                </div>
               </div>
             )
           }
@@ -359,25 +384,25 @@ class FilterSection extends React.Component {
                   {FixedSizeListItem}
                 </FixedSizeList>
               )}
-              { !isTextFilter && (
+              { isRangeFilter && (
+                // NOTE: We use the 'key' prop to force the RangeFilter
+                // to rerender if the `reset` button is clicked.
+                // Each reset button click increments the counter and changes the key.
+                // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+                // NOTE: We set hideValue={-1} here because Guppy returns a count of -1
+                // when the count is hidden from the end user.
                 <RangeFilter
-                  key={`${this.props.options[0].text}`}
+                  key={`${this.props.options[0].text}-${this.state.resetClickCounter}`}
                   label={this.props.options[0].text}
                   min={this.props.options[0].min}
                   max={this.props.options[0].max}
                   onAfterDrag={(lb, ub, min, max, step) => this.handleDragRangeFilter(
                     lb, ub, min, max, step)}
-                  lowerBound={
-                    (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
-                      ? undefined
-                      : filterStatus[0]
-                  }
-                  upperBound={
-                    (typeof filterStatus === 'undefined' || filterStatus.length !== 2)
-                      ? undefined
-                      : filterStatus[1]
-                  }
+                  lowerBound={lowerBound}
+                  upperBound={upperBound}
+                  inactive={lowerBound === undefined && upperBound === undefined}
                   count={this.props.options[0].count}
+                  hideValue={-1}
                 />
               )}
               {this.getShowMoreButton()}
