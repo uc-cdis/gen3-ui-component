@@ -41,6 +41,14 @@
   margin-top: 8px;
 }
 
+.summary-pie-chart__legend-item-value-number {
+  font-weight:900;
+}
+
+.summary-pie-chart__legend-item-value-percentage {
+  font-weight:100;
+}
+
 .summary-pie-chart__legend-item-name {
   white-space: nowrap;
   overflow: hidden;
