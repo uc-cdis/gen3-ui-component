@@ -32,7 +32,7 @@ class FilterSection extends React.Component {
       isExpanded: this.props.expanded,
       showingMore: false,
       filterStatus: {}, // shape: { [fieldName]: true | false } | [number, number]
-      searchInputEmpty: true,
+      searchInputValue: '',
       searchIsPending: false,
       showingSearch: false,
 
@@ -42,7 +42,6 @@ class FilterSection extends React.Component {
       // option visible status filtered by the search inputbox
       visibleOptions: this.getVisibleOptions(this.props.options),
     };
-    this.inputElem = React.createRef();
 
     // If there are a lot of options, debounce the search input for performance.
     this.hasManyOptions = this.state.visibleOptions.length > 100;
@@ -70,7 +69,7 @@ class FilterSection extends React.Component {
   }
 
   // getVisibleOptions returns the indices of the elements in optionList that are visible.
-  getVisibleOptions = (optionList, inputText) => {
+  getVisibleOptions(optionList, inputText) {
     const options = [];
     optionList.forEach((o, i) => {
       // Options with count of 0 are not visible if props.hideZero is true,
@@ -92,7 +91,7 @@ class FilterSection extends React.Component {
       }
     });
     return options;
-  };
+  }
 
   getSearchInput() {
     const isHidden = !this.state.showingSearch || !this.state.isExpanded;
@@ -100,8 +99,8 @@ class FilterSection extends React.Component {
       <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__search-input--hidden'}`}>
         <input
           className='g3-filter-section__search-input-box body'
-          onChange={() => { this.handleSearchInputChange(); }}
-          ref={this.inputElem}
+          value={this.state.searchInputValue}
+          onChange={ev => this.handleSearchInputChange(ev)}
         />
         { (this.state.searchIsPending && this.hasManyOptions)
           ? (
@@ -111,9 +110,9 @@ class FilterSection extends React.Component {
           )
           : (
             <i
-              className={`g3-icon g3-icon--${this.state.searchInputEmpty ? 'search' : 'cross'} g3-filter-section__search-input-close`}
-              onClick={() => this.state.searchInputEmpty || this.clearSearchInput()}
-              onKeyPress={() => this.state.searchInputEmpty || this.clearSearchInput()}
+              className={`g3-icon g3-icon--${this.state.searchInputValue === '' ? 'search' : 'cross'} g3-filter-section__search-input-close`}
+              onClick={() => this.state.searchInputValue === '' || this.clearSearchInput()}
+              onKeyPress={() => this.state.searchInputValue === '' || this.clearSearchInput()}
               role='button'
               tabIndex={0}
             />
@@ -156,19 +155,18 @@ class FilterSection extends React.Component {
     this.props.onClear();
   }
 
-  handleSearchInputChange() {
-    const currentInput = this.inputElem.current.value;
+  handleSearchInputChange(ev) {
+    const searchInputValue = ev.currentTarget.value;
     this.setState({
-      searchInputEmpty: !currentInput || currentInput.length === 0,
+      searchInputValue,
       searchIsPending: true,
     });
-    this.debouncedUpdateVisibleOptions(currentInput);
+    this.debouncedUpdateVisibleOptions(searchInputValue);
   }
 
   clearSearchInput() {
-    this.inputElem.current.value = '';
     this.setState({
-      searchInputEmpty: true,
+      searchInputValue: '',
     });
     // We don't use the debounced version of updateVisibleOptions here
     // because we don't expect the clear button to be pressed repeatedly.
