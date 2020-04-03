@@ -5,6 +5,7 @@ import { FixedSizeList } from 'react-window';
 import debounce from 'lodash.debounce';
 import SingleSelectFilter from '../SingleSelectFilter';
 import Chip from '../Chip';
+import Spinner from '../../Spinner/Spinner';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
 
@@ -32,6 +33,7 @@ class FilterSection extends React.Component {
       showingMore: false,
       filterStatus: {}, // shape: { [fieldName]: true | false } | [number, number]
       searchInputEmpty: true,
+      searchIsPending: false,
       showingSearch: false,
 
       // used for rerendering child components when reset button is clicked
@@ -43,9 +45,10 @@ class FilterSection extends React.Component {
     this.inputElem = React.createRef();
 
     // If there are a lot of options, debounce the search input for performance.
-    const debounceTime = this.state.visibleOptions.length < 100
-      ? 0
-      : 750; // ms
+    this.hasManyOptions = this.state.visibleOptions.length > 100;
+    const debounceTime = this.hasManyOptions
+      ? 750 // ms
+      : 0; // ms
     this.debouncedUpdateVisibleOptions = debounce(
       this.updateVisibleOptions,
       debounceTime,
@@ -100,13 +103,22 @@ class FilterSection extends React.Component {
           onChange={() => { this.handleSearchInputChange(); }}
           ref={this.inputElem}
         />
-        <i
-          className={`g3-icon g3-icon--${this.state.searchInputEmpty ? 'search' : 'cross'} g3-filter-section__search-input-close`}
-          onClick={() => this.state.searchInputEmpty || this.clearSearchInput()}
-          onKeyPress={() => this.state.searchInputEmpty || this.clearSearchInput()}
-          role='button'
-          tabIndex={0}
-        />
+        { (this.state.searchIsPending && this.hasManyOptions)
+          ? (
+            <div className='g3-filter-section__search-input-spinner'>
+              <Spinner />
+            </div>
+          )
+          : (
+            <i
+              className={`g3-icon g3-icon--${this.state.searchInputEmpty ? 'search' : 'cross'} g3-filter-section__search-input-close`}
+              onClick={() => this.state.searchInputEmpty || this.clearSearchInput()}
+              onKeyPress={() => this.state.searchInputEmpty || this.clearSearchInput()}
+              role='button'
+              tabIndex={0}
+            />
+          )
+        }
       </div>
     );
   }
@@ -148,6 +160,7 @@ class FilterSection extends React.Component {
     const currentInput = this.inputElem.current.value;
     this.setState({
       searchInputEmpty: !currentInput || currentInput.length === 0,
+      searchIsPending: true,
     });
     this.debouncedUpdateVisibleOptions(currentInput);
   }
@@ -167,12 +180,14 @@ class FilterSection extends React.Component {
     if (typeof inputText === 'undefined' || inputText.trim() === '') {
       this.setState({
         visibleOptions: this.getVisibleOptions(this.props.options),
+        searchIsPending: false,
       });
     }
 
     // if not empty, filter out those matched
     this.setState({
       visibleOptions: this.getVisibleOptions(this.props.options, inputText),
+      searchIsPending: false,
     });
   }
 

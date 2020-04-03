@@ -90,11 +90,7 @@
   color: var(--g3-color__base-blue);
   cursor: pointer;
   margin-top: 15px;
-  text-align: center;
-}
-
-.g3-filter-section__show-more:hover {
-  background-color: var(--g3-color__silver);
+  text-align: right;
 }
 
 .g3-filter-section__tooltip .rc-tooltip-inner {
@@ -139,6 +135,15 @@
   top: 6px;
   right: 6px;
   background-color: var(--g3-color__gray);
+  cursor: pointer;
+}
+
+.g3-filter-section__search-input-spinner {
+  width: 20px;
+  height: 10px;
+  position: relative;
+  top: 10px;
+  right: 6px;
   cursor: pointer;
 }
 
