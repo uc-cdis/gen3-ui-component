@@ -13,7 +13,6 @@
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
-  outline: none;
   padding: 1px 30px 1px 20px;
   margin: 0;
   position: relative;
@@ -140,7 +139,6 @@
   border-radius: 0 4px 4px 0;
   vertical-align: middle;
   cursor: pointer;
-  outline: none;
   margin: 0;
   border-left: none;
   width: 30px;

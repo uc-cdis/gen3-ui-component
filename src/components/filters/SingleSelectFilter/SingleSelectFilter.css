@@ -52,7 +52,6 @@
   margin: 0;
   flex-grow: 1;
   cursor: pointer;
-  outline: none;
 }
 
 .g3-single-select-filter__label--disabled {
