@@ -34,7 +34,6 @@
   flex-grow: 1;
   display: flex;
   align-items: center;
-  outline: none;
   cursor: pointer;
 }
 
@@ -81,13 +80,11 @@
 .g3-filter-section__search-icon {
   background-color: var(--g3-color__gray);
   margin-left: 10px;
-  outline: none;
   cursor: pointer;
 }
 
 .g3-filter-section__show-more {
   border: none;
-  outline: none;
   color: var(--g3-color__base-blue);
   cursor: pointer;
   margin-top: 15px;
@@ -116,7 +113,6 @@
 }
 
 .g3-filter-section__search-input-box {
-  outline: none;
   border: none;
   width: 100%;
 }
@@ -136,6 +132,15 @@
   top: 6px;
   right: 6px;
   background-color: var(--g3-color__gray);
+  cursor: pointer;
+}
+
+.g3-filter-section__search-input-spinner {
+  width: 20px;
+  height: 10px;
+  position: relative;
+  top: 10px;
+  right: 6px;
   cursor: pointer;
 }
 
