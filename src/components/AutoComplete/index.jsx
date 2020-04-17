@@ -27,6 +27,7 @@ class AutoComplete extends Component {
             ref={this.inputRef}
             placeHolderText={this.props.inputPlaceHolderText}
             icon={this.props.inputIcon}
+            inputTitle={this.props.inputTitle}
             onInputChange={this.props.onInputChange}
             onSubmitInput={this.props.onSubmitInput}
           />
@@ -45,6 +46,7 @@ AutoComplete.propTypes = {
   onInputChange: PropTypes.func,
   suggestionList: PropTypes.arrayOf(PropTypes.shape(SuggestionItem)),
   inputPlaceHolderText: PropTypes.string,
+  inputTitle: PropTypes.string,
   inputIcon: PropTypes.string,
   onSuggestionItemClick: PropTypes.func,
   onSubmitInput: PropTypes.func,
@@ -54,6 +56,7 @@ AutoComplete.defaultProps = {
   onInputChange: () => {},
   suggestionList: [],
   inputPlaceHolderText: 'Search',
+  inputTitle: 'Search Input',
   inputIcon: 'search',
   onSuggestionItemClick: () => {},
   onSubmitInput: () => {},
