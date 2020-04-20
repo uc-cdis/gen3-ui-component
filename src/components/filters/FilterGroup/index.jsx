@@ -103,11 +103,23 @@ class FilterGroup extends React.Component {
 
   handleSectionClear(tabIndex, sectionIndex) {
     this.setState((prevState) => {
+      // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
       newFilterStatus[tabIndex][sectionIndex] = {};
+
+      // update filter results; clear the results for this filter
+      let newFilterResults = Object.assign({}, prevState.filterResults);
+      const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
+      newFilterResults[field] = {};
+      newFilterResults = removeEmptyFilter(newFilterResults);
+
+      // update component state
       return {
         filterStatus: newFilterStatus,
+        filterResults: newFilterResults,
       };
+    }, () => {
+      this.callOnFilterChange();
     });
   }
 
