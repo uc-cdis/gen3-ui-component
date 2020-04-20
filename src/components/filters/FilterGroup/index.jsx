@@ -108,7 +108,7 @@ class FilterGroup extends React.Component {
       newFilterStatus[tabIndex][sectionIndex] = {};
 
       // update filter results; clear the results for this filter
-      let newFilterResults = prevState.filterResults;
+      let newFilterResults = Object.assign({}, prevState.filterResults);
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
       newFilterResults[field] = {};
       newFilterResults = removeEmptyFilter(newFilterResults);
