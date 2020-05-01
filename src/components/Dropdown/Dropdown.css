@@ -14,7 +14,7 @@
   margin-top: 1px;
   border: 1px solid var(--g3-dropdown-menu__border-color);
   z-index: 2;
-  width: calc(100% - 2px);
+  width: calc(100% + 60px);
 }
 
 .g3-dropdown__menu--opened {
