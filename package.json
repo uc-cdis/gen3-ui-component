@@ -8,7 +8,7 @@
     "storybook": "start-storybook -p 9001 -c .storybook",
     "prepare": "rm -rf dist && npm run eslint && npm run stylelint && npx gulp",
     "prepare-dev": "rm -rf dist && npm run eslint && npm run stylelint && npx gulp --dev",
-    "eslint": "eslint --ext js --ext jsx --ignore-pattern '**/setupTests.js' --ignore-pattern 'dist/' --fix src",
+    "eslint": "eslint --ext js --ext jsx --ignore-pattern 'dist/' --fix src",
     "stylelint": "stylelint 'src/**/*.less' 'src/**/*.css' 'stories/*.css' --config .stylelintrc.js --fix"
   },
   "repository": {
