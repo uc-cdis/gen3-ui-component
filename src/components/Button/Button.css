@@ -124,3 +124,7 @@
 .rc-tooltip-placement-bottom .rc-tooltip-arrow {
   border-bottom-color: var(--g3-color__gray);
 }
+
+.rc-tooltip {
+  opacity: 1;
+}
