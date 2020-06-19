@@ -60,13 +60,7 @@ class SummaryPieChart extends React.Component {
                           { helper.numberWithCommas(entry.value) }
                         </span>
                         <span className='summary-pie-chart__legend-item-value-percentage'>
-                          {' '}
-(
-                          {
-                            helper
-                              .percentageFormatter(this.props.showPercentage)(entry[dataKey])
-                          }
-)
+                          { helper.percentageFormatter(this.props.showPercentage)(entry[dataKey]) }
                         </span>
                       </div>
                     </div>
