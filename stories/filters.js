@@ -108,15 +108,15 @@ const fileSectionsWithTooltips = [
 ];
 
 const tabs = [
-  <FilterList key={0} sections={projectSections} />,
-  <FilterList key={1} sections={subjectSections} />,
-  <FilterList key={2} sections={fileSections} />,
+  <FilterList key={0} sections={projectSections} tierAccessLimit={1000} />,
+  <FilterList key={1} sections={subjectSections} tierAccessLimit={1000} />,
+  <FilterList key={2} sections={fileSections} tierAccessLimit={1000} />,
 ];
 
 const tabsWithTooltips = [
-  <FilterList key={0} sections={projectSectionsWithTooltips} />,
-  <FilterList key={1} sections={subjectSectionsWithTooltips} />,
-  <FilterList key={2} sections={fileSectionsWithTooltips} />,
+  <FilterList key={0} sections={projectSectionsWithTooltips} tierAccessLimit={1000} />,
+  <FilterList key={1} sections={subjectSectionsWithTooltips} tierAccessLimit={1000} />,
+  <FilterList key={2} sections={fileSectionsWithTooltips} tierAccessLimit={1000} />,
 ];
 
 const filterConfig = {
