@@ -339,7 +339,7 @@ class FilterSection extends React.Component {
                   // to rerender if the `reset` button is clicked.
                   // Each reset button click increments the counter and changes the key.
                   // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
-                  const key = `${option.text}-${this.state.resetClickCounter}`;
+                  const key = `${option.text}-${option.min}-${option.max}-${this.state.resetClickCounter}`;
                   // NOTE: We set hideValue={-1} here because Guppy returns a count of -1
                   // when the count is hidden from the end user.
                   const hideValue = -1;
