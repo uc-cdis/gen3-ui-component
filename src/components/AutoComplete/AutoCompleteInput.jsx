@@ -50,6 +50,7 @@ class AutoCompleteInput extends Component {
       <div className='auto-complete-input'>
         <form className='auto-complete-input__form' onSubmit={e => this.handleSubmit(e)}>
           <input
+            title={this.props.inputTitle}
             className='auto-complete-input__input-box body'
             onChange={() => { this.handleChange(); }}
             placeholder={this.props.placeHolderText}
@@ -87,6 +88,7 @@ AutoCompleteInput.propTypes = {
   placeHolderText: PropTypes.string,
   icon: PropTypes.string,
   onSubmitInput: PropTypes.func,
+  inputTitle: PropTypes.string,
 };
 
 AutoCompleteInput.defaultProps = {
@@ -94,6 +96,7 @@ AutoCompleteInput.defaultProps = {
   placeHolderText: 'Search',
   icon: 'search',
   onSubmitInput: () => {},
+  inputTitle: 'Search Input',
 };
 
 export default AutoCompleteInput;

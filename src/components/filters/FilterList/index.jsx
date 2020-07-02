@@ -22,6 +22,17 @@ class FilterList extends React.Component {
     this.props.onToggle(sectionIndex, newExpanded);
   }
 
+  handleSectionClear(sectionIndex) {
+    this.setState((prevState) => {
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      newFilterStatus[sectionIndex] = {};
+      return {
+        filterStatus: newFilterStatus,
+      };
+    });
+    this.props.onClear(sectionIndex);
+  }
+
   handleSelectSingleFilter(
     sectionIndex,
     singleFilterLabel,
@@ -72,6 +83,7 @@ class FilterList extends React.Component {
               options={section.options}
               expanded={this.props.expandedStatus[index]}
               onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
+              onClear={() => this.handleSectionClear(index)}
               filterStatus={filterStatus[index]}
               onSelect={
                 singleFilterLabel => this.handleSelectSingleFilter(
@@ -115,6 +127,7 @@ FilterList.propTypes = {
   })).isRequired,
   expandedStatus: PropTypes.arrayOf(PropTypes.bool),
   onToggle: PropTypes.func,
+  onClear: PropTypes.func,
   filterStatus: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
@@ -130,6 +143,7 @@ FilterList.propTypes = {
 FilterList.defaultProps = {
   expandedStatus: [],
   onToggle: () => {},
+  onClear: () => {},
   filterStatus: undefined,
   onSelect: () => {},
   onAfterDrag: () => {},

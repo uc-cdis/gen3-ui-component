@@ -6,7 +6,6 @@
   width: auto;
   display: flex;
   align-items: baseline;
-  outline: none;
 }
 
 .top-bar-button--active, .top-bar-button:hover {
