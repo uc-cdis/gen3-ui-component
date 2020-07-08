@@ -6,7 +6,6 @@ import RangeFilter from '../src/components/filters/RangeFilter';
 import FilterSection from '../src/components/filters/FilterSection';
 import FilterList from '../src/components/filters/FilterList';
 import FilterGroup from '../src/components/filters/FilterGroup';
-import Button from '../src/components/Button';
 
 const projectOptions = [
   { text: 'ndh-CHARLIE', filterType: 'singleSelect', count: 123 },
@@ -108,15 +107,15 @@ const fileSectionsWithTooltips = [
 ];
 
 const tabs = [
-  <FilterList key={0} sections={projectSections} />,
-  <FilterList key={1} sections={subjectSections} />,
-  <FilterList key={2} sections={fileSections} />,
+  <FilterList key={0} sections={projectSections} tierAccessLimit={1000} />,
+  <FilterList key={1} sections={subjectSections} tierAccessLimit={1000} />,
+  <FilterList key={2} sections={fileSections} tierAccessLimit={1000} />,
 ];
 
 const tabsWithTooltips = [
-  <FilterList key={0} sections={projectSectionsWithTooltips} />,
-  <FilterList key={1} sections={subjectSectionsWithTooltips} />,
-  <FilterList key={2} sections={fileSectionsWithTooltips} />,
+  <FilterList key={0} sections={projectSectionsWithTooltips} tierAccessLimit={1000} />,
+  <FilterList key={1} sections={subjectSectionsWithTooltips} tierAccessLimit={1000} />,
+  <FilterList key={2} sections={fileSectionsWithTooltips} tierAccessLimit={1000} />,
 ];
 
 const filterConfig = {
@@ -144,33 +143,6 @@ const filterConfig = {
     ],
   }],
 };
-
-class ExampleFilterGroup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.filterRef = React.createRef();
-  }
-
-  resetFilter = () => {
-    this.filterRef.current.resetFilter();
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <Button
-          label='reset filter'
-          onClick={this.resetFilter}
-        />
-        <FilterGroup
-          ref={this.filterRef}
-          tabs={tabs}
-          filterConfig={filterConfig}
-        />
-      </React.Fragment>
-    );
-  }
-}
 
 storiesOf('Filters', module)
   .add('SingleSelectFilter', () => (
@@ -232,9 +204,6 @@ storiesOf('Filters', module)
       filterConfig={filterConfig}
       onFilterChange={action('filter change')}
     />
-  ))
-  .add('FilterGroup that could be reset', () => (
-    <ExampleFilterGroup />
   ))
   .add('FilterGroup with tooltips', () => (
     <FilterGroup

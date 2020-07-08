@@ -1,11 +1,11 @@
 {
   "name": "@gen3/ui-component",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Basic UI component for gen3",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook": "start-storybook -p 9002 -c .storybook",
     "prepare": "rm -rf dist && npm run eslint && npm run stylelint && npx gulp",
     "prepare-dev": "rm -rf dist && npm run eslint && npm run stylelint && npx gulp --dev",
     "eslint": "eslint --ext js --ext jsx --ignore-pattern '**/setupTests.js' --ignore-pattern 'dist/' --fix src",
@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/uc-cdis/gen3-ui-component#readme",
   "dependencies": {
+    "@storybook/addon-actions": "^5.0.0",
+    "@storybook/react": "^5.0.0",
     "babel-loader": "^8.0.5",
     "postcss-loader": "^3.0.0",
     "postcss-svgo": "^4.0.2",
@@ -35,13 +37,11 @@
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1",
     "recharts": "^1.5.0",
-    "stylelint": "^9.10.1"
+    "stylelint": "^13.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/polyfill": "^7.2.5",
-    "@storybook/addon-actions": "^5.0.0",
-    "@storybook/react": "^5.0.0",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.4.10",
@@ -63,7 +63,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "jest": "^24.3.0",
     "minimist": "^1.2.0",
-    "postcss-cli": "^6.1.2",
+    "postcss-cli": "^7.1.1",
     "postcss-inline-svg": "^3.1.1",
     "react-test-renderer": "^16.8.4"
   },
