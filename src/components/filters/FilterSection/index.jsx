@@ -76,6 +76,7 @@ class FilterSection extends React.Component {
 
   getAndOrToggle() {
     console.log('inside getAndOrToggle');
+    console.log(this);
   }
 
   getShowMoreButton() {

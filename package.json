@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "storybook": "start-storybook -p 9002 -c .storybook",
-    "prepare": "rm -rf dist && npm run eslint && npm run stylelint && npx gulp",
-    "prepare-dev": "rm -rf dist && npm run eslint && npm run stylelint && npx gulp --dev",
+    "prepare": "rm -rf dist && npx gulp",
+    "prepare-dev": "rm -rf dist && npx gulp --dev",
     "eslint": "eslint --ext js --ext jsx --ignore-pattern '**/setupTests.js' --ignore-pattern 'dist/' --fix src",
     "stylelint": "stylelint 'src/**/*.less' 'src/**/*.css' 'stories/*.css' --config .stylelintrc.js --fix"
   },
