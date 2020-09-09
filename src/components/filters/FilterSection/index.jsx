@@ -209,6 +209,7 @@ class FilterSection extends React.Component {
     const isTextFilter = this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect';
     const isRangeFilter = !isTextFilter;
     const numSelected = getNumValuesSelected(filterStatus);
+    console.log('in render with numSelected ', numSelected);
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div className='g3-filter-section__toggle-icon-container'>
