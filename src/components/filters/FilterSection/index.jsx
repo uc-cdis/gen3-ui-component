@@ -54,6 +54,7 @@ class FilterSection extends React.Component {
   }
 
   getSearchInput() {
+    console.log('in getSearchInput');
     const isHidden = !this.state.showingSearch || !this.state.isExpanded;
     return (
       <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__search-input--hidden'}`}>
@@ -71,6 +72,10 @@ class FilterSection extends React.Component {
         />
       </div>
     );
+  }
+
+  getAndOrToggle() {
+    console.log('inside getAndOrToggle');
   }
 
   getShowMoreButton() {
@@ -299,6 +304,9 @@ class FilterSection extends React.Component {
         }
         {
           isTextFilter && this.getSearchInput()
+        }
+        {
+          isTextFilter && this.getAndOrToggle()
         }
         <div className='g3-filter-section__options'>
           {
