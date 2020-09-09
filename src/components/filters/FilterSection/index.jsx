@@ -43,6 +43,7 @@ class FilterSection extends React.Component {
       filterStatus: {}, // shape: { [fieldName]: true | false } | [number, number]
       searchInputEmpty: true,
       showingSearch: false,
+      showingAndOrToggle: false,
 
       // used for rerendering child components when reset button is clicked
       resetClickCounter: 0,
@@ -77,6 +78,23 @@ class FilterSection extends React.Component {
   getAndOrToggle() {
     console.log('inside getAndOrToggle');
     console.log(this);
+    const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
+    return (
+      <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__search-input--hidden'}`}>
+        <input
+          className='g3-filter-section__search-input-box body'
+          onChange={() => { this.handleSearchInputChange(); }}
+          ref={this.inputElem}
+        />
+        <i
+          className={`g3-icon g3-icon--${this.state.searchInputEmpty ? 'aperture' : 'cross'} g3-filter-section__search-input-close`}
+          onClick={() => this.state.searchInputEmpty || this.clearSearchInput()}
+          onKeyPress={() => this.state.searchInputEmpty || this.clearSearchInput()}
+          role='button'
+          tabIndex={0}
+        />
+      </div>
+    );
   }
 
   getShowMoreButton() {
@@ -196,6 +214,10 @@ class FilterSection extends React.Component {
 
   toggleShowSearch() {
     this.setState(prevState => ({ showingSearch: !prevState.showingSearch }));
+  }
+
+  toggleShowAndOrToggle() {
+    this.setState(prevState => ({ showingAndOrToggle: !prevState.showingAndOrToggle }));
   }
 
   toggleShowMore() {
