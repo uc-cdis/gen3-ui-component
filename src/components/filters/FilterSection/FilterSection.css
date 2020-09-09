@@ -112,6 +112,24 @@
   margin-top: 8px;
 }
 
+.g3-filter-section__and-or-toggle {
+  font-size: 12px;
+  padding: 5px 8px;
+}
+
+.g3-filter-section__and-or-toggle button {
+  background: none;
+  border-radius: 2px;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 1px solid var(--g3-color__lightgray);
+}
+
+
+.g3-filter-section__and-or-toggle button.g3-filter-section__and_or_active {
+  background: var(--g3-color__silver);
+}
+
 .g3-filter-section__search-input-box {
   border: none;
   width: 100%;
@@ -121,7 +139,7 @@
   border-color: var(--g3-color__base-blue);
 }
 
-.g3-filter-section__search-input--hidden {
+.g3-filter-section__hidden {
   display: none;
 }
 

@@ -100,10 +100,6 @@
   mask-image: svg-load(../images/icons/analysis.svg);
 }
 
-.g3-icon--aperture {
-  mask-image: svg-load(../images/icons/aperture.svg);
-}
-
 .g3-icon--back {
   mask-image: svg-load(../images/icons/back.svg);
 }
@@ -142,6 +138,10 @@
 
 .g3-icon--files {
   mask-image: svg-load(../images/icons/files.svg);
+}
+
+.g3-icon--gear {
+  mask-image: svg-load(../images/icons/gear.svg);
 }
 
 .g3-icon--graph {

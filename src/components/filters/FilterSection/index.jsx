@@ -44,6 +44,7 @@ class FilterSection extends React.Component {
       searchInputEmpty: true,
       showingSearch: false,
       showingAndOrToggle: false,
+      andModeOn: false,
 
       // used for rerendering child components when reset button is clicked
       resetClickCounter: 0,
@@ -58,7 +59,7 @@ class FilterSection extends React.Component {
     console.log('in getSearchInput');
     const isHidden = !this.state.showingSearch || !this.state.isExpanded;
     return (
-      <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__search-input--hidden'}`}>
+      <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__hidden'}`}>
         <input
           className='g3-filter-section__search-input-box body'
           onChange={() => { this.handleSearchInputChange(); }}
@@ -76,23 +77,14 @@ class FilterSection extends React.Component {
   }
 
   getAndOrToggle() {
-    console.log('inside getAndOrToggle');
+    console.log('inside getAndOrToggle!!!!');
     console.log(this);
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
     return (
-      <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__search-input--hidden'}`}>
-        <input
-          className='g3-filter-section__search-input-box body'
-          onChange={() => { this.handleSearchInputChange(); }}
-          ref={this.inputElem}
-        />
-        <i
-          className={`g3-icon g3-icon--${this.state.searchInputEmpty ? 'aperture' : 'cross'} g3-filter-section__search-input-close`}
-          onClick={() => this.state.searchInputEmpty || this.clearSearchInput()}
-          onKeyPress={() => this.state.searchInputEmpty || this.clearSearchInput()}
-          role='button'
-          tabIndex={0}
-        />
+      <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
+        Combine filters with
+        <button onClick={() => this.setState({andModeOn: true})} className={`${this.state.andModeOn && 'g3-filter-section__and_or_active'}`}>AND</button>
+        <button onClick={() => this.setState({andModeOn: false})} className={`${!this.state.andModeOn && 'g3-filter-section__and_or_active'}`}>OR</button>
       </div>
     );
   }
@@ -213,11 +205,13 @@ class FilterSection extends React.Component {
   }
 
   toggleShowSearch() {
-    this.setState(prevState => ({ showingSearch: !prevState.showingSearch }));
+    // If and/or toggle is shown, hide it before showing the search input.
+    this.setState(prevState => ({ showingSearch: !prevState.showingSearch, showingAndOrToggle: false }));
   }
 
   toggleShowAndOrToggle() {
-    this.setState(prevState => ({ showingAndOrToggle: !prevState.showingAndOrToggle }));
+    // If search input is shown, hide it before showing the and/or toggle.
+    this.setState(prevState => ({ showingAndOrToggle: !prevState.showingAndOrToggle, showingSearch: false }));
   }
 
   toggleShowMore() {
@@ -296,6 +290,20 @@ class FilterSection extends React.Component {
             )
           }
         </div>
+        {
+          isTextFilter && (
+            <div
+              tabIndex={0}
+              role='button'
+              onClick={() => this.toggleShowAndOrToggle()}
+              onKeyPress={() => this.toggleShowAndOrToggle()}
+            >
+              <i
+                className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
+              />
+            </div>
+          )
+        }
         {
           isTextFilter && (
             <div
