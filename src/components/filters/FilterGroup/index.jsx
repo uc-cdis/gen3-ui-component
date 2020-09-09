@@ -190,7 +190,7 @@ class FilterGroup extends React.Component {
   }
 
   callOnFilterChange() {
-    this.props.onFilterChange(this.state.filterResults);
+    this.props.onFilterChange(this.state.filterResults, null, this.state.filterConfig);
   }
 
   toggleFilters() {
