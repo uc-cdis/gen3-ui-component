@@ -185,6 +185,10 @@ class FilterGroup extends React.Component {
     });
   }
 
+  handleAndModeToggle() {
+    this.callOnFilterChange();
+  }
+
   callOnFilterChange() {
     this.props.onFilterChange(this.state.filterResults);
   }

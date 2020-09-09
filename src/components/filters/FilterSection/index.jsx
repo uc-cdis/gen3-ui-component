@@ -44,7 +44,7 @@ class FilterSection extends React.Component {
       searchInputEmpty: true,
       showingSearch: false,
       showingAndOrToggle: false,
-      andModeOn: false,
+      filterConfig: { 'andModeOn': false },
 
       // used for rerendering child components when reset button is clicked
       resetClickCounter: 0,
@@ -55,8 +55,14 @@ class FilterSection extends React.Component {
     this.inputElem = React.createRef();
   }
 
+  setFilterConfig(optionToSet, value) {
+    const filterConfigClone = Object.assign({}, this.state.filterConfig);
+    filterConfigClone[optionToSet] = value;
+    console.log('setting ', filterConfigClone);
+    this.setState({filterConfig: filterConfigClone});
+  }
+
   getSearchInput() {
-    console.log('in getSearchInput');
     const isHidden = !this.state.showingSearch || !this.state.isExpanded;
     return (
       <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__hidden'}`}>
@@ -77,14 +83,12 @@ class FilterSection extends React.Component {
   }
 
   getAndOrToggle() {
-    console.log('inside getAndOrToggle!!!!');
-    console.log(this);
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
     return (
       <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
         Combine filters with
-        <button onClick={() => this.setState({andModeOn: true})} className={`${this.state.andModeOn && 'g3-filter-section__and_or_active'}`}>AND</button>
-        <button onClick={() => this.setState({andModeOn: false})} className={`${!this.state.andModeOn && 'g3-filter-section__and_or_active'}`}>OR</button>
+        <button onClick={() => this.setFilterConfig('andModeOn', true)} className={`${this.state.filterConfig['andModeOn'] && 'g3-filter-section__and_or_active'}`}>AND</button>
+        <button onClick={() => this.setFilterConfig('andModeOn', false)} className={`${!this.state.filterConfig['andModeOn'] && 'g3-filter-section__and_or_active'}`}>OR</button>
       </div>
     );
   }
@@ -220,13 +224,13 @@ class FilterSection extends React.Component {
 
 
   render() {
+    console.log(this.state);
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
     const isTextFilter = this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect';
     const isRangeFilter = !isTextFilter;
     const numSelected = getNumValuesSelected(filterStatus);
-    console.log('in render with numSelected ', numSelected);
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div className='g3-filter-section__toggle-icon-container'>
