@@ -85,7 +85,7 @@ class FilterSection extends React.Component {
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
     return (
       <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
-        <span class='g3-filter-section__combine_label'>Combine options with</span>
+        <span className='g3-filter-section__combine_label'>Combine options with</span>
         <button onClick={() => this.setFilterConfig('andModeOn', true)} className={`${this.state.filterConfig['andModeOn'] && 'g3-filter-section__and_or_active'}`}>AND</button>
         <button onClick={() => this.setFilterConfig('andModeOn', false)} className={`${!this.state.filterConfig['andModeOn'] && 'g3-filter-section__and_or_active'}`}>OR</button>
       </div>
