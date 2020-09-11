@@ -58,7 +58,6 @@ class FilterSection extends React.Component {
   setFilterConfig(optionToSet, value) {
     const filterConfigClone = Object.assign({}, this.state.filterConfig);
     filterConfigClone[optionToSet] = value;
-    console.log('setting ', filterConfigClone);
     this.setState({filterConfig: filterConfigClone});
   }
 
@@ -224,7 +223,6 @@ class FilterSection extends React.Component {
 
 
   render() {
-    console.log(this.state);
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;

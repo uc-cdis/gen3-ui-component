@@ -190,6 +190,7 @@ class FilterGroup extends React.Component {
   }
 
   callOnFilterChange() {
+    console.log('gen3 ui component callOnFilterChange with ', this.state.filterConfig);
     this.props.onFilterChange(this.state.filterResults, null, this.state.filterConfig);
   }
 
