@@ -127,7 +127,9 @@
   margin: 0 4px;
   cursor: pointer;
   border: 1px solid var(--g3-color__lightgray);
+  text-align:center;
   width:40px;
+  padding:2px 3px;
   font-weight:200;
 }
 

@@ -123,10 +123,20 @@ class FilterGroup extends React.Component {
     });
   }
 
+  handleCombineOptionToggle(sectionIndex, value) {
+    console.log('inside handleCombineOptionToggle');
+    console.log('handleCombineOptionToggle sectionIndex: ', sectionIndex);
+    console.log('handleCombineOptionToggle value: ', value);
+  }
+
   handleSelect(sectionIndex, singleFilterLabel) {
+    console.log('handleSelect singleFilterLabel: ', singleFilterLabel);
+    console.log('handleSelect sectionIndex:  ', sectionIndex);
+    console.log('handleSelect prevState.filterStatus', this.state.filterStatus)
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
+      console.log('newFilterStatus[tabIndex][sectionIndex] : ', newFilterStatus[tabIndex][sectionIndex]);
       const tabIndex = prevState.selectedTabIndex;
       const oldSelected = newFilterStatus[tabIndex][sectionIndex][singleFilterLabel];
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
@@ -255,6 +265,7 @@ class FilterGroup extends React.Component {
                 expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex],
                 filterStatus: this.state.filterStatus[this.state.selectedTabIndex],
                 onSelect: this.handleSelect.bind(this),
+                onCombineOptionToggle: this.handleCombineOptionToggle(this),
                 onAfterDrag: this.handleDrag.bind(this),
                 hideZero: this.props.hideZero,
                 ref: this.currentFilterListRef,

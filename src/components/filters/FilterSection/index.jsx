@@ -44,7 +44,7 @@ class FilterSection extends React.Component {
       searchInputEmpty: true,
       showingSearch: false,
       showingAndOrToggle: false,
-      filterConfig: { 'andModeOn': false },
+      combineMode: 'OR',
 
       // used for rerendering child components when reset button is clicked
       resetClickCounter: 0,
@@ -55,10 +55,27 @@ class FilterSection extends React.Component {
     this.inputElem = React.createRef();
   }
 
-  setFilterConfig(optionToSet, value) {
-    const filterConfigClone = Object.assign({}, this.state.filterConfig);
-    filterConfigClone[optionToSet] = value;
-    this.setState({filterConfig: filterConfigClone});
+  handleSetCombineModeOption(combineModeIn) {
+    // Combine mode: AND or OR
+
+    // const filterConfigClone = Object.assign({}, this.state.filterConfig);
+    // filterConfigClone[optionToSet] = value;
+    this.setState({combineMode: combineModeIn});
+    console.log('inside handleSetCombineModeOption');
+    this.onCombineOptionToggle(combineModeIn);
+
+    // this.setState((prevState) => {
+    //   const newFilterStatus = Object.assign({}, prevState.filterStatus);
+    //   // const oldSelected = newFilterStatus[label];
+    //   const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
+    //   newFilterStatus[label] = newSelected;
+    //   return {
+    //     filterStatus: newFilterStatus,
+    //     showingAndOrToggle: !prevState.showingAndOrToggle, showingSearch: false
+    //   };
+    // });
+    // console.log('inside handle single select filter with label: ', label);
+    // this.props.onSelect(label);
   }
 
   getSearchInput() {
@@ -83,11 +100,12 @@ class FilterSection extends React.Component {
 
   getAndOrToggle() {
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
+    const isAndMode = this.state.combineMode == 'AND';
     return (
       <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
-        <span className='g3-filter-section__combine_label'>Combine options with</span>
-        <button onClick={() => this.setFilterConfig('andModeOn', true)} className={`${this.state.filterConfig['andModeOn'] && 'g3-filter-section__and_or_active'}`}>AND</button>
-        <button onClick={() => this.setFilterConfig('andModeOn', false)} className={`${!this.state.filterConfig['andModeOn'] && 'g3-filter-section__and_or_active'}`}>OR</button>
+        <span className='g3-filter-section__combine_label'>Combine with:</span>
+        <button onClick={() => this.handleSetCombineModeOption('AND')} className={`${isAndMode && 'g3-filter-section__and_or_active'}`}>AND</button>
+        <button onClick={() => this.handleSetCombineModeOption('OR')} className={`${!isAndMode && 'g3-filter-section__and_or_active'}`}>OR</button>
       </div>
     );
   }
@@ -194,6 +212,7 @@ class FilterSection extends React.Component {
         filterStatus: newFilterStatus,
       };
     });
+    console.log('inside handle single select filter with label: ', label);
     this.props.onSelect(label);
   }
 
@@ -428,6 +447,7 @@ FilterSection.propTypes = {
 
   })),
   onSelect: PropTypes.func.isRequired,
+  onCombineOptionToggle: PropTypes.func.isRequired,
   onAfterDrag: PropTypes.func.isRequired,
   onClear: PropTypes.func,
   expanded: PropTypes.bool,
