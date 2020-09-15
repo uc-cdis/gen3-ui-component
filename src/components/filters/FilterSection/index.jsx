@@ -62,7 +62,7 @@ class FilterSection extends React.Component {
     // filterConfigClone[optionToSet] = value;
     this.setState({combineMode: combineModeIn});
     console.log('inside handleSetCombineModeOption');
-    this.onCombineOptionToggle(combineModeIn);
+    this.props.onCombineOptionToggle(combineModeIn);
 
     // this.setState((prevState) => {
     //   const newFilterStatus = Object.assign({}, prevState.filterStatus);
@@ -447,7 +447,7 @@ FilterSection.propTypes = {
 
   })),
   onSelect: PropTypes.func.isRequired,
-  onCombineOptionToggle: PropTypes.func.isRequired,
+  onCombineOptionToggle: PropTypes.func,
   onAfterDrag: PropTypes.func.isRequired,
   onClear: PropTypes.func,
   expanded: PropTypes.bool,
