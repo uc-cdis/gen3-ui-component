@@ -49,6 +49,27 @@ class FilterList extends React.Component {
     this.props.onSelect(sectionIndex, singleFilterLabel);
   }
 
+  handleSelectCombineOptionToggle(
+    sectionIndex,
+    singleFilterLabel,
+  ) {
+    console.log('handleSelectCombineOptionToggle. sectionIndex: ', sectionIndex);
+    console.log('handleSelectCombineOptionToggle. singleFilterLabel: ', singleFilterLabel);
+    this.setState((prevState) => {
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
+      const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
+      newFilterStatus[sectionIndex][singleFilterLabel] = newSelected;
+      console.log('handleSelectCombineOptionToggle. newFilterStatus: ', newFilterStatus);
+      console.log();
+      return {
+        filterStatus: newFilterStatus,
+      };
+    });
+    // this.props.onSelect(sectionIndex, singleFilterLabel);
+    this.props.onCombineOptionToggle(sectionIndex, singleFilterLabel);
+  }
+
   handleDragRangeFilter(sectionIndex, lowerBound, upperBound, minValue, maxValue, rangeStep) {
     this.setState((prevState) => {
       const newFilterStatus = prevState.filterStatus.slice(0);
@@ -87,6 +108,12 @@ class FilterList extends React.Component {
               filterStatus={filterStatus[index]}
               onSelect={
                 singleFilterLabel => this.handleSelectSingleFilter(
+                  index,
+                  singleFilterLabel,
+                )
+              }
+              onCombineOptionToggle={
+                singleFilterLabel => this.handleSelectCombineOptionToggle(
                   index,
                   singleFilterLabel,
                 )

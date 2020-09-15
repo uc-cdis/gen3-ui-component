@@ -61,7 +61,7 @@ class FilterSection extends React.Component {
     // const filterConfigClone = Object.assign({}, this.state.filterConfig);
     // filterConfigClone[optionToSet] = value;
     this.setState({combineMode: combineModeIn});
-    console.log('inside handleSetCombineModeOption');
+    console.log('inside handleSetCombineModeOption with ', combineModeIn);
     this.props.onCombineOptionToggle(combineModeIn);
 
     // this.setState((prevState) => {
