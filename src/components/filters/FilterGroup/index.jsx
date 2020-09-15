@@ -136,9 +136,9 @@ class FilterGroup extends React.Component {
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
-      console.log('newFilterStatus[tabIndex][sectionIndex] : ', newFilterStatus[tabIndex][sectionIndex]);
       const tabIndex = prevState.selectedTabIndex;
       const oldSelected = newFilterStatus[tabIndex][sectionIndex][singleFilterLabel];
+      console.log('newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] : ', oldSelected);
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
       newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] = newSelected;
 
@@ -265,7 +265,7 @@ class FilterGroup extends React.Component {
                 expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex],
                 filterStatus: this.state.filterStatus[this.state.selectedTabIndex],
                 onSelect: this.handleSelect.bind(this),
-                onCombineOptionToggle: this.handleCombineOptionToggle(this),
+                onCombineOptionToggle: this.handleCombineOptionToggle.bind(this),
                 onAfterDrag: this.handleDrag.bind(this),
                 hideZero: this.props.hideZero,
                 ref: this.currentFilterListRef,
