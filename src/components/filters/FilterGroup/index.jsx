@@ -123,10 +123,11 @@ class FilterGroup extends React.Component {
     });
   }
 
-  handleCombineOptionToggle(sectionIndex, value) {
-    console.log('inside handleCombineOptionToggle');
+  handleCombineOptionToggle(sectionIndex, singleFilterLabel) {
+    console.log('(FilterGroup) inside handleCombineOptionToggle');
     console.log('handleCombineOptionToggle sectionIndex: ', sectionIndex);
-    console.log('handleCombineOptionToggle value: ', value);
+    console.log('handleCombineOptionToggle singleFilterLabel: ', singleFilterLabel);
+    this.handleSelect(sectionIndex, singleFilterLabel);
   }
 
   handleSelect(sectionIndex, singleFilterLabel) {

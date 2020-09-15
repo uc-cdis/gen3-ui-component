@@ -53,7 +53,7 @@ class FilterList extends React.Component {
     sectionIndex,
     singleFilterLabel,
   ) {
-    console.log('handleSelectCombineOptionToggle. sectionIndex: ', sectionIndex);
+    console.log('(FilterList) handleSelectCombineOptionToggle. sectionIndex: ', sectionIndex);
     console.log('handleSelectCombineOptionToggle. singleFilterLabel: ', singleFilterLabel);
     this.setState((prevState) => {
       const newFilterStatus = prevState.filterStatus.slice(0);
