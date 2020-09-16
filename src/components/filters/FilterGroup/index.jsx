@@ -7,9 +7,10 @@ const removeEmptyFilter = (filterResults) => {
   Object.keys(filterResults).forEach((field) => {
     if (typeof filterResults[field].lowerBound !== 'undefined'
       || (filterResults[field].selectedValues
-        && filterResults[field].selectedValues.length > 0)) {
+        && filterResults[field].selectedValues.length > 0)
+      || field.startsWith('__')) {
       newFilterResults[field] = filterResults[field];
-    }
+    } 
   });
   return newFilterResults;
 };
@@ -222,8 +223,8 @@ class FilterGroup extends React.Component {
   }
 
   callOnFilterChange() {
-    console.log('gen3 ui component callOnFilterChange with ', this.state.filterConfig);
-    this.props.onFilterChange(this.state.filterResults, null, this.state.filterConfig);
+    console.log('(FilterGroup) callOnFilterChange() filterResults: ', this.state.filterResults);
+    this.props.onFilterChange(this.state.filterResults);
   }
 
   toggleFilters() {
