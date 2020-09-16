@@ -5,6 +5,7 @@ import './FilterGroup.css';
 const removeEmptyFilter = (filterResults) => {
   const newFilterResults = {};
   Object.keys(filterResults).forEach((field) => {
+    console.log('(FilterGroup) removeEmptyFilter field ', field)
     if (typeof filterResults[field].lowerBound !== 'undefined'
       || (filterResults[field].selectedValues
         && filterResults[field].selectedValues.length > 0)
@@ -145,7 +146,9 @@ class FilterGroup extends React.Component {
         newFilterResults[field].combineMode = combineModeValue;
       }
 
+      console.log('(FilterGroup) newFilterResults before remove function: ', newFilterResults);
       newFilterResults = removeEmptyFilter(newFilterResults);
+      console.log('(FilterGroup) newFilterResults after remove function: ', newFilterResults);
       // update component state
       return {
         filterStatus: newFilterStatus,
@@ -165,7 +168,6 @@ class FilterGroup extends React.Component {
       const newFilterStatus = prevState.filterStatus.slice(0);
       const tabIndex = prevState.selectedTabIndex;
       const oldSelected = newFilterStatus[tabIndex][sectionIndex][singleFilterLabel];
-      console.log('(FilterGroup) newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] : ', oldSelected);
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
       newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] = newSelected;
 
