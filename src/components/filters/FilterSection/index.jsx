@@ -53,6 +53,7 @@ class FilterSection extends React.Component {
       optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
     };
     this.inputElem = React.createRef();
+    this.combineModeFieldName = '__combineMode';
   }
 
   handleSetCombineModeOption(combineModeIn) {
@@ -62,7 +63,7 @@ class FilterSection extends React.Component {
     // filterConfigClone[optionToSet] = value;
     this.setState({combineMode: combineModeIn});
     console.log('(FilterSection) inside handleSetCombineModeOption with ', combineModeIn);
-    this.props.onCombineOptionToggle(combineModeIn);
+    this.props.onCombineOptionToggle(this.combineModeFieldName, combineModeIn);
 
     // this.setState((prevState) => {
     //   const newFilterStatus = Object.assign({}, prevState.filterStatus);
@@ -212,7 +213,7 @@ class FilterSection extends React.Component {
         filterStatus: newFilterStatus,
       };
     });
-    console.log('inside handle single select filter with label: ', label);
+    console.log('(Filter Section) inside handle single select filter with label: ', label);
     this.props.onSelect(label);
   }
 

@@ -123,23 +123,48 @@ class FilterGroup extends React.Component {
     });
   }
 
-  handleCombineOptionToggle(sectionIndex, singleFilterLabel) {
+  handleCombineOptionToggle(sectionIndex, combineModeFieldName, combineModeValue) {
     console.log('(FilterGroup) inside handleCombineOptionToggle');
-    console.log('handleCombineOptionToggle sectionIndex: ', sectionIndex);
-    console.log('handleCombineOptionToggle singleFilterLabel: ', singleFilterLabel);
-    this.handleSelect(sectionIndex, singleFilterLabel);
+    console.log('(FilterGroup) handleCombineOptionToggle sectionIndex: ', sectionIndex);
+    console.log('(FilterGroup) handleCombineOptionToggle combineModeFieldName: ', combineModeFieldName);
+    console.log('(FilterGroup) handleCombineOptionToggle combineModeValue: ', combineModeValue);
+    // this.handleSelect(sectionIndex, singleFilterLabel);
+    this.setState((prevState) => {
+      // update filter status
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      const tabIndex = prevState.selectedTabIndex;
+      newFilterStatus[tabIndex][sectionIndex][combineModeFieldName] = combineModeValue;
+
+      // update filter results
+      let newFilterResults = prevState.filterResults;
+      const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
+      if (typeof newFilterResults[field] === 'undefined') {
+        newFilterResults[field] = { combineMode: combineModeValue };
+      } else {
+        newFilterResults[field].combineMode = combineModeValue;
+      }
+
+      newFilterResults = removeEmptyFilter(newFilterResults);
+      // update component state
+      return {
+        filterStatus: newFilterStatus,
+        filterResults: newFilterResults,
+      };
+    }, () => {
+      this.callOnFilterChange();
+    });
   }
 
   handleSelect(sectionIndex, singleFilterLabel) {
-    console.log('handleSelect singleFilterLabel: ', singleFilterLabel);
-    console.log('handleSelect sectionIndex:  ', sectionIndex);
-    console.log('handleSelect prevState.filterStatus', this.state.filterStatus)
+    console.log('(FilterGroup) handleSelect singleFilterLabel: ', singleFilterLabel);
+    console.log('(FilterGroup) handleSelect sectionIndex:  ', sectionIndex);
+    console.log('(FilterGroup) handleSelect prevState.filterStatus', this.state.filterStatus)
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
       const tabIndex = prevState.selectedTabIndex;
       const oldSelected = newFilterStatus[tabIndex][sectionIndex][singleFilterLabel];
-      console.log('newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] : ', oldSelected);
+      console.log('(FilterGroup) newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] : ', oldSelected);
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
       newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] = newSelected;
 
