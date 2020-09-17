@@ -5,11 +5,15 @@ import './FilterGroup.css';
 const removeEmptyFilter = (filterResults) => {
   const newFilterResults = {};
   Object.keys(filterResults).forEach((field) => {
-    console.log('(FilterGroup) removeEmptyFilter field ', field)
-    if (typeof filterResults[field].lowerBound !== 'undefined'
-      || (filterResults[field].selectedValues
-        && filterResults[field].selectedValues.length > 0)
-      || field.startsWith('__')) {
+    // Filter settings are prefaced with two underscores, e.g., __combineMode
+    let configFields = Object.keys(filterResults[field]).filter(x => x.startsWith('__'));
+    let containsRangeFilter = typeof filterResults[field].lowerBound !== 'undefined';
+    let containsCheckboxFilter = filterResults[field].selectedValues && filterResults[field].selectedValues.length > 0;
+    // A given config setting is still informative to Guppy even if the setting has no value.
+    let containsConfigSetting = configFields.length > 0;
+
+    console.log('(FilterGroup) removeEmptyFilter field ', field);
+    if (containsRangeFilter || containsCheckboxFilter || containsConfigSetting) {
       newFilterResults[field] = filterResults[field];
     } 
   });
@@ -141,9 +145,10 @@ class FilterGroup extends React.Component {
       let newFilterResults = prevState.filterResults;
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
       if (typeof newFilterResults[field] === 'undefined') {
-        newFilterResults[field] = { combineMode: combineModeValue };
+        newFilterResults = { };
+        newFilterResults[combineModeFieldName] = combineModeValue;
       } else {
-        newFilterResults[field].combineMode = combineModeValue;
+        newFilterResults[field][combineModeFieldName] = combineModeValue;
       }
 
       console.log('(FilterGroup) newFilterResults before remove function: ', newFilterResults);
