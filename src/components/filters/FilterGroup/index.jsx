@@ -142,13 +142,13 @@ class FilterGroup extends React.Component {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
       const tabIndex = prevState.selectedTabIndex;
-      newFilterStatus[tabIndex][sectionIndex][singleFilterLabel][combineModeFieldName] = combineModeValue;
+      newFilterStatus[tabIndex][sectionIndex][combineModeFieldName] = combineModeValue;
 
       // update filter results
       let newFilterResults = prevState.filterResults;
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
       if (typeof newFilterResults[field] === 'undefined') {
-        newFilterResults = { };
+        newFilterResults[field] = { };
         console.log('(FilterGroup) newFilterResults[field]', newFilterResults[field]);
         newFilterResults[field][combineModeFieldName] = combineModeValue;
       } else {
@@ -185,7 +185,10 @@ class FilterGroup extends React.Component {
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
       if (typeof newFilterResults[field] === 'undefined') {
         newFilterResults[field] = { selectedValues: [singleFilterLabel] };
-      } else {
+      } else if (typeof newFilterResults[field].selectedValues === 'undefined') {
+        newFilterResults[field].selectedValues =  [singleFilterLabel];
+      }
+      else {
         const findIndex = newFilterResults[field].selectedValues.indexOf(singleFilterLabel);
         if (findIndex >= 0 && !newSelected) {
           newFilterResults[field].selectedValues.splice(findIndex, 1);
