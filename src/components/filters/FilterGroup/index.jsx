@@ -5,12 +5,15 @@ import './FilterGroup.css';
 const removeEmptyFilter = (filterResults) => {
   const newFilterResults = {};
   Object.keys(filterResults).forEach((field) => {
-    // Filter settings are prefaced with two underscores, e.g., __combineMode
-    let configFields = Object.keys(filterResults[field]).filter(x => x.startsWith('__'));
     let containsRangeFilter = typeof filterResults[field].lowerBound !== 'undefined';
     let containsCheckboxFilter = filterResults[field].selectedValues && filterResults[field].selectedValues.length > 0;
+    // Filter settings are prefaced with two underscores, e.g., __combineMode
+    let configFields = Object.keys(filterResults[field]).filter(x => x.startsWith('__'));
     // A given config setting is still informative to Guppy even if the setting has no value.
     let containsConfigSetting = configFields.length > 0;
+
+    console.log('(FilterGroup) config fields: ',configFields);
+    console.log('(FilterGroup) containsConfigSetting: : ', containsConfigSetting);
 
     console.log('(FilterGroup) removeEmptyFilter field ', field);
     if (containsRangeFilter || containsCheckboxFilter || containsConfigSetting) {
@@ -139,14 +142,15 @@ class FilterGroup extends React.Component {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
       const tabIndex = prevState.selectedTabIndex;
-      newFilterStatus[tabIndex][sectionIndex][combineModeFieldName] = combineModeValue;
+      newFilterStatus[tabIndex][sectionIndex][singleFilterLabel][combineModeFieldName] = combineModeValue;
 
       // update filter results
       let newFilterResults = prevState.filterResults;
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
       if (typeof newFilterResults[field] === 'undefined') {
         newFilterResults = { };
-        newFilterResults[combineModeFieldName] = combineModeValue;
+        console.log('(FilterGroup) newFilterResults[field]', newFilterResults[field]);
+        newFilterResults[field][combineModeFieldName] = combineModeValue;
       } else {
         newFilterResults[field][combineModeFieldName] = combineModeValue;
       }
