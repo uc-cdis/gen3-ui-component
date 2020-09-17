@@ -164,7 +164,14 @@ class FilterGroup extends React.Component {
         filterResults: newFilterResults,
       };
     }, () => {
-      this.callOnFilterChange();
+      // const tabIndex = this.state.selectedTabIndex;
+      // const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
+      // console.log('(FilterGroup) 169 tabIndex', tabIndex);
+      // console.log('(FilterGroup) 170 field', field);
+      // console.log('(FilterGroup) 171 this.state.filterResults[field]', this.state.filterResults[field]);
+      // if(this.state.filterResults[field].selectedValues && this.state.filterResults[field].selectedValues.length > 0) {
+        this.callOnFilterChange();
+      //}
     });
   }
 
