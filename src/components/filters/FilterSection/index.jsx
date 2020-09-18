@@ -132,13 +132,6 @@ class FilterSection extends React.Component {
     return null;
   }
 
-  // searchInOptions(input) {
-  //   return debouncedSearchInOptions(
-  //     input,
-  //     this.props.options.filter(o => this.state.optionsVisibleStatus[o.text]),
-  //   );
-  // }
-
 
   handleClearButtonClick(ev) {
     // Prevent this click from triggering any onClick events in parent component
@@ -318,7 +311,6 @@ class FilterSection extends React.Component {
         }
       </div>
     );
-
     return (
       <div className='g3-filter-section'>
         {
