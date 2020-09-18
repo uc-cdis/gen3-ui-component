@@ -39,6 +39,7 @@
   height: 40%;
   border: solid var(--g3-color__white);
   border-width: 0 2px 2px 0;
+  box-sizing: initial;
   transform: rotate(45deg);
   display: none;
 }
