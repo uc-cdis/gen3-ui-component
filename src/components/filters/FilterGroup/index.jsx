@@ -11,11 +11,6 @@ const removeEmptyFilter = (filterResults) => {
     let configFields = Object.keys(filterResults[field]).filter(x => x.startsWith('__'));
     // A given config setting is still informative to Guppy even if the setting has no value.
     let containsConfigSetting = configFields.length > 0;
-
-    console.log('(FilterGroup) config fields: ',configFields);
-    console.log('(FilterGroup) containsConfigSetting: : ', containsConfigSetting);
-
-    console.log('(FilterGroup) removeEmptyFilter field ', field);
     if (containsRangeFilter || containsCheckboxFilter || containsConfigSetting) {
       newFilterResults[field] = filterResults[field];
     } 
@@ -133,10 +128,6 @@ class FilterGroup extends React.Component {
   }
 
   handleCombineOptionToggle(sectionIndex, combineModeFieldName, combineModeValue) {
-    console.log('(FilterGroup) inside handleCombineOptionToggle');
-    console.log('(FilterGroup) handleCombineOptionToggle sectionIndex: ', sectionIndex);
-    console.log('(FilterGroup) handleCombineOptionToggle combineModeFieldName: ', combineModeFieldName);
-    console.log('(FilterGroup) handleCombineOptionToggle combineModeValue: ', combineModeValue);
     // this.handleSelect(sectionIndex, singleFilterLabel);
     this.setState((prevState) => {
       // update filter status
@@ -149,15 +140,12 @@ class FilterGroup extends React.Component {
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
       if (typeof newFilterResults[field] === 'undefined') {
         newFilterResults[field] = { };
-        console.log('(FilterGroup) newFilterResults[field]', newFilterResults[field]);
         newFilterResults[field][combineModeFieldName] = combineModeValue;
       } else {
         newFilterResults[field][combineModeFieldName] = combineModeValue;
       }
 
-      console.log('(FilterGroup) newFilterResults before remove function: ', newFilterResults);
       newFilterResults = removeEmptyFilter(newFilterResults);
-      console.log('(FilterGroup) newFilterResults after remove function: ', newFilterResults);
       // update component state
       return {
         filterStatus: newFilterStatus,
@@ -167,9 +155,6 @@ class FilterGroup extends React.Component {
       // If no other filter is applied, the combineMode is not yet useful to Guppy
       const tabIndex = this.state.selectedTabIndex;
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
-      console.log('(FilterGroup) !!!! 169 tabIndex', tabIndex);
-      console.log('(FilterGroup) 170 field', field);
-      console.log('(FilterGroup) 171 this.state.filterResults[field]', this.state.filterResults[field]);
       if(this.state.filterResults[field].selectedValues && this.state.filterResults[field].selectedValues.length > 0) {
         this.callOnFilterChange();
       }
@@ -177,9 +162,6 @@ class FilterGroup extends React.Component {
   }
 
   handleSelect(sectionIndex, singleFilterLabel) {
-    console.log('(FilterGroup) handleSelect singleFilterLabel: ', singleFilterLabel);
-    console.log('(FilterGroup) handleSelect sectionIndex:  ', sectionIndex);
-    console.log('(FilterGroup) handleSelect prevState.filterStatus', this.state.filterStatus)
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
@@ -245,7 +227,6 @@ class FilterGroup extends React.Component {
   }
 
   callOnFilterChange() {
-    console.log('(FilterGroup) callOnFilterChange() filterResults: ', this.state.filterResults);
     this.props.onFilterChange(this.state.filterResults);
   }
 

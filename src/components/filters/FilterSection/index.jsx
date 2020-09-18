@@ -58,25 +58,8 @@ class FilterSection extends React.Component {
 
   handleSetCombineModeOption(combineModeIn) {
     // Combine mode: AND or OR
-
-    // const filterConfigClone = Object.assign({}, this.state.filterConfig);
-    // filterConfigClone[optionToSet] = value;
     this.setState({combineMode: combineModeIn});
-    console.log('(FilterSection) inside handleSetCombineModeOption with ', combineModeIn);
     this.props.onCombineOptionToggle(this.combineModeFieldName, combineModeIn);
-
-    // this.setState((prevState) => {
-    //   const newFilterStatus = Object.assign({}, prevState.filterStatus);
-    //   // const oldSelected = newFilterStatus[label];
-    //   const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
-    //   newFilterStatus[label] = newSelected;
-    //   return {
-    //     filterStatus: newFilterStatus,
-    //     showingAndOrToggle: !prevState.showingAndOrToggle, showingSearch: false
-    //   };
-    // });
-    // console.log('inside handle single select filter with label: ', label);
-    // this.props.onSelect(label);
   }
 
   getSearchInput() {
@@ -213,7 +196,6 @@ class FilterSection extends React.Component {
         filterStatus: newFilterStatus,
       };
     });
-    console.log('(Filter Section) inside handle single select filter with label: ', label);
     this.props.onSelect(label);
   }
 
