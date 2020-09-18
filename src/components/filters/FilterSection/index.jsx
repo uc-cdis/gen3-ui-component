@@ -345,8 +345,8 @@ class FilterSection extends React.Component {
                     label={option.text}
                     onSelect={label => this.handleSelectSingleSelectFilter(label)}
                     selected={filterStatus[option.text]}
-                    count={option.count}
-                    hideZero={this.props.hideZero}
+                    count={null}
+                    hideZero={false}
                     accessible={option.accessible}
                     tierAccessLimit={this.props.tierAccessLimit}
                     disabled={option.disabled}
