@@ -127,15 +127,15 @@
   margin: 0 4px;
   cursor: pointer;
   border: 1px solid var(--g3-color__lightgray);
-  text-align:center;
-  width:40px;
-  padding:2px 3px;
-  font-weight:200;
+  text-align: center;
+  width: 40px;
+  padding: 2px 3px;
+  font-weight: 200;
 }
 
 .g3-filter-section__and-or-toggle button.g3-filter-section__and_or_active {
   background: var(--g3-color__silver);
-  font-weight:700;
+  font-weight: 700;
 }
 
 .g3-filter-section__search-input-box {

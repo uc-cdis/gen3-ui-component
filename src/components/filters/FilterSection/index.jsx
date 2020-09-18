@@ -56,12 +56,6 @@ class FilterSection extends React.Component {
     this.combineModeFieldName = '__combineMode';
   }
 
-  handleSetCombineModeOption(combineModeIn) {
-    // Combine mode: AND or OR
-    this.setState({combineMode: combineModeIn});
-    this.props.onCombineOptionToggle(this.combineModeFieldName, combineModeIn);
-  }
-
   getSearchInput() {
     const isHidden = !this.state.showingSearch || !this.state.isExpanded;
     return (
@@ -84,12 +78,12 @@ class FilterSection extends React.Component {
 
   getAndOrToggle() {
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
-    const isAndMode = this.state.combineMode == 'AND';
+    const isAndMode = this.state.combineMode === 'AND';
     return (
       <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
         <span className='g3-filter-section__combine_label'>Combine with:</span>
-        <button onClick={() => this.handleSetCombineModeOption('AND')} className={`${isAndMode && 'g3-filter-section__and_or_active'}`}>AND</button>
-        <button onClick={() => this.handleSetCombineModeOption('OR')} className={`${!isAndMode && 'g3-filter-section__and_or_active'}`}>OR</button>
+        <button type='button' onClick={() => this.handleSetCombineModeOption('AND')} className={`${isAndMode && 'g3-filter-section__and_or_active'}`}>AND</button>
+        <button type='button' onClick={() => this.handleSetCombineModeOption('OR')} className={`${!isAndMode && 'g3-filter-section__and_or_active'}`}>OR</button>
       </div>
     );
   }
@@ -131,6 +125,12 @@ class FilterSection extends React.Component {
       return null;
     }
     return null;
+  }
+
+  handleSetCombineModeOption(combineModeIn) {
+    // Combine mode: AND or OR
+    this.setState({ combineMode: combineModeIn });
+    this.props.onCombineOptionToggle(this.combineModeFieldName, combineModeIn);
   }
 
 
@@ -211,12 +211,16 @@ class FilterSection extends React.Component {
 
   toggleShowSearch() {
     // If and/or toggle is shown, hide it before showing the search input.
-    this.setState(prevState => ({ showingSearch: !prevState.showingSearch, showingAndOrToggle: false }));
+    this.setState(prevState => (
+      { showingSearch: !prevState.showingSearch, showingAndOrToggle: false }),
+    );
   }
 
   toggleShowAndOrToggle() {
     // If search input is shown, hide it before showing the and/or toggle.
-    this.setState(prevState => ({ showingAndOrToggle: !prevState.showingAndOrToggle, showingSearch: false }));
+    this.setState(prevState => (
+      { showingAndOrToggle: !prevState.showingAndOrToggle, showingSearch: false }),
+    );
   }
 
   toggleShowMore() {
@@ -239,7 +243,8 @@ class FilterSection extends React.Component {
             onKeyPress={() => this.toggleSection()}
             tabIndex={0}
             role='button'
-            className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'down' : 'right'}`}
+            className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal 
+              g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'down' : 'right'}`}
           />
         </div>
         <div
@@ -249,7 +254,9 @@ class FilterSection extends React.Component {
           tabIndex={0}
           role='button'
         >
-          <div className={`g3-filter-section__title ${numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}>
+          <div className={`g3-filter-section__title ${
+            numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}
+          >
             {this.props.title}
           </div>
           { (isRangeFilter && numSelected !== 0)
@@ -430,7 +437,7 @@ FilterSection.propTypes = {
 
   })),
   onSelect: PropTypes.func.isRequired,
-  onCombineOptionToggle: PropTypes.func,
+  onCombineOptionToggle: PropTypes.func.isRequired,
   onAfterDrag: PropTypes.func.isRequired,
   onClear: PropTypes.func,
   expanded: PropTypes.bool,

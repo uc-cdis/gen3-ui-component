@@ -109,8 +109,8 @@ class FilterList extends React.Component {
               onCombineOptionToggle={
                 (combineModeFieldName, combineModeValue) => this.handleSelectCombineOptionToggle(
                   index,
-                  combineModeFieldName, 
-                  combineModeValue
+                  combineModeFieldName,
+                  combineModeValue,
                 )
               }
               onAfterDrag={
@@ -155,6 +155,7 @@ FilterList.propTypes = {
     PropTypes.arrayOf(PropTypes.number),
   ])),
   onSelect: PropTypes.func,
+  onCombineOptionToggle: PropTypes.func,
   onAfterDrag: PropTypes.func,
   hideZero: PropTypes.bool,
   tierAccessLimit: PropTypes.number,
@@ -168,6 +169,7 @@ FilterList.defaultProps = {
   onClear: () => {},
   filterStatus: undefined,
   onSelect: () => {},
+  onCombineOptionToggle: () => {},
   onAfterDrag: () => {},
   hideZero: true,
   tierAccessLimit: undefined,

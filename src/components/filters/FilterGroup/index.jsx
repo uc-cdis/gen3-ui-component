@@ -5,15 +5,16 @@ import './FilterGroup.css';
 const removeEmptyFilter = (filterResults) => {
   const newFilterResults = {};
   Object.keys(filterResults).forEach((field) => {
-    let containsRangeFilter = typeof filterResults[field].lowerBound !== 'undefined';
-    let containsCheckboxFilter = filterResults[field].selectedValues && filterResults[field].selectedValues.length > 0;
+    const containsRangeFilter = typeof filterResults[field].lowerBound !== 'undefined';
+    const containsCheckboxFilter = filterResults[field].selectedValues
+      && filterResults[field].selectedValues.length > 0;
     // Filter settings are prefaced with two underscores, e.g., __combineMode
-    let configFields = Object.keys(filterResults[field]).filter(x => x.startsWith('__'));
+    const configFields = Object.keys(filterResults[field]).filter(x => x.startsWith('__'));
     // A given config setting is still informative to Guppy even if the setting has no value.
-    let containsConfigSetting = configFields.length > 0;
+    const containsConfigSetting = configFields.length > 0;
     if (containsRangeFilter || containsCheckboxFilter || containsConfigSetting) {
       newFilterResults[field] = filterResults[field];
-    } 
+    }
   });
   return newFilterResults;
 };
@@ -128,7 +129,6 @@ class FilterGroup extends React.Component {
   }
 
   handleCombineOptionToggle(sectionIndex, combineModeFieldName, combineModeValue) {
-    // this.handleSelect(sectionIndex, singleFilterLabel);
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
@@ -155,7 +155,8 @@ class FilterGroup extends React.Component {
       // If no other filter is applied, the combineMode is not yet useful to Guppy
       const tabIndex = this.state.selectedTabIndex;
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
-      if(this.state.filterResults[field].selectedValues && this.state.filterResults[field].selectedValues.length > 0) {
+      if (this.state.filterResults[field].selectedValues
+          && this.state.filterResults[field].selectedValues.length > 0) {
         this.callOnFilterChange();
       }
     });
@@ -176,9 +177,8 @@ class FilterGroup extends React.Component {
       if (typeof newFilterResults[field] === 'undefined') {
         newFilterResults[field] = { selectedValues: [singleFilterLabel] };
       } else if (typeof newFilterResults[field].selectedValues === 'undefined') {
-        newFilterResults[field].selectedValues =  [singleFilterLabel];
-      }
-      else {
+        newFilterResults[field].selectedValues = [singleFilterLabel];
+      } else {
         const findIndex = newFilterResults[field].selectedValues.indexOf(singleFilterLabel);
         if (findIndex >= 0 && !newSelected) {
           newFilterResults[field].selectedValues.splice(findIndex, 1);
