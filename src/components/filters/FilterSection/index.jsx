@@ -80,6 +80,7 @@ class FilterSection extends React.Component {
       .map(kv => ({ value: kv[0], label: kv[0] }));
     return (
       <AsyncPaginate
+        className={`${this.state.isExpanded ? '' : 'g3-filter-section__search-filter--hidden'}`}
         cacheOptions
         controlShouldRenderValue={false}
         defaultOptions
@@ -333,7 +334,7 @@ class FilterSection extends React.Component {
         }
         <div className='g3-filter-section__options'>
           {
-            isSearchFilter
+            isSearchFilter && this.state.isExpanded
               ? this.props.options
                 // .filter(option => this.state.optionsVisibleStatus[option.text])
                 .map(option => (

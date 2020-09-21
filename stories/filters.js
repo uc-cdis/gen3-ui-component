@@ -39,7 +39,7 @@ const raceOptions = [
 ];
 
 const guidOptions = [];
-const NUM_GUID_OPTIONS = 500000;
+const NUM_GUID_OPTIONS = 5000;
 for (let i = 0; i < NUM_GUID_OPTIONS; i += 1) {
   guidOptions.push({
     text: `guid-${i}`,
@@ -194,11 +194,24 @@ storiesOf('Filters', module)
   .add('SearchFilter', () => (
     <FilterSection
       title={'File GUIDs'}
-      options={guidOptions}
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
       tierAccessLimit={1000}
       isSearchFilter={true}
+      onSearchFilterLoadOptions={(searchString, offset=0) => {
+        const pageSize = 20;
+        if (!searchString) {
+          return {
+            options: guidOptions.slice(offset,offset+pageSize).map(option => ({value: option.text, label: option.text})),
+            hasMore: guidOptions.length > offset + pageSize,
+          }
+        }
+        const filteredOptions = guidOptions.filter(option => option.text.indexOf(searchString) > 0);
+        return {
+          options: filteredOptions.slice(offset, offset+pageSize).map(option => ({value: option.text, label: option.text})),
+          hasMore: filteredOptions.length > offset + pageSize
+        }
+      }}
     />
   ))
   .add('FilterList', () => (
