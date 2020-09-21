@@ -10,23 +10,6 @@ describe('FilterSection', () => {
     { text: 'test4', filterType: 'singleSelect' },
   ];
 
-  const mixedOptions = [
-    { text: 'test1', filterType: 'singleSelect' },
-    {
-      text: 'test2',
-      filterType: 'range',
-      min: 0,
-      max: 100,
-    },
-    {
-      text: 'test3',
-      filterType: 'range',
-      min: 0,
-      max: 100,
-    },
-    { text: 'test4', filterType: 'singleSelect' },
-  ];
-
   const onDrag = jest.fn();
   const onSelect = jest.fn();
   let component;
