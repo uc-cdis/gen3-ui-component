@@ -221,7 +221,12 @@
   top:-3px;
   opacity:0.9;
   position:relative;
-  
+}
+
+.g3-tooltip {
+  margin-left:10px;
+  position:relative;
+  display:inline-block;
 }
 
 .g3-tooltip-body {
@@ -237,19 +242,27 @@
   -webkit-transition: opacity .2s;
   -moz-transition: opacity .2s;
   position:absolute;
+  left: 150%;
   background:black;
   color:white;
-  width:150px;
-  border-radius:3px;
+  border-radius:5px;
   padding:10px;
-  width:550px;
-  left:210px;
+  width:520px;
+  top:-22px;
+  z-index:30;
+}
+
+.g3-tooltip-body::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
 }
 
 .g3-tooltip:hover .g3-tooltip-body {
   opacity:1;
-}
-
-.g3-tooltip {
-  margin-left:10px;
 }
