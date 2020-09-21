@@ -248,6 +248,10 @@
   mask-image: svg-load(../images/icons/question-mark.svg);
 }
 
+.g3-icon--question-mark-bootstrap {
+  mask-image: svg-load(../images/icons/question-mark-bootstrap.svg);
+}
+
 .g3-icon--reset {
   mask-image: svg-load(../images/icons/reset.svg);
 }

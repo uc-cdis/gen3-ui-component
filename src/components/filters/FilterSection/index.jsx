@@ -84,6 +84,15 @@ class FilterSection extends React.Component {
         <span className='g3-filter-section__combine_label'>Combine with:</span>
         <button type='button' onClick={() => this.handleSetCombineModeOption('AND')} className={`${isAndMode && 'g3-filter-section__and_or_active'}`}>AND</button>
         <button type='button' onClick={() => this.handleSetCombineModeOption('OR')} className={`${!isAndMode && 'g3-filter-section__and_or_active'}`}>OR</button>
+        
+        <span className='g3-tooltip'>
+          <i className='g3-icon g3-icon--sm g3-icon--question-mark-bootstrap help-tooltip-icon' />
+          <div className='g3-tooltip-body'>
+            This toggle selects the logical operator used to combine checked filter options.
+            If AND is set, records must match all checked filter options. If OR is set, records
+            must match at least one checked option.
+          </div>
+        </span>
       </div>
     );
   }

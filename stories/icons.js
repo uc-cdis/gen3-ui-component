@@ -32,6 +32,7 @@ const iconClassList = [
   'g3-icon g3-icon--minus',
   'g3-icon g3-icon--plus',
   'g3-icon g3-icon--question-mark',
+  'g3-icon g3-icon--question-mark-bootstrap',
   'g3-icon g3-icon--reset',
   'g3-icon g3-icon--search',
   'g3-icon g3-icon--star',
