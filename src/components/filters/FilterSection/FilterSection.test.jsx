@@ -46,22 +46,6 @@ describe('FilterSection', () => {
     expect(component.find(FilterSection).length).toBe(1);
   });
 
-  it('picks the right kind of filter to display', () => {
-    expect(component.find('.g3-single-select-filter').length).toBe(singleSelectOptions.length);
-    expect(component.find('.g3-range-filter').length).toBe(0);
-    const mixedFilterComponent = mount(
-      <FilterSection
-        title='Section Title'
-        options={mixedOptions}
-        onSelect={onSelect}
-        onAfterDrag={onDrag}
-        hideZero={false}
-      />,
-    );
-    expect(mixedFilterComponent.find('.g3-single-select-filter').length).toBe(2);
-    expect(mixedFilterComponent.find('.g3-range-filter').length).toBe(2);
-  });
-
   it('toggles expand on click', () => {
     expect(component.instance().state.isExpanded).toBe(true);
     expect(component.find('.g3-filter-section__header').length).toBe(1);
