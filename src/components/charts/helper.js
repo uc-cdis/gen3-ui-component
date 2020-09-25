@@ -57,93 +57,6 @@ const getCategoryColorFrom2Colors = (index) => {
 
 const getDataKey = showPercentage => (showPercentage ? 'percentage' : 'value');
 
-
-const prettifyValueName = (name) => {
-  if (name === '__missing__') {
-    return 'No Data';
-  }
-  return name;
-};
-
-const transformArrangerDataToChart = (field, sqonValues) => {
-  const chartData = [];
-  field.buckets
-    .filter(bucket => (sqonValues === null || sqonValues.includes(bucket.key)))
-    .forEach(bucket => chartData.push({
-      name: prettifyValueName(bucket.key),
-      value: bucket.doc_count,
-    }),
-    );
-  return chartData;
-};
-
-const transformArrangerDataToSummary = (field, chartType, title, sqonValues) => ({
-  type: chartType,
-  title,
-  data: transformArrangerDataToChart(field, sqonValues),
-});
-
-const transformDataToCount = (field, label, sqonValues) => ({
-  label,
-  value: sqonValues ? Math.min(field.buckets.length, sqonValues.length) : field.buckets.length,
-});
-
-/**
- * Return an array of selected values in a given field
- * If no value selected, return null
- */
-const getSQONValues = (sqon, field) => {
-  if (!sqon || !sqon.content) return null;
-  const sqonItems = sqon.content.filter(item => item.content.field === field);
-  if (!sqonItems || sqonItems.length !== 1) return null;
-  const sqonValues = sqonItems[0].content.value;
-  return sqonValues;
-};
-
-const getCharts = (data, dataExplorerConfig, sqon) => {
-  const countItems = [];
-  const summaries = [];
-  const stackedBarCharts = [];
-  const { arrangerConfig } = dataExplorerConfig;
-
-  if (data && data[arrangerConfig.graphqlField].aggregations) {
-    const fields = data[arrangerConfig.graphqlField].aggregations;
-    Object.keys(fields).forEach((field) => {
-      const fieldConfig = dataExplorerConfig.charts[field];
-      const sqonValues = getSQONValues(sqon, field);
-      if (fieldConfig) {
-        switch (fieldConfig.chartType) {
-        case 'count':
-          countItems.push(transformDataToCount(fields[field], fieldConfig.title, sqonValues));
-          break;
-        case 'pie':
-        case 'bar':
-          summaries.push(
-            transformArrangerDataToSummary(
-              fields[field],
-              fieldConfig.chartType,
-              fieldConfig.title,
-              sqonValues),
-          );
-          break;
-        case 'stackedBar':
-          stackedBarCharts.push(
-            transformArrangerDataToSummary(
-              fields[field],
-              fieldConfig.chartType,
-              fieldConfig.title,
-              sqonValues),
-          );
-          break;
-        default:
-          break;
-        }
-      }
-    });
-  }
-  return { summaries, countItems, stackedBarCharts };
-};
-
 const parseParamWidth = width => ((typeof width === 'number') ? `${width}px` : width);
 
 const shouldHideChart = (data, lockValue) => data.find(item => item.value === lockValue);
@@ -157,11 +70,6 @@ const helper = {
   getCategoryColor,
   getCategoryColorFrom2Colors,
   getDataKey,
-  transformDataToCount,
-  transformArrangerDataToChart,
-  transformArrangerDataToSummary,
-  getCharts,
-  getSQONValues,
   parseParamWidth,
   categoricalColors,
   shouldHideChart,
