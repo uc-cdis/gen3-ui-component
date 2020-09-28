@@ -93,6 +93,7 @@
 
 .rc-tooltip-inner {
   min-height: unset;
+  max-width: unset;
   border: 1px solid var(--g3-color__silver);
   border-radius: 4px;
 }
