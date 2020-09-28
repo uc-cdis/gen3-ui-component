@@ -80,30 +80,30 @@ class FilterSection extends React.Component {
   getAndOrToggle() {
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
     const isAndMode = this.state.combineMode === 'AND';
-    const tooltipText = "This toggle selects the logical operator used to combine checked filter options. " + 
-      "If AND is set, records must match all checked filter options. " +
-      "If OR is set, records must match at least one checked option.";
+    const tooltipText = 'This toggle selects the logical operator used to combine checked filter options. '
+      + 'If AND is set, records must match all checked filter options. '
+      + 'If OR is set, records must match at least one checked option.';
     return (
       <React.Fragment>
-      <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
-        <span className='g3-filter-section__combine_label'>Combine with:</span>
-        <button type='button' onClick={() => this.handleSetCombineModeOption('AND')} className={`${isAndMode && 'g3-filter-section__and_or_active'}`}>AND</button>
-        <button type='button' onClick={() => this.handleSetCombineModeOption('OR')} className={`${!isAndMode && 'g3-filter-section__and_or_active'}`}>OR</button>
-        
-        
-          <Tooltip
-              placement='right'
-              overlay={tooltipText}
-              overlayClassName="g3-filter-section__and-or-toggle-helper-tooltip"
-              arrowContent={<div className='rc-tooltip-arrow-inner' />}
-              width="300px"
-              trigger={['hover', 'focus']}
-            >
-              <span className='g3-tooltip '>
-                <i className='g3-icon g3-icon--sm g3-icon--question-mark-bootstrap help-tooltip-icon' />
-              </span>
+        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
+          <span className='g3-filter-section__combine_label'>Combine with:</span>
+          <button type='button' onClick={() => this.handleSetCombineModeOption('AND')} className={`${isAndMode && 'g3-filter-section__and_or_active'}`}>AND</button>
+          <button type='button' onClick={() => this.handleSetCombineModeOption('OR')} className={`${!isAndMode && 'g3-filter-section__and_or_active'}`}>OR</button>
 
-              {/* <div className='rc-tooltip g3-filter-section__tooltip'>
+
+          <Tooltip
+            placement='right'
+            overlay={tooltipText}
+            overlayClassName='g3-filter-section__and-or-toggle-helper-tooltip'
+            arrowContent={<div className='rc-tooltip-arrow-inner' />}
+            width='300px'
+            trigger={['hover', 'focus']}
+          >
+            <span className='g3-helper-tooltip'>
+              <i className='g3-icon g3-icon--sm g3-icon--question-mark-bootstrap help-tooltip-icon' />
+            </span>
+
+            {/* <div className='rc-tooltip g3-filter-section__tooltip'>
             <div className='rc-tooltip-content'>
               <div className='rc-tooltip-arrow'>
                 <div className='rc-tooltip-arrow-inner'></div>
@@ -113,9 +113,9 @@ class FilterSection extends React.Component {
               </div>
             </div>
           </div> */}
-              </Tooltip>
-        
-      </div>
+          </Tooltip>
+
+        </div>
       </React.Fragment>
     );
   }
