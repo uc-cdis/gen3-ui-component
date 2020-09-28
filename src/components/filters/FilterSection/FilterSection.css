@@ -238,4 +238,10 @@ g3-helper-tooltip {
 
 .g3-filter-section__and-or-toggle-helper-tooltip {
   width: 300px;
+  background: none;
+}
+
+.g3-filter-section__and-or-toggle-helper-tooltip .rc-tooltip-content {
+  top: -5px;
+  position: relative;
 }
