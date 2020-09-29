@@ -135,6 +135,11 @@
   color: #333;
 }
 
+.g3-filter-section__and-or-toggle .ant-radio-button-wrapper {
+  width: 59px;
+  text-align:center;
+}
+
 .ant-radio-button-wrapper:hover {
   color: var(--g3-primary-btn__bg-color) !important; /* stylelint-disable-line declaration-no-important */
 }

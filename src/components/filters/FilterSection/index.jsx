@@ -87,12 +87,13 @@ class FilterSection extends React.Component {
     return (
       <React.Fragment>
         <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
+          <span style={{"margin-right":"5px"}}>Combine with </span>
           <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
             <Radio.Button value='AND' onChange={() => this.handleSetCombineModeOption('AND')}>
-            Combine with AND
+            AND
             </Radio.Button>
             <Radio.Button value='OR' onChange={() => this.handleSetCombineModeOption('OR')}>
-              Combine with OR
+              OR
             </Radio.Button>
           </Radio.Group>
 
