@@ -168,16 +168,6 @@
   border-color: var(--g3-primary-btn__bg-color) !important; /* stylelint-disable-line declaration-no-important */
 }
 
-.g3-filter-section__and-or-toggle button.g3-filter-section__and_or_active {
-  /* font-weight: 700; */
-  border: 1px solid var(--g3-primary-btn__color);
-  background-color: var(--g3-primary-btn__color);
-  color: white;
-  /* color: var(--g3-primary-btn__color);
-  fill: var(--g3-primary-btn__color); */
-  
-}
-
 .g3-filter-section__search-input-box {
   border: none;
   width: 100%;
@@ -258,7 +248,7 @@
 
 .g3-icon--question-mark-bootstrap.help-tooltip-icon {
   background-color: black;
-  top: 0px;
+  top: 2px;
   opacity: 0.9;
   width: 14px;
   height: 14px;
@@ -277,6 +267,6 @@
 }
 
 .g3-filter-section__and-or-toggle-helper-tooltip .rc-tooltip-content {
-  top: -5px;
+  top: -1px;
   position: relative;
 }
