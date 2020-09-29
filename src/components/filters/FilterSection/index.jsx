@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap_white.css';
+import { Radio } from 'antd';
+import 'antd/dist/antd.css';
 import SingleSelectFilter from '../SingleSelectFilter';
 import Chip from '../Chip';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
-import { Radio } from 'antd';
-import 'antd/dist/antd.css';
 
 const filterVisibleStatusObj = (optionList, inputText) => {
   const res = {};
@@ -81,21 +81,20 @@ class FilterSection extends React.Component {
 
   getAndOrToggle() {
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
-    const isAndMode = this.state.combineMode === 'AND';
     const tooltipText = 'This toggle selects the logical operator used to combine checked filter options. '
       + 'If AND is set, records must match all checked filter options. '
       + 'If OR is set, records must match at least one checked option.';
     return (
       <React.Fragment>
         <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
-        <Radio.Group defaultValue="OR" buttonStyle="solid">
-          <Radio.Button value="AND" onChange={() => this.handleSetCombineModeOption('AND')}>
+          <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
+            <Radio.Button value='AND' onChange={() => this.handleSetCombineModeOption('AND')}>
             Combine with AND
-          </Radio.Button>
-          <Radio.Button value="OR" onChange={() => this.handleSetCombineModeOption('OR')}>
+            </Radio.Button>
+            <Radio.Button value='OR' onChange={() => this.handleSetCombineModeOption('OR')}>
               Combine with OR
-          </Radio.Button>
-        </Radio.Group>
+            </Radio.Button>
+          </Radio.Group>
 
           <Tooltip
             placement='right'
