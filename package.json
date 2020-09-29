@@ -27,6 +27,7 @@
   "dependencies": {
     "@storybook/addon-actions": "^5.0.0",
     "@storybook/react": "^5.0.0",
+    "antd": "^4.6.6",
     "babel-loader": "^8.0.5",
     "postcss-loader": "^3.0.0",
     "postcss-svgo": "^4.0.2",

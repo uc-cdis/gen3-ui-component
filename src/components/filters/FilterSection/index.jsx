@@ -6,6 +6,8 @@ import SingleSelectFilter from '../SingleSelectFilter';
 import Chip from '../Chip';
 import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
+import { Radio } from 'antd';
+import 'antd/dist/antd.css';
 
 const filterVisibleStatusObj = (optionList, inputText) => {
   const res = {};
@@ -86,10 +88,14 @@ class FilterSection extends React.Component {
     return (
       <React.Fragment>
         <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
-          <span className='g3-filter-section__combine_label'>Combine with:</span>
-          <button type='button' onClick={() => this.handleSetCombineModeOption('AND')} className={`${isAndMode && 'g3-filter-section__and_or_active'}`}>AND</button>
-          <button type='button' onClick={() => this.handleSetCombineModeOption('OR')} className={`${!isAndMode && 'g3-filter-section__and_or_active'}`}>OR</button>
-
+        <Radio.Group defaultValue="OR" buttonStyle="solid">
+          <Radio.Button value="AND" onChange={() => this.handleSetCombineModeOption('AND')}>
+            Combine with AND
+          </Radio.Button>
+          <Radio.Button value="OR" onChange={() => this.handleSetCombineModeOption('OR')}>
+              Combine with OR
+          </Radio.Button>
+        </Radio.Group>
 
           <Tooltip
             placement='right'
