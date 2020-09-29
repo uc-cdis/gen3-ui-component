@@ -108,17 +108,6 @@ class FilterSection extends React.Component {
             <span className='g3-helper-tooltip'>
               <i className='g3-icon g3-icon--sm g3-icon--question-mark-bootstrap help-tooltip-icon' />
             </span>
-
-            {/* <div className='rc-tooltip g3-filter-section__tooltip'>
-            <div className='rc-tooltip-content'>
-              <div className='rc-tooltip-arrow'>
-                <div className='rc-tooltip-arrow-inner'></div>
-              </div>
-              <div className='g3-tooltip-body rc-tooltip-inner' role='tooltip'>
-                //
-              </div>
-            </div>
-          </div> */}
           </Tooltip>
 
         </div>
