@@ -5,6 +5,7 @@
   display: inline-block;
   position: relative;
   min-width: 152px;
+  border-radius: 4px;
 }
 
 .g3-dropdown__menu {
@@ -20,7 +21,6 @@
 .g3-dropdown__menu--opened {
   display: block;
   position: absolute;
-  box-shadow: 0 2px 4px -1px rgba(0,0,0,.1), 0 4px 5px 0 rgba(0,0,0,.12), 0 1px 10px 0 rgba(0,0,0,.14);
 }
 
 .g3-dropdown__item {
