@@ -216,7 +216,7 @@ class FilterGroup extends React.Component {
                 onKeyDown={() => this.selectTab(index)}
               >
                 <p className={`g3-filter-group__tab-title ${tabHasActiveFilters(this.state.filterStatus[index]) ? 'g3-filter-group__tab-title--has-active-filters' : ''}`}>
-                  {this.props.filterConfig.tabs[tab.key].title}
+                  {this.props.filterConfig.tabs[index].title}
                 </p>
               </div>
             ))
