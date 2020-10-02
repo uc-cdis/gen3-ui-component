@@ -22,11 +22,11 @@ storiesOf('Dropdown', module)
           Dropdown
       </Dropdown.Button>
       <Dropdown.Menu>
-        <Dropdown.Item onClick={action('item1 clicked')} leftIcon='datafile'>item1</Dropdown.Item>
-        <Dropdown.Item onClick={action('item2 clicked')} leftIcon='upload'>item2</Dropdown.Item>
-        <Dropdown.Item onClick={action('item3 clicked')} leftIcon='clinical' disabled>Disabled item</Dropdown.Item>
+        <Dropdown.Item onClick={action('exportToWorkspace clicked')} leftIcon='datafile'>Export to Workspace</Dropdown.Item>
+        <Dropdown.Item onClick={action('exportToAnalyzerApp clicked')} leftIcon='upload'>Export to Analyzer App</Dropdown.Item>
+        <Dropdown.Item onClick={action('exportToTSV clicked')} leftIcon='clinical' disabled>Export to TSV (Disabled)</Dropdown.Item>
         <Dropdown.MenuDivider />
-        <Dropdown.Item onClick={action('item4 clicked')} leftIcon='workspace'>item4</Dropdown.Item>
+        <Dropdown.Item onClick={action('exportPFBToWorkspace clicked')} leftIcon='workspace'>Export PFB to Workspace</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   ))
