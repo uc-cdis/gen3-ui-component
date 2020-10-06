@@ -334,32 +334,18 @@ class FilterSection extends React.Component {
         }
         <div className='g3-filter-section__options'>
           {
-            isSearchFilter && this.state.isExpanded
+            ((isTextFilter || isSearchFilter) && this.state.isExpanded)
               ? this.props.options
-                // .filter(option => this.state.optionsVisibleStatus[option.text])
-                .map(option => (
-                  // We use the 'key' prop to force the SingleSelectFilter
-                  // to rerender on filterStatus change.
-                  // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
-                  <SingleSelectFilter
-                    key={`${option.text}-${filterStatus[option.text] ? 'enabled' : 'disabled'}`}
-                    label={option.text}
-                    onSelect={label => this.handleSelectSingleSelectFilter(label)}
-                    selected={filterStatus[option.text]}
-                    count={null}
-                    hideZero={false}
-                    accessible={option.accessible}
-                    tierAccessLimit={this.props.tierAccessLimit}
-                    disabled={option.disabled}
-                    lockedTooltipMessage={this.props.lockedTooltipMessage}
-                    disabledTooltipMessage={this.props.disabledTooltipMessage}
-                  />
-                )) : null
-          }
-          {
-            (isTextFilter && this.state.isExpanded)
-              ? this.props.options
-                .filter(option => this.state.optionsVisibleStatus[option.text])
+                .filter((option) => {
+                  if (isSearchFilter) {
+                    // For searchFilters, options are treated differently -- the only
+                    // options passed are the already selected options, as opposed
+                    // to all available options in textfilters. So don't filter out
+                    // any options based on `optionsVisibleStatus`.
+                    return true;
+                  }
+                  return this.state.optionsVisibleStatus[option.text];
+                })
                 .map((option, index) => {
                   if (index >= this.props.initVisibleItemNumber && !this.state.showingMore) {
                     return null;
@@ -373,7 +359,7 @@ class FilterSection extends React.Component {
                       label={option.text}
                       onSelect={label => this.handleSelectSingleSelectFilter(label)}
                       selected={filterStatus[option.text]}
-                      count={option.count}
+                      count={isSearchFilter ? null : option.count}
                       hideZero={this.props.hideZero}
                       accessible={option.accessible}
                       tierAccessLimit={this.props.tierAccessLimit}
