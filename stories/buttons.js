@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action, configureActions } from '@storybook/addon-actions';
+import { action } from '@storybook/addon-actions';
 import Button from '../src/components/Button';
 
 class ButtonWrapper extends React.Component {
@@ -8,19 +8,19 @@ class ButtonWrapper extends React.Component {
     super(props);
     this.state = {
       loading: false,
-    }
+    };
 
     this.mockLoadData = this.mockLoadData.bind(this);
   }
 
   mockLoadData() {
-    console.log('loading...')
+    console.log('loading...');
     this.setState({ loading: true }, () => {
       setTimeout(() => {
         this.setState({ loading: false });
-      }, 5000)
+      }, 5000);
     });
-  };
+  }
 
   render() {
     return (
@@ -32,7 +32,7 @@ class ButtonWrapper extends React.Component {
         rightIcon='copy'
         isPending={this.state.loading}
       />
-    )
+    );
   }
 }
 
@@ -51,9 +51,9 @@ storiesOf('Buttons', module)
   ))
   .add('Multiple w/ Tooltip', () => (
     <div style={{ display: 'flex' }}>
-      <Button buttonType='primary' label='Tooltip Button 1' onClick={() => action('button click')('tooltip')} leftIcon='download' rightIcon='copy' tooltipEnabled={true} tooltipText='This is a tooltip a user could use to display a message.' />
-      <Button buttonType='primary' label='Tooltip Button 2' enabled={false} onClick={() => action('button click')('tooltip')} leftIcon='download' rightIcon='copy' tooltipEnabled={true} tooltipText='This would describe why the button is disabled.' />
-      <Button buttonType='primary' label='Tooltip Button 3' onClick={() => action('button click')('tooltip')} leftIcon='download' rightIcon='copy' tooltipEnabled={true} tooltipText='This is a tooltip a user could use to display a message.' />
+      <Button buttonType='primary' label='Tooltip Button 1' onClick={() => action('button click')('tooltip')} leftIcon='download' rightIcon='copy' tooltipEnabled tooltipText='This is a tooltip a user could use to display a message.' />
+      <Button buttonType='primary' label='Tooltip Button 2' enabled={false} onClick={() => action('button click')('tooltip')} leftIcon='download' rightIcon='copy' tooltipEnabled tooltipText='This would describe why the button is disabled.' />
+      <Button buttonType='primary' label='Tooltip Button 3' onClick={() => action('button click')('tooltip')} leftIcon='download' rightIcon='copy' tooltipEnabled tooltipText='This is a tooltip a user could use to display a message.' />
     </div>
   ))
   .add('Loading state', () => (
