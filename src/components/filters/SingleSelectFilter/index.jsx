@@ -112,7 +112,7 @@ class SingleSelectFilter extends React.Component {
             </span>
           )
         }
-        { countIconComponent }
+        { this.props.count !== null && countIconComponent }
         { lockIconComponent }
       </div>
     );
