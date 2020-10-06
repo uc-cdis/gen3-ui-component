@@ -206,7 +206,7 @@ storiesOf('Filters', module)
             hasMore: guidOptions.length > offset + pageSize,
           }
         }
-        const filteredOptions = guidOptions.filter(option => option.text.indexOf(searchString) > 0);
+        const filteredOptions = guidOptions.filter(option => option.text.indexOf(searchString) !== -1);
         return {
           options: filteredOptions.slice(offset, offset+pageSize).map(option => ({value: option.text, label: option.text})),
           hasMore: filteredOptions.length > offset + pageSize
