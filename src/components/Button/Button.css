@@ -126,5 +126,6 @@
 }
 
 .rc-tooltip {
+  max-width: 200px;
   opacity: 1;
 }
