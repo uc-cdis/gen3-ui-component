@@ -4,6 +4,7 @@ import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap_white.css';
 import { Radio } from 'antd';
 import 'antd/dist/antd.css';
+import { AsyncPaginate } from 'react-select-async-paginate';
 import SingleSelectFilter from '../SingleSelectFilter';
 import Chip from '../Chip';
 import RangeFilter from '../RangeFilter';
@@ -115,6 +116,26 @@ class FilterSection extends React.Component {
     );
   }
 
+  getSearchFilter() {
+    const selectedOptions = Object.entries(this.state.filterStatus)
+      .filter(kv => kv[1] === true)
+      .map(kv => ({ value: kv[0], label: kv[0] }));
+    return (
+      <AsyncPaginate
+        className={`${this.state.isExpanded ? '' : 'g3-filter-section__search-filter--hidden'}`}
+        cacheOptions
+        controlShouldRenderValue={false}
+        defaultOptions
+        debounceTimeout={250}
+        value={selectedOptions}
+        loadOptions={(input, loadedOptions) => this.props.onSearchFilterLoadOptions(
+          input, loadedOptions.length)}
+        onChange={option => this.handleSelectSingleSelectFilter(option.value)}
+      />
+    );
+  }
+
+
   getShowMoreButton() {
     if (this.state.isExpanded) {
       const totalCount = this.props.options
@@ -190,7 +211,7 @@ class FilterSection extends React.Component {
 
   updateVisibleOptions(inputText) {
     // if empty input, all should be visible
-    if (typeof inputText === 'undefined' || inputText.trim === '') {
+    if (typeof inputText === 'undefined' || inputText.trim() === '') {
       this.setState({
         optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
       });
@@ -259,8 +280,16 @@ class FilterSection extends React.Component {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
-    const isTextFilter = this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect';
-    const isRangeFilter = !isTextFilter;
+    let isSearchFilter = false;
+    let isTextFilter = false;
+    let isRangeFilter = false;
+    if (this.props.isSearchFilter) {
+      isSearchFilter = true;
+    } else if (this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect') {
+      isTextFilter = true;
+    } else {
+      isRangeFilter = true;
+    }
     const numSelected = getNumValuesSelected(filterStatus);
     const sectionHeader = (
       <div className='g3-filter-section__header'>
@@ -310,7 +339,7 @@ class FilterSection extends React.Component {
               </div>
             )
           }
-          { (isTextFilter && numSelected !== 0)
+          { ((isTextFilter || isSearchFilter) && numSelected !== 0)
             && (
               <div className='g3-filter-section__selected-count-chip'>
                 <Chip
@@ -373,6 +402,9 @@ class FilterSection extends React.Component {
           ) : sectionHeader
         }
         {
+          isSearchFilter && this.getSearchFilter(Option)
+        }
+        {
           isTextFilter && this.getSearchInput()
         }
         {
@@ -380,32 +412,49 @@ class FilterSection extends React.Component {
         }
         <div className='g3-filter-section__options'>
           {
-            this.state.isExpanded
+            ((isTextFilter || isSearchFilter) && this.state.isExpanded)
+              ? this.props.options
+                .filter((option) => {
+                  if (isSearchFilter) {
+                    // For searchFilters, options are treated differently -- the only
+                    // options passed are the already selected options, as opposed
+                    // to all available options in textfilters. So don't filter out
+                    // any options based on `optionsVisibleStatus`.
+                    return true;
+                  }
+                  return this.state.optionsVisibleStatus[option.text];
+                })
+                .map((option, index) => {
+                  if (index >= this.props.initVisibleItemNumber && !this.state.showingMore) {
+                    return null;
+                  }
+                  return (
+                    // We use the 'key' prop to force the SingleSelectFilter
+                    // to rerender on filterStatus change.
+                    // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
+                    <SingleSelectFilter
+                      key={`${option.text}-${filterStatus[option.text] ? 'enabled' : 'disabled'}`}
+                      label={option.text}
+                      onSelect={label => this.handleSelectSingleSelectFilter(label)}
+                      selected={filterStatus[option.text]}
+                      count={isSearchFilter ? null : option.count}
+                      hideZero={this.props.hideZero}
+                      accessible={option.accessible}
+                      tierAccessLimit={this.props.tierAccessLimit}
+                      disabled={option.disabled}
+                      lockedTooltipMessage={this.props.lockedTooltipMessage}
+                      disabledTooltipMessage={this.props.disabledTooltipMessage}
+                    />
+                  );
+                }) : null
+          }
+          {
+            (isRangeFilter && this.state.isExpanded)
               ? this.props.options
                 .filter(option => this.state.optionsVisibleStatus[option.text])
                 .map((option, index) => {
                   if (index >= this.props.initVisibleItemNumber && !this.state.showingMore) {
                     return null;
-                  }
-                  if (option.filterType === 'singleSelect') {
-                    return (
-                      // We use the 'key' prop to force the SingleSelectFilter
-                      // to rerender on filterStatus change.
-                      // See https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#recommendation-fully-uncontrolled-component-with-a-key
-                      <SingleSelectFilter
-                        key={`${option.text}-${filterStatus[option.text] ? 'enabled' : 'disabled'}`}
-                        label={option.text}
-                        onSelect={label => this.handleSelectSingleSelectFilter(label)}
-                        selected={filterStatus[option.text]}
-                        count={option.count}
-                        hideZero={this.props.hideZero}
-                        accessible={option.accessible}
-                        tierAccessLimit={this.props.tierAccessLimit}
-                        disabled={option.disabled}
-                        lockedTooltipMessage={this.props.lockedTooltipMessage}
-                        disabledTooltipMessage={this.props.disabledTooltipMessage}
-                      />
-                    );
                   }
                   const lowerBound = (typeof filterStatus === 'undefined'
                   || filterStatus.length !== 2)
@@ -438,7 +487,7 @@ class FilterSection extends React.Component {
                   );
                 }) : null
           }
-          {this.getShowMoreButton()}
+          {isTextFilter && this.getShowMoreButton()}
         </div>
       </div>
     );
@@ -478,6 +527,8 @@ FilterSection.propTypes = {
   tierAccessLimit: PropTypes.number,
   lockedTooltipMessage: PropTypes.string,
   disabledTooltipMessage: PropTypes.string,
+  isSearchFilter: PropTypes.bool,
+  onSearchFilterLoadOptions: PropTypes.func,
 };
 
 FilterSection.defaultProps = {
@@ -493,6 +544,8 @@ FilterSection.defaultProps = {
   tierAccessLimit: undefined,
   lockedTooltipMessage: '',
   disabledTooltipMessage: '',
+  isSearchFilter: false,
+  onSearchFilterLoadOptions: () => null,
 };
 
 export default FilterSection;

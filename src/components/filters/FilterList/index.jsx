@@ -96,6 +96,8 @@ class FilterList extends React.Component {
               title={section.title}
               tooltip={section.tooltip}
               options={section.options}
+              isSearchFilter={section.isSearchFilter}
+              onSearchFilterLoadOptions={section.onSearchFilterLoadOptions}
               expanded={this.props.expandedStatus[index]}
               onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
               onClear={() => this.handleSectionClear(index)}
