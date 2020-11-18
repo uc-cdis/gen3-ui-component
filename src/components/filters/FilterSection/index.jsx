@@ -531,6 +531,7 @@ FilterSection.propTypes = {
   disabledTooltipMessage: PropTypes.string,
   isSearchFilter: PropTypes.bool,
   onSearchFilterLoadOptions: PropTypes.func,
+  isArrayFilter: PropTypes.bool,
 };
 
 FilterSection.defaultProps = {
