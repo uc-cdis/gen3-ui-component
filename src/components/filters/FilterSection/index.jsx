@@ -283,6 +283,8 @@ class FilterSection extends React.Component {
     let isSearchFilter = false;
     let isTextFilter = false;
     let isRangeFilter = false;
+    // Filters can be of both type text and type array.
+    let isArrayFilter = this.props.isArrayFilter;
     if (this.props.isSearchFilter) {
       isSearchFilter = true;
     } else if (this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect') {
@@ -408,7 +410,7 @@ class FilterSection extends React.Component {
           isTextFilter && this.getSearchInput()
         }
         {
-          isTextFilter && this.getAndOrToggle()
+          isArrayFilter && this.getAndOrToggle()
         }
         <div className='g3-filter-section__options'>
           {
@@ -545,6 +547,7 @@ FilterSection.defaultProps = {
   lockedTooltipMessage: '',
   disabledTooltipMessage: '',
   isSearchFilter: false,
+  isArrayFilter: false,
   onSearchFilterLoadOptions: () => null,
 };
 

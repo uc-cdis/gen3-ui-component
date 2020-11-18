@@ -191,6 +191,16 @@ storiesOf('Filters', module)
       tierAccessLimit={1000}
     />
   ))
+  .add('ArrayFilter', () => (
+    <FilterSection
+      title={'Ethnicity'}
+      options={ethnicityOptions}
+      onSelect={action('checked')}
+      onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
+      isArrayFilter={true}
+    />
+  ))
   .add('SearchFilter', () => (
     <FilterSection
       title={'File GUIDs'}

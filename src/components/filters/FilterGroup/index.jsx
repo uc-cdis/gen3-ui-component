@@ -129,6 +129,7 @@ class FilterGroup extends React.Component {
   }
 
   handleCombineOptionToggle(sectionIndex, combineModeFieldName, combineModeValue) {
+    // The combine option toggle (also known as the and/or option toggle)
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
