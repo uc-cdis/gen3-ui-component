@@ -81,6 +81,7 @@ class FilterSection extends React.Component {
   }
 
   getAndOrToggle() {
+    console.log('getAndOrToggle sees this.props.isArrayFilter');
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
     const tooltipText = 'This toggle selects the logical operator used to combine checked filter options. '
       + 'If AND is set, records must match all checked filter options. '
