@@ -284,8 +284,6 @@ class FilterSection extends React.Component {
     let isSearchFilter = false;
     let isTextFilter = false;
     let isRangeFilter = false;
-    // Filters can be of both type text and type array.
-    const { isArrayField } = this.props;
     if (this.props.isSearchFilter) {
       isSearchFilter = true;
     } else if (this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect') {
