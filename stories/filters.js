@@ -67,6 +67,24 @@ const ethnicityOptions = [
   },
 ];
 
+const consentCodeOptions = [
+  {
+    text: 'ABC', filterType: 'singleSelect', count: 15, accessible: true,
+  },
+  {
+    text: '123', filterType: 'singleSelect', count: 7, accessible: false,
+  },
+  {
+    text: 'HAL', filterType: 'singleSelect', count: 2, accessible: true,
+  },
+  {
+    text: 'IRS', filterType: 'singleSelect', count: 1, accessible: true,
+  },
+  {
+    text: 'SOS', filterType: 'singleSelect', count: -1, accessible: false,
+  },
+];
+
 const ageOptions = [
   { min: 2, max: 97, filterType: 'range' },
 ];
@@ -191,14 +209,15 @@ storiesOf('Filters', module)
       tierAccessLimit={1000}
     />
   ))
-  .add('ArrayFilter', () => (
+  .add('FilterSection for array-typed field', () => (
     <FilterSection
-      title={'Ethnicity'}
-      options={ethnicityOptions}
+      title={'Consent Codes'}
+      options={consentCodeOptions}
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
+      onCombineOptionToggle={action('combine mode change')}
       tierAccessLimit={1000}
-      isArrayFilter={true}
+      isArrayField={true}
     />
   ))
   .add('SearchFilter', () => (

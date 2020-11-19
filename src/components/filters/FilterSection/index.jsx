@@ -81,7 +81,7 @@ class FilterSection extends React.Component {
   }
 
   getAndOrToggle() {
-    console.log('getAndOrToggle sees this.props.isArrayFilter');
+    console.log('getAndOrToggle sees this.props.isArrayField: ', this.props.isArrayField);
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
     const tooltipText = 'This toggle selects the logical operator used to combine checked filter options. '
       + 'If AND is set, records must match all checked filter options. '
@@ -285,7 +285,7 @@ class FilterSection extends React.Component {
     let isTextFilter = false;
     let isRangeFilter = false;
     // Filters can be of both type text and type array.
-    let isArrayFilter = this.props.isArrayFilter;
+    const { isArrayField } = this.props;
     if (this.props.isSearchFilter) {
       isSearchFilter = true;
     } else if (this.props.options.length > 0 && this.props.options[0].filterType === 'singleSelect') {
@@ -297,14 +297,16 @@ class FilterSection extends React.Component {
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div className='g3-filter-section__toggle-icon-container'>
-          <i
-            onClick={() => this.toggleSection()}
-            onKeyPress={() => this.toggleSection()}
-            tabIndex={0}
-            role='button'
-            className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal 
-              g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'down' : 'right'}`}
-          />
+        { false && (
+            <i
+              onClick={() => this.toggleSection()}
+              onKeyPress={() => this.toggleSection()}
+              tabIndex={0}
+              role='button'
+              className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal 
+                g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'down' : 'right'}`}
+            />)
+        }
         </div>
         <div
           className='g3-filter-section__title-container'
@@ -368,9 +370,9 @@ class FilterSection extends React.Component {
               onClick={() => this.toggleShowAndOrToggle()}
               onKeyPress={() => this.toggleShowAndOrToggle()}
             >
-              <i
+              { this.props.isArrayField && (<i
                 className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
-              />
+              />) }
             </div>
           )
         }
@@ -411,7 +413,7 @@ class FilterSection extends React.Component {
           isTextFilter && this.getSearchInput()
         }
         {
-          isArrayFilter && this.getAndOrToggle()
+          this.props.isArrayField && this.getAndOrToggle()
         }
         <div className='g3-filter-section__options'>
           {
@@ -532,7 +534,7 @@ FilterSection.propTypes = {
   disabledTooltipMessage: PropTypes.string,
   isSearchFilter: PropTypes.bool,
   onSearchFilterLoadOptions: PropTypes.func,
-  isArrayFilter: PropTypes.bool,
+  isArrayField: PropTypes.bool,
 };
 
 FilterSection.defaultProps = {
@@ -549,7 +551,7 @@ FilterSection.defaultProps = {
   lockedTooltipMessage: '',
   disabledTooltipMessage: '',
   isSearchFilter: false,
-  isArrayFilter: false,
+  isArrayField: false,
   onSearchFilterLoadOptions: () => null,
 };
 
