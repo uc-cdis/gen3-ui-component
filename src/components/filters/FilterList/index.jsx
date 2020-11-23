@@ -83,6 +83,7 @@ class FilterList extends React.Component {
 
   render() {
     console.log('this.props.isArrayField: ', this.props.isArrayField);
+    console.log('this.props.sections: ', this.props.sections);
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
@@ -99,6 +100,7 @@ class FilterList extends React.Component {
               options={section.options}
               isSearchFilter={section.isSearchFilter}
               isArrayField={this.props.isArrayField}
+              isArrayFieldTwo={section.isArrayField}
               onSearchFilterLoadOptions={section.onSearchFilterLoadOptions}
               expanded={this.props.expandedStatus[index]}
               onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}

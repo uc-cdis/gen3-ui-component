@@ -82,6 +82,7 @@ class FilterSection extends React.Component {
 
   getAndOrToggle() {
     console.log('getAndOrToggle sees this.props.isArrayField: ', this.props.isArrayField);
+    console.log('getAndOrToggle sees this.props.isArrayFieldTwo: ', this.props.isArrayFieldTwo);
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
     const tooltipText = 'This toggle selects the logical operator used to combine checked filter options. '
       + 'If AND is set, records must match all checked filter options. '
@@ -295,7 +296,7 @@ class FilterSection extends React.Component {
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div className='g3-filter-section__toggle-icon-container'>
-        { false && (
+          { false && (
             <i
               onClick={() => this.toggleSection()}
               onKeyPress={() => this.toggleSection()}
@@ -303,8 +304,9 @@ class FilterSection extends React.Component {
               role='button'
               className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal 
                 g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'down' : 'right'}`}
-            />)
-        }
+            />
+          )
+          }
         </div>
         <div
           className='g3-filter-section__title-container'
@@ -368,9 +370,11 @@ class FilterSection extends React.Component {
               onClick={() => this.toggleShowAndOrToggle()}
               onKeyPress={() => this.toggleShowAndOrToggle()}
             >
-              { this.props.isArrayField && (<i
-                className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
-              />) }
+              { this.props.isArrayFieldTwo && (
+                <i
+                  className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
+                />
+              ) }
             </div>
           )
         }
@@ -533,6 +537,7 @@ FilterSection.propTypes = {
   isSearchFilter: PropTypes.bool,
   onSearchFilterLoadOptions: PropTypes.func,
   isArrayField: PropTypes.bool,
+  isArrayFieldTwo: PropTypes.bool,
 };
 
 FilterSection.defaultProps = {
@@ -550,6 +555,7 @@ FilterSection.defaultProps = {
   disabledTooltipMessage: '',
   isSearchFilter: false,
   isArrayField: false,
+  isArrayFieldTwo: false,
   onSearchFilterLoadOptions: () => null,
 };
 
