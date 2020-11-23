@@ -82,7 +82,6 @@ class FilterList extends React.Component {
   }
 
   render() {
-    console.log('this.props.isArrayField: ', this.props.isArrayField);
     console.log('this.props.sections: ', this.props.sections);
     // Takes in parent component's filterStatus or self state's filterStatus
     const filterStatus = this.props.filterStatus
@@ -99,7 +98,6 @@ class FilterList extends React.Component {
               tooltip={section.tooltip}
               options={section.options}
               isSearchFilter={section.isSearchFilter}
-              isArrayField={this.props.isArrayField}
               isArrayFieldTwo={section.isArrayField}
               onSearchFilterLoadOptions={section.onSearchFilterLoadOptions}
               expanded={this.props.expandedStatus[index]}
@@ -167,7 +165,6 @@ FilterList.propTypes = {
   tierAccessLimit: PropTypes.number,
   lockedTooltipMessage: PropTypes.string,
   disabledTooltipMessage: PropTypes.string,
-  isArrayField: PropTypes.bool,
 };
 
 FilterList.defaultProps = {
@@ -182,7 +179,6 @@ FilterList.defaultProps = {
   tierAccessLimit: undefined,
   lockedTooltipMessage: '',
   disabledTooltipMessage: '',
-  isArrayField: false,
 };
 
 export default FilterList;

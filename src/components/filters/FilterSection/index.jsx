@@ -81,7 +81,6 @@ class FilterSection extends React.Component {
   }
 
   getAndOrToggle() {
-    console.log('getAndOrToggle sees this.props.isArrayField: ', this.props.isArrayField);
     console.log('getAndOrToggle sees this.props.isArrayFieldTwo: ', this.props.isArrayFieldTwo);
     const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
     const tooltipText = 'This toggle selects the logical operator used to combine checked filter options. '
@@ -363,18 +362,18 @@ class FilterSection extends React.Component {
           }
         </div>
         {
-          isTextFilter && (
+          isTextFilter && this.props.isArrayFieldTwo && (
             <div
               tabIndex={0}
               role='button'
               onClick={() => this.toggleShowAndOrToggle()}
               onKeyPress={() => this.toggleShowAndOrToggle()}
             >
-              { this.props.isArrayFieldTwo && (
+              (
                 <i
                   className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
                 />
-              ) }
+              )
             </div>
           )
         }
@@ -415,7 +414,7 @@ class FilterSection extends React.Component {
           isTextFilter && this.getSearchInput()
         }
         {
-          this.props.isArrayField && this.getAndOrToggle()
+          this.props.isArrayFieldTwo && this.getAndOrToggle()
         }
         <div className='g3-filter-section__options'>
           {
@@ -536,7 +535,6 @@ FilterSection.propTypes = {
   disabledTooltipMessage: PropTypes.string,
   isSearchFilter: PropTypes.bool,
   onSearchFilterLoadOptions: PropTypes.func,
-  isArrayField: PropTypes.bool,
   isArrayFieldTwo: PropTypes.bool,
 };
 
@@ -554,7 +552,6 @@ FilterSection.defaultProps = {
   lockedTooltipMessage: '',
   disabledTooltipMessage: '',
   isSearchFilter: false,
-  isArrayField: false,
   isArrayFieldTwo: false,
   onSearchFilterLoadOptions: () => null,
 };

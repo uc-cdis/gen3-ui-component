@@ -217,7 +217,7 @@ storiesOf('Filters', module)
       onAfterDrag={action('range change')}
       onCombineOptionToggle={action('combine mode change')}
       tierAccessLimit={1000}
-      isArrayField={true}
+      isArrayFieldTwo={true}
     />
   ))
   .add('SearchFilter', () => (
