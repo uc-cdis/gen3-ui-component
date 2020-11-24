@@ -356,7 +356,7 @@ class FilterSection extends React.Component {
           }
         </div>
         {
-         (isTextFilter || isSearchFilter) && this.props.isArrayField && (
+         isTextFilter && this.props.isArrayField && (
             <div
               tabIndex={0}
               role='button'
