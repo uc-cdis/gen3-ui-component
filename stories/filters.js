@@ -209,7 +209,7 @@ storiesOf('Filters', module)
       tierAccessLimit={1000}
     />
   ))
-  .add('FilterSection for array-typed field', () => (
+  .add('FilterSection for array-type field', () => (
     <FilterSection
       title={'Consent Codes'}
       options={consentCodeOptions}
@@ -227,6 +227,31 @@ storiesOf('Filters', module)
       onAfterDrag={action('range change')}
       tierAccessLimit={1000}
       isSearchFilter={true}
+      onSearchFilterLoadOptions={(searchString, offset=0) => {
+        const pageSize = 20;
+        if (!searchString) {
+          return {
+            options: guidOptions.slice(offset,offset+pageSize).map(option => ({value: option.text, label: option.text})),
+            hasMore: guidOptions.length > offset + pageSize,
+          }
+        }
+        const filteredOptions = guidOptions.filter(option => option.text.indexOf(searchString) !== -1);
+        return {
+          options: filteredOptions.slice(offset, offset+pageSize).map(option => ({value: option.text, label: option.text})),
+          hasMore: filteredOptions.length > offset + pageSize
+        }
+      }}
+    />
+  ))
+  .add('SearchFilter for array-type field', () => (
+    <FilterSection
+      title={'File GUIDs'}
+      onSelect={action('checked')}
+      onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
+      isSearchFilter={true}
+      isArrayField={true}
+      onCombineOptionToggle={action('combine mode change')}
       onSearchFilterLoadOptions={(searchString, offset=0) => {
         const pageSize = 20;
         if (!searchString) {

@@ -10,7 +10,7 @@ const removeEmptyFilter = (filterResults) => {
       && filterResults[field].selectedValues.length > 0;
     // Filter settings are prefaced with two underscores, e.g., __combineMode
     const configFields = Object.keys(filterResults[field]).filter(x => x.startsWith('__'));
-    // A given config setting is still informative to Guppy even if the setting has no value.
+    // A given config setting is still informative to Guppy even if the setting becomes empty
     const containsConfigSetting = configFields.length > 0;
     if (containsRangeFilter || containsCheckboxFilter || containsConfigSetting) {
       newFilterResults[field] = filterResults[field];

@@ -294,7 +294,6 @@ class FilterSection extends React.Component {
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div className='g3-filter-section__toggle-icon-container'>
-          { false && (
             <i
               onClick={() => this.toggleSection()}
               onKeyPress={() => this.toggleSection()}
@@ -303,8 +302,6 @@ class FilterSection extends React.Component {
               className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal 
                 g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'down' : 'right'}`}
             />
-          )
-          }
         </div>
         <div
           className='g3-filter-section__title-container'
@@ -313,9 +310,7 @@ class FilterSection extends React.Component {
           tabIndex={0}
           role='button'
         >
-          <div className={`g3-filter-section__title ${
-            numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}
-          >
+          <div className={`g3-filter-section__title ${numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}>
             {this.props.title}
           </div>
           { (isRangeFilter && numSelected !== 0)
@@ -361,16 +356,16 @@ class FilterSection extends React.Component {
           }
         </div>
         {
-          isTextFilter && this.props.isArrayField && (
+         (isTextFilter || isSearchFilter) && this.props.isArrayField && (
             <div
               tabIndex={0}
               role='button'
               onClick={() => this.toggleShowAndOrToggle()}
               onKeyPress={() => this.toggleShowAndOrToggle()}
             >
-                <i
-                  className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
-                />
+              <i
+                className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
+              />
             </div>
           )
         }
@@ -405,13 +400,13 @@ class FilterSection extends React.Component {
           ) : sectionHeader
         }
         {
-          isSearchFilter && this.getSearchFilter(Option)
-        }
-        {
           isTextFilter && this.getSearchInput()
         }
         {
           this.props.isArrayField && this.getAndOrToggle()
+        }
+        {
+          isSearchFilter && this.getSearchFilter(Option)
         }
         <div className='g3-filter-section__options'>
           {
