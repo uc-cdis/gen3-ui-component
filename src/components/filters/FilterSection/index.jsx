@@ -511,7 +511,7 @@ FilterSection.propTypes = {
 
   })),
   onSelect: PropTypes.func.isRequired,
-  onCombineOptionToggle: PropTypes.func.isRequired,
+  onCombineOptionToggle: PropTypes.func,
   onAfterDrag: PropTypes.func.isRequired,
   onClear: PropTypes.func,
   expanded: PropTypes.bool,
@@ -537,6 +537,7 @@ FilterSection.defaultProps = {
   expanded: true,
   onToggle: () => {},
   onClear: () => {},
+  onCombineOptionToggle: () => {},
   filterStatus: undefined,
   initVisibleItemNumber: 5,
   hideZero: true,
