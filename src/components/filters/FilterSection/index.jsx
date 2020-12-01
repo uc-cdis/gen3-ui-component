@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tooltip from 'rc-tooltip';
+import 'rc-tooltip/assets/bootstrap_white.css';
+import { Radio } from 'antd';
+import 'antd/dist/antd.css';
 import { AsyncPaginate } from 'react-select-async-paginate';
 import SingleSelectFilter from '../SingleSelectFilter';
 import Chip from '../Chip';
@@ -44,6 +47,8 @@ class FilterSection extends React.Component {
       filterStatus: {}, // shape: { [fieldName]: true | false } | [number, number]
       searchInputEmpty: true,
       showingSearch: false,
+      showingAndOrToggle: false,
+      combineMode: 'OR',
 
       // used for rerendering child components when reset button is clicked
       resetClickCounter: 0,
@@ -52,12 +57,13 @@ class FilterSection extends React.Component {
       optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
     };
     this.inputElem = React.createRef();
+    this.combineModeFieldName = '__combineMode';
   }
 
   getSearchInput() {
     const isHidden = !this.state.showingSearch || !this.state.isExpanded;
     return (
-      <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__search-input--hidden'}`}>
+      <div className={`g3-filter-section__search-input ${isHidden && 'g3-filter-section__hidden'}`}>
         <input
           className='g3-filter-section__search-input-box body'
           onChange={() => { this.handleSearchInputChange(); }}
@@ -71,6 +77,42 @@ class FilterSection extends React.Component {
           tabIndex={0}
         />
       </div>
+    );
+  }
+
+  getAndOrToggle() {
+    const isHidden = !this.state.showingAndOrToggle || !this.state.isExpanded;
+    const tooltipText = 'This toggle selects the logical operator used to combine checked filter options. '
+      + 'If AND is set, records must match all checked filter options. '
+      + 'If OR is set, records must match at least one checked option.';
+    return (
+      <React.Fragment>
+        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
+          <span style={{ marginRight: '5px' }}>Combine with </span>
+          <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
+            <Radio.Button value='AND' onChange={() => this.handleSetCombineModeOption('AND')}>
+            AND
+            </Radio.Button>
+            <Radio.Button value='OR' onChange={() => this.handleSetCombineModeOption('OR')}>
+              OR
+            </Radio.Button>
+          </Radio.Group>
+
+          <Tooltip
+            placement='right'
+            overlay={tooltipText}
+            overlayClassName='g3-filter-section__and-or-toggle-helper-tooltip'
+            arrowContent={<div className='rc-tooltip-arrow-inner' />}
+            width='300px'
+            trigger={['hover', 'focus']}
+          >
+            <span className='g3-helper-tooltip'>
+              <i className='g3-icon g3-icon--sm g3-icon--question-mark-bootstrap help-tooltip-icon' />
+            </span>
+          </Tooltip>
+
+        </div>
+      </React.Fragment>
     );
   }
 
@@ -131,6 +173,12 @@ class FilterSection extends React.Component {
       return null;
     }
     return null;
+  }
+
+  handleSetCombineModeOption(combineModeIn) {
+    // Combine mode: AND or OR
+    this.setState({ combineMode: combineModeIn });
+    this.props.onCombineOptionToggle(this.combineModeFieldName, combineModeIn);
   }
 
 
@@ -210,7 +258,17 @@ class FilterSection extends React.Component {
   }
 
   toggleShowSearch() {
-    this.setState(prevState => ({ showingSearch: !prevState.showingSearch }));
+    // If and/or toggle is shown, hide it before showing the search input.
+    this.setState(prevState => (
+      { showingSearch: !prevState.showingSearch, showingAndOrToggle: false }),
+    );
+  }
+
+  toggleShowAndOrToggle() {
+    // If search input is shown, hide it before showing the and/or toggle.
+    this.setState(prevState => (
+      { showingAndOrToggle: !prevState.showingAndOrToggle, showingSearch: false }),
+    );
   }
 
   toggleShowMore() {
@@ -241,7 +299,8 @@ class FilterSection extends React.Component {
             onKeyPress={() => this.toggleSection()}
             tabIndex={0}
             role='button'
-            className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'down' : 'right'}`}
+            className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal 
+                g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'down' : 'right'}`}
           />
         </div>
         <div
@@ -297,6 +356,20 @@ class FilterSection extends React.Component {
           }
         </div>
         {
+          isTextFilter && this.props.isArrayField && (
+            <div
+              tabIndex={0}
+              role='button'
+              onClick={() => this.toggleShowAndOrToggle()}
+              onKeyPress={() => this.toggleShowAndOrToggle()}
+            >
+              <i
+                className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
+              />
+            </div>
+          )
+        }
+        {
           isTextFilter && (
             <div
               tabIndex={0}
@@ -327,10 +400,13 @@ class FilterSection extends React.Component {
           ) : sectionHeader
         }
         {
-          isSearchFilter && this.getSearchFilter(Option)
+          isTextFilter && this.getSearchInput()
         }
         {
-          isTextFilter && this.getSearchInput()
+          this.props.isArrayField && this.getAndOrToggle()
+        }
+        {
+          isSearchFilter && this.getSearchFilter(Option)
         }
         <div className='g3-filter-section__options'>
           {
@@ -435,6 +511,7 @@ FilterSection.propTypes = {
 
   })),
   onSelect: PropTypes.func.isRequired,
+  onCombineOptionToggle: PropTypes.func,
   onAfterDrag: PropTypes.func.isRequired,
   onClear: PropTypes.func,
   expanded: PropTypes.bool,
@@ -450,6 +527,7 @@ FilterSection.propTypes = {
   disabledTooltipMessage: PropTypes.string,
   isSearchFilter: PropTypes.bool,
   onSearchFilterLoadOptions: PropTypes.func,
+  isArrayField: PropTypes.bool,
 };
 
 FilterSection.defaultProps = {
@@ -459,6 +537,7 @@ FilterSection.defaultProps = {
   expanded: true,
   onToggle: () => {},
   onClear: () => {},
+  onCombineOptionToggle: () => {},
   filterStatus: undefined,
   initVisibleItemNumber: 5,
   hideZero: true,
@@ -466,6 +545,7 @@ FilterSection.defaultProps = {
   lockedTooltipMessage: '',
   disabledTooltipMessage: '',
   isSearchFilter: false,
+  isArrayField: false,
   onSearchFilterLoadOptions: () => null,
 };
 

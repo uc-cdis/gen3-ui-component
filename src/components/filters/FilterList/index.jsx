@@ -49,6 +49,21 @@ class FilterList extends React.Component {
     this.props.onSelect(sectionIndex, singleFilterLabel);
   }
 
+  handleSelectCombineOptionToggle(
+    sectionIndex,
+    fieldName,
+    value,
+  ) {
+    this.setState((prevState) => {
+      const newFilterStatus = prevState.filterStatus.slice(0);
+      newFilterStatus[sectionIndex][fieldName] = value;
+      return {
+        filterStatus: newFilterStatus,
+      };
+    });
+    this.props.onCombineOptionToggle(sectionIndex, fieldName, value);
+  }
+
   handleDragRangeFilter(sectionIndex, lowerBound, upperBound, minValue, maxValue, rangeStep) {
     this.setState((prevState) => {
       const newFilterStatus = prevState.filterStatus.slice(0);
@@ -82,6 +97,7 @@ class FilterList extends React.Component {
               tooltip={section.tooltip}
               options={section.options}
               isSearchFilter={section.isSearchFilter}
+              isArrayField={section.isArrayField}
               onSearchFilterLoadOptions={section.onSearchFilterLoadOptions}
               expanded={this.props.expandedStatus[index]}
               onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
@@ -91,6 +107,13 @@ class FilterList extends React.Component {
                 singleFilterLabel => this.handleSelectSingleFilter(
                   index,
                   singleFilterLabel,
+                )
+              }
+              onCombineOptionToggle={
+                (combineModeFieldName, combineModeValue) => this.handleSelectCombineOptionToggle(
+                  index,
+                  combineModeFieldName,
+                  combineModeValue,
                 )
               }
               onAfterDrag={
@@ -135,6 +158,7 @@ FilterList.propTypes = {
     PropTypes.arrayOf(PropTypes.number),
   ])),
   onSelect: PropTypes.func,
+  onCombineOptionToggle: PropTypes.func,
   onAfterDrag: PropTypes.func,
   hideZero: PropTypes.bool,
   tierAccessLimit: PropTypes.number,
@@ -148,6 +172,7 @@ FilterList.defaultProps = {
   onClear: () => {},
   filterStatus: undefined,
   onSelect: () => {},
+  onCombineOptionToggle: () => {},
   onAfterDrag: () => {},
   hideZero: true,
   tierAccessLimit: undefined,
