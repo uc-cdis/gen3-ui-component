@@ -294,14 +294,14 @@ class FilterSection extends React.Component {
     const sectionHeader = (
       <div className='g3-filter-section__header'>
         <div className='g3-filter-section__toggle-icon-container'>
-            <i
-              onClick={() => this.toggleSection()}
-              onKeyPress={() => this.toggleSection()}
-              tabIndex={0}
-              role='button'
-              className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal 
+          <i
+            onClick={() => this.toggleSection()}
+            onKeyPress={() => this.toggleSection()}
+            tabIndex={0}
+            role='button'
+            className={`g3-filter-section__toggle-icon g3-icon g3-icon-color__coal 
                 g3-icon--sm g3-icon--chevron-${this.state.isExpanded ? 'down' : 'right'}`}
-            />
+          />
         </div>
         <div
           className='g3-filter-section__title-container'
@@ -356,7 +356,7 @@ class FilterSection extends React.Component {
           }
         </div>
         {
-         isTextFilter && this.props.isArrayField && (
+          isTextFilter && this.props.isArrayField && (
             <div
               tabIndex={0}
               role='button'
