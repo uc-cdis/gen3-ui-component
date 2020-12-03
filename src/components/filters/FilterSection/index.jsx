@@ -52,6 +52,7 @@ class FilterSection extends React.Component {
       optionsVisibleStatus: filterVisibleStatusObj(this.props.options),
     };
     this.inputElem = React.createRef();
+    this.filterSectionRef = React.createRef();
   }
 
   getSearchInput() {
@@ -217,6 +218,12 @@ class FilterSection extends React.Component {
     this.setState(prevState => ({ showingMore: !prevState.showingMore }));
   }
 
+  scrollToSection() {
+    if (this.filterSectionRef.current) {
+      this.filterSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
 
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
@@ -313,7 +320,7 @@ class FilterSection extends React.Component {
       </div>
     );
     return (
-      <div className='g3-filter-section'>
+      <div className='g3-filter-section' ref={this.filterSectionRef}>
         {
           this.props.tooltip ? (
             <Tooltip

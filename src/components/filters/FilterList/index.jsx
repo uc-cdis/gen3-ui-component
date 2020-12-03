@@ -22,6 +22,12 @@ class FilterList extends React.Component {
     this.props.onToggle(sectionIndex, newExpanded);
   }
 
+  scrollToSection(sectionIndex) {
+    if (this.sectionRefs[sectionIndex].current) {
+      this.sectionRefs[sectionIndex].current.scrollToSection();
+    }
+  }
+
   handleSectionClear(sectionIndex) {
     this.setState((prevState) => {
       const newFilterStatus = prevState.filterStatus.slice(0);

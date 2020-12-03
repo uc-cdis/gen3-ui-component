@@ -70,6 +70,14 @@ class FilterGroup extends React.Component {
     this.setState({ selectedTabIndex: index });
   }
 
+  scrollToSection(tabIndex, sectionIndex) {
+    this.setState({ selectedTabIndex: tabIndex }, () => {
+      if (this.currentFilterListRef.current) {
+        this.currentFilterListRef.current.scrollToSection(sectionIndex);
+      }
+    });
+  }
+
   resetFilter() {
     this.setState((prevState) => {
       const oldFilterStatus = prevState.filterStatus;
@@ -123,11 +131,10 @@ class FilterGroup extends React.Component {
     });
   }
 
-  handleSelect(sectionIndex, singleFilterLabel) {
+  handleSelect(tabIndex, sectionIndex, singleFilterLabel) {
     this.setState((prevState) => {
       // update filter status
       const newFilterStatus = prevState.filterStatus.slice(0);
-      const tabIndex = prevState.selectedTabIndex;
       const oldSelected = newFilterStatus[tabIndex][sectionIndex][singleFilterLabel];
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
       newFilterStatus[tabIndex][sectionIndex][singleFilterLabel] = newSelected;
@@ -249,7 +256,11 @@ class FilterGroup extends React.Component {
                 ),
                 expandedStatus: this.state.expandedStatus[this.state.selectedTabIndex],
                 filterStatus: this.state.filterStatus[this.state.selectedTabIndex],
-                onSelect: this.handleSelect.bind(this),
+                onSelect: (sectionIndex, singleFilterLabel) => this.handleSelect(
+                  this.state.selectedTabIndex,
+                  sectionIndex,
+                  singleFilterLabel,
+                ),
                 onAfterDrag: this.handleDrag.bind(this),
                 hideZero: this.props.hideZero,
                 ref: this.currentFilterListRef,
