@@ -8,6 +8,7 @@ import FilterList from '../src/components/filters/FilterList';
 import FilterGroup from '../src/components/filters/FilterGroup';
 
 const projectOptions = [
+  { text: 'big-number', filterType: 'singleSelect', count: 123456789 },
   { text: 'ndh-CHARLIE', filterType: 'singleSelect', count: 123 },
   { text: 'ndh-dait-microbiome', filterType: 'singleSelect', count: 123 },
   { text: 'ndh-dmid-LMV', filterType: 'singleSelect', count: 123 },
@@ -111,6 +112,7 @@ const subjectSections = [
   { title: 'Race', options: raceOptions },
   { title: 'Ethnicity', options: ethnicityOptions },
   { title: 'Age', options: ageOptions },
+  { title: 'Big List', options: guidOptions },
 ];
 
 const fileSections = [
@@ -181,6 +183,9 @@ storiesOf('Filters', module)
       <SingleSelectFilter label='Option3' onSelect={action('checked')} count={-1} accessible tierAccessLimit={1000} />
       <SingleSelectFilter label='Option4' onSelect={action('checked')} count={4} accessible={false} />
       <SingleSelectFilter label='Option5' onSelect={action('checked')} count={-1} accessible={false} tierAccessLimit={1000} />
+      <SingleSelectFilter label='Option6' onSelect={action('checked')} count={123456789} accessible />
+      <SingleSelectFilter label='Option7' onSelect={action('checked')} count={-1} accessible tierAccessLimit={123456789} />
+      <SingleSelectFilter label='Option8' onSelect={action('checked')} count={123456789} accessible={false} />
     </div>
   ))
   .add('RangeFilter', () => (
@@ -197,6 +202,13 @@ storiesOf('Filters', module)
         min={0.00000000001}
         max={99.9999999999}
         rangeStep={0.1}
+      />
+      <RangeFilter
+        label='Range slider Big Numbers'
+        onAfterDrag={action('range change')}
+        min={0}
+        max={2000000}
+        rangeStep={10}
       />
     </div>
   ))
