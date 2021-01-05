@@ -87,7 +87,7 @@ class SummaryBarChart extends React.Component {
                       role='button'
                       tabIndex={0}
                     >
-                      {`And ${barChartData.length - this.props.maximumDisplayItem} more`}
+                      {`And ${(barChartData.length - this.props.maximumDisplayItem).toLocaleString()} more`}
                     </div>
                   )
                 }

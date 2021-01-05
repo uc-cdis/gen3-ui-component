@@ -57,7 +57,7 @@ class SummaryPieChart extends React.Component {
                       </div>
                       <div className='summary-pie-chart__legend-item-value form-special-number'>
                         <span className='summary-pie-chart__legend-item-value-number'>
-                          { helper.numberWithCommas(entry.value) }
+                          { Number(entry.value).toLocaleString() }
                         </span>
                         <br />
                         <span className='summary-pie-chart__legend-item-value-percentage'>
@@ -94,7 +94,7 @@ class SummaryPieChart extends React.Component {
                         role='button'
                         tabIndex={0}
                       >
-                        {`And ${pieChartData.length - this.props.maximumDisplayItem} more`}
+                        {`And ${(pieChartData.length - this.props.maximumDisplayItem).toLocaleString()} more`}
                       </div>
                     )
                   }

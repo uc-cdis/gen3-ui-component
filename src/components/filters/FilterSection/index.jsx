@@ -165,7 +165,7 @@ class FilterSection extends React.Component {
             onKeyPress={() => this.toggleShowMore()}
             tabIndex={0}
           >
-            {moreCount}
+            {moreCount.toLocaleString()}
             &nbsp;more
           </div>
         );
