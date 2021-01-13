@@ -6,7 +6,7 @@ import './SummaryChartGroup.css';
 import helper from '../helper.js';
 
 class SummaryChartGroup extends Component {
-  getChart = (item) => {
+  getChart(item) {
     switch (item.type) {
     case 'pie':
       return (
