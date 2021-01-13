@@ -42,7 +42,7 @@ const NUM_OPTIONS = 2000;
 for (let i = 0; i < NUM_OPTIONS; i += 1) {
   bigSet.push({
     name: `item-${i}`,
-    value: Math.random()
+    value: Math.random(),
   });
 }
 
@@ -79,7 +79,9 @@ const lockedSummaries = [
 ];
 
 const summariesWithOneEmpty = [
-  { type: 'bar', title: 'Gender', data: genderData, chartIsEmpty: true },
+  {
+    type: 'bar', title: 'Gender', data: genderData, chartIsEmpty: true,
+  },
   { type: 'pie', title: 'Birth-Year', data: lockedBirth },
   { type: 'pie', title: 'Species', data: speciesData },
   { type: 'bar', title: 'Race', data: raceData },

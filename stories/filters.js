@@ -229,7 +229,7 @@ storiesOf('Filters', module)
       onAfterDrag={action('range change')}
       onCombineOptionToggle={action('combine mode change')}
       tierAccessLimit={1000}
-      isArrayField={true}
+      isArrayField
     />
   ))
   .add('SearchFilter', () => (
@@ -238,20 +238,26 @@ storiesOf('Filters', module)
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
       tierAccessLimit={1000}
-      isSearchFilter={true}
-      onSearchFilterLoadOptions={(searchString, offset=0) => {
+      isSearchFilter
+      onSearchFilterLoadOptions={(searchString, offset = 0) => {
         const pageSize = 20;
         if (!searchString) {
           return {
-            options: guidOptions.slice(offset,offset+pageSize).map(option => ({value: option.text, label: option.text})),
+            options: guidOptions
+              .slice(offset, offset + pageSize)
+              .map(option => ({ value: option.text, label: option.text })),
             hasMore: guidOptions.length > offset + pageSize,
-          }
+          };
         }
-        const filteredOptions = guidOptions.filter(option => option.text.indexOf(searchString) !== -1);
+        const filteredOptions = guidOptions.filter(
+          option => option.text.indexOf(searchString) !== -1,
+        );
         return {
-          options: filteredOptions.slice(offset, offset+pageSize).map(option => ({value: option.text, label: option.text})),
-          hasMore: filteredOptions.length > offset + pageSize
-        }
+          options: filteredOptions
+            .slice(offset, offset + pageSize)
+            .map(option => ({ value: option.text, label: option.text })),
+          hasMore: filteredOptions.length > offset + pageSize,
+        };
       }}
     />
   ))
