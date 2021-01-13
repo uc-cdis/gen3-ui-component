@@ -49,7 +49,7 @@ for (let i = 0; i < NUM_OPTIONS; i += 1) {
 const summaries = [
   { type: 'bar', title: 'Gender', data: genderData },
   { type: 'pie', title: 'Birth-Year', data: birthData },
-  { type: 'pie', title: 'Species', data: speciesData },
+  { type: 'full-pie', title: 'Species', data: speciesData },
   { type: 'bar', title: 'Race', data: raceData },
   { type: 'bar', title: 'Virus', data: virusData },
   { type: 'bar', title: 'Big Set', data: bigSet },
@@ -113,6 +113,9 @@ storiesOf('Chart', module)
   ))
   .add('SummaryPieChart with customized colors', () => (
     <SummaryPieChart data={virusData} title='pie chart title' showPercentage useCustomizedColorMap customizedColorMap={customizedColorMap} />
+  ))
+  .add('SummaryFullPieChart', () => (
+    <SummaryPieChart data={virusData} title='pie chart title' innerRadius={0} showPercentage />
   ))
   .add('SummaryChartGroup', () => (
     <SummaryChartGroup summaries={summaries} width={1010} />
