@@ -49,7 +49,7 @@ for (let i = 0; i < NUM_OPTIONS; i += 1) {
 const summaries = [
   { type: 'bar', title: 'Gender', data: genderData },
   { type: 'pie', title: 'Birth-Year', data: birthData },
-  { type: 'full-pie', title: 'Species', data: speciesData },
+  { type: 'fullPie', title: 'Species', data: speciesData },
   { type: 'bar', title: 'Race', data: raceData },
   { type: 'bar', title: 'Virus', data: virusData },
   { type: 'bar', title: 'Big Set', data: bigSet },

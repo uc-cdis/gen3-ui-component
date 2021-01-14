@@ -22,7 +22,7 @@ class SummaryChartGroup extends Component {
           chartEmptyMessage={this.props.chartEmptyMessage}
         />
         );
-      case 'full-pie':
+      case 'fullPie':
         return (
         <SummaryPieChart
           data={item.data}
