@@ -8,8 +8,8 @@ import helper from '../helper.js';
 class SummaryChartGroup extends Component {
   getChart(item) {
     switch (item.type) {
-    case 'pie':
-      return (
+      case 'pie':
+        return (
         <SummaryPieChart
           data={item.data}
           title={item.title}
@@ -21,9 +21,9 @@ class SummaryChartGroup extends Component {
           chartIsEmpty={item.chartIsEmpty}
           chartEmptyMessage={this.props.chartEmptyMessage}
         />
-      );
-    case 'full-pie':
-      return (
+        );
+      case 'full-pie':
+        return (
         <SummaryPieChart
           data={item.data}
           title={item.title}
@@ -36,9 +36,9 @@ class SummaryChartGroup extends Component {
           chartEmptyMessage={this.props.chartEmptyMessage}
           innerRadius={0}
         />
-      );
-    case 'bar':
-      return (
+        );
+      case 'bar':
+        return (
         <SummaryHorizontalBarChart
           data={item.data}
           title={item.title}
@@ -53,9 +53,9 @@ class SummaryChartGroup extends Component {
           chartIsEmpty={item.chartIsEmpty}
           chartEmptyMessage={this.props.chartEmptyMessage}
         />
-      );
-    default:
-      return null;
+        );
+      default:
+        return null;
     }
   }
 

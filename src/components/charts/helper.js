@@ -111,30 +111,30 @@ const getCharts = (data, dataExplorerConfig, sqon) => {
       const sqonValues = getSQONValues(sqon, field);
       if (fieldConfig) {
         switch (fieldConfig.chartType) {
-        case 'count':
-          countItems.push(transformDataToCount(fields[field], fieldConfig.title, sqonValues));
-          break;
-        case 'pie':
-        case 'bar':
-          summaries.push(
-            transformArrangerDataToSummary(
-              fields[field],
-              fieldConfig.chartType,
-              fieldConfig.title,
-              sqonValues),
-          );
-          break;
-        case 'stackedBar':
-          stackedBarCharts.push(
-            transformArrangerDataToSummary(
-              fields[field],
-              fieldConfig.chartType,
-              fieldConfig.title,
-              sqonValues),
-          );
-          break;
-        default:
-          break;
+          case 'count':
+            countItems.push(transformDataToCount(fields[field], fieldConfig.title, sqonValues));
+            break;
+          case 'pie':
+          case 'bar':
+            summaries.push(
+              transformArrangerDataToSummary(
+                fields[field],
+                fieldConfig.chartType,
+                fieldConfig.title,
+                sqonValues),
+            );
+            break;
+          case 'stackedBar':
+            stackedBarCharts.push(
+              transformArrangerDataToSummary(
+                fields[field],
+                fieldConfig.chartType,
+                fieldConfig.title,
+                sqonValues),
+            );
+            break;
+          default:
+            break;
         }
       }
     });
