@@ -42,14 +42,14 @@ const NUM_OPTIONS = 2000;
 for (let i = 0; i < NUM_OPTIONS; i += 1) {
   bigSet.push({
     name: `item-${i}`,
-    value: Math.random()
+    value: Math.random(),
   });
 }
 
 const summaries = [
   { type: 'bar', title: 'Gender', data: genderData },
   { type: 'pie', title: 'Birth-Year', data: birthData },
-  { type: 'pie', title: 'Species', data: speciesData },
+  { type: 'fullPie', title: 'Species', data: speciesData },
   { type: 'bar', title: 'Race', data: raceData },
   { type: 'bar', title: 'Virus', data: virusData },
   { type: 'bar', title: 'Big Set', data: bigSet },
@@ -79,7 +79,9 @@ const lockedSummaries = [
 ];
 
 const summariesWithOneEmpty = [
-  { type: 'bar', title: 'Gender', data: genderData, chartIsEmpty: true },
+  {
+    type: 'bar', title: 'Gender', data: genderData, chartIsEmpty: true,
+  },
   { type: 'pie', title: 'Birth-Year', data: lockedBirth },
   { type: 'pie', title: 'Species', data: speciesData },
   { type: 'bar', title: 'Race', data: raceData },
@@ -113,6 +115,9 @@ storiesOf('Chart', module)
   ))
   .add('SummaryPieChart with customized colors', () => (
     <SummaryPieChart data={virusData} title='pie chart title' showPercentage useCustomizedColorMap customizedColorMap={customizedColorMap} />
+  ))
+  .add('SummaryFullPieChart', () => (
+    <SummaryPieChart data={virusData} title='pie chart title' innerRadius={0} showPercentage />
   ))
   .add('SummaryChartGroup', () => (
     <SummaryChartGroup summaries={summaries} width={1010} />

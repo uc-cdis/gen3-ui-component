@@ -6,6 +6,59 @@ import './SummaryChartGroup.css';
 import helper from '../helper.js';
 
 class SummaryChartGroup extends Component {
+  getChart(item) {
+    switch (item.type) {
+      case 'pie':
+        return (
+        <SummaryPieChart
+          data={item.data}
+          title={item.title}
+          lockValue={this.props.lockValue}
+          lockMessage={this.props.lockMessage}
+          useCustomizedColorMap={this.props.useCustomizedColorMap}
+          customizedColorMap={this.props.customizedColorMap}
+          maximumDisplayItem={this.props.maximumDisplayItem}
+          chartIsEmpty={item.chartIsEmpty}
+          chartEmptyMessage={this.props.chartEmptyMessage}
+        />
+        );
+      case 'fullPie':
+        return (
+        <SummaryPieChart
+          data={item.data}
+          title={item.title}
+          lockValue={this.props.lockValue}
+          lockMessage={this.props.lockMessage}
+          useCustomizedColorMap={this.props.useCustomizedColorMap}
+          customizedColorMap={this.props.customizedColorMap}
+          maximumDisplayItem={this.props.maximumDisplayItem}
+          chartIsEmpty={item.chartIsEmpty}
+          chartEmptyMessage={this.props.chartEmptyMessage}
+          innerRadius={0}
+        />
+        );
+      case 'bar':
+        return (
+        <SummaryHorizontalBarChart
+          data={item.data}
+          title={item.title}
+          vertical
+          color={this.props.useCustomizedColorMap ? undefined
+            : this.props.barChartColor}
+          lockValue={this.props.lockValue}
+          lockMessage={this.props.lockMessage}
+          useCustomizedColorMap={this.props.useCustomizedColorMap}
+          customizedColorMap={this.props.customizedColorMap}
+          maximumDisplayItem={this.props.maximumDisplayItem}
+          chartIsEmpty={item.chartIsEmpty}
+          chartEmptyMessage={this.props.chartEmptyMessage}
+        />
+        );
+      default:
+        return null;
+    }
+  }
+
   render() {
     const width = helper.parseParamWidth(this.props.width);
     return (
@@ -16,37 +69,7 @@ class SummaryChartGroup extends Component {
               {
                 index > 0 && <div className='summary-chart-group__column-left-border' />
               }
-              {
-                item.type === 'pie'
-                  ? (
-                    <SummaryPieChart
-                      data={item.data}
-                      title={item.title}
-                      lockValue={this.props.lockValue}
-                      lockMessage={this.props.lockMessage}
-                      useCustomizedColorMap={this.props.useCustomizedColorMap}
-                      customizedColorMap={this.props.customizedColorMap}
-                      maximumDisplayItem={this.props.maximumDisplayItem}
-                      chartIsEmpty={item.chartIsEmpty}
-                      chartEmptyMessage={this.props.chartEmptyMessage}
-                    />
-                  ) : (
-                    <SummaryHorizontalBarChart
-                      data={item.data}
-                      title={item.title}
-                      vertical
-                      color={this.props.useCustomizedColorMap ? undefined
-                        : this.props.barChartColor}
-                      lockValue={this.props.lockValue}
-                      lockMessage={this.props.lockMessage}
-                      useCustomizedColorMap={this.props.useCustomizedColorMap}
-                      customizedColorMap={this.props.customizedColorMap}
-                      maximumDisplayItem={this.props.maximumDisplayItem}
-                      chartIsEmpty={item.chartIsEmpty}
-                      chartEmptyMessage={this.props.chartEmptyMessage}
-                    />
-                  )
-              }
+              { this.getChart(item) }
             </div>
           ))
         }
