@@ -210,6 +210,12 @@ storiesOf('Filters', module)
         max={2000000}
         rangeStep={10}
       />
+      <RangeFilter
+        label='Empty Ranger slider'
+        onAfterDrag={action('range change')}
+        min={0}
+        max={0}
+      />
     </div>
   ))
   .add('FilterSection', () => (

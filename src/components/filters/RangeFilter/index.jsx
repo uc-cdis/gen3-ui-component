@@ -145,6 +145,9 @@ class RangeFilter extends React.Component {
   }
 
   render() {
+    if (this.props.max === 0 && this.props.hideZero) {
+      return null;
+    }
     return (
       <div className='g3-range-filter'>
         { this.props.label
@@ -222,6 +225,7 @@ RangeFilter.propTypes = {
   hideValue: PropTypes.number,
   count: PropTypes.number,
   inactive: PropTypes.bool,
+  hideZero: PropTypes.bool,
 };
 
 RangeFilter.defaultProps = {
@@ -234,6 +238,7 @@ RangeFilter.defaultProps = {
   hideValue: -1,
   count: 0,
   inactive: false,
+  hideZero: true,
 };
 
 export default RangeFilter;
