@@ -481,6 +481,7 @@ class FilterSection extends React.Component {
                       inactive={lowerBound === undefined && upperBound === undefined}
                       count={option.count}
                       hideValue={hideValue}
+                      hideZero={this.props.hideZero}
                     />
                   );
                 }) : null
