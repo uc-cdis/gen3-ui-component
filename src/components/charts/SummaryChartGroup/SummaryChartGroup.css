@@ -4,6 +4,7 @@
   padding: 12px 12px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   background-color: var(--g3-color__white);
 }
 
