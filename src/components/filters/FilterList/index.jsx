@@ -89,7 +89,10 @@ class FilterList extends React.Component {
 
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
-    console.log('inside gen3uicomponent render FilterList');
+    console.log('inside gen3uicomponent render FilterList with ', this.state.filterStatus);
+
+    console.log('----');
+    
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
 
