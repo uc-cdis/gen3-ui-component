@@ -6,8 +6,12 @@ import './FilterList.css';
 class FilterList extends React.Component {
   constructor(props) {
     super(props);
-    const initialFilterStatus = props.sections
+    console.log('FilterList constructor with props.filterStatus ', props.filterStatus);
+    let initialFilterStatus = props.sections
       .map(() => ({}));
+    if (props.filterStatus) {
+      initialFilterStatus = props.filterStatus;
+    }
     this.state = {
       /**
        * Current selected status for filters,
@@ -23,6 +27,7 @@ class FilterList extends React.Component {
   }
 
   handleSectionClear(sectionIndex) {
+    console.log('section clear handler');
     this.setState((prevState) => {
       const newFilterStatus = prevState.filterStatus.slice(0);
       newFilterStatus[sectionIndex] = {};
@@ -42,6 +47,7 @@ class FilterList extends React.Component {
       const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
       newFilterStatus[sectionIndex][singleFilterLabel] = newSelected;
+      console.log('in gen3-ui=component handleSelect with ', newFilterStatus);
       return {
         filterStatus: newFilterStatus,
       };
@@ -83,6 +89,7 @@ class FilterList extends React.Component {
 
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
+    console.log('inside gen3uicomponent render FilterList');
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
 
