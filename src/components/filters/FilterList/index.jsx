@@ -179,6 +179,7 @@ FilterList.propTypes = {
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
   ])),
+  key: PropTypes.number,
 };
 
 FilterList.defaultProps = {
@@ -194,6 +195,7 @@ FilterList.defaultProps = {
   tierAccessLimit: undefined,
   lockedTooltipMessage: '',
   disabledTooltipMessage: '',
+  key: undefined,
 };
 
 export default FilterList;
