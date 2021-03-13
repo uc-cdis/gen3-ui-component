@@ -90,7 +90,7 @@ class FilterList extends React.Component {
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
     console.log('inside gen3uicomponent - this.state.filterStatus', this.state.filterStatus);
-    console.log('inside gen3uicomponent - this.props.filterStatus', this.props.filterStatus);
+    console.log('inside gen3uicomponent - this.props.filterStatusFromURL', this.props.filterStatusFromURL, ' and key: ', this.props.key);
 
     console.log('----');
 
@@ -175,6 +175,10 @@ FilterList.propTypes = {
   tierAccessLimit: PropTypes.number,
   lockedTooltipMessage: PropTypes.string,
   disabledTooltipMessage: PropTypes.string,
+  filterStatusFromURL: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.number),
+  ])),
 };
 
 FilterList.defaultProps = {
@@ -182,6 +186,7 @@ FilterList.defaultProps = {
   onToggle: () => {},
   onClear: () => {},
   filterStatus: undefined,
+  filterStatusFromURL: undefined,
   onSelect: () => {},
   onCombineOptionToggle: () => {},
   onAfterDrag: () => {},
