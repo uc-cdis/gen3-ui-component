@@ -97,7 +97,8 @@ class FilterList extends React.Component {
     let filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
 
-    const filtersFromURL = this.props.filterStatusFromURL ? this.props.filterStatusFromURL.map(x => Object.keys(x)).flat() : [];
+    const filtersFromURL = this.props.filterStatusFromURL
+      ? this.props.filterStatusFromURL.map(x => Object.keys(x)).flat() : [];
 
     if (filtersFromURL.length > 0) {
       filterStatus = this.props.filterStatusFromURL;
