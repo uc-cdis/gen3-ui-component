@@ -6,11 +6,11 @@ import './FilterList.css';
 class FilterList extends React.Component {
   constructor(props) {
     super(props);
-    console.log('FilterList constructor with props.filterStatus ', props.filterStatus);
+    console.log('FilterList constructor with props.filterStatusFromURL ', props.filterStatusFromURL);
     let initialFilterStatus = props.sections
       .map(() => ({}));
-    if (props.filterStatus) {
-      initialFilterStatus = props.filterStatus;
+    if (props.filterStatusFromURL) {
+      initialFilterStatus = props.filterStatusFromURL;
     }
     this.state = {
       /**
