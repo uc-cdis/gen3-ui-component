@@ -94,8 +94,14 @@ class FilterList extends React.Component {
 
     console.log('----');
 
-    const filterStatus = this.props.filterStatus
+    var filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
+
+    let filtersFromURL = this.props.filterStatusFromURL.map((x) => Object.keys(x)).flat();
+    
+    if (filtersFromURL.length > 0) {
+      filterStatus = this.props.filterStatusFromURL;
+    }
 
     return (
       <div className='g3-filter-list'>
