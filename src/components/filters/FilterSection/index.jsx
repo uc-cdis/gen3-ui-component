@@ -41,6 +41,7 @@ const getNumValuesSelected = (filterStatus) => {
 class FilterSection extends React.Component {
   constructor(props) {
     super(props);
+    console.log('in the FilterSection constructor with ', this.props.filterStatus);
     this.state = {
       isExpanded: this.props.expanded,
       showingMore: false,
