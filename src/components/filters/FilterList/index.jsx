@@ -92,8 +92,6 @@ class FilterList extends React.Component {
     console.log('inside gen3uicomponent - this.state.filterStatus', this.state.filterStatus);
     console.log('inside gen3uicomponent - this.props.filterStatusFromURL', this.props.filterStatusFromURL, ' and key: ', this.props.key);
 
-    console.log('----');
-
     let filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
 
