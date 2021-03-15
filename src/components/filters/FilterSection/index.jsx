@@ -41,7 +41,6 @@ const getNumValuesSelected = (filterStatus) => {
 class FilterSection extends React.Component {
   constructor(props) {
     super(props);
-    console.log('in the FilterSection constructor with ', this.props.filterStatus);
     this.state = {
       isExpanded: this.props.expanded,
       showingMore: false,
@@ -280,7 +279,6 @@ class FilterSection extends React.Component {
 
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
-    console.log('in FilterSection render with this.props.filterStatus', this.props.filterStatus);
     const filterStatus = this.props.filterStatus
       ? this.props.filterStatus : this.state.filterStatus;
     let isSearchFilter = false;

@@ -47,7 +47,6 @@ class FilterList extends React.Component {
       const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
       newFilterStatus[sectionIndex][singleFilterLabel] = newSelected;
-      console.log('in gen3-ui=component handleSelect with ', newFilterStatus);
       return {
         filterStatus: newFilterStatus,
       };
