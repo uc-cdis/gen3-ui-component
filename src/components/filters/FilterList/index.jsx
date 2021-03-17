@@ -95,7 +95,8 @@ class FilterList extends React.Component {
     // const filtersInProps = this.props.filterStatus
     //   ? this.props.filterStatus.map(x => Object.keys(x)).flat() : [];
 
-    const filterStatus = this.props.filterStatus ? this.props.filterStatus : this.state.filterStatus;
+    const filterStatus = this.props.filterStatus
+      ? this.props.filterStatus : this.state.filterStatus;
 
     // const { filterStatus } = this.state;
 
