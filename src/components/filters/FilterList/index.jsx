@@ -9,7 +9,7 @@ class FilterList extends React.Component {
     console.log('FilterList constructor with props.filterStatusFromURL ', props.filterStatusFromURL);
     let initialFilterStatus = props.sections
       .map(() => ({}));
-    if (props.filterStatusFromURL) {
+    if (Object.keys(props.filterStatusFromURL).length > 0) {
       initialFilterStatus = props.filterStatusFromURL;
     }
     this.state = {
@@ -43,6 +43,7 @@ class FilterList extends React.Component {
     singleFilterLabel,
   ) {
     this.setState((prevState) => {
+      console.log('GEN3 UI COMPONENT handleSelectSingleFilter');
       const newFilterStatus = prevState.filterStatus.slice(0);
       const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
@@ -91,11 +92,13 @@ class FilterList extends React.Component {
     console.log('inside gen3uicomponent - this.state.filterStatus', this.state.filterStatus);
     console.log('inside gen3uicomponent - this.props.filterStatusFromURL', this.props.filterStatusFromURL, ' and key: ', this.props.key);
 
-    const filtersInProps = this.props.filterStatus
-      ? this.props.filterStatus.map(x => Object.keys(x)).flat() : [];
+    // const filtersInProps = this.props.filterStatus
+    //   ? this.props.filterStatus.map(x => Object.keys(x)).flat() : [];
 
-    const filterStatus = filtersInProps.length > 0
-      ? this.props.filterStatus : this.state.filterStatus;
+    // const filterStatus = filtersInProps.length > 0
+    //   ? this.props.filterStatus : this.state.filterStatus;
+
+    const filterStatus = this.state.filterStatus;
 
     return (
       <div className='g3-filter-list'>
