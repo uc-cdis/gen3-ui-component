@@ -43,7 +43,7 @@ class FilterList extends React.Component {
     singleFilterLabel,
   ) {
     this.setState((prevState) => {
-      console.log('GEN3 UI COMPONENT handleSelectSingleFilter');
+      console.log('GEN3 UI COMPONENT handleSelectSingleFilter singleFilterLabel: ', singleFilterLabel);
       const newFilterStatus = prevState.filterStatus.slice(0);
       const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
@@ -95,10 +95,9 @@ class FilterList extends React.Component {
     // const filtersInProps = this.props.filterStatus
     //   ? this.props.filterStatus.map(x => Object.keys(x)).flat() : [];
 
-    // const filterStatus = filtersInProps.length > 0
-    //   ? this.props.filterStatus : this.state.filterStatus;
+    const filterStatus = this.props.filterStatus ? this.props.filterStatus : this.state.filterStatus;
 
-    const filterStatus = this.state.filterStatus;
+    // const { filterStatus } = this.state;
 
     return (
       <div className='g3-filter-list'>
