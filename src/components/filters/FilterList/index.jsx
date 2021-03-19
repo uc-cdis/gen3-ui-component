@@ -9,7 +9,7 @@ class FilterList extends React.Component {
     console.log('FilterList constructor with props.filterStatusFromURL ', props.filterStatusFromURL);
     let initialFilterStatus = props.sections
       .map(() => ({}));
-    if (Object.keys(props.filterStatusFromURL).length > 0) {
+    if (props.filterStatusFromURL && Object.keys(props.filterStatusFromURL).length > 0) {
       initialFilterStatus = props.filterStatusFromURL;
     }
     this.state = {
