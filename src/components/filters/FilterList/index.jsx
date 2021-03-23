@@ -6,11 +6,11 @@ import './FilterList.css';
 class FilterList extends React.Component {
   constructor(props) {
     super(props);
-    console.log('FilterList constructor with props.filterStatusFromURL ', props.filterStatusFromURL);
+    console.log('FilterList constructor with props.filterStatus ', props.filterStatus);
     let initialFilterStatus = props.sections
       .map(() => ({}));
     if (props.filterStatusFromURL && Object.keys(props.filterStatusFromURL).length > 0) {
-      initialFilterStatus = props.filterStatusFromURL;
+      initialFilterStatus = props.filterStatus;
     }
     this.state = {
       /**
@@ -48,6 +48,7 @@ class FilterList extends React.Component {
       const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
       newFilterStatus[sectionIndex][singleFilterLabel] = newSelected;
+      console.log('GEN3 UI COMPONENT setting newFilterStatus:', newFilterStatus);
       return {
         filterStatus: newFilterStatus,
       };
@@ -98,7 +99,6 @@ class FilterList extends React.Component {
     const filterStatus = filtersInProps.length > 0
       ? this.props.filterStatus : this.state.filterStatus;
 
-      
 
     // const { filterStatus } = this.state;
 
