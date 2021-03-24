@@ -9,7 +9,7 @@ class FilterList extends React.Component {
     console.log('FilterList constructor with props.filterStatus ', props.filterStatus);
     let initialFilterStatus = props.sections
       .map(() => ({}));
-    if (props.filterStatusFromURL && Object.keys(props.filterStatusFromURL).length > 0) {
+    if (props.filterStatus && Object.keys(props.filterStatus).length > 0) {
       initialFilterStatus = props.filterStatus;
     }
     this.state = {
@@ -91,7 +91,7 @@ class FilterList extends React.Component {
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
     console.log('inside gen3uicomponent - this.state.filterStatus', this.state.filterStatus);
-    console.log('inside gen3uicomponent - this.props.filterStatusFromURL', this.props.filterStatusFromURL, ' and key: ', this.props.key);
+    console.log('inside gen3uicomponent - this.props.filterStatus', this.props.filterStatus, ' and key: ', this.props.key);
 
     const filtersInProps = this.props.filterStatus
       ? this.props.filterStatus.map(x => Object.keys(x)).flat() : [];
