@@ -39,8 +39,19 @@ class FilterGroup extends React.Component {
     const initialExpandedStatusControl = true;
     const initialExpandedStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => (initialExpandedStatusControl)));
-    const initialFilterStatus = props.filterConfig.tabs
+    let initialFilterStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => ({})));
+    
+    console.log('in the FilterGroup constructor with filterStatusFromParent: ', 
+      props.filterStatusFromParent, ' and filterResultsFromParent: ', filterResultsFromParent);
+    if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
+      initialFilterStatus = props.filterStatusFromParent;
+    }
+    let initialFilterResults = {};
+    if (props.filterResultsFromParent && Object.keys(props.filterResultsFromParent).length > 0) {
+      initialFilterResults = props.filterStatusFromParent;
+    }
+
     this.state = {
       selectedTabIndex: 0,
       expandedStatus: initialExpandedStatus,
@@ -66,7 +77,7 @@ class FilterGroup extends React.Component {
        *     ...
        *   }
        */
-      filterResults: {},
+      filterResults: initialFilterResults,
     };
     this.currentFilterListRef = React.createRef();
   }
@@ -316,12 +327,17 @@ FilterGroup.propTypes = {
   onFilterChange: PropTypes.func,
   hideZero: PropTypes.bool,
   className: PropTypes.string,
+  filterStatusFromParent: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.number),
+  ])),
 };
 
 FilterGroup.defaultProps = {
   onFilterChange: () => {},
   hideZero: true,
   className: '',
+  filterStatusFromParent: undefined,
 };
 
 export default FilterGroup;
