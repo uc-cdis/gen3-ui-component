@@ -6,11 +6,11 @@ import './FilterList.css';
 class FilterList extends React.Component {
   constructor(props) {
     super(props);
-    console.log('FilterList constructor with props.filterStatus ', props.filterStatus);
+    console.log('FilterList constructor with props.filterStatusFromParent ', props.filterStatusFromParent);
     let initialFilterStatus = props.sections
       .map(() => ({}));
-    if (props.filterStatus && Object.keys(props.filterStatus).length > 0) {
-      initialFilterStatus = props.filterStatus;
+    if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
+      initialFilterStatus = props.filterStatusFromParent;
     }
     this.state = {
       /**
@@ -91,13 +91,13 @@ class FilterList extends React.Component {
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
     console.log('inside gen3uicomponent - this.state.filterStatus', this.state.filterStatus);
-    console.log('inside gen3uicomponent - this.props.filterStatus', this.props.filterStatus, ' and key: ', this.props.key);
+    console.log('inside gen3uicomponent - this.props.filterStatusFromParent', this.props.filterStatusFromParent, ' and key: ', this.props.key);
 
-    const filtersInProps = this.props.filterStatus
-      ? this.props.filterStatus.map(x => Object.keys(x)).flat() : [];
+    const filtersInProps = this.props.filterStatusFromParent
+      ? this.props.filterStatusFromParent.map(x => Object.keys(x)).flat() : [];
 
     const filterStatus = filtersInProps.length > 0
-      ? this.props.filterStatus : this.state.filterStatus;
+      ? this.props.filterStatusFromParent : this.state.filterStatus;
 
 
     // const { filterStatus } = this.state;
@@ -169,7 +169,7 @@ FilterList.propTypes = {
   expandedStatus: PropTypes.arrayOf(PropTypes.bool),
   onToggle: PropTypes.func,
   onClear: PropTypes.func,
-  filterStatus: PropTypes.arrayOf(PropTypes.oneOfType([
+  filterStatusFromParent: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
   ])),
@@ -191,7 +191,7 @@ FilterList.defaultProps = {
   expandedStatus: [],
   onToggle: () => {},
   onClear: () => {},
-  filterStatus: undefined,
+  filterStatusFromParent: undefined,
   // filterStatusFromURL: undefined,
   onSelect: () => {},
   onCombineOptionToggle: () => {},
