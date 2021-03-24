@@ -180,10 +180,10 @@ FilterList.propTypes = {
   tierAccessLimit: PropTypes.number,
   lockedTooltipMessage: PropTypes.string,
   disabledTooltipMessage: PropTypes.string,
-  filterStatusFromURL: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.number),
-  ])),
+  // filterStatusFromURL: PropTypes.arrayOf(PropTypes.oneOfType([
+  //   PropTypes.object,
+  //   PropTypes.arrayOf(PropTypes.number),
+  // ])),
   key: PropTypes.number,
 };
 
@@ -192,7 +192,7 @@ FilterList.defaultProps = {
   onToggle: () => {},
   onClear: () => {},
   filterStatus: undefined,
-  filterStatusFromURL: undefined,
+  // filterStatusFromURL: undefined,
   onSelect: () => {},
   onCombineOptionToggle: () => {},
   onAfterDrag: () => {},
