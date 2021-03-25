@@ -42,11 +42,12 @@ class FilterSection extends React.Component {
   constructor(props) {
     super(props);
     console.log('in the FilterSection constructor with ', this.props.filterStatus);
+    let initialFilterStatus = this.props.filterStatus.map((x) => Object.assign({}, x) );
     this.state = {
       isExpanded: this.props.expanded,
       showingMore: false,
       // shape: { [fieldName]: true | false } | [number, number]
-      filterStatus: this.props.filterStatus,
+      filterStatus: initialFilterStatus,
       searchInputEmpty: true,
       showingSearch: false,
       showingAndOrToggle: false,

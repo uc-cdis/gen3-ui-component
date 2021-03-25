@@ -10,7 +10,7 @@ class FilterList extends React.Component {
     let initialFilterStatus = props.sections
       .map(() => ({}));
     if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
-      initialFilterStatus = props.filterStatusFromParent;
+      initialFilterStatus = props.filterStatusFromParent.map((x) => Object.assign({}, x) );
     }
     this.state = {
       /**
@@ -43,7 +43,7 @@ class FilterList extends React.Component {
     singleFilterLabel,
   ) {
     this.setState((prevState) => {
-      let prev = JSON.stringify(prevState);
+      const prev = JSON.stringify(prevState);
       console.log('FilterList 46 handleSelectSingleFilter prevState: ', prev);
       console.log('FilterList 47 handleSelectSingleFilter singleFilterLabel: ', singleFilterLabel);
       console.log('FilterList 47 handleSelectSingleFilter sectionIndex: ', sectionIndex);
