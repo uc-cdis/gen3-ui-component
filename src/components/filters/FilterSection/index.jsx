@@ -42,7 +42,8 @@ class FilterSection extends React.Component {
   constructor(props) {
     super(props);
     console.log('in the FilterSection constructor with ', this.props.filterStatus);
-    let initialFilterStatus = this.props.filterStatus.map((x) => Object.assign({}, x) );
+    const initialFilterStatus = Object.assign({}, this.props.filterStatus);
+    console.log('FilterSection clone initialFilterStatus: ', initialFilterStatus);
     this.state = {
       isExpanded: this.props.expanded,
       showingMore: false,

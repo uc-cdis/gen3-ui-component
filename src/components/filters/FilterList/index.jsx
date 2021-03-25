@@ -10,7 +10,8 @@ class FilterList extends React.Component {
     let initialFilterStatus = props.sections
       .map(() => ({}));
     if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
-      initialFilterStatus = props.filterStatusFromParent.map((x) => Object.assign({}, x) );
+      initialFilterStatus = props.filterStatusFromParent.map(x => Object.assign({}, x));
+      console.log('FilterList clone initialFilterStatus: ', initialFilterStatus);
     }
     this.state = {
       /**
