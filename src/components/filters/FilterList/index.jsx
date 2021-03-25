@@ -43,12 +43,15 @@ class FilterList extends React.Component {
     singleFilterLabel,
   ) {
     this.setState((prevState) => {
-      console.log('FilterList 46 handleSelectSingleFilter prevState: ', prevState);
+      let prev = JSON.stringify(prevState);
+      console.log('FilterList 46 handleSelectSingleFilter prevState: ', prev);
       console.log('FilterList 47 handleSelectSingleFilter singleFilterLabel: ', singleFilterLabel);
       console.log('FilterList 47 handleSelectSingleFilter sectionIndex: ', sectionIndex);
       const newFilterStatus = prevState.filterStatus.slice(0);
       console.log('FilterList 48 handleSelectSingleFilter newFilterStatus: ', newFilterStatus);
       const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
+      console.log('FilterList 49 handleSelectSingleFilter newFilterStatus[sectionIndex]: ', newFilterStatus[sectionIndex]);
+      console.log('FilterList 49 handleSelectSingleFilter oldSelected: ', oldSelected);
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
       console.log('FilterList 51 handleSelectSingleFilter newSelected: ', newSelected);
       newFilterStatus[sectionIndex][singleFilterLabel] = newSelected;
