@@ -45,11 +45,12 @@ class FilterGroup extends React.Component {
     console.log('in the FilterGroup constructor with filterStatusFromParent: ',
       props.filterStatusFromParent, ' and filterResultsFromParent', props.filterResultsFromParent);
     if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
-      initialFilterStatus = props.filterStatusFromParent;
+      initialFilterStatus = props.filterStatusFromParent.map(x => Object.assign({}, x));
+      console.log('FilterGroup clone initialFilterStatus: ', initialFilterStatus);
     }
     let initialFilterResults = {};
     if (props.filterResultsFromParent && Object.keys(props.filterResultsFromParent).length > 0) {
-      initialFilterResults = props.filterStatusFromParent;
+      initialFilterResults = Object.assign({}, props.filterResultsFromParent);
     }
 
     this.state = {
