@@ -41,9 +41,9 @@ class FilterGroup extends React.Component {
       .map(t => t.fields.map(() => (initialExpandedStatusControl)));
     let initialFilterStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => ({})));
-    
+
     console.log('in the FilterGroup constructor with filterStatusFromParent: ', 
-      props.filterStatusFromParent, ' and filterResultsFromParent: ', filterResultsFromParent);
+    props.filterStatusFromParent);
     if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
       initialFilterStatus = props.filterStatusFromParent;
     }
