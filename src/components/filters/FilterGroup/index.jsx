@@ -47,7 +47,7 @@ class FilterGroup extends React.Component {
     if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
       initialFilterStatus = props.filterStatusFromParent.map(t => t.map(x => Object.assign({}, x)));
       console.log('FilterGroup clone initialFilterStatus: ', initialFilterStatus);
-    }
+    } 
     let initialFilterResults = {};
     if (props.filterResultsFromParent && Object.keys(props.filterResultsFromParent).length > 0) {
       initialFilterResults = Object.assign({}, props.filterResultsFromParent);
@@ -336,7 +336,7 @@ FilterGroup.propTypes = {
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
   ]),
-};s
+}; s;
 
 FilterGroup.defaultProps = {
   onFilterChange: () => {},
