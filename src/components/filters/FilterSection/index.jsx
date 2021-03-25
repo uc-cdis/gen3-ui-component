@@ -237,11 +237,14 @@ class FilterSection extends React.Component {
   }
 
   handleSelectSingleSelectFilter(label) {
+    console.log('FilterSection 240 handleSelectSingleFilter label: ', label);
     this.setState((prevState) => {
+      console.log('FilterSection 242 handleSelectSingleFilter prevState.filterStatus: ', prevState.filterStatus);
       const newFilterStatus = Object.assign({}, prevState.filterStatus);
       const oldSelected = newFilterStatus[label];
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
       newFilterStatus[label] = newSelected;
+      console.log('FilterSection 247 handleSelectSingleFilter returning newFilterStatus: ', newFilterStatus);
       return {
         filterStatus: newFilterStatus,
       };
