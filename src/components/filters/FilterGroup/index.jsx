@@ -336,7 +336,7 @@ FilterGroup.propTypes = {
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
   ]),
-};s
+}; s;
 
 FilterGroup.defaultProps = {
   onFilterChange: () => {},
