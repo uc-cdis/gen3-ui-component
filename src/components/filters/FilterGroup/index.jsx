@@ -42,8 +42,8 @@ class FilterGroup extends React.Component {
     let initialFilterStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => ({})));
 
-    console.log('in the FilterGroup constructor with filterStatusFromParent: ', 
-    props.filterStatusFromParent);
+    console.log('in the FilterGroup constructor with filterStatusFromParent: ',
+      props.filterStatusFromParent, ' and filterResultsFromParent', props.filterResultsFromParent);
     if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
       initialFilterStatus = props.filterStatusFromParent;
     }
@@ -331,6 +331,10 @@ FilterGroup.propTypes = {
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
   ])),
+  filterResultsFromParent: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.number),
+  ])),
 };
 
 FilterGroup.defaultProps = {
@@ -338,6 +342,7 @@ FilterGroup.defaultProps = {
   hideZero: true,
   className: '',
   filterStatusFromParent: undefined,
+  filterResultsFromParent: undefined,
 };
 
 export default FilterGroup;
