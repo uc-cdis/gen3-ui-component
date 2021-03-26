@@ -42,11 +42,8 @@ class FilterGroup extends React.Component {
     let initialFilterStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => ({})));
 
-    console.log('in the FilterGroup constructor with filterStatusFromParent: ',
-      props.filterStatusFromParent, ' and filterResultsFromParent', props.filterResultsFromParent);
     if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
       initialFilterStatus = props.filterStatusFromParent.map(t => t.map(x => Object.assign({}, x)));
-      console.log('FilterGroup clone initialFilterStatus: ', initialFilterStatus);
     }
     let initialFilterResults = {};
     if (props.filterResultsFromParent && Object.keys(props.filterResultsFromParent).length > 0) {
@@ -256,8 +253,6 @@ class FilterGroup extends React.Component {
   }
 
   render() {
-    console.log('in the FilterGroup render with this.state.filterStatus:', this.state.filterStatus);
-    console.log('in the FilterGroup render with this.state.filterResults:', this.state.filterResults);
     return (
       <div className={`g3-filter-group ${this.props.className}`}>
         <div className='g3-filter-group__tabs'>

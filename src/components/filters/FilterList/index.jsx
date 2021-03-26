@@ -6,12 +6,10 @@ import './FilterList.css';
 class FilterList extends React.Component {
   constructor(props) {
     super(props);
-    console.log('FilterList constructor with props.filterStatusFromParent ', props.filterStatusFromParent);
     let initialFilterStatus = props.sections
       .map(() => ({}));
     if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
       initialFilterStatus = props.filterStatusFromParent.map(x => Object.assign({}, x));
-      console.log('FilterList clone initialFilterStatus: ', initialFilterStatus);
     }
     this.state = {
       /**
@@ -28,7 +26,6 @@ class FilterList extends React.Component {
   }
 
   handleSectionClear(sectionIndex) {
-    console.log('section clear handler');
     this.setState((prevState) => {
       const newFilterStatus = prevState.filterStatus.slice(0);
       newFilterStatus[sectionIndex] = {};
@@ -45,18 +42,10 @@ class FilterList extends React.Component {
   ) {
     this.setState((prevState) => {
       const prev = JSON.stringify(prevState);
-      console.log('FilterList 46 handleSelectSingleFilter prevState: ', prev);
-      console.log('FilterList 47 handleSelectSingleFilter singleFilterLabel: ', singleFilterLabel);
-      console.log('FilterList 47 handleSelectSingleFilter sectionIndex: ', sectionIndex);
       const newFilterStatus = prevState.filterStatus.slice(0);
-      console.log('FilterList 48 handleSelectSingleFilter newFilterStatus: ', newFilterStatus);
       const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
-      console.log('FilterList 49 handleSelectSingleFilter newFilterStatus[sectionIndex]: ', newFilterStatus[sectionIndex]);
-      console.log('FilterList 49 handleSelectSingleFilter oldSelected: ', oldSelected);
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
-      console.log('FilterList 51 handleSelectSingleFilter newSelected: ', newSelected);
       newFilterStatus[sectionIndex][singleFilterLabel] = newSelected;
-      console.log('FilterList 52 handleSelectSingleFilter newFilterStatus: ', newFilterStatus);
       return {
         filterStatus: newFilterStatus,
       };
@@ -98,17 +87,12 @@ class FilterList extends React.Component {
 
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
-    console.log('inside gen3uicomponent - this.state.filterStatus', this.state.filterStatus);
-    console.log('inside gen3uicomponent - this.props.filterStatusFromParent', this.props.filterStatusFromParent, ' and key: ', this.props.key);
 
     const filtersInProps = this.props.filterStatusFromParent
       ? this.props.filterStatusFromParent.map(x => Object.keys(x)).flat() : [];
 
     const filterStatus = filtersInProps.length > 0
       ? this.props.filterStatusFromParent : this.state.filterStatus;
-
-
-    // const { filterStatus } = this.state;
 
     return (
       <div className='g3-filter-list'>
@@ -188,10 +172,6 @@ FilterList.propTypes = {
   tierAccessLimit: PropTypes.number,
   lockedTooltipMessage: PropTypes.string,
   disabledTooltipMessage: PropTypes.string,
-  // filterStatusFromURL: PropTypes.arrayOf(PropTypes.oneOfType([
-  //   PropTypes.object,
-  //   PropTypes.arrayOf(PropTypes.number),
-  // ])),
   key: PropTypes.number,
 };
 
@@ -200,7 +180,6 @@ FilterList.defaultProps = {
   onToggle: () => {},
   onClear: () => {},
   filterStatusFromParent: undefined,
-  // filterStatusFromURL: undefined,
   onSelect: () => {},
   onCombineOptionToggle: () => {},
   onAfterDrag: () => {},
