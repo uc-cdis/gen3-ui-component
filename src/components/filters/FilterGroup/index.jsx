@@ -330,10 +330,7 @@ FilterGroup.propTypes = {
   onFilterChange: PropTypes.func,
   hideZero: PropTypes.bool,
   className: PropTypes.string,
-  filterStatusFromParent: PropTypes.arrayOf(PropTypes.oneOf([
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.number),
-  ])),
+  filterStatusFromParent: PropTypes.arrayOf(PropTypes.any),
   filterResultsFromParent: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
