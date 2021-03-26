@@ -256,6 +256,8 @@ class FilterGroup extends React.Component {
   }
 
   render() {
+    console.log('in the FilterGroup render with this.state.filterStatus:', this.state.filterStatus);
+    console.log('in the FilterGroup render with this.state.filterResults:', this.state.filterResults);
     return (
       <div className={`g3-filter-group ${this.props.className}`}>
         <div className='g3-filter-group__tabs'>
@@ -336,6 +338,7 @@ FilterGroup.propTypes = {
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
   ]),
+  key: PropTypes.number
 };
 
 FilterGroup.defaultProps = {
@@ -344,6 +347,7 @@ FilterGroup.defaultProps = {
   className: '',
   filterStatusFromParent: undefined,
   filterResultsFromParent: undefined,
+  key: undefined
 };
 
 export default FilterGroup;
