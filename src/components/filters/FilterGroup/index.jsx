@@ -330,14 +330,14 @@ FilterGroup.propTypes = {
   onFilterChange: PropTypes.func,
   hideZero: PropTypes.bool,
   className: PropTypes.string,
-  filterStatusFromParent: PropTypes.arrayOf(PropTypes.oneOfType([
+  filterStatusFromParent: PropTypes.arrayOf(PropTypes.oneOf([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
   ])),
   filterResultsFromParent: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
-  ])
+  ]),
 };
 
 FilterGroup.defaultProps = {
@@ -345,7 +345,7 @@ FilterGroup.defaultProps = {
   hideZero: true,
   className: '',
   filterStatusFromParent: undefined,
-  filterResultsFromParent: undefined
+  filterResultsFromParent: undefined,
 };
 
 export default FilterGroup;
