@@ -337,8 +337,7 @@ FilterGroup.propTypes = {
   filterResultsFromParent: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
-  ]),
-  key: PropTypes.number
+  ])
 };
 
 FilterGroup.defaultProps = {
@@ -346,8 +345,7 @@ FilterGroup.defaultProps = {
   hideZero: true,
   className: '',
   filterStatusFromParent: undefined,
-  filterResultsFromParent: undefined,
-  key: undefined
+  filterResultsFromParent: undefined
 };
 
 export default FilterGroup;
