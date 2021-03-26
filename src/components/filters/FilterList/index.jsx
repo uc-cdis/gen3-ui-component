@@ -41,7 +41,6 @@ class FilterList extends React.Component {
     singleFilterLabel,
   ) {
     this.setState((prevState) => {
-      const prev = JSON.stringify(prevState);
       const newFilterStatus = prevState.filterStatus.slice(0);
       const oldSelected = newFilterStatus[sectionIndex][singleFilterLabel];
       const newSelected = typeof oldSelected === 'undefined' ? true : !oldSelected;
@@ -172,7 +171,6 @@ FilterList.propTypes = {
   tierAccessLimit: PropTypes.number,
   lockedTooltipMessage: PropTypes.string,
   disabledTooltipMessage: PropTypes.string,
-  key: PropTypes.number,
 };
 
 FilterList.defaultProps = {
@@ -187,7 +185,6 @@ FilterList.defaultProps = {
   tierAccessLimit: undefined,
   lockedTooltipMessage: '',
   disabledTooltipMessage: '',
-  key: undefined,
 };
 
 export default FilterList;
