@@ -133,7 +133,7 @@ class FilterList extends React.Component {
         <div key='g3-filter-list-empty' className='g3-filter-list-empty g3-filter-section'>
           <h4>
             Selected Data Does NOT Include
-            <br>
+            <br />
             These Filters
           </h4>
         </div>,
