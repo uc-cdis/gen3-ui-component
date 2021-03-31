@@ -108,6 +108,7 @@ const projectSections = [
 ];
 
 const subjectSections = [
+  { title: 'Empty', options: [] },
   { title: 'Gender', options: genderOptions },
   { title: 'Race', options: raceOptions },
   { title: 'Ethnicity', options: ethnicityOptions },
@@ -267,6 +268,15 @@ storiesOf('Filters', module)
       onSelect={action('checked')}
       onAfterDrag={action('range change')}
       tierAccessLimit={1000}
+    />
+  ))
+  .add('FilterList Hide Empty', () => (
+    <FilterList
+      sections={subjectSections}
+      onSelect={action('checked')}
+      onAfterDrag={action('range change')}
+      tierAccessLimit={1000}
+      hideEmptyFilterSection
     />
   ))
   .add('FilterList with icon tooltips', () => (

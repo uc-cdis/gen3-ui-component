@@ -16,7 +16,7 @@ describe('FilterList', () => {
   ];
 
   const filterSections = [
-    { title: 'Section 1', options: filterOptions },
+    { title: 'Section 1', options: [] },
     { title: 'Section 2', options: filterOptions },
   ];
 
@@ -29,8 +29,22 @@ describe('FilterList', () => {
       onDrag={onDrag}
     />,
   );
+  const componentEmpty = mount(
+    <FilterList
+      sections={filterSections}
+      onSelect={onSelect}
+      onDrag={onDrag}
+      hideEmptyFilterSection
+    />,
+  );
 
   it('renders', () => {
     expect(component.find(FilterList).length).toBe(1);
+  });
+  it('renders', () => {
+    expect(component.find('.g3-filter-section').length).toBe(2);
+  });
+  it('renders', () => {
+    expect(componentEmpty.find('.g3-filter-section').length).toBe(1);
   });
 });
