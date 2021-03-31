@@ -127,7 +127,7 @@ class FilterList extends React.Component {
         />,
       );
     });
-    // if no filters in tab add meassage
+    // if no filters in tab add message
     if (filterSectionToShow.length === 0) {
       filterSectionToShow.push(
         <div key='g3-filter-list-empty' className='g3-filter-list-empty g3-filter-section'>
