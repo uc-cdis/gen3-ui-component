@@ -136,7 +136,6 @@ class FilterList extends React.Component {
             <br>
             These Filters
           </h4>
-          <span>Disable Filters in other tabs to view</span>
         </div>,
       );
     }
