@@ -61,13 +61,10 @@ class SummaryChartGroup extends Component {
 
   render() {
     const width = helper.parseParamWidth(this.props.width);
-
-    const filteredCharts = this.props.summaries.filter(chart => chart.data.length > 0);
-
     return (
       <div className='summary-chart-group' style={{ width }}>
         {
-          filteredCharts.map((item, index) => (
+          this.props.summaries.map((item, index) => (
             <div className='summary-chart-group__column' key={item.title}>
               {
                 index > 0 && <div className='summary-chart-group__column-left-border' />
