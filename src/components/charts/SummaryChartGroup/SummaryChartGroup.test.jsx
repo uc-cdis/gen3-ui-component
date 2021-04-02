@@ -28,6 +28,8 @@ describe('<SummaryChartGroup />', () => {
   const summaries = [
     { type: 'bar', title: 'Gender', data: chartData1 },
     { type: 'pie', title: 'Birth-Year', data: chartData },
+    { type: 'pie', title: 'Empty Pie', data: [] },
+    { type: 'bar', title: 'Empty Bar', data: [] },
     { type: 'pie', title: 'Species', data: chartData1 },
     { type: 'bar', title: 'Race', data: chartData2 },
     { type: 'bar', title: 'Virus', data: chartData },
