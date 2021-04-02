@@ -39,7 +39,7 @@ class SummaryPieChart extends React.Component {
     );
     const dataKey = helper.getDataKey(this.props.showPercentage);
     let chart = null;
-    if (this.props.chartIsEmpty) {
+    if (this.props.data.length === 0) {
       chart = (<EmptyContent message={this.props.chartEmptyMessage} />);
     } else if (helper.shouldHideChart(this.props.data, this.props.lockValue)) {
       chart = <LockedContent lockMessage={this.props.lockMessage} />;
@@ -160,7 +160,6 @@ SummaryPieChart.propTypes = {
   useCustomizedColorMap: PropTypes.bool,
   customizedColorMap: PropTypes.arrayOf(PropTypes.string),
   maximumDisplayItem: PropTypes.number,
-  chartIsEmpty: PropTypes.bool,
   chartEmptyMessage: PropTypes.string,
 };
 
@@ -181,7 +180,6 @@ SummaryPieChart.defaultProps = {
   useCustomizedColorMap: false,
   customizedColorMap: ['#3283c8'],
   maximumDisplayItem: 15,
-  chartIsEmpty: false,
   chartEmptyMessage: 'Cannot render this chart because some fields don\'t apply',
 };
 

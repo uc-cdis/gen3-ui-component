@@ -18,7 +18,6 @@ class SummaryChartGroup extends Component {
           useCustomizedColorMap={this.props.useCustomizedColorMap}
           customizedColorMap={this.props.customizedColorMap}
           maximumDisplayItem={this.props.maximumDisplayItem}
-          chartIsEmpty={item.chartIsEmpty}
           chartEmptyMessage={this.props.chartEmptyMessage}
         />
         );
@@ -32,7 +31,6 @@ class SummaryChartGroup extends Component {
           useCustomizedColorMap={this.props.useCustomizedColorMap}
           customizedColorMap={this.props.customizedColorMap}
           maximumDisplayItem={this.props.maximumDisplayItem}
-          chartIsEmpty={item.chartIsEmpty}
           chartEmptyMessage={this.props.chartEmptyMessage}
           innerRadius={0}
         />
@@ -50,7 +48,6 @@ class SummaryChartGroup extends Component {
           useCustomizedColorMap={this.props.useCustomizedColorMap}
           customizedColorMap={this.props.customizedColorMap}
           maximumDisplayItem={this.props.maximumDisplayItem}
-          chartIsEmpty={item.chartIsEmpty}
           chartEmptyMessage={this.props.chartEmptyMessage}
         />
         );

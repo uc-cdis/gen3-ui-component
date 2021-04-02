@@ -34,7 +34,7 @@ class SummaryBarChart extends React.Component {
       this.props.percentageFixedPoint,
     );
     let chart = null;
-    if (this.props.chartIsEmpty) {
+    if (this.props.data.length === 0) {
       chart = (<EmptyContent message={this.props.chartEmptyMessage} />);
     } else if (helper.shouldHideChart(this.props.data, this.props.lockValue)) {
       chart = (<LockedContent lockMessage={this.props.lockMessage} />);
@@ -126,7 +126,6 @@ SummaryBarChart.propTypes = {
   lockValue: PropTypes.number, // if one of the value is equal to `lockValue`, lock the chart
   lockMessage: PropTypes.string,
   maximumDisplayItem: PropTypes.number,
-  chartIsEmpty: PropTypes.bool,
   chartEmptyMessage: PropTypes.string,
 };
 
@@ -139,7 +138,6 @@ SummaryBarChart.defaultProps = {
   lockValue: -1,
   lockMessage: 'This chart is hidden because it contains fewer than 1000 subjects',
   maximumDisplayItem: 15,
-  chartIsEmpty: false,
   chartEmptyMessage: 'Cannot render this chart because some fields don\'t apply',
 };
 
