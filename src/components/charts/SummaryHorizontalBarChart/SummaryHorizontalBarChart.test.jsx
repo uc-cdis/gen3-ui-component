@@ -13,7 +13,7 @@ describe('<SummaryHorizontalBarChart />', () => {
   ];
 
   const wrapper = mount(
-    <SummaryHorizontalBarChart data={chartData} title='bar chart title' color='#3283c8' />,
+    <SummaryHorizontalBarChart data={chartData} title='bar chart title' color='#3283c8' totalCount={4000 + 3000 + 2800 + 2000 + 2708 + 1890} />,
   );
   const charts = wrapper.find(SummaryHorizontalBarChart);
 

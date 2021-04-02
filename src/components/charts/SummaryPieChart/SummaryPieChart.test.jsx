@@ -15,6 +15,7 @@ describe('<SummaryPieChart />', () => {
   const charts = mount(<SummaryPieChart
     title='test'
     data={chartData}
+    totalCount={4000 + 3000 + 2800 + 2000 + 2708 + 1890}
   />).find(SummaryPieChart);
 
   it('renders', () => {

@@ -33,6 +33,7 @@ class SummaryPieChart extends React.Component {
 
   render() {
     const pieChartData = helper.calculateChartData(
+      this.props.totalCount,
       this.props.data,
       this.props.showPercentage,
       this.props.percentageFixedPoint,
@@ -150,6 +151,7 @@ const ChartDataShape = PropTypes.shape({
 SummaryPieChart.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(ChartDataShape).isRequired,
+  totalCount: PropTypes.number.isRequired,
   innerRadius: PropTypes.number,
   outerRadius: PropTypes.number,
   showPercentage: PropTypes.bool,

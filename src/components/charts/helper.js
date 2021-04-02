@@ -2,12 +2,11 @@ const percentageFormatter = showPercentage => v => (showPercentage ? `${v}%` : v
 
 const addPercentage = v => (percentageFormatter(true)(v));
 
-const calculateChartData = (data, percentageFixedPoint) => {
-  const sum = data.reduce((a, entry) => a + entry.value, 0);
+const calculateChartData = (total, data, percentageFixedPoint) => {
   const max = data.reduce((a, entry) => Math.max(a, entry.value), -Infinity);
   return data.map((entry) => {
     let percentage;
-    percentage = (entry.value * 100) / sum;
+    percentage = (entry.value * 100) / total;
     percentage = Number(Number(percentage).toFixed(percentageFixedPoint));
     const widthPercentage = entry.value * 100 / max;
     return Object.assign({ percentage, widthPercentage }, entry);

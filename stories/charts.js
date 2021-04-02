@@ -13,6 +13,7 @@ const virusData = [
   { name: 'SARS_CoV', value: 2708 },
   { name: 'CA04', value: 1890 },
 ];
+const virusDataTotal = virusData.reduce((a, entry) => a + entry.value, 0);
 
 const genderData = [
   { name: 'female', value: 400 },
@@ -102,34 +103,34 @@ const customizedColorMap = [
 
 storiesOf('Chart', module)
   .add('SummaryHorizontalBarChart', () => (
-    <SummaryHorizontalBarChart data={virusData} title='bar chart title' showPercentage={false} />
+    <SummaryHorizontalBarChart data={virusData} title='bar chart title' showPercentage={false} totalCount={virusDataTotal}/>
   ))
   .add('SummaryHorizontalBarChart with single color and percentage', () => (
-    <SummaryHorizontalBarChart data={virusData} title='bar chart title' color='#3283c8' />
+    <SummaryHorizontalBarChart data={virusData} title='bar chart title' color='#3283c8'  totalCount={virusDataTotal} />
   ))
   .add('SummaryHorizontalBarChart with customized colors', () => (
-    <SummaryHorizontalBarChart data={virusData} title='bar chart title' showPercentage={false} useCustomizedColorMap customizedColorMap={customizedColorMap} />
+    <SummaryHorizontalBarChart data={virusData} title='bar chart title' showPercentage={false} useCustomizedColorMap customizedColorMap={customizedColorMap}  totalCount={virusDataTotal}/>
   ))
   .add('SummaryPieChart', () => (
-    <SummaryPieChart data={virusData} title='pie chart title' showPercentage />
+    <SummaryPieChart data={virusData} title='pie chart title' showPercentage  totalCount={virusDataTotal}/>
   ))
   .add('SummaryPieChart with customized colors', () => (
-    <SummaryPieChart data={virusData} title='pie chart title' showPercentage useCustomizedColorMap customizedColorMap={customizedColorMap} />
+    <SummaryPieChart data={virusData} title='pie chart title' showPercentage useCustomizedColorMap customizedColorMap={customizedColorMap} totalCount={virusDataTotal} />
   ))
   .add('SummaryFullPieChart', () => (
-    <SummaryPieChart data={virusData} title='pie chart title' innerRadius={0} showPercentage />
+    <SummaryPieChart data={virusData} title='pie chart title' innerRadius={0} showPercentage totalCount={virusDataTotal} />
   ))
   .add('SummaryChartGroup', () => (
-    <SummaryChartGroup summaries={summaries} width={1010} />
+    <SummaryChartGroup summaries={summaries} width={1010} totalCount={10000} />
   ))
   .add('SummaryChartGroup with only showing 2 at first', () => (
-    <SummaryChartGroup summaries={summaries} width={1010} maximumDisplayItem={2} />
+    <SummaryChartGroup summaries={summaries} width={1010} maximumDisplayItem={2} totalCount={1000} />
   ))
   .add('SummaryChartGroup with a Locked Chart', () => (
-    <SummaryChartGroup summaries={lockedSummaries} width={1010} lockValue={-1} lockMessage='This chart is locked!' />
+    <SummaryChartGroup summaries={lockedSummaries} width={1010} lockValue={-1} lockMessage='This chart is locked!' totalCount={1000} />
   ))
   .add('SummaryChartGroup with an Empty Chart', () => (
-    <SummaryChartGroup summaries={summariesWithOneEmpty} width={1010} chartEmptyMessage='This chart is empty!' />
+    <SummaryChartGroup summaries={summariesWithOneEmpty} width={1010} chartEmptyMessage='This chart is empty!' totalCount={10000} />
   ))
   .add('PercentageStackedBarChart', () => (
     <PercentageStackedBarChart data={virusData} title='percentage stacked bar chart title' />

@@ -14,9 +14,10 @@ describe('helper', () => {
     { name: 'HuCoV_EMC', value: 1000 },
     { name: 'SARS_CoV', value: 10000 },
   ];
+  const total = chartData.reduce((a, entry) => a + entry.value, 0);
 
   it('calculate chart data', () => {
-    expect(helper.calculateChartData(chartData, 0)).toEqual([
+    expect(helper.calculateChartData(total, chartData, 0)).toEqual([
       {
         percentage: 20, name: 'H1N1', value: 4000, widthPercentage: 40,
       },
