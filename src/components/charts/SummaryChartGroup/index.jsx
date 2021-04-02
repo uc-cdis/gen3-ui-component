@@ -83,7 +83,7 @@ class SummaryChartGroup extends Component {
 
 SummaryChartGroup.propTypes = {
   summaries: PropTypes.arrayOf(PropTypes.object).isRequired,
-  totalCount: PropTypes.number,
+  totalCount: PropTypes.number.isRequired,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   barChartColor: PropTypes.string,
   lockValue: PropTypes.number, // if one of the value is equal to `lockValue`, lock the chart
@@ -98,7 +98,6 @@ SummaryChartGroup.defaultProps = {
   width: '100%',
   barChartColor: '#3283c8',
   lockValue: -1,
-  totalCount: 0,
   lockMessage: 'This chart is hidden because it contains fewer than 1000 subjects',
   useCustomizedColorMap: false,
   customizedColorMap: ['#3283c8'],
