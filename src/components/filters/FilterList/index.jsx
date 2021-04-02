@@ -86,53 +86,69 @@ class FilterList extends React.Component {
 
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
-
     const filtersInProps = this.props.filterStatusFromParent
       ? this.props.filterStatusFromParent.map(x => Object.keys(x)).flat() : [];
 
     const filterStatus = filtersInProps.length > 0
       ? this.props.filterStatusFromParent : this.state.filterStatus;
 
+    const filterSectionToShow = [];
+    this.props.sections.forEach((section, index) => {
+      if (this.props.hideEmptyFilterSection && section.options.length === 0) {
+        return;
+      }
+      filterSectionToShow.push(
+        <FilterSection
+          key={index}
+          ref={this.sectionRefs[index]}
+          title={section.title}
+          tooltip={section.tooltip}
+          options={section.options}
+          isSearchFilter={section.isSearchFilter}
+          isArrayField={section.isArrayField}
+          onSearchFilterLoadOptions={section.onSearchFilterLoadOptions}
+          expanded={this.props.expandedStatus[index]}
+          onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
+          onClear={() => this.handleSectionClear(index)}
+          filterStatus={filterStatus[index]}
+          onSelect={
+            singleFilterLabel => this.handleSelectSingleFilter(
+              index,
+              singleFilterLabel,
+            )
+          }
+          onCombineOptionToggle={
+            (combineModeFieldName, combineModeValue) => this.handleSelectCombineOptionToggle(
+              index,
+              combineModeFieldName,
+              combineModeValue,
+            )
+          }
+          onAfterDrag={
+            (...args) => this.handleDragRangeFilter(index, ...args)
+          }
+          hideZero={this.props.hideZero}
+          tierAccessLimit={this.props.tierAccessLimit}
+          lockedTooltipMessage={this.props.lockedTooltipMessage}
+          disabledTooltipMessage={this.props.disabledTooltipMessage}
+        />,
+      );
+    });
+    // if no filters in tab add message
+    if (filterSectionToShow.length === 0) {
+      filterSectionToShow.push(
+        <div key='g3-filter-list-empty' className='g3-filter-list-empty g3-filter-section'>
+          <h4>
+            Selected Data Does NOT Include
+            <br />
+            These Filters
+          </h4>
+        </div>,
+      );
+    }
     return (
       <div className='g3-filter-list'>
-        {
-          this.props.sections.map((section, index) => (
-            <FilterSection
-              key={index}
-              ref={this.sectionRefs[index]}
-              title={section.title}
-              tooltip={section.tooltip}
-              options={section.options}
-              isSearchFilter={section.isSearchFilter}
-              isArrayField={section.isArrayField}
-              onSearchFilterLoadOptions={section.onSearchFilterLoadOptions}
-              expanded={this.props.expandedStatus[index]}
-              onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
-              onClear={() => this.handleSectionClear(index)}
-              filterStatus={filterStatus[index]}
-              onSelect={
-                singleFilterLabel => this.handleSelectSingleFilter(
-                  index,
-                  singleFilterLabel,
-                )
-              }
-              onCombineOptionToggle={
-                (combineModeFieldName, combineModeValue) => this.handleSelectCombineOptionToggle(
-                  index,
-                  combineModeFieldName,
-                  combineModeValue,
-                )
-              }
-              onAfterDrag={
-                (...args) => this.handleDragRangeFilter(index, ...args)
-              }
-              hideZero={this.props.hideZero}
-              tierAccessLimit={this.props.tierAccessLimit}
-              lockedTooltipMessage={this.props.lockedTooltipMessage}
-              disabledTooltipMessage={this.props.disabledTooltipMessage}
-            />
-          ))
-        }
+        {filterSectionToShow}
       </div>
     );
   }
@@ -168,6 +184,7 @@ FilterList.propTypes = {
   onCombineOptionToggle: PropTypes.func,
   onAfterDrag: PropTypes.func,
   hideZero: PropTypes.bool,
+  hideEmptyFilterSection: PropTypes.bool,
   tierAccessLimit: PropTypes.number,
   lockedTooltipMessage: PropTypes.string,
   disabledTooltipMessage: PropTypes.string,
@@ -182,6 +199,7 @@ FilterList.defaultProps = {
   onCombineOptionToggle: () => {},
   onAfterDrag: () => {},
   hideZero: true,
+  hideEmptyFilterSection: false,
   tierAccessLimit: undefined,
   lockedTooltipMessage: '',
   disabledTooltipMessage: '',
