@@ -83,7 +83,7 @@ class SummaryChartGroup extends Component {
 
 SummaryChartGroup.propTypes = {
   summaries: PropTypes.arrayOf(PropTypes.object).isRequired,
-  totalCount: PropTypes.number.isRequired,
+  totalCount: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   barChartColor: PropTypes.string,
   lockValue: PropTypes.number, // if one of the value is equal to `lockValue`, lock the chart
@@ -95,6 +95,7 @@ SummaryChartGroup.propTypes = {
 };
 
 SummaryChartGroup.defaultProps = {
+  totalCount: null,
   width: '100%',
   barChartColor: '#3283c8',
   lockValue: -1,

@@ -16,8 +16,8 @@ class SummaryPieChart extends React.Component {
     };
   }
 
-  getItemColor(index) {
-    const useTwoColors = this.props.data.length === 2;
+  getItemColor(index, tempDataArr) {
+    const useTwoColors = tempDataArr.length === 2;
     if (useTwoColors) {
       return helper.getCategoryColorFrom2Colors(index);
     }
@@ -32,17 +32,33 @@ class SummaryPieChart extends React.Component {
   }
 
   render() {
+    const tempDataArr = [...this.props.data];
+    let tempDataTotal = this.props.totalCount;
+    // if chart is missing total add it
+    const dataSum = tempDataArr.reduce((a, entry) => a + entry.value, 0);
+    if (!tempDataTotal) {
+      tempDataTotal = dataSum;
+
+    // if chart is missing data add it
+    } else if (tempDataTotal > dataSum) {
+      tempDataArr.push({
+        name: 'No Data',
+        value: tempDataTotal - dataSum,
+      });
+      // sort data by value
+      tempDataArr.sort((a, b) => b.value - a.value);
+    }
+
     const pieChartData = helper.calculateChartData(
-      this.props.totalCount,
-      this.props.data,
-      this.props.showPercentage,
+      tempDataTotal,
+      tempDataArr,
       this.props.percentageFixedPoint,
     );
     const dataKey = helper.getDataKey(this.props.showPercentage);
     let chart = null;
     if (this.props.chartIsEmpty) {
       chart = (<EmptyContent message={this.props.chartEmptyMessage} />);
-    } else if (helper.shouldHideChart(this.props.data, this.props.lockValue)) {
+    } else if (helper.shouldHideChart(tempDataArr, this.props.lockValue)) {
       chart = <LockedContent lockMessage={this.props.lockMessage} />;
     } else {
       chart = (
@@ -121,7 +137,7 @@ class SummaryPieChart extends React.Component {
                   <Cell
                     key={dataKey}
                     dataKey={dataKey}
-                    fill={this.getItemColor(index)}
+                    fill={this.getItemColor(index, tempDataArr)}
                   />
                 ))
               }
@@ -151,7 +167,7 @@ const ChartDataShape = PropTypes.shape({
 SummaryPieChart.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(ChartDataShape).isRequired,
-  totalCount: PropTypes.number.isRequired,
+  totalCount: PropTypes.number,
   innerRadius: PropTypes.number,
   outerRadius: PropTypes.number,
   showPercentage: PropTypes.bool,
@@ -167,6 +183,7 @@ SummaryPieChart.propTypes = {
 };
 
 SummaryPieChart.defaultProps = {
+  totalCount: null,
   innerRadius: 31.5,
   outerRadius: 43,
   showPercentage: true,

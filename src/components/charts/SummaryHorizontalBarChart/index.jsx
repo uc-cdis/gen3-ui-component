@@ -29,8 +29,12 @@ class SummaryBarChart extends React.Component {
   }
 
   render() {
+    let tempDataTotal = this.props.totalCount;
+    if (!tempDataTotal) {
+      tempDataTotal = this.props.data.reduce((a, entry) => a + entry.value, 0);
+    }
     const barChartData = helper.calculateChartData(
-      this.props.totalCount,
+      tempDataTotal,
       this.props.data,
       this.props.percentageFixedPoint,
     );
@@ -119,7 +123,7 @@ const ChartDataShape = PropTypes.shape({
 SummaryBarChart.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(ChartDataShape).isRequired,
-  totalCount: PropTypes.number.isRequired,
+  totalCount: PropTypes.number,
   color: PropTypes.string,
   useCustomizedColorMap: PropTypes.bool,
   customizedColorMap: PropTypes.arrayOf(PropTypes.string),
@@ -133,6 +137,7 @@ SummaryBarChart.propTypes = {
 };
 
 SummaryBarChart.defaultProps = {
+  totalCount: null,
   color: undefined,
   useCustomizedColorMap: false,
   customizedColorMap: ['#3283c8'],
