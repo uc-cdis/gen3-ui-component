@@ -138,7 +138,7 @@ SummaryBarChart.defaultProps = {
   lockValue: -1,
   lockMessage: 'This chart is hidden because it contains fewer than 1000 subjects',
   maximumDisplayItem: 15,
-  chartEmptyMessage: 'Cannot render this chart because some fields don\'t apply',
+  chartEmptyMessage: 'This chart is empty',
 };
 
 export default SummaryBarChart;
