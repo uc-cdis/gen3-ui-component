@@ -95,7 +95,7 @@ SummaryChartGroup.defaultProps = {
   useCustomizedColorMap: false,
   customizedColorMap: ['#3283c8'],
   maximumDisplayItem: 15,
-  chartEmptyMessage: 'Cannot render this chart because some fields don\'t apply',
+  chartEmptyMessage: 'This chart is empty',
 };
 
 export default SummaryChartGroup;
