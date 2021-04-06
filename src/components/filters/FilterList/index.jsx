@@ -8,8 +8,8 @@ class FilterList extends React.Component {
     super(props);
     let initialFilterStatus = props.sections
       .map(() => ({}));
-    if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
-      initialFilterStatus = props.filterStatusFromParent.map(x => Object.assign({}, x));
+    if (props.filterStatusFromParent && props.filterStatusFromParent.length > 0) {
+      initialFilterStatus = props.filterStatusFromParent.map(x => ({ ...x }));
     }
     this.state = {
       /**
