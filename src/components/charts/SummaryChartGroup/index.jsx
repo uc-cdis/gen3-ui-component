@@ -18,7 +18,6 @@ class SummaryChartGroup extends Component {
           useCustomizedColorMap={this.props.useCustomizedColorMap}
           customizedColorMap={this.props.customizedColorMap}
           maximumDisplayItem={this.props.maximumDisplayItem}
-          chartIsEmpty={item.chartIsEmpty}
           chartEmptyMessage={this.props.chartEmptyMessage}
         />
         );
@@ -32,7 +31,6 @@ class SummaryChartGroup extends Component {
           useCustomizedColorMap={this.props.useCustomizedColorMap}
           customizedColorMap={this.props.customizedColorMap}
           maximumDisplayItem={this.props.maximumDisplayItem}
-          chartIsEmpty={item.chartIsEmpty}
           chartEmptyMessage={this.props.chartEmptyMessage}
           innerRadius={0}
         />
@@ -50,7 +48,6 @@ class SummaryChartGroup extends Component {
           useCustomizedColorMap={this.props.useCustomizedColorMap}
           customizedColorMap={this.props.customizedColorMap}
           maximumDisplayItem={this.props.maximumDisplayItem}
-          chartIsEmpty={item.chartIsEmpty}
           chartEmptyMessage={this.props.chartEmptyMessage}
         />
         );
@@ -98,7 +95,7 @@ SummaryChartGroup.defaultProps = {
   useCustomizedColorMap: false,
   customizedColorMap: ['#3283c8'],
   maximumDisplayItem: 15,
-  chartEmptyMessage: 'Cannot render this chart because some fields don\'t apply',
+  chartEmptyMessage: 'This chart is empty',
 };
 
 export default SummaryChartGroup;
