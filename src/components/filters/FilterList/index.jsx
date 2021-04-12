@@ -6,8 +6,11 @@ import './FilterList.css';
 class FilterList extends React.Component {
   constructor(props) {
     super(props);
-    const initialFilterStatus = props.sections
+    let initialFilterStatus = props.sections
       .map(() => ({}));
+    if (props.filterStatusFromParent && props.filterStatusFromParent.length > 0) {
+      initialFilterStatus = props.filterStatusFromParent.map(x => ({ ...x }));
+    }
     this.state = {
       /**
        * Current selected status for filters,
@@ -83,8 +86,12 @@ class FilterList extends React.Component {
 
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
-    const filterStatus = this.props.filterStatus
-      ? this.props.filterStatus : this.state.filterStatus;
+    const filtersInProps = this.props.filterStatusFromParent
+      ? this.props.filterStatusFromParent.map(x => Object.keys(x)).flat() : [];
+
+    const filterStatus = filtersInProps.length > 0
+      ? this.props.filterStatusFromParent : this.state.filterStatus;
+
     const filterSectionToShow = [];
     this.props.sections.forEach((section, index) => {
       if (this.props.hideEmptyFilterSection && section.options.length === 0) {
@@ -169,7 +176,7 @@ FilterList.propTypes = {
   expandedStatus: PropTypes.arrayOf(PropTypes.bool),
   onToggle: PropTypes.func,
   onClear: PropTypes.func,
-  filterStatus: PropTypes.arrayOf(PropTypes.oneOfType([
+  filterStatusFromParent: PropTypes.arrayOf(PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.number),
   ])),
@@ -187,7 +194,7 @@ FilterList.defaultProps = {
   expandedStatus: [],
   onToggle: () => {},
   onClear: () => {},
-  filterStatus: undefined,
+  filterStatusFromParent: undefined,
   onSelect: () => {},
   onCombineOptionToggle: () => {},
   onAfterDrag: () => {},

@@ -41,10 +41,12 @@ const getNumValuesSelected = (filterStatus) => {
 class FilterSection extends React.Component {
   constructor(props) {
     super(props);
+    const initialFilterStatus = ({ ...this.props.filterStatus });
     this.state = {
       isExpanded: this.props.expanded,
       showingMore: false,
-      filterStatus: {}, // shape: { [fieldName]: true | false } | [number, number]
+      // shape: { [fieldName]: true | false } | [number, number]
+      filterStatus: initialFilterStatus,
       searchInputEmpty: true,
       showingSearch: false,
       showingAndOrToggle: false,
