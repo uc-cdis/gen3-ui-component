@@ -42,7 +42,7 @@ class FilterGroup extends React.Component {
     let initialFilterStatus = props.filterConfig.tabs
       .map(t => t.fields.map(() => ({})));
 
-    if (props.filterStatusFromParent && Object.keys(props.filterStatusFromParent).length > 0) {
+    if (props.filterStatusFromParent && props.filterStatusFromParent.length > 0) {
       initialFilterStatus = props.filterStatusFromParent.map(t => t.map(x => Object.assign({}, x)));
     }
     let initialFilterResults = {};
