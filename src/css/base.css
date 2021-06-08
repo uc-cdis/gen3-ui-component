@@ -17,6 +17,7 @@
   --g3-color__silver: #E7E7E7;
   --g3-color__black: #000000;
   --g3-color__white: #FFFFFF;
+  --g3-color__titanium: #707070;
 
   --g3-primary-btn__color: var(--g3-color__white);
   --g3-primary-btn__bg-color: var(--g3-color__highlight-orange);
@@ -52,6 +53,8 @@
 
   --g3-font__medium-weight: 500;
   --g3-font__semi-bold-weight: 600;
+
+  --g3-placeholder-text-color: var(--g3-color__titanium);
 }
 
 h1, h2, h3, h4,
@@ -188,4 +191,12 @@ a {
 
 .g3-link:hover {
   color: var(--g3-color__base-blue-light);
+}
+
+/* The contrast ratio of text to background must be at least 4.5:1 
+  to meet 508 accessibility guidelines. Use this tool to verify:
+  https://webaim.org/resources/contrastchecker/
+  */
+input::placeholder {
+  color: --g3-placeholder-text-color;
 }
