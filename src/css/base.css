@@ -193,14 +193,9 @@ a {
   color: var(--g3-color__base-blue-light);
 }
 
-/* The contrast ratio of text to background must be at least 4.5:1 
-  to meet 508 accessibility guidelines. Use this tool to verify:
-  https://webaim.org/resources/contrastchecker/
-  */
 input::placeholder {
   color: --g3-placeholder-text-color;
 }
-
 
 .ant-btn-text[disabled], .ant-btn-text[disabled]:hover, .ant-btn-text[disabled]:focus, .ant-btn-text[disabled]:active {
   color: #757575;
