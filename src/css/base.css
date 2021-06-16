@@ -18,6 +18,7 @@
   --g3-color__black: #000000;
   --g3-color__white: #FFFFFF;
   --g3-color__titanium: #707070;
+  --g3-color__obsidian: #757575;
 
   --g3-primary-btn__color: var(--g3-color__white);
   --g3-primary-btn__bg-color: var(--g3-color__highlight-orange);
@@ -198,5 +199,5 @@ input::placeholder {
 }
 
 .ant-btn-text[disabled], .ant-btn-text[disabled]:hover, .ant-btn-text[disabled]:focus, .ant-btn-text[disabled]:active {
-  color: #757575;
+  color: var(--g3-color__obsidian);
 }
