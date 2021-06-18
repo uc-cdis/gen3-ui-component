@@ -17,6 +17,8 @@
   --g3-color__silver: #E7E7E7;
   --g3-color__black: #000000;
   --g3-color__white: #FFFFFF;
+  --g3-color__titanium: #707070;
+  --g3-color__obsidian: #757575;
 
   --g3-primary-btn__color: var(--g3-color__white);
   --g3-primary-btn__bg-color: var(--g3-color__highlight-orange);
@@ -40,7 +42,7 @@
   --g3-default-btn__border-color--hover: var(--g3-color__black);
   --g3-default-btn__border-color--active: var(--g3-color__highlight-orange-light);
 
-  --g3-disabled-btn__color: var(--g3-color__lightgray);
+  --g3-disabled-btn__color: var(--g3-color__titanium);
   --g3-disabled-btn__bg-color: var(--g3-color__white);
   --g3-disabled-btn__border-color: var(--g3-color__silver);
 
@@ -188,4 +190,17 @@ a {
 
 .g3-link:hover {
   color: var(--g3-color__base-blue-light);
+}
+
+input::placeholder {
+  color: --g3-placeholder-text-color;
+}
+
+.ant-btn-text[disabled], .ant-btn-text[disabled]:hover, .ant-btn-text[disabled]:focus, .ant-btn-text[disabled]:active {
+  color: var(--g3-color__obsidian);
+}
+
+.ant-btn-primary[disabled], .ant-btn-primary[disabled]:hover, .ant-btn-primary[disabled]:focus, .ant-btn-primary[disabled]:active,
+ant-input:placeholder {
+  color: var(--g3-color__titanium);
 }
