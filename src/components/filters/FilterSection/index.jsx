@@ -95,10 +95,17 @@ class FilterSection extends React.Component {
           <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
             <Radio.Button
               value='AND'
+              data-toggle-value='AND'
               onKeyPress={(event) => {
                 console.log('keypress. this.inputElem.current: ', this.inputElem.current);
-
-                this.inputElem.current.click();
+                let labels = document.getElementsByTagName('label');
+                for (let i = 0; i < labels.length; i += 1) {
+                  if (labels[i].innerText = 'AND') {
+                    console.log('got one: ', labels[i]);
+                    console.log(typeof labels[i]);
+                    labels[i].click();
+                  }
+                }
                 
                 console.log('99: ', event.key);
                 console.log('onkeypress state: ', this.state);
@@ -123,6 +130,7 @@ class FilterSection extends React.Component {
             </Radio.Button>
             <Radio.Button
               value='OR'
+              data-toggle-value='OR'
               onKeyPress={(event) => {
                 this.click();
                 console.log('114: ', event.key);
