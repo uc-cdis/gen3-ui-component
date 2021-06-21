@@ -100,7 +100,7 @@ class FilterSection extends React.Component {
                 console.log('keypress. this.inputElem.current: ', this.inputElem.current);
                 let labels = document.getElementsByTagName('label');
                 for (let i = 0; i < labels.length; i += 1) {
-                  if (labels[i].innerText = 'AND') {
+                  if (labels[i].innerText == 'AND') {
                     console.log('got one: ', labels[i]);
                     console.log(typeof labels[i]);
                     labels[i].click();
