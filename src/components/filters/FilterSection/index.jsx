@@ -97,32 +97,17 @@ class FilterSection extends React.Component {
               value='AND'
               data-toggle-value='AND'
               onKeyPress={(event) => {
-                console.log('keypress. this.inputElem.current: ', this.inputElem.current);
-                const labels = document.getElementsByTagName('label');
-                for (let i = 0; i < labels.length; i += 1) {
-                  if (labels[i].innerText === 'AND') {
-                    console.log('got one: ', labels[i]);
-                    console.log(typeof labels[i]);
-                    labels[i].click();
+                if (event.key === 'Enter') {
+                  const labels = document.getElementsByTagName('label');
+                  for (let i = 0; i < labels.length; i += 1) {
+                    if (labels[i].innerText === 'AND') {
+                      labels[i].click();
+                    }
                   }
                 }
-
-                console.log('99: ', event.key);
-                console.log('onkeypress state: ', this.state);
-                // console.log(event.key());
-                if (event.key === 'Enter') {
-                  console.log('101, this: ', this);
-                  this.handleSetCombineModeOption('AND');
-                }
               }}
-              onClick={() => {
-                console.log('manual click, this: ', this);
-                this.handleSetCombineModeOption('AND');
-              }}
-              onChange={() => {
-                console.log('manual change, this: ', this);
-                this.handleSetCombineModeOption('AND');
-              }}
+              onClick={() => this.handleSetCombineModeOption('AND')}
+              onChange={() => this.handleSetCombineModeOption('AND')}
               tabIndex='0'
               className='g3-ring-on-focus'
             >
@@ -132,17 +117,16 @@ class FilterSection extends React.Component {
               value='OR'
               data-toggle-value='OR'
               onKeyPress={(event) => {
-                this.click();
-                console.log('114: ', event.key);
                 if (event.key === 'Enter') {
-                  console.log('117 this:', this);
-                  this.handleSetCombineModeOption('OR');
+                  const labels = document.getElementsByTagName('label');
+                  for (let i = 0; i < labels.length; i += 1) {
+                    if (labels[i].innerText === 'OR') {
+                      labels[i].click();
+                    }
+                  }
                 }
               }}
-              onClick={() => {
-                console.log(this);
-                this.handleSetCombineModeOption('OR');
-              }}
+              onClick={() => this.handleSetCombineModeOption('OR')}
               onChange={() => this.handleSetCombineModeOption('OR')}
               tabIndex='0'
               className='g3-ring-on-focus'
