@@ -97,6 +97,12 @@ class FilterSection extends React.Component {
               value='AND'
               data-toggle-value='AND'
               onKeyPress={(event) => {
+                /*
+                  Here, we manually pass the Enter keypress to the sibling label.
+                  This radio button splits into a label and an input,
+                  but only the input gains focus in the tab order.
+                  This pass-through allows for accessible tab-navigation.
+                */
                 if (event.key === 'Enter') {
                   const labels = document.getElementsByTagName('label');
                   for (let i = 0; i < labels.length; i += 1) {
