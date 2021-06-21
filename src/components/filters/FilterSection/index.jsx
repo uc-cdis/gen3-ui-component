@@ -98,15 +98,15 @@ class FilterSection extends React.Component {
               data-toggle-value='AND'
               onKeyPress={(event) => {
                 console.log('keypress. this.inputElem.current: ', this.inputElem.current);
-                let labels = document.getElementsByTagName('label');
+                const labels = document.getElementsByTagName('label');
                 for (let i = 0; i < labels.length; i += 1) {
-                  if (labels[i].innerText == 'AND') {
+                  if (labels[i].innerText === 'AND') {
                     console.log('got one: ', labels[i]);
                     console.log(typeof labels[i]);
                     labels[i].click();
                   }
                 }
-                
+
                 console.log('99: ', event.key);
                 console.log('onkeypress state: ', this.state);
                 // console.log(event.key());
