@@ -102,6 +102,7 @@ class FilterSection extends React.Component {
                   for (let i = 0; i < labels.length; i += 1) {
                     if (labels[i].innerText === 'AND') {
                       labels[i].click();
+                      break;
                     }
                   }
                 }
@@ -122,6 +123,7 @@ class FilterSection extends React.Component {
                   for (let i = 0; i < labels.length; i += 1) {
                     if (labels[i].innerText === 'OR') {
                       labels[i].click();
+                      break;
                     }
                   }
                 }
@@ -213,8 +215,6 @@ class FilterSection extends React.Component {
   }
 
   handleSetCombineModeOption(combineModeIn) {
-    console.log('inside handleSetCombineModeOption with input:', combineModeIn, ' and this.props: ', this.props);
-
     // Combine mode: AND or OR
     this.setState({ combineMode: combineModeIn });
     this.props.onCombineOptionToggle(this.combineModeFieldName, combineModeIn);
