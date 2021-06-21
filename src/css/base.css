@@ -208,10 +208,16 @@ a {
 }
 
 .g3-ring-on-focus:focus, .g3-ring-on-focus:focus-within, .g3-ring-on-focus:focus-visible {
-  outline-color: rgb(77, 144, 254);
+  /* outline: 1px solid rgb(77, 144, 254);
+  outline-offset: -2px; */
+  
+  -webkit-box-shadow: 0px 0px 5px  #4D90FE;
+  box-shadow: 0px 0px 5px  #4D90FE;
+
+  /* outline-color: rgb(77, 144, 254);
   outline-offset: -2px;
   outline-style: auto;
-  outline-width: 5px;
+  outline-width: 5px; */
 }
 
 input::placeholder {
