@@ -92,10 +92,27 @@ class FilterSection extends React.Component {
         <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
           <span style={{ marginRight: '5px' }}>Combine with </span>
           <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
-            <Radio.Button value='AND' onChange={() => this.handleSetCombineModeOption('AND')} onClick={() => this.handleSetCombineModeOption('AND')} tabIndex='0' className='g3-ring-on-focus'>
+            <Radio.Button value='AND' 
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  this.handleSetCombineModeOption('AND');
+                }
+              }}
+              onChange={() => this.handleSetCombineModeOption('AND')}
+              tabIndex='0'
+              className='g3-ring-on-focus'>
             AND
             </Radio.Button>
-            <Radio.Button value='OR' onChange={() => this.handleSetCombineModeOption('OR')} onClick={() => this.handleSetCombineModeOption('OR')} tabIndex='0' className='g3-ring-on-focus'>
+            <Radio.Button 
+              value='OR'
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  this.handleSetCombineModeOption('OR');
+                }
+              }}
+              onChange={() => this.handleSetCombineModeOption('OR')}
+              tabIndex='0'
+              className='g3-ring-on-focus'>
               OR
             </Radio.Button>
           </Radio.Group>
