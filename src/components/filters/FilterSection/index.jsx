@@ -95,10 +95,10 @@ class FilterSection extends React.Component {
             <Radio.Button
               value='AND'
               onKeyPress={(event) => {
-                console.log(event);
-                console.log(event.key);
-                console.log(event.key());
-                if (event.key() === 'Enter') {
+                console.log('99: ', event.key);
+                // console.log(event.key());
+                if (event.key === 'Enter') {
+                  console.log('101, this: ', this);
                   this.handleSetCombineModeOption('AND');
                 }
               }}
@@ -112,14 +112,16 @@ class FilterSection extends React.Component {
             <Radio.Button
               value='OR'
               onKeyPress={(event) => {
-                console.log(event);
-                console.log(event.key);
-                console.log(event.key());
-                if (event.key() === 'Enter') {
+                console.log('114: ', event.key);
+                if (event.key === 'Enter') {
+                  console.log('117 this:', this);
                   this.handleSetCombineModeOption('OR');
                 }
               }}
-              onClick={() => this.handleSetCombineModeOption('OR')}
+              onClick={() => {
+                console.log(this);
+                this.handleSetCombineModeOption('OR');
+              }}
               onChange={() => this.handleSetCombineModeOption('OR')}
               tabIndex='0'
               className='g3-ring-on-focus'
