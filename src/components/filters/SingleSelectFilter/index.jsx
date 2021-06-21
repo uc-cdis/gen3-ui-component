@@ -102,7 +102,7 @@ class SingleSelectFilter extends React.Component {
             </span>
           ) : (
             <span
-              className='g3-single-select-filter__label'
+              className='g3-single-select-filter__label g3-ring-on-focus'
               onClick={() => this.handleCheck()}
               onKeyPress={() => this.handleCheck()}
               role='button'

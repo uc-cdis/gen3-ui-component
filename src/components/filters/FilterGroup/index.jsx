@@ -264,7 +264,6 @@ class FilterGroup extends React.Component {
                 tabIndex='0'
                 className={'g3-filter-group__tab'.concat(this.state.selectedTabIndex === index ? ' g3-filter-group__tab--selected' : '')}
                 onClick={() => this.selectTab(index)}
-                onKeyDown={() => this.selectTab(index)}
               >
                 <p className={`g3-filter-group__tab-title ${tabHasActiveFilters(this.state.filterStatus[index]) ? 'g3-filter-group__tab-title--has-active-filters' : ''}`}>
                   {this.props.filterConfig.tabs[index].title}
