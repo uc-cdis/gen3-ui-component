@@ -90,6 +90,7 @@ class SingleSelectFilter extends React.Component {
           onChange={() => this.handleCheck()}
           checked={selected}
           disabled={inputDisabled}
+          tabIndex='-1'
         />
         {
           inputDisabled ? (
