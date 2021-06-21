@@ -103,8 +103,14 @@ class FilterSection extends React.Component {
                   this.handleSetCombineModeOption('AND');
                 }
               }}
-              onClick={() => this.handleSetCombineModeOption('AND')}
-              onChange={() => this.handleSetCombineModeOption('AND')}
+              onClick={() => {
+                console.log('manual click, this: ', this);
+                this.handleSetCombineModeOption('AND');
+              }}
+              onChange={() => {
+                console.log('manual change, this: ', this);
+                this.handleSetCombineModeOption('AND');
+              }}
               tabIndex='0'
               className='g3-ring-on-focus'
             >
