@@ -96,7 +96,12 @@ class FilterSection extends React.Component {
             <Radio.Button
               value='AND'
               onKeyPress={(event) => {
+                console.log('keypress. this.inputElem.current: ', this.inputElem.current);
+
+                this.inputElem.current.click();
+                
                 console.log('99: ', event.key);
+                console.log('onkeypress state: ', this.state);
                 // console.log(event.key());
                 if (event.key === 'Enter') {
                   console.log('101, this: ', this);
@@ -119,6 +124,7 @@ class FilterSection extends React.Component {
             <Radio.Button
               value='OR'
               onKeyPress={(event) => {
+                this.click();
                 console.log('114: ', event.key);
                 if (event.key === 'Enter') {
                   console.log('117 this:', this);
