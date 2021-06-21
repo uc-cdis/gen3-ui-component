@@ -60,6 +60,7 @@ class FilterSection extends React.Component {
     };
     this.inputElem = React.createRef();
     this.combineModeFieldName = '__combineMode';
+    this.handleSetCombineModeOption = this.handleSetCombineModeOption.bind(this);
   }
 
   getSearchInput() {
