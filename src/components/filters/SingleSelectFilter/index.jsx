@@ -94,7 +94,7 @@ class SingleSelectFilter extends React.Component {
         {
           inputDisabled ? (
             <span
-              className='g3-single-select-filter__label g3-single-select-filter__label--disabled'
+              className='g3-single-select-filter__label g3-single-select-filter__label--disabled g3-ring-on-focus'
               role='button'
               tabIndex={0}
             >
