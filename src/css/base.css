@@ -207,6 +207,13 @@ a {
   font-size:initial;
 }
 
+.g3-ring-on-focus:focus, .g3-ring-on-focus:focus-within, .g3-ring-on-focus:focus-visible {
+  outline-color: rgb(77, 144, 254);
+  outline-offset: -2px;
+  outline-style: auto;
+  outline-width: 5px;
+}
+
 input::placeholder {
   color: --g3-placeholder-text-color;
 }
