@@ -93,11 +93,13 @@ class FilterSection extends React.Component {
           <span style={{ marginRight: '5px' }}>Combine with </span>
           <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
             <Radio.Button value='AND' 
-              onKeyDown={(event) => {
+              onKeyPress={(event) => {
+                console.log(event);
                 if (event.key === 'Enter') {
                   this.handleSetCombineModeOption('AND');
                 }
               }}
+              onClick={() => this.handleSetCombineModeOption('AND')}
               onChange={() => this.handleSetCombineModeOption('AND')}
               tabIndex='0'
               className='g3-ring-on-focus'>
@@ -105,11 +107,13 @@ class FilterSection extends React.Component {
             </Radio.Button>
             <Radio.Button 
               value='OR'
-              onKeyDown={(event) => {
+              onKeyPress={(event) => {
+                console.log(event);
                 if (event.key === 'Enter') {
                   this.handleSetCombineModeOption('OR');
                 }
               }}
+              onClick={() => this.handleSetCombineModeOption('OR')}
               onChange={() => this.handleSetCombineModeOption('OR')}
               tabIndex='0'
               className='g3-ring-on-focus'>
