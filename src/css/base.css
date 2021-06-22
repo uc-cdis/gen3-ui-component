@@ -242,4 +242,12 @@ ant-input:placeholder {
 .g3-accessibility-nav-link {
   display: inline-block;
   margin: 0 10px 0 10px;
+  color:#3283C8;
+  font-size:14px;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.g3-accessibility-nav-link:hover {
+  color: #05B8EE;
 }
