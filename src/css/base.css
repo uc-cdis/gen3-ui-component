@@ -85,12 +85,12 @@ h2 {
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 1.285em;
   letter-spacing: .02rem;
 }
 
 h4 {
-  font-size: 14px;
+  font-size: 1em;
   letter-spacing: .02rem;
 }
 
@@ -99,7 +99,7 @@ a {
 }
 
 .introduction {
-  font-size: 18px;
+  font-size: 1.285em;
   font-weight: normal;
   line-height: 1.6em;
   letter-spacing: .03rem;
@@ -162,7 +162,7 @@ a {
 }
 
 .form-special-number {
-  font-size: 18px;
+  font-size: 1.285em;
   font-weight: 600;
   line-height: 1em;
   letter-spacing: .02rem;
@@ -170,7 +170,7 @@ a {
 }
 
 .g3-badge {
-  font-size: 14px;
+  font-size: 1em;
   font-weight: 600;
   color: var(--g3-color__base-blue);
   background-color: var(--g3-color__silver);
@@ -243,7 +243,7 @@ ant-input:placeholder {
   display: inline-block;
   margin: 0 10px 0 10px;
   color:#3283C8;
-  font-size:14px;
+  font-size:1em;
   -webkit-transition: color 0.3s;
   transition: color 0.3s;
 }
