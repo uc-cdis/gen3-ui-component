@@ -232,3 +232,14 @@ input::placeholder {
 ant-input:placeholder {
   color: var(--g3-color__titanium);
 }
+
+.g3-accessibility-links {
+  position: absolute;
+  right: 11px;
+  padding-bottom:15px;
+}
+
+.g3-accessibility-nav-link {
+  display: inline-block;
+  margin: 0 10px 0 10px;
+}
