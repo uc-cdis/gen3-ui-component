@@ -102,7 +102,7 @@ a {
 .introduction {
   font-size: 1.125rem;
   font-weight: normal;
-  line-height: 1.6em;
+  line-height: 1.125em;
   letter-spacing: .03rem;
   color: var(--g3-color__black);
 }
