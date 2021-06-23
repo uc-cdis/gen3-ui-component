@@ -38,7 +38,7 @@
 }
 
 .g3-filter-section__title {
-  font-size: 14px;
+  font-size: 1em;
   font-weight: var(--g3-font__semi-bold-weight);
   color: var(--g3-color__bg-coal);
   border-bottom: 2px solid transparent;
@@ -68,7 +68,7 @@
 }
 
 .g3-filter-section__options {
-  font-size: 14px;
+  font-size: 1em;
   color: var(--g3-color__gray);
 }
 
@@ -219,7 +219,7 @@
 
 .g3-filter-section__range-filter-clear-btn {
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 1em;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

@@ -9,7 +9,7 @@
 .g3-dropdown-button__button {
   height: 100%;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 1em;
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
