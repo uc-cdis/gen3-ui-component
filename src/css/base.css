@@ -54,6 +54,8 @@
 
   --g3-font__medium-weight: 500;
   --g3-font__semi-bold-weight: 600;
+
+  font-size: 14px;
 }
 
 h1, h2, h3, h4,
