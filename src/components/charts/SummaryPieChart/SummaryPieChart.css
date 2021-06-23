@@ -31,7 +31,7 @@
 .summary-pie-chart__legend-item {
   text-align: right;
   margin-bottom: 22px;
-  font-size: 1rem;
+  font-size: 0.875rem;
   line-height: 1em;
   letter-spacing: .03rem;
   color: var(--g3-color__gray);
@@ -61,5 +61,5 @@
 
 .summary-pie-chart__toggle {
   text-align: right;
-  font-size: 1rem;
+  font-size: 0.875rem;
 }

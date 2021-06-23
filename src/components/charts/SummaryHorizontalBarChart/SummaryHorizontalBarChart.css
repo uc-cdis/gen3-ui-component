@@ -23,7 +23,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: normal;
   letter-spacing: .03rem;
   color: var(--g3-color__gray);
@@ -68,5 +68,5 @@
 }
 
 .summary-horizontal-bar-chart__toggle {
-  font-size: 1rem;
+  font-size: 0.875rem;
 }
