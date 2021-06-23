@@ -70,12 +70,12 @@ body,
 
 h1, h2, h3, h4 {
   font-weight: 600;
-  line-height: 2em;
+  line-height: 2rem;
   color: var(--g3-color__black);
 }
 
 h1 {
-  font-size: 2.286em;
+  font-size: 2.286rem;
   letter-spacing: 0;
 }
 
@@ -85,12 +85,12 @@ h2 {
 }
 
 h3 {
-  font-size: 1.285em;
+  font-size: 1.285rem;
   letter-spacing: .02rem;
 }
 
 h4 {
-  font-size: 1em;
+  font-size: 1rem;
   letter-spacing: .02rem;
 }
 
@@ -99,7 +99,7 @@ a {
 }
 
 .introduction {
-  font-size: 1.285em;
+  font-size: 1.285rem;
   font-weight: normal;
   line-height: 1.6em;
   letter-spacing: .03rem;
@@ -109,7 +109,7 @@ a {
 .body {
   font-size: 14px;
   font-weight: normal;
-  line-height: 1.6em;
+  line-height: 1.6rem;
   letter-spacing: .02rem;
   color: var(--g3-color__gray);
 }
@@ -123,7 +123,7 @@ a {
 }
 
 .special-number {
-  font-size: 2.286em;
+  font-size: 2.286rem;
   font-weight: 600;
   letter-spacing: .03rem;
   color: var(--g3-color__base-blue);
@@ -162,7 +162,7 @@ a {
 }
 
 .form-special-number {
-  font-size: 1.285em;
+  font-size: 1.285rem;
   font-weight: 600;
   line-height: 1em;
   letter-spacing: .02rem;
@@ -170,7 +170,7 @@ a {
 }
 
 .g3-badge {
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--g3-color__base-blue);
   background-color: var(--g3-color__silver);
@@ -243,7 +243,7 @@ ant-input:placeholder {
   display: inline-block;
   margin: 0 10px 0 10px;
   color:#3283C8;
-  font-size:1em;
+  font-size:1rem;
   -webkit-transition: color 0.3s;
   transition: color 0.3s;
 }
