@@ -90,7 +90,7 @@ class FilterSection extends React.Component {
       + 'If OR is set, records must match at least one checked option.';
     return (
       <React.Fragment>
-        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`} id={`${this.props.key}-${this.props.title}-AND`}>
+        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`} id={`${this.props.index}-${this.props.title}-AND`}>
           <span style={{ marginRight: '5px' }}>Combine with </span>
           <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
             <Radio.Button
@@ -106,8 +106,8 @@ class FilterSection extends React.Component {
                   https://github.com/ant-design/ant-design/issues/8305
                 */
                 if (event.key === 'Enter') {
-                  console.log('hii: ', `.g3-filter-section__and-or-toggle#${this.props.key}-${this.props.title}-AND`);
-                  const thisToggle = document.querySelector(`.g3-filter-section__and-or-toggle#${this.props.key}-${this.props.title}-AND`);
+                  console.log('hii: ', `.g3-filter-section__and-or-toggle#${this.props.index}-${this.props.title}-AND`);
+                  const thisToggle = document.querySelector(`.g3-filter-section__and-or-toggle#${this.props.index}-${this.props.title}-AND`);
                   
                   
                   const labels = thisToggle.elementByTagName('label');
@@ -129,11 +129,11 @@ class FilterSection extends React.Component {
               data-toggle-value='OR'
               onKeyPress={(event) => {
                 if (event.key === 'Enter') {
-                  const label = document.querySelector(`label#${this.props.key}-${this.props.title}-OR`);
+                  const label = document.querySelector(`label#${this.props.index}-${this.props.title}-OR`);
                   label.click();
                 }
               }}
-              id={`${this.props.key}-${this.props.title}-OR`}
+              id={`${this.props.index}-${this.props.title}-OR`}
               onClick={() => this.handleSetCombineModeOption('OR')}
               onChange={() => this.handleSetCombineModeOption('OR')}
               tabIndex='0'
@@ -573,7 +573,7 @@ FilterSection.propTypes = {
   isSearchFilter: PropTypes.bool,
   onSearchFilterLoadOptions: PropTypes.func,
   isArrayField: PropTypes.bool,
-  key: PropTypes.number,
+  index: PropTypes.number,
 };
 
 FilterSection.defaultProps = {
@@ -593,7 +593,7 @@ FilterSection.defaultProps = {
   isSearchFilter: false,
   isArrayField: false,
   onSearchFilterLoadOptions: () => null,
-  key: 0,
+  index: 0,
 };
 
 export default FilterSection;
