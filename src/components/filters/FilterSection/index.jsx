@@ -113,7 +113,7 @@ class FilterSection extends React.Component {
                   const labels = thisToggle.elementByTagName('label');
                   console.log('labels: ', labels);
                   for(let i = 0; i < labels.length; i += 1) {
-                    if(labels[i].innerText == 'AND') {
+                    if(labels[i].innerText === 'AND') {
                       labels[i].click();
                     }
                   }
@@ -137,7 +137,7 @@ class FilterSection extends React.Component {
                   const labels = thisToggle.elementByTagName('label');
                   console.log('labels: ', labels);
                   for(let i = 0; i < labels.length; i += 1) {
-                    if(labels[i].innerText == 'OR') {
+                    if(labels[i].innerText === 'OR') {
                       labels[i].click();
                     }
                   }
