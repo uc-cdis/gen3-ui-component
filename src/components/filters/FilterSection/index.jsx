@@ -412,6 +412,7 @@ class FilterSection extends React.Component {
               role='button'
               onClick={() => this.toggleShowAndOrToggle()}
               onKeyPress={() => this.toggleShowAndOrToggle()}
+              aria-expanded={this.state.showingAndOrToggle}
             >
               <i
                 className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
