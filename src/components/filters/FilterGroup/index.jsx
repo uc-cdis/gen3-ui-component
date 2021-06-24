@@ -258,11 +258,11 @@ class FilterGroup extends React.Component {
         <div className='g3-filter-group__tabs'>
           {
             this.props.tabs.map((tab, index) => (
-              <button
+              <div
                 key={index}
-                type='button'
+                role='tab'
                 tabIndex='0'
-                className={'g3-unstyle-btn g3-filter-group__tab'.concat(this.state.selectedTabIndex === index ? ' g3-filter-group__tab--selected' : '')}
+                className={'g3-filter-group__tab'.concat(this.state.selectedTabIndex === index ? ' g3-filter-group__tab--selected' : '')}
                 onClick={() => this.selectTab(index)}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {
@@ -274,7 +274,7 @@ class FilterGroup extends React.Component {
                 <p className={`g3-filter-group__tab-title ${tabHasActiveFilters(this.state.filterStatus[index]) ? 'g3-filter-group__tab-title--has-active-filters' : ''}`}>
                   {this.props.filterConfig.tabs[index].title}
                 </p>
-              </button>
+              </div>
             ))
           }
         </div>
