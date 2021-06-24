@@ -565,7 +565,7 @@ FilterSection.propTypes = {
   isSearchFilter: PropTypes.bool,
   onSearchFilterLoadOptions: PropTypes.func,
   isArrayField: PropTypes.bool,
-  key: PropTypes.string,
+  key: PropTypes.number,
 };
 
 FilterSection.defaultProps = {
@@ -585,7 +585,7 @@ FilterSection.defaultProps = {
   isSearchFilter: false,
   isArrayField: false,
   onSearchFilterLoadOptions: () => null,
-  key: '',
+  key: 0,
 };
 
 export default FilterSection;
