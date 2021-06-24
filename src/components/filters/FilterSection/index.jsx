@@ -104,15 +104,11 @@ class FilterSection extends React.Component {
                   This pass-through allows for accessible tab-navigation.
                 */
                 if (event.key === 'Enter') {
-                  const labels = document.getElementsByTagName('label');
-                  for (let i = 0; i < labels.length; i += 1) {
-                    if (labels[i].innerText === 'AND') {
-                      labels[i].click();
-                      break;
-                    }
-                  }
+                  const label = document.querySelector(`label#${key}-${title}-AND`);
+                  label.click();
                 }
               }}
+              id={`${key}-${title}-AND`}
               onClick={() => this.handleSetCombineModeOption('AND')}
               onChange={() => this.handleSetCombineModeOption('AND')}
               tabIndex='0'
@@ -125,15 +121,11 @@ class FilterSection extends React.Component {
               data-toggle-value='OR'
               onKeyPress={(event) => {
                 if (event.key === 'Enter') {
-                  const labels = document.getElementsByTagName('label');
-                  for (let i = 0; i < labels.length; i += 1) {
-                    if (labels[i].innerText === 'OR') {
-                      labels[i].click();
-                      break;
-                    }
-                  }
+                  const label = document.querySelector(`label#${key}-${title}-OR`);
+                  label.click();
                 }
               }}
+              id={`${key}-${title}-OR`}
               onClick={() => this.handleSetCombineModeOption('OR')}
               onChange={() => this.handleSetCombineModeOption('OR')}
               tabIndex='0'
