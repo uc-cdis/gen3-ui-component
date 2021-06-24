@@ -106,12 +106,10 @@ class FilterSection extends React.Component {
                   https://github.com/ant-design/ant-design/issues/8305
                 */
                 if (event.key === 'Enter') {
-                  console.log('hii: ', `g3-filter-section__and-or-toggle-${this.props.index}`);
                   const thisToggle = document.getElementById(`g3-filter-section__and-or-toggle-${this.props.index}`);
                   const labels = thisToggle.getElementsByTagName('label');
-                  console.log('labels: ', labels);
-                  for(let i = 0; i < labels.length; i += 1) {
-                    if(labels[i].innerText === 'AND') {
+                  for (let i = 0; i < labels.length; i += 1) {
+                    if (labels[i].innerText === 'AND') {
                       labels[i].click();
                       break;
                     }
@@ -132,9 +130,8 @@ class FilterSection extends React.Component {
                 if (event.key === 'Enter') {
                   const thisToggle = document.getElementById(`g3-filter-section__and-or-toggle-${this.props.index}`);
                   const labels = thisToggle.getElementsByTagName('label');
-                  console.log('labels: ', labels);
-                  for(let i = 0; i < labels.length; i += 1) {
-                    if(labels[i].innerText === 'OR') {
+                  for (let i = 0; i < labels.length; i += 1) {
+                    if (labels[i].innerText === 'OR') {
                       labels[i].click();
                       break;
                     }

@@ -201,11 +201,11 @@ a {
   role="button" and then change the element to a button.
 */
 .g3-unstyle-btn {
-  border:initial;
-  width:initial;
-  height:initial;
-  color:initial;
-  font-size:initial;
+  border: initial;
+  width: initial;
+  height: initial;
+  color: initial;
+  font-size: initial;
 }
 
 .g3-ring-on-focus:focus, .g3-ring-on-focus:focus-within, .g3-ring-on-focus:focus-visible {
@@ -229,14 +229,14 @@ ant-input:placeholder {
 .g3-accessibility-links {
   position: absolute;
   right: 11px;
-  padding-bottom:15px;
+  padding-bottom: 15px;
 }
 
 .g3-accessibility-nav-link {
   display: inline-block;
   margin: 0 10px 0 10px;
-  color:#3283C8;
-  font-size:1rem;
+  color: #3283C8;
+  font-size: 1rem;
   -webkit-transition: color 0.3s;
   transition: color 0.3s;
 }
