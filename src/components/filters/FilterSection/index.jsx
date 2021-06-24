@@ -90,7 +90,7 @@ class FilterSection extends React.Component {
       + 'If OR is set, records must match at least one checked option.';
     return (
       <React.Fragment>
-        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`} id={`.g3-filter-section__and-or-toggle-${this.props.index}`}>
+        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`} id={`g3-filter-section__and-or-toggle-${this.props.index}`}>
           <span style={{ marginRight: '5px' }}>Combine with </span>
           <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
             <Radio.Button
@@ -106,15 +106,14 @@ class FilterSection extends React.Component {
                   https://github.com/ant-design/ant-design/issues/8305
                 */
                 if (event.key === 'Enter') {
-                  console.log('hii: ', `.g3-filter-section__and-or-toggle-${this.props.index}`);
-                  const thisToggle = document.querySelector(`.g3-filter-section__and-or-toggle-${this.props.index}`);
-                  
-                  
-                  const labels = thisToggle.elementByTagName('label');
+                  console.log('hii: ', `g3-filter-section__and-or-toggle-${this.props.index}`);
+                  const thisToggle = document.getElementById(`g3-filter-section__and-or-toggle-${this.props.index}`);
+                  const labels = thisToggle.getElementsByTagName('label');
                   console.log('labels: ', labels);
                   for(let i = 0; i < labels.length; i += 1) {
                     if(labels[i].innerText === 'AND') {
                       labels[i].click();
+                      break;
                     }
                   }
                 }
@@ -131,14 +130,13 @@ class FilterSection extends React.Component {
               data-toggle-value='OR'
               onKeyPress={(event) => {
                 if (event.key === 'Enter') {
-                  const thisToggle = document.querySelector(`.g3-filter-section__and-or-toggle-${this.props.index}`);
-                  
-                  
-                  const labels = thisToggle.elementByTagName('label');
+                  const thisToggle = document.getElementById(`g3-filter-section__and-or-toggle-${this.props.index}`);
+                  const labels = thisToggle.getElementsByTagName('label');
                   console.log('labels: ', labels);
                   for(let i = 0; i < labels.length; i += 1) {
                     if(labels[i].innerText === 'OR') {
                       labels[i].click();
+                      break;
                     }
                   }
                 }
