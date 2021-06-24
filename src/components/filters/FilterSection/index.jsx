@@ -90,7 +90,7 @@ class FilterSection extends React.Component {
       + 'If OR is set, records must match at least one checked option.';
     return (
       <React.Fragment>
-        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
+        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`} id={`${this.props.key}-${this.props.title}-AND`}>
           <span style={{ marginRight: '5px' }}>Combine with </span>
           <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
             <Radio.Button
@@ -101,14 +101,22 @@ class FilterSection extends React.Component {
                   Here, we manually pass the Enter keypress to the sibling label.
                   This radio button splits into a label and an input,
                   but only the input gains focus in the tab order.
-                  This pass-through allows for accessible tab-navigation.
+                  This pass-through code allows for accessible tab-navigation.
+                  The method is verbose due to:
+                  https://github.com/ant-design/ant-design/issues/8305
                 */
                 if (event.key === 'Enter') {
-                  const label = document.querySelector(`label#${this.props.key}-${this.props.title}-AND`);
-                  label.click();
+                  console.log('hii: ', `.g3-filter-section__and-or-toggle#${this.props.key}-${this.props.title}-AND`);
+                  const thisToggle = document.querySelector(`.g3-filter-section__and-or-toggle#${this.props.key}-${this.props.title}-AND`);
+                  
+                  
+                  const labels = thisToggle.elementByTagName('label');
+                  console.log('labels: ', labels);
+                  for(let i = 0; i < labels.length; i += 1) {
+                    labels[i].click();
+                  }
                 }
               }}
-              id={`${this.props.key}-${this.props.title}-AND`}
               onClick={() => this.handleSetCombineModeOption('AND')}
               onChange={() => this.handleSetCombineModeOption('AND')}
               tabIndex='0'
