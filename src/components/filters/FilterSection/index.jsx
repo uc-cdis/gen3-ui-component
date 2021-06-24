@@ -358,6 +358,7 @@ class FilterSection extends React.Component {
           onKeyPress={() => this.toggleSection()}
           tabIndex={-1}
           role='button'
+          aria-expanded={this.state.isExpanded}
         >
           <div className={`g3-filter-section__title ${numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}>
             {this.props.title}

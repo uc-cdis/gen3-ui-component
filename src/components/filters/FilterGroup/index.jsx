@@ -269,6 +269,7 @@ class FilterGroup extends React.Component {
                     this.selectTab(index);
                   }
                 }}
+                aria-selected={this.state.selectedTabIndex === index ? 'true' : 'false'}
               >
                 <p className={`g3-filter-group__tab-title ${tabHasActiveFilters(this.state.filterStatus[index]) ? 'g3-filter-group__tab-title--has-active-filters' : ''}`}>
                   {this.props.filterConfig.tabs[index].title}
@@ -284,6 +285,7 @@ class FilterGroup extends React.Component {
             onKeyPress={() => this.toggleFilters()}
             role='button'
             tabIndex={0}
+            aria-expanded={this.state.expandedStatusControl}
           >
             {this.state.expandedStatusText}
           </span>
