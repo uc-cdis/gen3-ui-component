@@ -99,8 +99,8 @@ class FilterSection extends React.Component {
               onKeyPress={(event) => {
                 /*
                   Here, we manually pass the Enter keypress to the sibling label.
-                  This radio button splits into a label and an input,
-                  but only the input gains focus in the tab order.
+                  Radio.Button splits into a label and an input,
+                  but only the non-event-bound input gains focus in the tab order.
                   This pass-through code allows for accessible tab-navigation.
                   The method is verbose due to:
                   https://github.com/ant-design/ant-design/issues/8305
@@ -141,7 +141,6 @@ class FilterSection extends React.Component {
                   }
                 }
               }}
-              id={`${this.props.index}-${this.props.title}-OR`}
               onClick={() => this.handleSetCombineModeOption('OR')}
               onChange={() => this.handleSetCombineModeOption('OR')}
               tabIndex='0'
