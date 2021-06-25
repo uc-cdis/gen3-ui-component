@@ -197,7 +197,7 @@ a {
   To ensure WCAG accessibility, we must use button elements
   where a button is needed, rather than a div with the
   button role. Apply this style to a button element to remove
-  default web styles. Apply this style to any div with 
+  default web styles. Apply this style to any div with
   role="button" and then change the element to a button.
 */
 .g3-unstyle-btn {
