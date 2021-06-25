@@ -76,7 +76,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  font-size: 2.285rem;
+  font-size: 2rem;
   letter-spacing: 0;
 }
 
@@ -102,7 +102,7 @@ a {
 .introduction {
   font-size: 1.125rem;
   font-weight: normal;
-  line-height: 1.125em;
+  line-height: 1.6rem;
   letter-spacing: .03rem;
   color: var(--g3-color__black);
 }
