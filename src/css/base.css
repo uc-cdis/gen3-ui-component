@@ -246,7 +246,7 @@ ant-input:placeholder {
 }
 
 .g3-accessibility-links .help-tooltip-icon {
-  background-color: var(--g3-color__bg-coal);
+  background-color: black;
   opacity: 1;
 }
 
