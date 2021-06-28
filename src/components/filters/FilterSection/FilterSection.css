@@ -244,7 +244,7 @@
 }
 
 .g3-icon--question-mark-bootstrap.help-tooltip-icon {
-  background-color: black;
+  background-color: var(--g3-color__titanium);
   top: 2px;
   opacity: 0.9;
   width: 14px;
