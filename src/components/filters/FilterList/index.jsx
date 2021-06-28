@@ -100,6 +100,7 @@ class FilterList extends React.Component {
       filterSectionToShow.push(
         <FilterSection
           key={index}
+          index={index}
           ref={this.sectionRefs[index]}
           title={section.title}
           tooltip={section.tooltip}

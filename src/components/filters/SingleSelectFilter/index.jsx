@@ -90,11 +90,12 @@ class SingleSelectFilter extends React.Component {
           onChange={() => this.handleCheck()}
           checked={selected}
           disabled={inputDisabled}
+          tabIndex='-1'
         />
         {
           inputDisabled ? (
             <span
-              className='g3-single-select-filter__label g3-single-select-filter__label--disabled'
+              className='g3-single-select-filter__label g3-single-select-filter__label--disabled g3-ring-on-focus'
               role='button'
               tabIndex={0}
             >
@@ -102,7 +103,7 @@ class SingleSelectFilter extends React.Component {
             </span>
           ) : (
             <span
-              className='g3-single-select-filter__label'
+              className='g3-single-select-filter__label g3-ring-on-focus'
               onClick={() => this.handleCheck()}
               onKeyPress={() => this.handleCheck()}
               role='button'

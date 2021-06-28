@@ -38,7 +38,7 @@
 }
 
 .g3-filter-section__title {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: var(--g3-font__semi-bold-weight);
   color: var(--g3-color__bg-coal);
   border-bottom: 2px solid transparent;
@@ -68,7 +68,7 @@
 }
 
 .g3-filter-section__options {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--g3-color__gray);
 }
 
@@ -91,13 +91,6 @@
   text-align: right;
 }
 
-.rc-tooltip-inner {
-  min-height: unset;
-  max-width: unset;
-  border: 1px solid var(--g3-color__silver);
-  border-radius: 4px;
-}
-
 .g3-filter-section .rc-tooltip-placement-top .rc-tooltip-arrow,
 .g3-filter-section .rc-tooltip-placement-topLeft .rc-tooltip-arrow,
 .g3-filter-section .rc-tooltip-placement-topRight .rc-tooltip-arrow {
@@ -114,7 +107,7 @@
 }
 
 .g3-filter-section__and-or-toggle {
-  font-size: 12px;
+  font-size: 0.75rem;
   padding: 5px 0 5px 8px;
 }
 
@@ -219,7 +212,7 @@
 
 .g3-filter-section__range-filter-clear-btn {
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 0.875rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

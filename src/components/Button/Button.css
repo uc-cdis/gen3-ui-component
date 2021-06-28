@@ -8,8 +8,8 @@
   border-radius: 4px;
   min-width: 152px;
   width: auto;
-  height: 40px;
-  font-size: 14px;
+  height: 2.5rem;
+  font-size: 0.875rem;
   cursor: pointer;
   font-weight: 600;
   padding: 1px 20px;
@@ -115,11 +115,6 @@
 }
 
 /* Tooltip overrides */
-
-.rc-tooltip-inner {
-  border: 1px solid var(--g3-color__gray);
-  border-radius: 4px;
-}
 
 .rc-tooltip-placement-bottom .rc-tooltip-arrow {
   border-bottom-color: var(--g3-color__gray);

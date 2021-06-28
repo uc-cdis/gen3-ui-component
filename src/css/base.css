@@ -54,6 +54,7 @@
 
   --g3-font__medium-weight: 500;
   --g3-font__semi-bold-weight: 600;
+
 }
 
 h1, h2, h3, h4,
@@ -70,12 +71,12 @@ body,
 
 h1, h2, h3, h4 {
   font-weight: 600;
-  line-height: 2em;
+  line-height: 2rem;
   color: var(--g3-color__black);
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 2rem;
   letter-spacing: 0;
 }
 
@@ -85,12 +86,12 @@ h2 {
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 1.125rem;
   letter-spacing: .02rem;
 }
 
 h4 {
-  font-size: 14px;
+  font-size: 0.875rem;
   letter-spacing: .02rem;
 }
 
@@ -99,23 +100,23 @@ a {
 }
 
 .introduction {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: normal;
-  line-height: 1.6em;
+  line-height: 1.6rem;
   letter-spacing: .03rem;
   color: var(--g3-color__black);
 }
 
 .body {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: normal;
-  line-height: 1.6em;
+  line-height: 1.6rem;
   letter-spacing: .02rem;
   color: var(--g3-color__gray);
 }
 
 .caption {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: normal;
   line-height: 1.6em;
   letter-spacing: .02rem;
@@ -123,14 +124,14 @@ a {
 }
 
 .special-number {
-  font-size: 32px;
+  font-size: 2rem;
   font-weight: 600;
   letter-spacing: .03rem;
   color: var(--g3-color__base-blue);
 }
 
 .form-body {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: normal;
   line-height: 1em;
   letter-spacing: .03rem;
@@ -138,7 +139,7 @@ a {
 }
 
 .form-h1 {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
   line-height: 1.2em;
   letter-spacing: .02rem;
@@ -154,7 +155,7 @@ a {
 }
 
 .form-caption {
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: 600;
   line-height: 1em;
   letter-spacing: .03rem;
@@ -162,7 +163,7 @@ a {
 }
 
 .form-special-number {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   line-height: 1em;
   letter-spacing: .02rem;
@@ -170,7 +171,7 @@ a {
 }
 
 .g3-badge {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--g3-color__base-blue);
   background-color: var(--g3-color__silver);
@@ -192,6 +193,26 @@ a {
   color: var(--g3-color__base-blue-light);
 }
 
+/*
+  To ensure WCAG accessibility, we must use button elements
+  where a button is needed, rather than a div with the
+  button role. Apply this style to a button element to remove
+  default web styles. Apply this style to any div with
+  role="button" and then change the element to a button.
+*/
+.g3-unstyle-btn {
+  border: initial;
+  width: initial;
+  height: initial;
+  color: initial;
+  font-size: initial;
+}
+
+.g3-ring-on-focus:focus, .g3-ring-on-focus:focus-within, .g3-ring-on-focus:focus-visible {
+  outline: 1px solid rgb(77, 144, 254);
+  outline-offset: -2px;
+}
+
 input::placeholder {
   color: --g3-placeholder-text-color;
 }
@@ -203,4 +224,36 @@ input::placeholder {
 .ant-btn-primary[disabled], .ant-btn-primary[disabled]:hover, .ant-btn-primary[disabled]:focus, .ant-btn-primary[disabled]:active,
 ant-input:placeholder {
   color: var(--g3-color__titanium);
+}
+
+.g3-accessibility-links {
+  position: absolute;
+  right: 11px;
+  padding-bottom: 15px;
+}
+
+.g3-accessibility-nav-link {
+  display: inline-block;
+  margin: 0 10px 0 10px;
+  color: #3283C8;
+  font-size: 1rem;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.g3-accessibility-nav-link:hover {
+  color: #05B8EE;
+}
+
+.g3-accessibility-links .help-tooltip-icon {
+  background-color: black;
+  opacity: 1;
+}
+
+.rc-tooltip-inner {
+  min-height: unset;
+  max-width: unset;
+  border-radius: 4px;
+  border: 1px solid ;
+  border-radius: 4px;
 }

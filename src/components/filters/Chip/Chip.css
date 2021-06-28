@@ -1,6 +1,6 @@
 .g3-chip {
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 0.875rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

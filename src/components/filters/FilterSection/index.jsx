@@ -60,6 +60,7 @@ class FilterSection extends React.Component {
     };
     this.inputElem = React.createRef();
     this.combineModeFieldName = '__combineMode';
+    this.handleSetCombineModeOption = this.handleSetCombineModeOption.bind(this);
   }
 
   getSearchInput() {
@@ -89,13 +90,59 @@ class FilterSection extends React.Component {
       + 'If OR is set, records must match at least one checked option.';
     return (
       <React.Fragment>
-        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`}>
+        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`} id={`g3-filter-section__and-or-toggle-${this.props.index}`}>
           <span style={{ marginRight: '5px' }}>Combine with </span>
           <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
-            <Radio.Button value='AND' onChange={() => this.handleSetCombineModeOption('AND')}>
+            <Radio.Button
+              value='AND'
+              data-toggle-value='AND'
+              onKeyPress={(event) => {
+                /*
+                  Here, we manually pass the Enter keypress to the sibling label.
+                  Radio.Button splits into a label and an input,
+                  but only the non-event-bound input gains focus in the tab order.
+                  This pass-through code allows for accessible tab-navigation.
+                  The method is verbose due to:
+                  https://github.com/ant-design/ant-design/issues/8305
+                */
+                if (event.key === 'Enter') {
+                  const thisToggle = document.getElementById(`g3-filter-section__and-or-toggle-${this.props.index}`);
+                  const labels = thisToggle.getElementsByTagName('label');
+                  for (let i = 0; i < labels.length; i += 1) {
+                    if (labels[i].innerText === 'AND') {
+                      labels[i].click();
+                      break;
+                    }
+                  }
+                }
+              }}
+              onClick={() => this.handleSetCombineModeOption('AND')}
+              onChange={() => this.handleSetCombineModeOption('AND')}
+              tabIndex='0'
+              className='g3-ring-on-focus'
+            >
             AND
             </Radio.Button>
-            <Radio.Button value='OR' onChange={() => this.handleSetCombineModeOption('OR')}>
+            <Radio.Button
+              value='OR'
+              data-toggle-value='OR'
+              onKeyPress={(event) => {
+                if (event.key === 'Enter') {
+                  const thisToggle = document.getElementById(`g3-filter-section__and-or-toggle-${this.props.index}`);
+                  const labels = thisToggle.getElementsByTagName('label');
+                  for (let i = 0; i < labels.length; i += 1) {
+                    if (labels[i].innerText === 'OR') {
+                      labels[i].click();
+                      break;
+                    }
+                  }
+                }
+              }}
+              onClick={() => this.handleSetCombineModeOption('OR')}
+              onChange={() => this.handleSetCombineModeOption('OR')}
+              tabIndex='0'
+              className='g3-ring-on-focus'
+            >
               OR
             </Radio.Button>
           </Radio.Group>
@@ -294,7 +341,7 @@ class FilterSection extends React.Component {
     }
     const numSelected = getNumValuesSelected(filterStatus);
     const sectionHeader = (
-      <div className='g3-filter-section__header'>
+      <div className='g3-filter-section__header g3-ring-on-focus'>
         <div className='g3-filter-section__toggle-icon-container'>
           <i
             onClick={() => this.toggleSection()}
@@ -309,8 +356,9 @@ class FilterSection extends React.Component {
           className='g3-filter-section__title-container'
           onClick={() => this.toggleSection()}
           onKeyPress={() => this.toggleSection()}
-          tabIndex={0}
+          tabIndex={-1}
           role='button'
+          aria-expanded={this.state.isExpanded}
         >
           <div className={`g3-filter-section__title ${numSelected !== 0 ? 'g3-filter-section__title--active' : ''}`}>
             {this.props.title}
@@ -364,6 +412,7 @@ class FilterSection extends React.Component {
               role='button'
               onClick={() => this.toggleShowAndOrToggle()}
               onKeyPress={() => this.toggleShowAndOrToggle()}
+              aria-expanded={this.state.showingAndOrToggle}
             >
               <i
                 className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
@@ -530,6 +579,7 @@ FilterSection.propTypes = {
   isSearchFilter: PropTypes.bool,
   onSearchFilterLoadOptions: PropTypes.func,
   isArrayField: PropTypes.bool,
+  index: PropTypes.number,
 };
 
 FilterSection.defaultProps = {
@@ -549,6 +599,7 @@ FilterSection.defaultProps = {
   isSearchFilter: false,
   isArrayField: false,
   onSearchFilterLoadOptions: () => null,
+  index: 0,
 };
 
 export default FilterSection;
