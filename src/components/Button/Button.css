@@ -116,11 +116,6 @@
 
 /* Tooltip overrides */
 
-.rc-tooltip-inner {
-  border: 1px solid var(--g3-color__gray);
-  border-radius: 4px;
-}
-
 .rc-tooltip-placement-bottom .rc-tooltip-arrow {
   border-bottom-color: var(--g3-color__gray);
 }

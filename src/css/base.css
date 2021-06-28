@@ -244,3 +244,16 @@ ant-input:placeholder {
 .g3-accessibility-nav-link:hover {
   color: #05B8EE;
 }
+
+.g3-accessibility-links .help-tooltip-icon {
+  background-color: var(--g3-color__titanium);
+  opacity: 1;
+}
+
+.rc-tooltip-inner {
+  min-height: unset;
+  max-width: unset;
+  border-radius: 4px;
+  border: 1px solid var(--g3-color__gray);
+  border-radius: 4px;
+}

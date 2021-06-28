@@ -91,13 +91,6 @@
   text-align: right;
 }
 
-.rc-tooltip-inner {
-  min-height: unset;
-  max-width: unset;
-  border: 1px solid var(--g3-color__silver);
-  border-radius: 4px;
-}
-
 .g3-filter-section .rc-tooltip-placement-top .rc-tooltip-arrow,
 .g3-filter-section .rc-tooltip-placement-topLeft .rc-tooltip-arrow,
 .g3-filter-section .rc-tooltip-placement-topRight .rc-tooltip-arrow {
