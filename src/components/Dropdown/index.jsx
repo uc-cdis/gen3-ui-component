@@ -19,13 +19,9 @@ class Dropdown extends Component {
     if (this.props.disabled) {
       return;
     }
-    this.setState(state => (
+    this.setState((state) => (
       { menuOpen: !state.menuOpen }
     ));
-  }
-
-  closeMenu() {
-    this.setState({ menuOpen: false });
   }
 
   handleWindowClick(e) {
@@ -37,12 +33,16 @@ class Dropdown extends Component {
     }
   }
 
+  closeMenu() {
+    this.setState({ menuOpen: false });
+  }
+
   bindCancellingEvent() {
-    window.addEventListener('click', e => this.handleWindowClick(e));
+    window.addEventListener('click', (e) => this.handleWindowClick(e));
   }
 
   unbindCancellingEvent() {
-    window.removeEventListener('click', e => this.handleWindowClick(e));
+    window.removeEventListener('click', (e) => this.handleWindowClick(e));
   }
 
   render() {
@@ -52,14 +52,14 @@ class Dropdown extends Component {
       this.unbindCancellingEvent();
     }
     return (
-      <div className={`g3-dropdown ${this.props.disabled ? 'g3-dropdown--disabled' : ''} ${this.props.className || ''} 
+      <div className={`g3-dropdown ${this.props.disabled ? 'g3-dropdown--disabled' : ''} ${this.props.className || ''}
                                    ${this.props.buttonType === 'secondary' ? 'g3-dropdown--secondary' : ''}`}
       >
         {
-          React.Children.map(this.props.children, child => React.cloneElement(child, {
-            handleTriggerMenu: e => this.handleTriggerMenu(e),
+          React.Children.map(this.props.children, (child) => React.cloneElement(child, {
+            handleTriggerMenu: (e) => this.handleTriggerMenu(e),
             menuOpen: this.state.menuOpen,
-            afterClick: e => this.closeMenu(e),
+            afterClick: (e) => this.closeMenu(e),
             menuTriggerElementRef: this.menuTriggerElementRef,
             buttonType: this.props.buttonType,
             disabled: this.props.disabled,

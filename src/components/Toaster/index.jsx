@@ -14,7 +14,6 @@ class Toaster extends React.Component {
   }
 }
 
-
 Toaster.propTypes = {
   isEnabled: PropTypes.bool.isRequired,
   className: PropTypes.string,

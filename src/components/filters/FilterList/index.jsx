@@ -9,7 +9,7 @@ class FilterList extends React.Component {
     let initialFilterStatus = props.sections
       .map(() => ({}));
     if (props.filterStatusFromParent && props.filterStatusFromParent.length > 0) {
-      initialFilterStatus = props.filterStatusFromParent.map(x => ({ ...x }));
+      initialFilterStatus = props.filterStatusFromParent.map((x) => ({ ...x }));
     }
     this.state = {
       /**
@@ -87,7 +87,7 @@ class FilterList extends React.Component {
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filtersInProps = this.props.filterStatusFromParent
-      ? this.props.filterStatusFromParent.map(x => Object.keys(x)).flat() : [];
+      ? this.props.filterStatusFromParent.map((x) => Object.keys(x)).flat() : [];
 
     const filterStatus = filtersInProps.length > 0
       ? this.props.filterStatusFromParent : this.state.filterStatus;
@@ -109,11 +109,11 @@ class FilterList extends React.Component {
           isArrayField={section.isArrayField}
           onSearchFilterLoadOptions={section.onSearchFilterLoadOptions}
           expanded={this.props.expandedStatus[index]}
-          onToggle={newExpanded => this.handleSectionToggle(index, newExpanded)}
+          onToggle={(newExpanded) => this.handleSectionToggle(index, newExpanded)}
           onClear={() => this.handleSectionClear(index)}
           filterStatus={filterStatus[index]}
           onSelect={
-            singleFilterLabel => this.handleSelectSingleFilter(
+            (singleFilterLabel) => this.handleSelectSingleFilter(
               index,
               singleFilterLabel,
             )

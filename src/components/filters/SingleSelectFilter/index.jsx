@@ -12,7 +12,7 @@ class SingleSelectFilter extends React.Component {
   }
 
   handleCheck() {
-    this.setState(prevState => ({ selected: !prevState.selected }));
+    this.setState((prevState) => ({ selected: !prevState.selected }));
     this.props.onSelect(this.props.label);
   }
 
@@ -23,8 +23,8 @@ class SingleSelectFilter extends React.Component {
     // Takes in parent component's selected or self state's selected
     const selected = (typeof this.props.selected === 'undefined') ? this.state.selected : this.props.selected;
     let inputDisabled = this.props.disabled;
-    let lockIconComponent = <React.Fragment />;
-    let countIconComponent = <React.Fragment />;
+    let lockIconComponent = <></>;
+    let countIconComponent = <></>;
 
     const showLockedTooltip = !this.props.accessible && this.props.lockedTooltipMessage !== '';
 
@@ -32,7 +32,7 @@ class SingleSelectFilter extends React.Component {
       lockIconComponent = <i className='g3-icon g3-icon--md g3-icon--lock g3-icon-color__gray' />;
       if (showLockedTooltip) {
         lockIconComponent = (
-          <React.Fragment>
+          <>
             {
               <Tooltip
                 placement='right'
@@ -43,7 +43,7 @@ class SingleSelectFilter extends React.Component {
                 {lockIconComponent}
               </Tooltip>
             }
-          </React.Fragment>
+          </>
         );
       }
     }
@@ -64,7 +64,7 @@ class SingleSelectFilter extends React.Component {
       const showDisabledTooltip = inputDisabled && this.props.disabledTooltipMessage !== '';
       if (showDisabledTooltip) {
         countIconComponent = (
-          <React.Fragment>
+          <>
             {
               <Tooltip
                 placement='right'
@@ -75,7 +75,7 @@ class SingleSelectFilter extends React.Component {
                 {countIconComponent}
               </Tooltip>
             }
-          </React.Fragment>
+          </>
         );
       }
     } else if (this.props.accessible) {

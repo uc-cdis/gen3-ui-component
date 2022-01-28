@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './Chip.css';
 
-const Chip = props => (
+const Chip = (props) => (
   <div className='g3-chip'>
     <div className='g3-chip__text'>
       {props.text}

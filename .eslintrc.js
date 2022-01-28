@@ -39,5 +39,6 @@ module.exports = {
         "react/no-array-index-key" : ["off", "ignore"],
         "react/destructuring-assignment": ["off", "ignore"],
         "react/jsx-filename-extension": ["off", "ignore"],
+        'react/jsx-props-no-spreading': ['off'],
     }
 };
