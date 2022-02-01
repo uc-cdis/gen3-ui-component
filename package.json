@@ -75,7 +75,7 @@
     "react-test-renderer": "^16.8.4"
   },
   "overrides": {
-    "ansi-regex": "5.0.1"
+    "ansi-regex": "^5.0.1"
   },
   "jest": {
     "moduleNameMapper": {
