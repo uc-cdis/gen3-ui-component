@@ -69,7 +69,6 @@
     "npm": "^8.4.0",
     "postcss": "^8.0.0",
     "postcss-cli": "^8.0.0",
-    "postcss-inline-svg": "^5.0.0",
     "postcss-loader": "^4.3.0",
     "postcss-preset-env": "^7.0.0",
     "react-test-renderer": "^16.8.4"
