@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
+const assets = require('postcss-assets');
 const autoprefixer = require('autoprefixer');
 const postcssSvgo = require('postcss-svgo');
 const minifyCSS = require('gulp-csso');
@@ -14,6 +15,9 @@ const isDev = argv.dev || false;
 gulp.task('css', () => {
   const plugins = [
     autoprefixer(),
+    assets({
+      loadPath: ['src/images/icons/'],
+    }),
     postcssSvgo(),
   ];
   return gulp.src('src/**/*.css')
