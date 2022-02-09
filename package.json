@@ -74,9 +74,8 @@
     "react-test-renderer": "^16.8.4"
   },
   "overrides": {
-    "strip-ansi": "6.0.1",
     "@storybook/react": {
-      "trim": "0.0.3"
+      "strip-ansi": "6.0.1"
     }
   },
   "jest": {
