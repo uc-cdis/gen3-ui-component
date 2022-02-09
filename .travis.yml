@@ -3,9 +3,6 @@ git:
   depth: 1
 node_js:
   - '14'
-cache:
-  directories:
-  - node_modules
 before_install:
   - npm install -g npm@8
 install:
