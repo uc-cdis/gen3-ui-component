@@ -25,7 +25,7 @@ class SummaryBarChart extends React.Component {
   }
 
   toggle() {
-    this.setState(prevState => ({ showMore: !prevState.showMore }));
+    this.setState((prevState) => ({ showMore: !prevState.showMore }));
   }
 
   render() {
@@ -67,7 +67,7 @@ class SummaryBarChart extends React.Component {
           }
           {
             barChartData.length > this.props.maximumDisplayItem ? (
-              <React.Fragment>
+              <>
                 {
                   this.state.showMore ? (
                     <div
@@ -91,8 +91,8 @@ class SummaryBarChart extends React.Component {
                     </div>
                   )
                 }
-              </React.Fragment>
-            ) : (<React.Fragment />)
+              </>
+            ) : (<></>)
           }
         </div>
       );

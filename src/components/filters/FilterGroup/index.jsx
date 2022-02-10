@@ -9,7 +9,7 @@ const removeEmptyFilter = (filterResults) => {
     const containsCheckboxFilter = filterResults[field].selectedValues
       && filterResults[field].selectedValues.length > 0;
     // Filter settings are prefaced with two underscores, e.g., __combineMode
-    const configFields = Object.keys(filterResults[field]).filter(x => x.startsWith('__'));
+    const configFields = Object.keys(filterResults[field]).filter((x) => x.startsWith('__'));
     // A given config setting is still informative to Guppy even if the setting becomes empty
     const containsConfigSetting = configFields.length > 0;
     if (containsRangeFilter || containsCheckboxFilter || containsConfigSetting) {
@@ -26,7 +26,7 @@ const tabHasActiveFilters = (tabFilterStatus) => {
   let hasActiveFilters = false;
   tabFilterStatus.forEach((section) => {
     const fieldStatuses = Object.values(section);
-    if (fieldStatuses.some(status => status !== undefined && status !== false)) {
+    if (fieldStatuses.some((status) => status !== undefined && status !== false)) {
       hasActiveFilters = true;
     }
   });
@@ -38,16 +38,16 @@ class FilterGroup extends React.Component {
     super(props);
     const initialExpandedStatusControl = true;
     const initialExpandedStatus = props.filterConfig.tabs
-      .map(t => t.fields.map(() => (initialExpandedStatusControl)));
+      .map((t) => t.fields.map(() => (initialExpandedStatusControl)));
     let initialFilterStatus = props.filterConfig.tabs
-      .map(t => t.fields.map(() => ({})));
+      .map((t) => t.fields.map(() => ({})));
 
     if (props.filterStatusFromParent && props.filterStatusFromParent.length > 0) {
-      initialFilterStatus = props.filterStatusFromParent.map(t => t.map(x => Object.assign({}, x)));
+      initialFilterStatus = props.filterStatusFromParent.map((t) => t.map((x) => ({ ...x })));
     }
     let initialFilterResults = {};
     if (props.filterResultsFromParent && Object.keys(props.filterResultsFromParent).length > 0) {
-      initialFilterResults = Object.assign({}, props.filterResultsFromParent);
+      initialFilterResults = { ...props.filterResultsFromParent };
     }
 
     this.state = {
@@ -80,31 +80,6 @@ class FilterGroup extends React.Component {
     this.currentFilterListRef = React.createRef();
   }
 
-  selectTab(index) {
-    this.setState({ selectedTabIndex: index });
-  }
-
-  resetFilter() {
-    this.setState((prevState) => {
-      const oldFilterStatus = prevState.filterStatus;
-      const resetStatus = oldFilterStatus.map((oldSectionStatus) => {
-        const sectionStatus = oldSectionStatus.map((oldEntry) => {
-          if (!oldEntry || Object.keys(oldEntry).length === 0) return oldEntry;
-          const newEntry = Object.keys(oldEntry).reduce((res, key) => {
-            res[key] = false;
-            return res;
-          }, {});
-          return newEntry;
-        });
-        return sectionStatus;
-      });
-      return {
-        filterStatus: resetStatus,
-        filterResults: {},
-      };
-    });
-  }
-
   handleToggle(tabIndex, sectionIndex, newSectionExpandedStatus) {
     this.setState((prevState) => {
       const newExpandedStatus = prevState.expandedStatus.slice(0);
@@ -122,7 +97,7 @@ class FilterGroup extends React.Component {
       newFilterStatus[tabIndex][sectionIndex] = {};
 
       // update filter results; clear the results for this filter
-      let newFilterResults = Object.assign({}, prevState.filterResults);
+      let newFilterResults = { ...prevState.filterResults };
       const field = this.props.filterConfig.tabs[tabIndex].fields[sectionIndex];
       newFilterResults[field] = {};
       newFilterResults = removeEmptyFilter(newFilterResults);
@@ -236,6 +211,31 @@ class FilterGroup extends React.Component {
     });
   }
 
+  selectTab(index) {
+    this.setState({ selectedTabIndex: index });
+  }
+
+  resetFilter() {
+    this.setState((prevState) => {
+      const oldFilterStatus = prevState.filterStatus;
+      const resetStatus = oldFilterStatus.map((oldSectionStatus) => {
+        const sectionStatus = oldSectionStatus.map((oldEntry) => {
+          if (!oldEntry || Object.keys(oldEntry).length === 0) return oldEntry;
+          const newEntry = Object.keys(oldEntry).reduce((res, key) => {
+            res[key] = false;
+            return res;
+          }, {});
+          return newEntry;
+        });
+        return sectionStatus;
+      });
+      return {
+        filterStatus: resetStatus,
+        filterResults: {},
+      };
+    });
+  }
+
   callOnFilterChange() {
     this.props.onFilterChange(this.state.filterResults);
   }
@@ -245,7 +245,7 @@ class FilterGroup extends React.Component {
       this.currentFilterListRef.current.toggleFilters(!prevState.expandedStatusControl);
       return {
         expandedStatus: this.props.filterConfig.tabs
-          .map(t => t.fields.map(() => (!prevState.expandedStatusControl))),
+          .map((t) => t.fields.map(() => (!prevState.expandedStatusControl))),
         expandedStatusText: (!prevState.expandedStatusControl) ? 'Collapse all' : 'Open all',
         expandedStatusControl: !prevState.expandedStatusControl,
       };
@@ -300,7 +300,7 @@ class FilterGroup extends React.Component {
                   sectionIndex,
                   newSectionExpandedStatus,
                 ),
-                onClear: sectionIndex => this.handleSectionClear(
+                onClear: (sectionIndex) => this.handleSectionClear(
                   this.state.selectedTabIndex,
                   sectionIndex,
                 ),

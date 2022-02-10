@@ -8,7 +8,7 @@ import helper from '../helper';
 import './PercentageStackedBarChart.css';
 import LockedContent from '../LockedContent';
 
-const getPercentageDataLabels = chartData => chartData.map(entry => entry.name);
+const getPercentageDataLabels = (chartData) => chartData.map((entry) => entry.name);
 
 // FIXME: add back in animation (https://github.com/recharts/recharts/issues/1083)
 class PercentageStackedBarChart extends React.Component {

@@ -28,7 +28,7 @@ class SummaryPieChart extends React.Component {
   }
 
   toggle() {
-    this.setState(prevState => ({ showMore: !prevState.showMore }));
+    this.setState((prevState) => ({ showMore: !prevState.showMore }));
   }
 
   render() {
@@ -74,7 +74,7 @@ class SummaryPieChart extends React.Component {
             }
             {
               pieChartData.length > this.props.maximumDisplayItem ? (
-                <React.Fragment>
+                <>
                   {
                     this.state.showMore ? (
                       <div
@@ -98,8 +98,8 @@ class SummaryPieChart extends React.Component {
                       </div>
                     )
                   }
-                </React.Fragment>
-              ) : (<React.Fragment />)
+                </>
+              ) : (<></>)
             }
           </div>
           <PieChart

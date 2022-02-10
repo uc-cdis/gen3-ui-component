@@ -21,7 +21,7 @@ class Button extends Component {
       <button
         type='button'
         className={`${this.props.className} g3-button ${buttonTypeClassName}`}
-        onClick={e => this.handleClick(e)}
+        onClick={(e) => this.handleClick(e)}
         {...otherAttrs}
       >
         {
@@ -39,13 +39,12 @@ class Button extends Component {
           <div className='g3-button__spinner g3-button__icon--right'>
             <Spinner />
           </div>
-        ) : null
-        }
+        ) : null}
       </button>
     );
 
     return (
-      <React.Fragment>
+      <>
         {
           this.props.tooltipEnabled ? (
             <Tooltip
@@ -57,7 +56,7 @@ class Button extends Component {
             </Tooltip>
           ) : button
         }
-      </React.Fragment>
+      </>
     );
   }
 }

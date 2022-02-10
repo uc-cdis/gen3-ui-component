@@ -11,11 +11,6 @@ class AutoCompleteInput extends Component {
     this.inputElem = React.createRef();
   }
 
-  setInputText(text) {
-    this.inputElem.current.value = text;
-    this.updateCloseIcon();
-  }
-
   handleChange() {
     const currentInput = this.inputElem.current.value;
     this.props.onInputChange(currentInput);
@@ -28,16 +23,21 @@ class AutoCompleteInput extends Component {
     this.props.onInputChange('');
   }
 
+  handleSubmit(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    this.props.onSubmitInput(this.inputElem.current.value);
+  }
+
+  setInputText(text) {
+    this.inputElem.current.value = text;
+    this.updateCloseIcon();
+  }
+
   updateCloseIcon() {
     const currentInput = this.inputElem.current.value;
     this.setState({
       closeIconHidden: !currentInput || currentInput.length === 0,
     });
-  }
-
-  handleSubmit(e) {
-    if (e && e.preventDefault) e.preventDefault();
-    this.props.onSubmitInput(this.inputElem.current.value);
   }
 
   clearInput() {
@@ -48,7 +48,7 @@ class AutoCompleteInput extends Component {
   render() {
     return (
       <div className='auto-complete-input'>
-        <form className='auto-complete-input__form' onSubmit={e => this.handleSubmit(e)}>
+        <form className='auto-complete-input__form' onSubmit={(e) => this.handleSubmit(e)}>
           <input
             title={this.props.inputTitle}
             className='auto-complete-input__input-box body'
@@ -59,16 +59,17 @@ class AutoCompleteInput extends Component {
         </form>
         {
           !this.state.closeIconHidden && (
-            <React.Fragment>
+            <>
               <i
                 className='g3-icon g3-icon--cross auto-complete-input__close'
                 onClick={() => { this.handleClear(); }}
                 onKeyPress={() => { this.handleClear(); }}
                 role='button'
+                aria-label='close'
                 tabIndex={0}
               />
               <i className='auto-complete-input__separator' />
-            </React.Fragment>
+            </>
           )
         }
         <i
@@ -76,6 +77,7 @@ class AutoCompleteInput extends Component {
           onClick={() => this.handleSubmit()}
           onKeyPress={() => this.handleSubmit()}
           role='button'
+          aria-label='submit'
           tabIndex={0}
         />
       </div>
