@@ -192,6 +192,13 @@ storiesOf('Filters', module)
   .add('RangeFilter', () => (
     <div>
       <RangeFilter
+        label='Ranger slider from 0-100 with step 1 and "showTotal" Enabled'
+        onAfterDrag={action('range change')}
+        min={0}
+        max={100}
+        showTotal
+      />
+      <RangeFilter
         label='Ranger slider from 0-100 with step 1'
         onAfterDrag={action('range change')}
         min={0}
