@@ -203,6 +203,7 @@ storiesOf('Filters', module)
         onAfterDrag={action('range change')}
         min={0}
         max={100}
+        showTotal
       />
       <RangeFilter
         label='Range slider from 0.00000000001 to 99.9999999999, with default fixed precision(2), and rangeStep=0.1 and "showTotal" Enabled'
@@ -210,6 +211,7 @@ storiesOf('Filters', module)
         min={0.00000000001}
         max={99.9999999999}
         rangeStep={0.1}
+        showTotal
       />
       <RangeFilter
         label='Range slider Big Numbers and "showTotal" Enabled'
@@ -217,6 +219,7 @@ storiesOf('Filters', module)
         min={0}
         max={2000000}
         rangeStep={10}
+        showTotal
       />
       <RangeFilter
         label='Ranger slider from 0-100 with step 1'

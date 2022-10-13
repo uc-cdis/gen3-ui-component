@@ -89,6 +89,7 @@ class RangeFilter extends React.Component {
           upperBound: newUpperBound,
           lowerBoundInputValue: newLowerBound,
           upperBoundInputValue: newUpperBound,
+          total: newUpperBound - newLowerBound,
         },
         () => {
           this.props.onAfterDrag(
@@ -211,13 +212,13 @@ class RangeFilter extends React.Component {
           </label>
           {this.props.showTotal && (
           <div className='g3-range-filter__total'>
-            {this.state.total}
+            {Number(this.state.total).toLocaleString()}
           </div>
           )}
         </div>
         <div className='g3-range-filter__labels'>
           <span>{this.getNumberToFixed(this.props.min)}</span>
-          <span style={{display:'inline-block',float:"right"}}>{this.getNumberToFixed(this.props.max)}</span>
+          <span>{this.getNumberToFixed(this.props.max)}</span>
         </div>
         <Range
           className={`g3-range-filter__slider ${

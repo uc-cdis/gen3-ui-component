@@ -59,10 +59,22 @@
   border: 2px solid #f4f4f4;
   padding-left: 5px;
 }
+
+/* hides the numeric input arrow buttons for Chrome */
+input.g3-range-filter__bound ::-webkit-outer-spin-button,
+input.g3-range-filter__bound ::-webkit-inner-spin-button {
+  display: none;
+}
+/* hides the numeric input arrow buttons for FF */
+input.g3-range-filter__bound[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .g3-range-filter__divider {
   margin-top: 22px;
   color: black;
 }
+
 .g3-range-filter__total {
   background: #e7e7e7;
   color: #629ed0;
@@ -73,9 +85,11 @@
   font-weight: 300;
   text-align: center;
 }
+
 .rc-slider-track {
   background-color: #3786c9;
 }
+
 .rc-slider-handle {
   border-radius: 20px;
   width: 14px;
@@ -84,4 +98,8 @@
 .rc-slider-handle:hover, .rc-slider-handle:focus {
   border: 3px solid rgba(55,134,201,0.7);
   box-shadow: none;
+}
+.g3-range-filter__labels span:nth-child(2) {
+  display: inline-block;
+  float: right;
 }
