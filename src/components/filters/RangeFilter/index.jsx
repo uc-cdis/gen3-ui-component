@@ -165,7 +165,7 @@ class RangeFilter extends React.Component {
         )}
         <div className='g3-range-filter__bounds'>
           <label htmlFor={`${this.props.label}-lower-bound-input`}>
-            Min:&nbsp;
+            Min
             <input
               type='number'
               id={`${this.props.label}-lower-bound-input`}
@@ -186,8 +186,9 @@ class RangeFilter extends React.Component {
               className='g3-range-filter__bound g3-range-filter__bound--lower'
             />
           </label>
+          <div className='g3-range-filter__divider'> &mdash; </div>
           <label htmlFor={`${this.props.label}-upper-bound-input`}>
-            Max:&nbsp;
+            Max
             <input
               type='number'
               id={`${this.props.label}-upper-bound-input`}
@@ -209,11 +210,14 @@ class RangeFilter extends React.Component {
             />
           </label>
           {this.props.showTotal && (
-          <div>
-            Total:
+          <div className='g3-range-filter__total'>
             {this.state.total}
           </div>
           )}
+        </div>
+        <div className='g3-range-filter__labels'>
+          <span>{this.getNumberToFixed(this.props.min)}</span>
+          <span style={{display:'inline-block',float:"right"}}>{this.getNumberToFixed(this.props.max)}</span>
         </div>
         <Range
           className={`g3-range-filter__slider ${

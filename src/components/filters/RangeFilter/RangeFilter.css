@@ -47,3 +47,41 @@
 .g3-range-filter__slider--inactive .rc-slider-track {
   background-color: var(--g3-color__lightgray);
 }
+
+/* Slider Redesign 10/2022 */
+
+.g3-range-filter__bounds {
+  color:#65a2d5;
+}
+.g3-range-filter__bound {
+  display: block;
+  color: black;
+  border: 2px solid #f4f4f4;
+  padding-left: 5px;
+}
+.g3-range-filter__divider {
+  margin-top: 22px;
+  color: black;
+}
+.g3-range-filter__total {
+  background: #e7e7e7;
+  color: #629ed0;
+  min-width: 80px;
+  height: 25px;
+  padding-top: 1px;
+  margin-top: 25px;
+  font-weight: 300;
+  text-align: center;
+}
+.rc-slider-track {
+  background-color: #3786c9;
+}
+.rc-slider-handle {
+  border-radius: 20px;
+  width: 14px;
+  border: 3px solid #3786c9;
+}
+.rc-slider-handle:hover, .rc-slider-handle:focus {
+  border: 3px solid rgba(55,134,201,0.7);
+  box-shadow: none;
+}
