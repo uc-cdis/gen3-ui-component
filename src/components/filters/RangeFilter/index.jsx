@@ -189,7 +189,7 @@ class RangeFilter extends React.Component {
               />
             </label>
             {this.props.showTotal && (<div className='g3-range-filter__divider'> &ndash; </div>)}
-            <label htmlFor={`${this.props.label}-upper-bound-input`} className={`${this.props.showTotal && ('upperBound')}`}>
+            <label htmlFor={`${this.props.label}-upper-bound-input`}>
               Max
               <input
                 type='number'

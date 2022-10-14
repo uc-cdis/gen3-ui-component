@@ -77,6 +77,7 @@ input.g3-range-filter__bound[type="number"] {
   border: 3px solid var(--g3-color__base-blue-light);
   box-shadow: none;
 }
+
 .g3-range-filter__labels span:nth-child(2) {
   float: right;
 }
