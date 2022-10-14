@@ -73,8 +73,6 @@ input.g3-range-filter__bound[type="number"] {
   text-align: center;
 }
 
-
-
 .rc-slider-handle:hover, .rc-slider-handle:focus {
   border: 3px solid var(--g3-color__base-blue-light);
   box-shadow: none;
@@ -84,7 +82,6 @@ input.g3-range-filter__bound[type="number"] {
 }
 
 /* Changes layout based on whether using show total or default layout */
-
 .g3-range-filter__showTotal {
   display: flex;
 }
