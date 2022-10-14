@@ -165,6 +165,7 @@ class RangeFilter extends React.Component {
           <p className='g3-range-filter__title'>{this.props.label}</p>
         )}
         <div className='g3-range-filter__bounds'>
+          <div className={`${this.props.showTotal ? 'g3-range-filter__showTotal' : 'g3-range-filter__default'}`}>
             <label htmlFor={`${this.props.label}-lower-bound-input`}>
               Min
               <input
@@ -187,8 +188,8 @@ class RangeFilter extends React.Component {
                 className='g3-range-filter__bound g3-range-filter__bound--lower'
               />
             </label>
-            {this.props.showTotal && (<div className='g3-range-filter__divider'> &mdash; </div>)}
-            <label htmlFor={`${this.props.label}-upper-bound-input`}>
+            {this.props.showTotal && (<div className='g3-range-filter__divider'> &ndash; </div>)}
+            <label htmlFor={`${this.props.label}-upper-bound-input`} className={`${this.props.showTotal && ('upperBound')}`}>
               Max
               <input
                 type='number'
@@ -207,14 +208,16 @@ class RangeFilter extends React.Component {
                   }
                 }}
                 onBlur={() => this.handleInputSubmit()}
-                className={`g3-range-filter__bound g3-range-filter__bound--lower ${this.props.showTotal && ('margin-right-offset')}`}
+                className='g3-range-filter__bound g3-range-filter__bound--lower'
               />
             </label>
+          </div>
           {this.props.showTotal && (
           <div className='g3-range-filter__total'>
             {Number(this.state.total).toLocaleString()}
           </div>
           )}
+
         </div>
         <div className='g3-range-filter__labels'>
           <span>{Number(this.getNumberToFixed(this.props.min)).toLocaleString()}</span>
