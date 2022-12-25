@@ -28,7 +28,7 @@
     "@storybook/addon-actions": "^6.0.0",
     "@storybook/react": "^6.0.0",
     "antd": "^4.16.7",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.2.4",
     "postcss-svgo": "^5.0.0",
     "prop-types": "^15.7.2",
     "rc-slider": "^8.6.6",
