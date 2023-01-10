@@ -4,7 +4,7 @@ git:
 node_js:
   - '14'
 before_install:
-  - npm install -g npm@8.5
+  - npm install -g npm
 install:
   - npm ci
 script:
