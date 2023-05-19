@@ -1,6 +1,6 @@
 {
   "name": "@gen3/ui-component",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "description": "Basic UI component for gen3",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,7 @@
   "dependencies": {
     "@storybook/addon-actions": "^6.0.0",
     "@storybook/react": "^6.0.0",
-    "antd": "^4.16.7",
+    "antd": "^4.24.3",
     "babel-loader": "^8.0.5",
     "postcss-svgo": "^5.0.0",
     "prop-types": "^15.7.2",
@@ -42,10 +42,10 @@
     "stylelint": "^14.15.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
+    "@babel/core": "^7.20.2",
     "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
     "autoprefixer": "^9.4.10",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^26.0.0",
@@ -78,6 +78,9 @@
     "strip-ansi": "6.0.1",
     "@storybook/react": {
       "trim": "0.0.3"
+    },
+    "default-browser-id": {
+      "meow": "6.1.0"
     }
   },
   "jest": {
