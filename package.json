@@ -27,7 +27,7 @@
   "dependencies": {
     "@storybook/addon-actions": "^6.0.0",
     "@storybook/react": "^6.0.0",
-    "antd": "^4.16.7",
+    "antd": "^4.24.3",
     "babel-loader": "^8.0.5",
     "postcss-svgo": "^5.0.0",
     "prop-types": "^15.7.2",
@@ -42,10 +42,10 @@
     "stylelint": "^15.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
+    "@babel/core": "^7.20.2",
     "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
     "autoprefixer": "^9.4.10",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^26.0.0",
@@ -55,7 +55,7 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react": "^7.31.11",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-cli": "^2.0.1",
@@ -71,7 +71,7 @@
     "postcss-cli": "^8.0.0",
     "postcss-less": "^6.0.0",
     "postcss-loader": "^4.3.0",
-    "postcss-preset-env": "^7.0.0",
+    "postcss-preset-env": "^7.8.3",
     "react-test-renderer": "^16.8.4"
   },
   "overrides": {
