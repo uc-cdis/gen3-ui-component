@@ -37,7 +37,7 @@
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1",
     "react-select-async-paginate": "^0.7.2",
-    "recharts": "^2.3.0",
+    "recharts": "^2.5.0",
     "stylelint": "^15.0.0"
   },
   "devDependencies": {
@@ -52,7 +52,7 @@
     "enzyme-adapter-react-16": "^1.10.0",
     "eslint": "^7.23.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.31.11",
     "gulp": "^4.0.0",
@@ -69,7 +69,7 @@
     "postcss-assets": "^6.0.0",
     "postcss-cli": "^10.0.0",
     "postcss-less": "^6.0.0",
-    "postcss-loader": "^7.1.0",
+    "postcss-loader": "^7.3.0",
     "postcss-preset-env": "^7.8.3",
     "react-test-renderer": "^16.8.4"
   },
