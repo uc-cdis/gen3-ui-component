@@ -15,19 +15,23 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 14px 0;
+  color: var(--g3-color__base-blue);
 }
 
 .g3-range-filter__bound {
   margin: 0;
-  /* if no max-width this thing will take full length in FF */
-  max-width: 6em;
+  display: block;
+  color: var(--g3-color__black);
+  border: 2px solid #f4f4f4;
+  padding: 2px 2px 2px 5px;
+  width: 4.5em;
 }
 
 /* Overrides for rc-slider */
 .rc-slider-handle {
-  border-radius: 0;
-  width: 10px;
-  border: 1px solid var(--g3-color__lightgray);
+  border-radius: 20px;
+  width: 14px;
+  border: 3px solid var(--g3-color__base-blue);
 }
 
 .rc-slider-handle:hover {
@@ -40,10 +44,58 @@
 }
 
 .rc-slider-track {
-  background-color: var(--g3-color__highlight-orange);
+  background-color: var(--g3-color__base-blue);
   border-radius: 2px;
 }
 
 .g3-range-filter__slider--inactive .rc-slider-track {
   background-color: var(--g3-color__lightgray);
+}
+
+/* hides the numeric input arrow buttons for Chrome */
+input.g3-range-filter__bound ::-webkit-outer-spin-button,
+input.g3-range-filter__bound ::-webkit-inner-spin-button {
+  display: none;
+}
+
+/* hides the numeric input arrow buttons for FF */
+input.g3-range-filter__bound[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.g3-range-filter__total {
+  background: var(--g3-color__silver);
+  color: var(--g3-color__base-blue);
+  min-width: 80px;
+  height: 25px;
+  padding-top: 1px;
+  margin: 23px 0 0 10px;
+  text-align: center;
+}
+
+.rc-slider-handle:hover, .rc-slider-handle:focus {
+  border: 3px solid var(--g3-color__base-blue-light);
+  box-shadow: none;
+}
+
+.g3-range-filter__labels span:nth-child(2) {
+  float: right;
+}
+
+/* Changes layout based on whether using show total or default layout */
+.g3-range-filter__showTotal {
+  display: flex;
+}
+
+.g3-range-filter__showTotal .g3-range-filter__divider {
+  color: var(--g3-color__black);
+  margin: 25px 10px 0 10px;
+}
+
+/* Default Layout */
+.g3-range-filter__default {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
 }
