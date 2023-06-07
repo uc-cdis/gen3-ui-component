@@ -1,5 +1,4 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import '../src/css/icon.css';
 import './icon-story.css';
 
@@ -57,24 +56,25 @@ const iconClassList = [
   'g3-icon g3-icon--graph g3-icon--lg',
 ];
 
-storiesOf('General/Icons and Images', module)
-  .add('Icons', () => (
-    <div className='icon-demo'>
-      {
-        iconClassList.map(iconClass => (
-          <div className='icon-demo__card' key={iconClass}>
-            <div className='icon-demo__icon-wrap'>
-              <i className={`icon-demo__icon ${iconClass}`} />
-            </div>
-            <div>
-              {iconClass.split(' ').map(iconClassName => (
-                <p className='icon-demo__text' key={iconClassName}>
-                  {iconClassName}
-                </p>
-              ))}
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  ));
+export default {
+  title: 'General/Icons and Images',
+};
+
+export const Icons = () => (
+  <div className="icon-demo">
+    {iconClassList.map((iconClass) => (
+      <div className="icon-demo__card" key={iconClass}>
+        <div className="icon-demo__icon-wrap">
+          <i className={`icon-demo__icon ${iconClass}`} />
+        </div>
+        <div>
+          {iconClass.split(' ').map((iconClassName) => (
+            <p className="icon-demo__text" key={iconClassName}>
+              {iconClassName}
+            </p>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+);

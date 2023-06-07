@@ -9,15 +9,11 @@ describe('<Dropdown />', () => {
   /* eslint-disable */
   const dropdownWrapper = mount(
     <Dropdown>
-      <Dropdown.Button>
-        Dropdown
-      </Dropdown.Button>
+      <Dropdown.Button>Dropdown</Dropdown.Button>
       <Dropdown.Menu>
-        <Dropdown.Item onClick={func1}>
-          item1
-        </Dropdown.Item>
+        <Dropdown.Item onClick={func1}>item1</Dropdown.Item>
       </Dropdown.Menu>
-    </Dropdown>,
+    </Dropdown>
   );
   const splitDropdownWrapper = mount(
     <Dropdown>
@@ -25,11 +21,9 @@ describe('<Dropdown />', () => {
         Dropdown
       </Dropdown.Button>
       <Dropdown.Menu>
-        <Dropdown.Item onClick={func3}>
-          item1
-        </Dropdown.Item>
+        <Dropdown.Item onClick={func3}>item1</Dropdown.Item>
       </Dropdown.Menu>
-    </Dropdown>,
+    </Dropdown>
     /* eslint-enable */
   );
 
