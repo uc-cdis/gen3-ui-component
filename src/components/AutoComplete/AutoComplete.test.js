@@ -20,10 +20,7 @@ describe('<AutoComplete />', () => {
     ],
   };
 
-  const suggestionList = [
-    suggestionItem1,
-    suggestionItem2,
-  ];
+  const suggestionList = [suggestionItem1, suggestionItem2];
 
   const suggestionItemClickFunc = jest.fn();
   const inputChangeFunc = jest.fn();
@@ -45,7 +42,8 @@ describe('<AutoComplete />', () => {
   it('call onInputChange function when typing', () => {
     const inputElem = autoComplete.find('.auto-complete-input__input-box');
     const testInput = 'test';
-    for (let i = 0; i < testInput.length; i += 1) { // mock typing
+    for (let i = 0; i < testInput.length; i += 1) {
+      // mock typing
       inputElem.simulate('change', { target: { value: testInput.substring(i) } });
     }
     expect(inputChangeFunc.mock.calls.length).toBe(testInput.length);
@@ -68,13 +66,10 @@ describe('<AutoComplete />', () => {
   });
 
   it('build html for suggestion items', () => {
-    const builtFragment = mount(
-      <div>
-        {getSuggestionItemHTML(suggestionItem1)}
-      </div>,
+    const builtFragment = mount(<div>{getSuggestionItemHTML(suggestionItem1)}</div>);
+    expect(builtFragment.find('.auto-complete-suggestions__highlight').length).toBe(
+      suggestionItem1.matchedPieceIndices.length,
     );
-    expect(builtFragment.find('.auto-complete-suggestions__highlight').length)
-      .toBe(suggestionItem1.matchedPieceIndices.length);
   });
 
   it('could clear input from outside', () => {
