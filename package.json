@@ -67,7 +67,7 @@
     "install": "^0.13.0",
     "jest": "^26.0.0",
     "minimist": "^1.2.0",
-    "postcss": "^8.0.0",
+    "postcss": "^8.4.24",
     "postcss-assets": "^6.0.0",
     "postcss-cli": "^8.0.0",
     "postcss-less": "^6.0.0",
