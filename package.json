@@ -26,7 +26,7 @@
   "homepage": "https://github.com/uc-cdis/gen3-ui-component#readme",
   "dependencies": {
     "antd": "^4.24.9",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^9.0.0",
     "postcss-svgo": "^5.0.0",
     "prop-types": "^15.7.2",
     "rc-slider": "^8.6.6",
