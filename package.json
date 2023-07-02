@@ -74,7 +74,7 @@
     "postcss-loader": "^4.3.0",
     "postcss-preset-env": "^7.8.3",
     "react-test-renderer": "^16.8.4",
-    "storybook": "^7.0.18"
+    "storybook": "^7.0.20"
   },
   "overrides": {
     "strip-ansi": "6.0.1",
