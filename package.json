@@ -36,7 +36,7 @@
     "react-router-dom": "^4.3.1",
     "react-select-async-paginate": "^0.7.3",
     "recharts": "^2.7.2",
-    "stylelint": "^15.9.0"
+    "stylelint": "^16.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
