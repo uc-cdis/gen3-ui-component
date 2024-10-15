@@ -36,6 +36,14 @@
   background-color: var(--g3-color__highlight-orange-light);
 }
 
+.g3-color__highlight-orange-white-text {
+  background-color: var(--g3-color__highlight-orange-white-text);
+}
+
+.g3-color__highlight-orange-white-text-light {
+  background-color: var(--g3-color__highlight-orange-white-text-light);
+}
+
 .g3-color__mint {
   background-color: var(--g3-color__mint);
 }

@@ -1,6 +1,6 @@
 :root {
-  --g3-color__base-blue: #3283C8;
-  --g3-color__base-blue-light: #05B8EE;
+  --g3-color__base-blue: #194C90;
+  --g3-color__base-blue-light: #2466AC;
   --g3-color__lime: #7EC500;
   --g3-color__iris: #AD91FF;
   --g3-color__rose: #E74C3C;
@@ -8,6 +8,8 @@
   --g3-color__pink: #FF7ABC;
   --g3-color__highlight-orange: #EF8523;
   --g3-color__highlight-orange-light: #FF9635;
+  --g3-color__highlight-orange-white-text: #994A03;
+  --g3-color__highlight-orange-white-text-light: #B35F05;
   --g3-color__mint: #26D9B1;
   --g3-color__bg-coal: #4A4A4A;
   --g3-color__bg-cloud: #F5F5F5;
@@ -21,8 +23,8 @@
   --g3-color__obsidian: #757575;
 
   --g3-primary-btn__color: var(--g3-color__white);
-  --g3-primary-btn__bg-color: var(--g3-color__highlight-orange);
-  --g3-primary-btn__bg-color--hover: var(--g3-color__highlight-orange-light);
+  --g3-primary-btn__bg-color: var(--g3-color__highlight-orange-white-text);
+  --g3-primary-btn__bg-color--hover: var(--g3-color__highlight-orange-white-text-light);
   --g3-primary-btn__border-color: var(--g3-color__lightgray);
   --g3-primary-btn__border-color--hover: var(--g3-color__gray);
   --g3-primary-btn__border-color--active: var(--g3-color__lightgray);
@@ -36,11 +38,11 @@
 
   --g3-default-btn__color: var(--g3-color__gray);
   --g3-default-btn__color--hover: var(--g3-color__black);
-  --g3-default-btn__color--active: var(--g3-color__highlight-orange-light);
+  --g3-default-btn__color--active: var(--g3-color__highlight-orange-white-text-light);
   --g3-default-btn__bg-color: var(--g3-color__white);
   --g3-default-btn__border-color: var(--g3-color__gray);
   --g3-default-btn__border-color--hover: var(--g3-color__black);
-  --g3-default-btn__border-color--active: var(--g3-color__highlight-orange-light);
+  --g3-default-btn__border-color--active: var(--g3-color__highlight-orange-white-text-light);
 
   --g3-disabled-btn__color: var(--g3-color__titanium);
   --g3-disabled-btn__bg-color: var(--g3-color__white);

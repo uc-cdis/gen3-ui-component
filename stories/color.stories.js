@@ -9,6 +9,8 @@ const coreSystemColors = [
   [
     { name: 'highlight-orange', color: 'highlight-orange' },
     { name: 'highlight-orange-light', color: 'highlight-orange-light' },
+    { name: 'highlight-orange-white-text', color: 'highlight-orange-white-text' },
+    { name: 'highlight-orange-white-text-light', color: 'highlight-orange-white-text-light' },
   ],
   [
     { name: 'bg-coal', color: 'bg-coal' },
