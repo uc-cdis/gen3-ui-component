@@ -44,7 +44,7 @@
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
     "@storybook/addon-actions": "^7.0.24",
-    "@storybook/react": "^7.0.18",
+    "@storybook/react": "^7.6.20",
     "@storybook/react-webpack5": "^7.0.24",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "autoprefixer": "^9.8.8",
