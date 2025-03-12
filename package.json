@@ -39,12 +39,12 @@
     "recharts": "^2.7.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.5",
+    "@babel/core": "^7.26.10",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
     "@storybook/addon-actions": "^7.0.24",
-    "@storybook/react": "^7.0.18",
+    "@storybook/react": "^7.1.0",
     "@storybook/react-webpack5": "^7.0.24",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "autoprefixer": "^9.8.8",
@@ -74,7 +74,7 @@
     "postcss-loader": "^4.3.0",
     "postcss-preset-env": "^7.8.3",
     "react-test-renderer": "^17.0.2",
-    "storybook": "^7.0.24"
+    "storybook": "^8.2.0"
   },
   "overrides": {
     "strip-ansi": "6.0.1",
