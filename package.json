@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/uc-cdis/gen3-ui-component#readme",
   "dependencies": {
-    "antd": "^4.24.12",
+    "antd": "^5.12.7",
     "babel-loader": "^9.1.3",
     "postcss-svgo": "^5.1.0",
     "prop-types": "^15.8.1",
@@ -33,7 +33,7 @@
     "rc-tooltip": "^3.7.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^6.4.0",
     "react-select-async-paginate": "^0.7.3",
     "stylelint": "^15.10.0",
     "recharts": "^2.7.3"
