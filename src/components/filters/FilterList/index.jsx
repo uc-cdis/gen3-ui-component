@@ -80,7 +80,10 @@ class FilterList extends React.Component {
 
   toggleFilters(openAll) {
     this.sectionRefs.forEach((ref) => {
-      ref.current.toggleSection(openAll);
+      if(ref.current){
+        // Current is null if the specific filter has no data and is hidden
+        ref.current.toggleSection(openAll);
+      }
     });
   }
 
