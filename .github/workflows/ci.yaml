@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    types: [opened, reopened]
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+
+jobs:
+  Security:
+    name: Security Pipeline
+    uses: uc-cdis/.github/.github/workflows/securitypipeline.yaml@master
+    with:
+      python-poetry: 'false'
+    secrets: inherit
+
+
+  unit_test:
+    name: NPM Unit Test
+    uses: uc-cdis/.github/.github/workflows/npm_unit_test.yaml@master
+    with:
+      node-version: '16'
+      npm-version: '8'
+      post-test: 'npm run eslint && npm run stylelint'
