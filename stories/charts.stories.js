@@ -80,6 +80,22 @@ const lockedSummaries = [
   { type: 'bar', title: 'Virus', data: lockedVirus },
 ];
 
+const summariesWithCustomizedMaxItems = [
+  { type: 'bar', title: 'Gender', data: genderData },
+  {
+    type: 'pie', title: 'Birth-Year', data: birthData, maximumDisplayItem: 2,
+  },
+  { type: 'pie', title: 'Empty Pie', data: [] },
+  { type: 'bar', title: 'Empty Bar', data: [] },
+  { type: 'fullPie', title: 'Empty FullPie', data: [] },
+  { type: 'fullPie', title: 'Species', data: speciesData },
+  { type: 'bar', title: 'Race', data: raceData },
+  {
+    type: 'bar', title: 'Virus', data: virusData, maximumDisplayItem: 5,
+  },
+  { type: 'bar', title: 'Big Set', data: bigSet },
+];
+
 const summariesWithOneEmpty = [
   {
     type: 'bar',
@@ -109,7 +125,7 @@ export default {
 };
 
 export const _SummaryHorizontalBarChart = () => (
-  <SummaryHorizontalBarChart data={virusData} title="bar chart title" showPercentage={false} />
+  <SummaryHorizontalBarChart data={virusData} title='bar chart title' showPercentage={false} />
 );
 
 _SummaryHorizontalBarChart.story = {
@@ -117,7 +133,7 @@ _SummaryHorizontalBarChart.story = {
 };
 
 export const SummaryHorizontalBarChartWithSingleColorAndPercentage = () => (
-  <SummaryHorizontalBarChart data={virusData} title="bar chart title" color="#3283c8" />
+  <SummaryHorizontalBarChart data={virusData} title='bar chart title' color='#3283c8' />
 );
 
 SummaryHorizontalBarChartWithSingleColorAndPercentage.story = {
@@ -127,7 +143,7 @@ SummaryHorizontalBarChartWithSingleColorAndPercentage.story = {
 export const SummaryHorizontalBarChartWithCustomizedColors = () => (
   <SummaryHorizontalBarChart
     data={virusData}
-    title="bar chart title"
+    title='bar chart title'
     showPercentage={false}
     useCustomizedColorMap
     customizedColorMap={customizedColorMap}
@@ -139,7 +155,7 @@ SummaryHorizontalBarChartWithCustomizedColors.story = {
 };
 
 export const _SummaryPieChart = () => (
-  <SummaryPieChart data={virusData} title="pie chart title" showPercentage />
+  <SummaryPieChart data={virusData} title='pie chart title' showPercentage />
 );
 
 _SummaryPieChart.story = {
@@ -149,7 +165,7 @@ _SummaryPieChart.story = {
 export const SummaryPieChartWithCustomizedColors = () => (
   <SummaryPieChart
     data={virusData}
-    title="pie chart title"
+    title='pie chart title'
     showPercentage
     useCustomizedColorMap
     customizedColorMap={customizedColorMap}
@@ -161,7 +177,7 @@ SummaryPieChartWithCustomizedColors.story = {
 };
 
 export const SummaryFullPieChart = () => (
-  <SummaryPieChart data={virusData} title="pie chart title" innerRadius={0} showPercentage />
+  <SummaryPieChart data={virusData} title='pie chart title' innerRadius={0} showPercentage />
 );
 
 SummaryFullPieChart.story = {
@@ -182,12 +198,20 @@ SummaryChartGroupWithOnlyShowing2AtFirst.story = {
   name: 'SummaryChartGroup with only showing 2 at first',
 };
 
+export const SummaryChartGroupWithCustomizedMaxItems = () => (
+  <SummaryChartGroup summaries={summariesWithCustomizedMaxItems} width={1010} />
+);
+
+SummaryChartGroupWithCustomizedMaxItems.story = {
+  name: 'SummaryChartGroup with customized number of items',
+};
+
 export const SummaryChartGroupWithALockedChart = () => (
   <SummaryChartGroup
     summaries={lockedSummaries}
     width={1010}
     lockValue={-1}
-    lockMessage="This chart is locked!"
+    lockMessage='This chart is locked!'
   />
 );
 
@@ -199,7 +223,7 @@ export const SummaryChartGroupWithAnEmptyChart = () => (
   <SummaryChartGroup
     summaries={summariesWithOneEmpty}
     width={1010}
-    chartEmptyMessage="This chart is empty!"
+    chartEmptyMessage='This chart is empty!'
   />
 );
 
@@ -208,7 +232,7 @@ SummaryChartGroupWithAnEmptyChart.story = {
 };
 
 export const _PercentageStackedBarChart = () => (
-  <PercentageStackedBarChart data={virusData} title="percentage stacked bar chart title" />
+  <PercentageStackedBarChart data={virusData} title='percentage stacked bar chart title' />
 );
 
 _PercentageStackedBarChart.story = {
@@ -218,7 +242,7 @@ _PercentageStackedBarChart.story = {
 export const PercentageStackedBarChartWithCustomizedColors = () => (
   <PercentageStackedBarChart
     data={virusData}
-    title="percentage stacked bar chart title"
+    title='percentage stacked bar chart title'
     useCustomizedColorMap
     customizedColorMap={customizedColorMap}
   />
@@ -229,7 +253,7 @@ PercentageStackedBarChartWithCustomizedColors.story = {
 };
 
 export const PercentageStackedBarChartLocked = () => (
-  <PercentageStackedBarChart data={lockedVirus} title="percentage stacked bar chart title" />
+  <PercentageStackedBarChart data={lockedVirus} title='percentage stacked bar chart title' />
 );
 
 PercentageStackedBarChartLocked.story = {
