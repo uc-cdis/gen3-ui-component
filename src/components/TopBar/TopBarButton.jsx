@@ -2,24 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './TopBarButton.css';
 
-const TopBarButton = ({
+function TopBarButton({
   item, onActiveTab = () => {}, isActive = false, tabIndex,
-}) => (
-  <div
-    className={isActive ? 'top-bar-button top-bar-button--active body' : 'top-bar-button body'}
-    onClick={onActiveTab}
-    onKeyDown={onActiveTab}
-    role='button'
-    tabIndex={tabIndex}
-  >
+}) {
+  return (
+<div
+  className={isActive ? 'top-bar-button top-bar-button--active body' : 'top-bar-button body'}
+  onClick={onActiveTab}
+  onKeyDown={onActiveTab}
+  role='button'
+  tabIndex={tabIndex}
+>
     {item.name}
     {
       item.iconClassName
         ? <i className={`top-bar-button__icon ${item.iconClassName}`} />
         : null
     }
-  </div>
-);
+</div>
+  );
+}
 
 TopBarButton.propTypes = {
   item: PropTypes.shape({

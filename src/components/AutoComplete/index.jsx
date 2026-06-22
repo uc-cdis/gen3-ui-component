@@ -10,14 +10,6 @@ class AutoComplete extends Component {
     this.inputRef = React.createRef();
   }
 
-  setInputText(text) {
-    this.inputRef.current.setInputText(text);
-  }
-
-  clearInput() {
-    this.inputRef.current.clearInput();
-  }
-
   render() {
     const emptySuggestionsClassModifier = this.props.suggestionList.length === 0 ? 'auto-complete--empty-suggestion-list' : '';
     return (

@@ -1,14 +1,16 @@
 module.exports = {
   "extends": ["airbnb", "plugin:storybook/recommended"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true,
     "es6": true,
     "jest": true
   },
   "parserOptions": {
-    "sourceType": "module",
-    "ecmaVersion": 6
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"],
+    },
   },
   "plugins": ["react"],
   "rules": {
@@ -25,6 +27,6 @@ module.exports = {
     "react/no-array-index-key": ["off", "ignore"],
     "react/destructuring-assignment": ["off", "ignore"],
     "react/jsx-filename-extension": ["off", "ignore"],
-    'react/jsx-props-no-spreading': ['off']
+    "react/jsx-props-no-spreading": ["off"]
   }
 };

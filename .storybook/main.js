@@ -6,7 +6,7 @@ const config = {
   },
   stories: ['../stories/*.stories.js'],
   // Optional
-  addons: ['@storybook/addon-actions'],
+  addons: [],
 };
 
 export default config;

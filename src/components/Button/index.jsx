@@ -44,7 +44,7 @@ class Button extends Component {
     );
 
     return (
-      <>
+      <div>
         {
           this.props.tooltipEnabled ? (
             <Tooltip
@@ -56,7 +56,7 @@ class Button extends Component {
             </Tooltip>
           ) : button
         }
-      </>
+      </div>
     );
   }
 }
