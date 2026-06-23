@@ -29,13 +29,13 @@ class Button extends Component {
             <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon} g3-button__icon g3-button__icon--left`} />
           )
         }
-        { this.props.label }
+        {this.props.label}
         {
           this.props.rightIcon && !this.props.isPending
             ? <i className={`g3-icon g3-icon--sm g3-icon--${this.props.rightIcon} g3-button__icon g3-button__icon--right`} />
             : null
         }
-        { this.props.isPending ? (
+        {this.props.isPending ? (
           <div className='g3-button__spinner g3-button__icon--right'>
             <Spinner />
           </div>
@@ -43,21 +43,15 @@ class Button extends Component {
       </button>
     );
 
-    return (
-      <div>
-        {
-          this.props.tooltipEnabled ? (
-            <Tooltip
-              placement='bottom'
-              overlay={this.props.tooltipText}
-              arrowContent={<div className='rc-tooltip-arrow-inner' />}
-            >
-              {button}
-            </Tooltip>
-          ) : button
-        }
-      </div>
-    );
+    return this.props.tooltipEnabled ? (
+      <Tooltip
+        placement='bottom'
+        overlay={this.props.tooltipText}
+        arrowContent={<div className='rc-tooltip-arrow-inner' />}
+      >
+        {button}
+      </Tooltip>
+    ) : button;
   }
 }
 
@@ -81,7 +75,7 @@ Button.defaultProps = {
   buttonType: 'primary',
   enabled: true,
   className: '',
-  onClick: () => {},
+  onClick: () => { },
   leftIcon: null,
   rightIcon: null,
   type: 'button',
