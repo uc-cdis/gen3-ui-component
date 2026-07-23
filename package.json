@@ -79,15 +79,7 @@
     "style-loader": "^3.3.4"
   },
   "overrides": {
-    "strip-ansi": "6.0.1",
-    "glob-parent": "^5.1.2",
-    "semver": "^7.5.2",
-    "@storybook/react": {
-      "trim": "0.0.3"
-    },
-    "default-browser-id": {
-      "meow": "6.1.0"
-    }
+    "glob-parent": "^5.1.2"
   },
   "jest": {
     "moduleNameMapper": {
