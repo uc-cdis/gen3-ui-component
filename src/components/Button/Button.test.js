@@ -4,7 +4,7 @@ import Button from '.';
 
 describe('<Button />', () => {
   it('renders correctly with label', () => {
-    render(<Button label="test-button" />);
+    render(<Button label='test-button' />);
     expect(screen.getByText('test-button')).toBeInTheDocument();
   });
 });

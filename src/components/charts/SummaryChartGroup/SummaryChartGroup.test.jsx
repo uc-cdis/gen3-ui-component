@@ -4,13 +4,13 @@ import SummaryChartGroup from '.';
 
 jest.mock('../SummaryPieChart', () => {
   return function MockSummaryPieChart() {
-    return <div data-testid="summary-pie-chart" />;
+    return <div data-testid='summary-pie-chart' />;
   };
 });
 
 jest.mock('../SummaryHorizontalBarChart', () => {
   return function MockSummaryHorizontalBarChart() {
-    return <div data-testid="summary-bar-chart" />;
+    return <div data-testid='summary-bar-chart' />;
   };
 });
 

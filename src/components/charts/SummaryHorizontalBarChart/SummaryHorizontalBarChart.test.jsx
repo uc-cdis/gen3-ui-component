@@ -14,7 +14,7 @@ describe('<SummaryHorizontalBarChart />', () => {
 
   it('renders correctly with title', () => {
     render(
-      <SummaryHorizontalBarChart data={chartData} title="bar chart title" color="#3283c8" />,
+      <SummaryHorizontalBarChart data={chartData} title='bar chart title' color='#3283c8' />,
     );
     expect(screen.getByText('bar chart title')).toBeInTheDocument();
   });

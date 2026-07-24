@@ -9,14 +9,14 @@ describe('RangeFilter', () => {
 
   it('renders range inputs', () => {
     const { container } = render(
-      <RangeFilter min={min} max={max} onAfterDrag={onDrag} label="" />,
+      <RangeFilter min={min} max={max} onAfterDrag={onDrag} label='' />,
     );
     expect(container.querySelectorAll('input').length).toBeGreaterThan(0);
   });
 
   it('updates input values on user input and submit', () => {
     const { container } = render(
-      <RangeFilter min={min} max={max} onAfterDrag={onDrag} label="" />,
+      <RangeFilter min={min} max={max} onAfterDrag={onDrag} label='' />,
     );
 
     const inputs = container.querySelectorAll('input');
@@ -32,7 +32,7 @@ describe('RangeFilter', () => {
 
   it('clamps lowerBound value to min if below range', () => {
     const { container } = render(
-      <RangeFilter min={min} max={max} onAfterDrag={onDrag} label="" />,
+      <RangeFilter min={min} max={max} onAfterDrag={onDrag} label='' />,
     );
 
     const inputs = container.querySelectorAll('input');
@@ -48,7 +48,7 @@ describe('RangeFilter', () => {
 
   it('clamps upperBound value to max if above range', () => {
     const { container } = render(
-      <RangeFilter min={min} max={max} onAfterDrag={onDrag} label="" />,
+      <RangeFilter min={min} max={max} onAfterDrag={onDrag} label='' />,
     );
 
     const inputs = container.querySelectorAll('input');

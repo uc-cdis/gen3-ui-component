@@ -7,9 +7,9 @@ describe('<CommonsLogin />', () => {
   it('renders title and button', () => {
     render(
       <CommonsLogin
-        title="KidsFirst"
+        title='KidsFirst'
         logoSrc={kfLogo}
-        buttonTitle="Connect"
+        buttonTitle='Connect'
         onButtonClick={() => {}}
       />,
     );

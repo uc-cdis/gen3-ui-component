@@ -7,7 +7,7 @@ describe('SingleSelectFilter', () => {
 
   it('renders checkbox input and calls onSelect when clicked', () => {
     const { container } = render(
-      <SingleSelectFilter label="test1" onSelect={onSelect} hideZero={false} />,
+      <SingleSelectFilter label='test1' onSelect={onSelect} hideZero={false} />,
     );
 
     const input = container.querySelector('input');

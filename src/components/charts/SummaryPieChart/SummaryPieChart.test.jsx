@@ -13,18 +13,18 @@ describe('<SummaryPieChart />', () => {
   ];
 
   it('renders title', () => {
-    render(<SummaryPieChart title="test" data={chartData} />);
+    render(<SummaryPieChart title='test' data={chartData} />);
     expect(screen.getByText('test')).toBeInTheDocument();
   });
 
   it('should render all pie sectors', () => {
-    const { container } = render(<SummaryPieChart title="test" data={chartData} />);
+    const { container } = render(<SummaryPieChart title='test' data={chartData} />);
     const pieSectors = container.querySelectorAll('.recharts-layer.recharts-pie-sector');
     expect(pieSectors.length).toBe(chartData.length);
   });
 
   it('should render all legend items', () => {
-    const { container } = render(<SummaryPieChart title="test" data={chartData} />);
+    const { container } = render(<SummaryPieChart title='test' data={chartData} />);
     const legendItems = container.querySelectorAll('.summary-pie-chart__legend-item');
     expect(legendItems.length).toBe(chartData.length);
   });

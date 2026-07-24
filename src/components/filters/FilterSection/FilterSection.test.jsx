@@ -17,7 +17,7 @@ describe('FilterSection', () => {
   const renderComponent = () =>
     render(
       <FilterSection
-        title="Section Title"
+        title='Section Title'
         options={singleSelectOptions}
         onSelect={onSelect}
         onAfterDrag={onDrag}
