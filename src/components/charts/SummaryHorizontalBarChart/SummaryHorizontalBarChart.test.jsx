@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import SummaryHorizontalBarChart from '.';
 
 describe('<SummaryHorizontalBarChart />', () => {
@@ -12,12 +12,10 @@ describe('<SummaryHorizontalBarChart />', () => {
     { name: 'CA04', value: 1890 },
   ];
 
-  const wrapper = mount(
-    <SummaryHorizontalBarChart data={chartData} title='bar chart title' color='#3283c8' />,
-  );
-  const charts = wrapper.find(SummaryHorizontalBarChart);
-
-  it('renders', () => {
-    expect(charts.length).toBe(1);
+  it('renders correctly with title', () => {
+    render(
+      <SummaryHorizontalBarChart data={chartData} title="bar chart title" color="#3283c8" />,
+    );
+    expect(screen.getByText('bar chart title')).toBeInTheDocument();
   });
 });

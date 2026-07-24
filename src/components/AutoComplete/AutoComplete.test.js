@@ -1,5 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { getSuggestionItemHTML } from './AutoCompleteSuggestions';
 import AutoComplete from '.';
 
@@ -26,55 +27,79 @@ describe('<AutoComplete />', () => {
   const inputChangeFunc = jest.fn();
   const submitInputFunc = jest.fn();
 
-  const autoComplete = mount(
-    <AutoComplete
-      suggestionList={suggestionList}
-      onSuggestionItemClick={suggestionItemClickFunc}
-      onInputChange={inputChangeFunc}
-      onSubmitInput={submitInputFunc}
-    />,
-  );
-
-  it('renders', () => {
-    expect(autoComplete.find(AutoComplete).length).toBe(1);
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('call onInputChange function when typing', () => {
-    const inputElem = autoComplete.find('.auto-complete-input__input-box');
-    const testInput = 'test';
-    for (let i = 0; i < testInput.length; i += 1) {
-      // mock typing
-      inputElem.simulate('change', { target: { value: testInput.substring(i) } });
-    }
-    expect(inputChangeFunc.mock.calls.length).toBe(testInput.length);
-  });
-
-  it('call onSubmitInput function when submit', () => {
-    const formElem = autoComplete.find('.auto-complete-input__form');
-    formElem.simulate('submit');
-    expect(submitInputFunc.mock.calls.length).toBe(1);
-
-    const iconElem = autoComplete.find('.auto-complete-input__icon');
-    iconElem.simulate('click');
-    expect(submitInputFunc.mock.calls.length).toBe(2);
-  });
-
-  it('call onSuggestionItemClick when clicking suggestion items', () => {
-    const firstItemElem = autoComplete.find('.auto-complete-suggestions__item').first();
-    firstItemElem.simulate('click');
-    expect(suggestionItemClickFunc.mock.calls.length).toBe(1);
-  });
-
-  it('build html for suggestion items', () => {
-    const builtFragment = mount(<div>{getSuggestionItemHTML(suggestionItem1)}</div>);
-    expect(builtFragment.find('.auto-complete-suggestions__highlight').length).toBe(
-      suggestionItem1.matchedPieceIndices.length,
+  const renderComponent = (props = {}) => {
+    return render(
+      <AutoComplete
+        suggestionList={suggestionList}
+        onSuggestionItemClick={suggestionItemClickFunc}
+        onInputChange={inputChangeFunc}
+        onSubmitInput={submitInputFunc}
+        {...props}
+      />,
     );
+  };
+
+  it('renders correctly', () => {
+    const { container } = renderComponent();
+    expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('could clear input from outside', () => {
-    autoComplete.find(AutoComplete).instance().clearInput();
-    const inputElem = autoComplete.find('.auto-complete-input__input-box');
-    expect(inputElem.text()).toBe('');
+  it('calls onInputChange function when typing', async () => {
+    const user = userEvent.setup();
+    const { container } = renderComponent();
+
+    const inputElem = container.querySelector('.auto-complete-input__input-box');
+    const testInput = 'test';
+
+    await user.type(inputElem, testInput);
+
+    expect(inputChangeFunc).toHaveBeenCalledTimes(testInput.length);
+  });
+
+  it('calls onSubmitInput function when submitting form or clicking icon', async () => {
+    const user = userEvent.setup();
+    const { container } = renderComponent();
+
+    const formElem = container.querySelector('.auto-complete-input__form');
+    fireEvent.submit(formElem);
+    expect(submitInputFunc).toHaveBeenCalledTimes(1);
+
+    const iconElem = container.querySelector('.auto-complete-input__icon');
+    await user.click(iconElem);
+    expect(submitInputFunc).toHaveBeenCalledTimes(2);
+  });
+
+  it('calls onSuggestionItemClick when clicking suggestion items', async () => {
+    const user = userEvent.setup();
+    const { container } = renderComponent();
+
+    const firstItemElem = container.querySelector('.auto-complete-suggestions__item');
+    await user.click(firstItemElem);
+
+    expect(suggestionItemClickFunc).toHaveBeenCalledTimes(1);
+  });
+
+  it('builds html for suggestion items', () => {
+    const { container } = render(<div>{getSuggestionItemHTML(suggestionItem1)}</div>);
+    const highlightElems = container.querySelectorAll('.auto-complete-suggestions__highlight');
+
+    expect(highlightElems.length).toBe(suggestionItem1.matchedPieceIndices.length);
+  });
+
+  it('could clear input', async () => {
+    const user = userEvent.setup();
+    const { container } = renderComponent();
+
+    const inputElem = container.querySelector('.auto-complete-input__input-box');
+
+    await user.type(inputElem, 'test');
+    expect(inputElem.value).toBe('test');
+
+    await user.clear(inputElem);
+    expect(inputElem.value).toBe('');
   });
 });

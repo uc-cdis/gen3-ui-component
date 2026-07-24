@@ -1,14 +1,20 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import CommonsLogin from '.';
 import kfLogo from '../../images/logos/kf-logo.png';
 
 describe('<CommonsLogin />', () => {
-  const commonsLogin = mount(
-    <CommonsLogin title='KidsFirst' logoSrc={kfLogo} buttonTitle='Connect' onButtonClick={() => {}} />,
-  ).find(CommonsLogin);
+  it('renders title and button', () => {
+    render(
+      <CommonsLogin
+        title="KidsFirst"
+        logoSrc={kfLogo}
+        buttonTitle="Connect"
+        onButtonClick={() => {}}
+      />,
+    );
 
-  it('renders', () => {
-    expect(commonsLogin.length).toBe(1);
+    expect(screen.getByText('KidsFirst')).toBeInTheDocument();
+    expect(screen.getByText('Connect')).toBeInTheDocument();
   });
 });

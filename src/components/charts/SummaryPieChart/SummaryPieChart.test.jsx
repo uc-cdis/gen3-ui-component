@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import SummaryPieChart from '.';
 
 describe('<SummaryPieChart />', () => {
@@ -12,20 +12,20 @@ describe('<SummaryPieChart />', () => {
     { name: 'CA04', value: 1890 },
   ];
 
-  const charts = mount(<SummaryPieChart
-    title='test'
-    data={chartData}
-  />).find(SummaryPieChart);
-
-  it('renders', () => {
-    expect(charts.length).toBe(1);
+  it('renders title', () => {
+    render(<SummaryPieChart title="test" data={chartData} />);
+    expect(screen.getByText('test')).toBeInTheDocument();
   });
 
   it('should render all pie sectors', () => {
-    expect(charts.find('.recharts-layer.recharts-pie-sector').length).toBe(chartData.length);
+    const { container } = render(<SummaryPieChart title="test" data={chartData} />);
+    const pieSectors = container.querySelectorAll('.recharts-layer.recharts-pie-sector');
+    expect(pieSectors.length).toBe(chartData.length);
   });
 
   it('should render all legend items', () => {
-    expect(charts.find('.summary-pie-chart__legend-item').length).toBe(chartData.length);
+    const { container } = render(<SummaryPieChart title="test" data={chartData} />);
+    const legendItems = container.querySelectorAll('.summary-pie-chart__legend-item');
+    expect(legendItems.length).toBe(chartData.length);
   });
 });
