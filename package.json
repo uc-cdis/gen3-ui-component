@@ -35,7 +35,7 @@
     "react-router-dom": "^4.3.1",
     "react-select-async-paginate": "^0.7.3",
     "recharts": "^2.7.3",
-    "stylelint": "^15.10.0"
+    "stylelint": "^17.14.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
@@ -59,7 +59,7 @@
     "eslint-plugin-storybook": "^10.4.6",
     "gulp": "^5.0.1",
     "gulp-babel": "^8.0.0",
-    "gulp-cli": "^2.3.0",
+    "gulp-cli": "^3.1.0",
     "gulp-if": "^2.0.2",
     "gulp-postcss": "^9.0.1",
     "install": "^0.13.0",
