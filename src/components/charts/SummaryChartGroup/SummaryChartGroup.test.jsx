@@ -1,8 +1,18 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import SummaryChartGroup from '.';
-import SummaryPieChart from '../SummaryPieChart';
-import SummaryHorizontalBarChart from '../SummaryHorizontalBarChart';
+
+jest.mock('../SummaryPieChart', () => {
+  return function MockSummaryPieChart() {
+    return <div data-testid='summary-pie-chart' />;
+  };
+});
+
+jest.mock('../SummaryHorizontalBarChart', () => {
+  return function MockSummaryHorizontalBarChart() {
+    return <div data-testid='summary-bar-chart' />;
+  };
+});
 
 describe('<SummaryChartGroup />', () => {
   const chartData = [
@@ -35,20 +45,20 @@ describe('<SummaryChartGroup />', () => {
     { type: 'bar', title: 'Virus', data: chartData },
   ];
 
-  const charts = mount(<SummaryChartGroup
-    summaries={summaries}
-    width={1010}
-  />);
-
-  it('renders', () => {
-    expect(charts.length).toBe(1);
+  it('renders without crashing', () => {
+    const { container } = render(
+      <SummaryChartGroup summaries={summaries} width={1010} />
+    );
+    expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('should render 3 bar charts', () => {
-    expect(charts.find(SummaryHorizontalBarChart).length).toBe(4);
+  it('should render 4 bar charts', () => {
+    render(<SummaryChartGroup summaries={summaries} width={1010} />);
+    expect(screen.getAllByTestId('summary-bar-chart')).toHaveLength(4);
   });
 
-  it('should render 2 pie charts', () => {
-    expect(charts.find(SummaryPieChart).length).toBe(3);
+  it('should render 3 pie charts', () => {
+    render(<SummaryChartGroup summaries={summaries} width={1010} />);
+    expect(screen.getAllByTestId('summary-pie-chart')).toHaveLength(3);
   });
 });

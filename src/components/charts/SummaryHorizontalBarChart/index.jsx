@@ -67,7 +67,7 @@ class SummaryBarChart extends React.Component {
           }
           {
             barChartData.length > this.props.maximumDisplayItem ? (
-              <>
+              <div>
                 {
                   this.state.showMore ? (
                     <div
@@ -91,8 +91,8 @@ class SummaryBarChart extends React.Component {
                     </div>
                   )
                 }
-              </>
-            ) : (<></>)
+              </div>
+            ) : null
           }
         </div>
       );

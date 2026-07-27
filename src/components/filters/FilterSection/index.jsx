@@ -138,8 +138,7 @@ class FilterSection extends React.Component {
       + 'If AND is set, records must match all checked filter options. '
       + 'If OR is set, records must match at least one checked option.';
     return (
-      <>
-        <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`} id={`g3-filter-section__and-or-toggle-${this.props.index}`}>
+      <div className={`g3-filter-section__and-or-toggle ${isHidden && 'g3-filter-section__hidden'}`} id={`g3-filter-section__and-or-toggle-${this.props.index}`}>
           <span style={{ marginRight: '5px' }}>Combine with </span>
           <Radio.Group defaultValue={this.state.combineMode} buttonStyle='solid'>
             <Radio.Button
@@ -209,8 +208,7 @@ class FilterSection extends React.Component {
             </span>
           </Tooltip>
 
-        </div>
-      </>
+      </div>
     );
   }
 
@@ -410,6 +408,7 @@ class FilterSection extends React.Component {
               onClick={() => this.toggleShowAndOrToggle()}
               onKeyPress={() => this.toggleShowAndOrToggle()}
               aria-expanded={this.state.showingAndOrToggle}
+              aria-label='And Or Toggle'
             >
               <i
                 className='g3-filter-section__toggle-icon g3-icon g3-icon--sm g3-icon--gear'
@@ -424,6 +423,7 @@ class FilterSection extends React.Component {
               role='button'
               onClick={() => this.toggleShowSearch()}
               onKeyPress={() => this.toggleShowSearch()}
+              aria-label='Search Toggle'
             >
               <i
                 className='g3-filter-section__search-icon g3-icon g3-icon--sm g3-icon--search'

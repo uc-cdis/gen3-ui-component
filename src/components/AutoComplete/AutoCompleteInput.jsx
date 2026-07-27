@@ -28,21 +28,11 @@ class AutoCompleteInput extends Component {
     this.props.onSubmitInput(this.inputElem.current.value);
   }
 
-  setInputText(text) {
-    this.inputElem.current.value = text;
-    this.updateCloseIcon();
-  }
-
   updateCloseIcon() {
     const currentInput = this.inputElem.current.value;
     this.setState({
       closeIconHidden: !currentInput || currentInput.length === 0,
     });
-  }
-
-  clearInput() {
-    this.inputElem.current.value = '';
-    this.updateCloseIcon();
   }
 
   render() {

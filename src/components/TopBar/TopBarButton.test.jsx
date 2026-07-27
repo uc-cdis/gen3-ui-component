@@ -1,5 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import TopBarButton from './TopBarButton';
 
 const internalLink = {
@@ -14,35 +15,45 @@ const externalLink = {
 };
 
 const onActiveTab = jest.fn();
-const activeClassName = '.top-bar-button--active';
 
-describe('<TopBar />', () => {
-  const internalButton = mount(
-    <TopBarButton
-      item={internalLink}
-      onActiveTab={onActiveTab}
-      tabIndex={0}
-      isActive
-    />,
-  );
+describe('<TopBarButton />', () => {
+  it('renders component text', () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <TopBarButton
+          item={internalLink}
+          onActiveTab={onActiveTab}
+          tabIndex={0}
+          isActive
+        />
+      </MemoryRouter>,
+    );
 
-  const externalButton = mount(
-    <TopBarButton
-      item={externalLink}
-      onActiveTab={onActiveTab}
-      tabIndex={0}
-    />,
-  );
-
-  it('renders', () => {
-    expect(internalButton.find('TopBarButton').length).toBe(1);
+    expect(screen.getByText('Data Submission')).toBeInTheDocument();
   });
 
-  it('applies the proper class name', () => {
-    expect(internalButton.find('TopBarButton').props().isActive).toBe(true);
-    expect(internalButton.find(activeClassName).length).toBe(1);
+  it('applies the active class name based on isActive prop', () => {
+    const { container: activeContainer } = render(
+      <MemoryRouter initialEntries={['/']}>
+        <TopBarButton
+          item={internalLink}
+          onActiveTab={onActiveTab}
+          tabIndex={0}
+          isActive
+        />
+      </MemoryRouter>,
+    );
+    expect(activeContainer.querySelector('.top-bar-button--active')).toBeInTheDocument();
 
-    expect(externalButton.find('TopBarButton').props().isActive).toBe(false);
-    expect(externalButton.find(activeClassName).length).toBe(0);
+    const { container: inactiveContainer } = render(
+      <MemoryRouter initialEntries={['/']}>
+        <TopBarButton
+          item={externalLink}
+          onActiveTab={onActiveTab}
+          tabIndex={0}
+        />
+      </MemoryRouter>,
+    );
+    expect(inactiveContainer.querySelector('.top-bar-button--active')).not.toBeInTheDocument();
   });
 });

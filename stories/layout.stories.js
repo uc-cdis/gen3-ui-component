@@ -1,5 +1,5 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { StaticRouter } from 'react-router-dom';
 import TopBar from '../src/components/TopBar/TopBar';
 import Header from '../src/components/Header/.';
