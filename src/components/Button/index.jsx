@@ -7,13 +7,14 @@ import './Button.css';
 
 class Button extends Component {
   handleClick(e) {
-    if (this.props.enabled && this.props.onClick && !this.props.isPending) {
+    if (this.props.onClick && !this.props.isPending && this.props.enabled !== false) {
       this.props.onClick(e);
     }
   }
 
   render() {
-    const buttonTypeClassName = !this.props.enabled || this.props.isPending ? 'g3-button--disabled' : `g3-button--${this.props.buttonType}`;
+    const isButtonDisabled = this.props.enabled === false || this.props.isPending;
+    const buttonTypeClassName = isButtonDisabled ? 'g3-button--disabled' : `g3-button--${this.props.buttonType}`;
     const otherAttrs = {};
     if (this.props.id) otherAttrs.id = this.props.id;
     if (this.props.value) otherAttrs.value = this.props.value;
