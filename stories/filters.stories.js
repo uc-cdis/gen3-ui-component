@@ -1,5 +1,5 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import SingleSelectFilter from '../src/components/filters/SingleSelectFilter';
 import RangeFilter from '../src/components/filters/RangeFilter';
 import FilterSection from '../src/components/filters/FilterSection';

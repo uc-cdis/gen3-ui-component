@@ -1,5 +1,5 @@
 import React from 'react';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import CommonsLogin from '../src/components/CommonsLogin/.';
 import kfLogo from '../src/images/logos/kf-logo.png';
 

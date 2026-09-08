@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen, fireEvent } from '@testing-library/react';
 import FilterGroup from '.';
 import FilterList from '../FilterList';
 
@@ -8,31 +8,12 @@ describe('FilterGroup', () => {
     { text: 'test1', filterType: 'singleSelect' },
     { text: 'test2', filterType: 'singleSelect' },
     { text: 'test3', filterType: 'singleSelect' },
-    {
-      text: 'test4',
-      filterType: 'range',
-      min: 0,
-      max: 100,
-    },
+    { text: 'test4', filterType: 'range', min: 0, max: 100 },
   ];
 
-  const filterSections = [
-    { title: 'Section 1', options: filterOptions },
-    { title: 'Section 2', options: filterOptions },
-    { title: 'Section 3', options: filterOptions },
-  ];
-
-  const filterSections2 = [
-    { title: 'Section 3', options: filterOptions },
-    { title: 'Section 4', options: filterOptions },
-    { title: 'Section 5', options: filterOptions },
-    { title: 'Section 6', options: filterOptions },
-  ];
-
-  const filterSections3 = [
-    { title: 'Section 5', options: filterOptions },
-    { title: 'Section 6', options: filterOptions },
-  ];
+  const filterSections = [{ title: 'Section 1', options: filterOptions }];
+  const filterSections2 = [{ title: 'Section 3', options: filterOptions }];
+  const filterSections3 = [{ title: 'Section 5', options: filterOptions }];
 
   const tabs = [
     <FilterList key={0} sections={filterSections} />,
@@ -41,75 +22,48 @@ describe('FilterGroup', () => {
   ];
 
   const filterConfig = {
-    tabs: [{
-      title: 'Project',
-
-      fields: [
-        'project',
-        'study',
-      ],
-    },
-    {
-      title: 'Subject',
-      fields: [
-        'race',
-        'ethnicity',
-        'gender',
-        'vital_status',
-      ],
-    },
-    {
-      title: 'File',
-      fields: [
-        'file_type',
-      ],
-    }],
+    tabs: [
+      { title: 'Project', fields: ['project', 'study'] },
+      { title: 'Subject', fields: ['race', 'ethnicity', 'gender', 'vital_status'] },
+      { title: 'File', fields: ['file_type'] },
+    ],
   };
 
-  const component = mount(
-    <FilterGroup
-      tabs={tabs}
-      filterConfig={filterConfig}
-      onFilterChange={jest.fn()}
-    />,
-  );
+  const renderFilterGroup = () =>
+    render(
+      <FilterGroup
+        tabs={tabs}
+        filterConfig={filterConfig}
+        onFilterChange={jest.fn()}
+      />,
+    );
 
-  beforeEach(() => {
-    component.find('.g3-filter-group__tab').at(0).simulate('click');
+  it('renders without crashing', () => {
+    const { container } = renderFilterGroup();
+    expect(container.firstChild).toBeInTheDocument();
   });
 
-  it('renders', () => {
-    expect(component.find(FilterGroup).length).toBe(1);
+  it('displays the correct number of tabs and tab titles', () => {
+    const { container } = renderFilterGroup();
+    const tabElems = container.querySelectorAll('.g3-filter-group__tab');
+    const tabTitleElems = container.querySelectorAll('.g3-filter-group__tab-title');
+
+    expect(tabElems.length).toBe(tabs.length);
+    expect(tabTitleElems.length).toBe(3);
+
+    filterConfig.tabs.forEach((tab, index) => {
+      expect(tabTitleElems[index]).toHaveTextContent(tab.title);
+    });
   });
 
-  it('displays the correct number of tabs', () => {
-    expect(component.find('.g3-filter-group__tab').length).toBe(tabs.length);
-  });
+  it('selects the tab and updates CSS selection class on click', () => {
+    const { container } = renderFilterGroup();
+    const tabElems = container.querySelectorAll('.g3-filter-group__tab');
 
-  it('displays the correct tab title', () => {
-    expect(component.find('.g3-filter-group__tab-title').length).toBe(3);
-    expect(
-      component.find('.g3-filter-group__tab-title').at(0).text(),
-    ).toBe(filterConfig.tabs[0].title);
-    expect(
-      component.find('.g3-filter-group__tab-title').at(1).text(),
-    ).toBe(filterConfig.tabs[1].title);
-    expect(
-      component.find('.g3-filter-group__tab-title').at(2).text(),
-    ).toBe(filterConfig.tabs[2].title);
-  });
+    expect(tabElems[0]).toHaveClass('g3-filter-group__tab--selected');
 
-  it('selects the tab on click', () => {
-    expect(component.instance().state.selectedTabIndex).toBe(0);
-    component.find('.g3-filter-group__tab').at(2).simulate('click');
-    expect(component.instance().state.selectedTabIndex).toBe(2);
-  });
+    fireEvent.click(tabElems[2]);
 
-  it('changes the class for the selected tab', () => {
-    expect(component.instance().state.selectedTabIndex).toBe(0);
-    expect(component.find('.g3-filter-group__tab--selected').length).toBe(1);
-    component.find('.g3-filter-group__tab').at(2).simulate('click');
-    expect(component.instance().state.selectedTabIndex).toBe(2);
-    expect(component.find('.g3-filter-group__tab--selected').length).toBe(1);
+    expect(tabElems[2]).toHaveClass('g3-filter-group__tab--selected');
   });
 });

@@ -1,20 +1,19 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen, fireEvent } from '@testing-library/react';
 import SingleSelectFilter from '.';
 
 describe('SingleSelectFilter', () => {
   const onSelect = jest.fn();
-  const component = mount(
-    <SingleSelectFilter label='test1' onSelect={onSelect} hideZero={false} />,
-  );
 
-  it('renders', () => {
-    expect(component.find(SingleSelectFilter).length).toBe(1);
-  });
+  it('renders checkbox input and calls onSelect when clicked', () => {
+    const { container } = render(
+      <SingleSelectFilter label='test1' onSelect={onSelect} hideZero={false} />,
+    );
 
-  it('calls onSelect when selected', () => {
-    expect(component.find('input').length).toBe(1);
-    component.find('input').simulate('change');
+    const input = container.querySelector('input');
+    expect(input).toBeInTheDocument();
+
+    fireEvent.click(input);
     expect(onSelect).toHaveBeenCalled();
   });
 });

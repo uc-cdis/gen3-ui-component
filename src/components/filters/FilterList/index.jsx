@@ -78,12 +78,6 @@ class FilterList extends React.Component {
     this.props.onAfterDrag(sectionIndex, lowerBound, upperBound, minValue, maxValue, rangeStep);
   }
 
-  toggleFilters(openAll) {
-    this.sectionRefs.forEach((ref) => {
-      ref.current.toggleSection(openAll);
-    });
-  }
-
   render() {
     // Takes in parent component's filterStatus or self state's filterStatus
     const filtersInProps = this.props.filterStatusFromParent

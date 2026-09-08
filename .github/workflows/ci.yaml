@@ -23,6 +23,6 @@ jobs:
     name: NPM Unit Test
     uses: uc-cdis/.github/.github/workflows/npm_unit_test.yaml@master
     with:
-      node-version: '16'
-      npm-version: '8'
+      node-version: '24'
+      npm-version: '11'
       post-test: 'npm run eslint && npm run stylelint'

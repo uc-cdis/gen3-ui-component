@@ -7,13 +7,14 @@ import './Button.css';
 
 class Button extends Component {
   handleClick(e) {
-    if (this.props.enabled && this.props.onClick && !this.props.isPending) {
+    if (this.props.onClick && !this.props.isPending && this.props.enabled !== false) {
       this.props.onClick(e);
     }
   }
 
   render() {
-    const buttonTypeClassName = !this.props.enabled || this.props.isPending ? 'g3-button--disabled' : `g3-button--${this.props.buttonType}`;
+    const isButtonDisabled = this.props.enabled === false || this.props.isPending;
+    const buttonTypeClassName = isButtonDisabled ? 'g3-button--disabled' : `g3-button--${this.props.buttonType}`;
     const otherAttrs = {};
     if (this.props.id) otherAttrs.id = this.props.id;
     if (this.props.value) otherAttrs.value = this.props.value;
@@ -29,13 +30,13 @@ class Button extends Component {
             <i className={`g3-icon g3-icon--sm g3-icon--${this.props.leftIcon} g3-button__icon g3-button__icon--left`} />
           )
         }
-        { this.props.label }
+        {this.props.label}
         {
           this.props.rightIcon && !this.props.isPending
             ? <i className={`g3-icon g3-icon--sm g3-icon--${this.props.rightIcon} g3-button__icon g3-button__icon--right`} />
             : null
         }
-        { this.props.isPending ? (
+        {this.props.isPending ? (
           <div className='g3-button__spinner g3-button__icon--right'>
             <Spinner />
           </div>
@@ -43,21 +44,15 @@ class Button extends Component {
       </button>
     );
 
-    return (
-      <>
-        {
-          this.props.tooltipEnabled ? (
-            <Tooltip
-              placement='bottom'
-              overlay={this.props.tooltipText}
-              arrowContent={<div className='rc-tooltip-arrow-inner' />}
-            >
-              {button}
-            </Tooltip>
-          ) : button
-        }
-      </>
-    );
+    return this.props.tooltipEnabled ? (
+      <Tooltip
+        placement='bottom'
+        overlay={this.props.tooltipText}
+        arrowContent={<div className='rc-tooltip-arrow-inner' />}
+      >
+        {button}
+      </Tooltip>
+    ) : button;
   }
 }
 
@@ -81,7 +76,7 @@ Button.defaultProps = {
   buttonType: 'primary',
   enabled: true,
   className: '',
-  onClick: () => {},
+  onClick: () => { },
   leftIcon: null,
   rightIcon: null,
   type: 'button',

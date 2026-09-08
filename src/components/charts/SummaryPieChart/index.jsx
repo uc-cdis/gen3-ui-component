@@ -74,7 +74,7 @@ class SummaryPieChart extends React.Component {
             }
             {
               pieChartData.length > this.props.maximumDisplayItem ? (
-                <>
+                <div>
                   {
                     this.state.showMore ? (
                       <div
@@ -98,8 +98,8 @@ class SummaryPieChart extends React.Component {
                       </div>
                     )
                   }
-                </>
-              ) : (<></>)
+                </div>
+              ) : null
             }
           </div>
           <PieChart

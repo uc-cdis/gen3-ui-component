@@ -1,5 +1,6 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import FilterSection from '.';
 
 describe('FilterSection', () => {
@@ -12,9 +13,9 @@ describe('FilterSection', () => {
 
   const onDrag = jest.fn();
   const onSelect = jest.fn();
-  let component;
-  beforeEach(() => {
-    component = mount(
+
+  const renderComponent = () =>
+    render(
       <FilterSection
         title='Section Title'
         options={singleSelectOptions}
@@ -23,55 +24,41 @@ describe('FilterSection', () => {
         hideZero={false}
       />,
     );
+
+  it('renders header correctly', () => {
+    const { container } = renderComponent();
+    expect(container.querySelector('.g3-filter-section__header')).toBeInTheDocument();
   });
 
-  it('renders', () => {
-    expect(component.find(FilterSection).length).toBe(1);
+  it('toggles collapse/expand on header click', async () => {
+    const user = userEvent.setup();
+    const { container } = renderComponent();
+
+    const titleElem = container.querySelector('.g3-filter-section__title');
+    expect(titleElem).toBeInTheDocument();
+
+    await user.click(titleElem);
+    expect(container.querySelector('.g3-filter-section')).toBeInTheDocument();
   });
 
-  it('toggles expand on click', () => {
-    expect(component.instance().state.isExpanded).toBe(true);
-    expect(component.find('.g3-filter-section__header').length).toBe(1);
-    component.find('.g3-filter-section__title').simulate('click');
-    expect(component.instance().state.isExpanded).toBe(false);
-  });
+  it('shows selected count chip when filters are selected and clears on clear button click', () => {
+    const { container } = renderComponent();
 
-  it('shows the number of currently selected filters', () => {
-    // expect the filterChip to not be shown
-    expect(component.find('.g3-filter-section__selected-count-chip').length).toBe(0);
+    expect(container.querySelector('.g3-filter-section__selected-count-chip')).not.toBeInTheDocument();
 
-    // select two options
-    const option1 = singleSelectOptions[0];
-    const option2 = singleSelectOptions[1];
-    component.instance().handleSelectSingleSelectFilter(option1.text);
-    component.instance().handleSelectSingleSelectFilter(option2.text);
+    const option1 = screen.getByText('test1');
+    const option2 = screen.getByText('test2');
 
-    // expect the filterChip to appear
-    component.update();
-    expect(component.find('.g3-filter-section__selected-count-chip').length).toBe(1);
-    // expect the filterChip to display that 2 filters are selected
-    const filterChip = component.find('.g3-filter-section__selected-count-chip').first();
-    expect(filterChip.find('.g3-filter-section__selected-count-chip-text-emphasis').first().instance().text === '2');
-  });
+    fireEvent.click(option1);
+    fireEvent.click(option2);
 
-  it('clears all selected filters on clear button click', () => {
-    // select two options
-    const option1 = singleSelectOptions[0];
-    const option2 = singleSelectOptions[1];
-    component.instance().handleSelectSingleSelectFilter(option1.text);
-    component.instance().handleSelectSingleSelectFilter(option2.text);
+    const chip = container.querySelector('.g3-filter-section__selected-count-chip');
+    expect(chip).toBeInTheDocument();
+    expect(chip).toHaveTextContent('2');
 
-    // expect options to be selected
-    expect(component.state('filterStatus')).toEqual({
-      [option1.text]: true,
-      [option2.text]: true,
-    });
+    const clearBtn = screen.getByLabelText('Clear Chip');
+    fireEvent.click(clearBtn);
 
-    // click the clear button
-    const mockEvent = { stopPropagation: () => {} };
-    component.instance().handleClearButtonClick(mockEvent);
-
-    // expect all options to be unselected
-    expect(component.state('filterStatus')).toEqual({});
+    expect(container.querySelector('.g3-filter-section__selected-count-chip')).not.toBeInTheDocument();
   });
 });

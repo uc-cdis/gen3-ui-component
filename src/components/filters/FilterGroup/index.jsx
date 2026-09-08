@@ -215,27 +215,6 @@ class FilterGroup extends React.Component {
     this.setState({ selectedTabIndex: index });
   }
 
-  resetFilter() {
-    this.setState((prevState) => {
-      const oldFilterStatus = prevState.filterStatus;
-      const resetStatus = oldFilterStatus.map((oldSectionStatus) => {
-        const sectionStatus = oldSectionStatus.map((oldEntry) => {
-          if (!oldEntry || Object.keys(oldEntry).length === 0) return oldEntry;
-          const newEntry = Object.keys(oldEntry).reduce((res, key) => {
-            res[key] = false;
-            return res;
-          }, {});
-          return newEntry;
-        });
-        return sectionStatus;
-      });
-      return {
-        filterStatus: resetStatus,
-        filterResults: {},
-      };
-    });
-  }
-
   callOnFilterChange() {
     this.props.onFilterChange(this.state.filterResults);
   }

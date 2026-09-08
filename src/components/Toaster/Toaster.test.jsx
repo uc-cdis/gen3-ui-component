@@ -1,21 +1,29 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import Toaster from '.';
 
 describe('<Toaster />', () => {
-  const t = mount(
-    <Toaster isEnabled={false}>
-      <div>
-          Test
-      </div>
-    </Toaster>,
-  );
+  it('updates when isEnabled prop changes', () => {
+    const { container, rerender } = render(
+      <Toaster isEnabled={false}>
+        <div>Test</div>
+      </Toaster>,
+    );
 
-  it('updates with state change', () => {
-    expect(t.find('.toaster__div').length).toBe(0);
-    t.setProps({ isEnabled: true });
-    expect(t.find('.toaster__div').length).toBe(1);
-    t.setProps({ isEnabled: false });
-    expect(t.find('.toaster__div').length).toBe(0);
+    expect(container.querySelector('.toaster__div')).not.toBeInTheDocument();
+
+    rerender(
+      <Toaster isEnabled={true}>
+        <div>Test</div>
+      </Toaster>,
+    );
+    expect(container.querySelector('.toaster__div')).toBeInTheDocument();
+
+    rerender(
+      <Toaster isEnabled={false}>
+        <div>Test</div>
+      </Toaster>,
+    );
+    expect(container.querySelector('.toaster__div')).not.toBeInTheDocument();
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import FilterList from '.';
 
 describe('FilterList', () => {
@@ -7,12 +7,7 @@ describe('FilterList', () => {
     { text: 'test1', filterType: 'singleSelect' },
     { text: 'test2', filterType: 'singleSelect' },
     { text: 'test3', filterType: 'singleSelect' },
-    {
-      text: 'test4',
-      filterType: 'range',
-      min: 0,
-      max: 100,
-    },
+    { text: 'test4', filterType: 'range', min: 0, max: 100 },
   ];
 
   const filterSections = [
@@ -22,29 +17,23 @@ describe('FilterList', () => {
 
   const onDrag = jest.fn();
   const onSelect = jest.fn();
-  const component = mount(
-    <FilterList
-      sections={filterSections}
-      onSelect={onSelect}
-      onDrag={onDrag}
-    />,
-  );
-  const componentEmpty = mount(
-    <FilterList
-      sections={filterSections}
-      onSelect={onSelect}
-      onDrag={onDrag}
-      hideEmptyFilterSection
-    />,
-  );
 
-  it('renders', () => {
-    expect(component.find(FilterList).length).toBe(1);
+  it('renders all filter sections', () => {
+    const { container } = render(
+      <FilterList sections={filterSections} onSelect={onSelect} onDrag={onDrag} />,
+    );
+    expect(container.querySelectorAll('.g3-filter-section').length).toBe(2);
   });
-  it('renders', () => {
-    expect(component.find('.g3-filter-section').length).toBe(2);
-  });
-  it('renders', () => {
-    expect(componentEmpty.find('.g3-filter-section').length).toBe(1);
+
+  it('hides empty filter sections when hideEmptyFilterSection is true', () => {
+    const { container } = render(
+      <FilterList
+        sections={filterSections}
+        onSelect={onSelect}
+        onDrag={onDrag}
+        hideEmptyFilterSection
+      />,
+    );
+    expect(container.querySelectorAll('.g3-filter-section').length).toBe(1);
   });
 });

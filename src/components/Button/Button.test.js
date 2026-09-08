@@ -1,11 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import Button from '.';
 
 describe('<Button />', () => {
-  const btn = mount(<Button label='test-button' />).find(Button);
-
-  it('renders', () => {
-    expect(btn.length).toBe(1);
+  it('renders correctly with label', () => {
+    render(<Button label='test-button' />);
+    expect(screen.getByText('test-button')).toBeInTheDocument();
   });
 });
