@@ -11,9 +11,9 @@ import RangeFilter from '../RangeFilter';
 import './FilterSection.css';
 
 const filterVisibleStatusObj = (optionList, inputText) => {
-  const res = {};
+  const res = Object.create(null);
   optionList.forEach((o) => {
-    if (typeof inputText === 'undefined') {
+    if (typeof inputText === 'undefined' || typeof o.text !== 'string') {
       res[o.text] = true;
     } else {
       const matched = o.text.toLowerCase().indexOf(inputText.toLowerCase()) >= 0;
@@ -48,6 +48,7 @@ class FilterSection extends React.Component {
       // shape: { [fieldName]: true | false } | [number, number]
       filterStatus: initialFilterStatus,
       searchInputEmpty: true,
+      searchInputText: '',
       showingSearch: false,
       showingAndOrToggle: false,
       combineMode: 'OR',
@@ -61,6 +62,24 @@ class FilterSection extends React.Component {
     this.inputElem = React.createRef();
     this.combineModeFieldName = '__combineMode';
     this.handleSetCombineModeOption = this.handleSetCombineModeOption.bind(this);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const previousVisibility = prevState.optionsVisibleStatus || {};
+    const missingOptions = nextProps.options
+      .filter((option) => !Object.prototype.hasOwnProperty.call(
+        previousVisibility, option.text));
+
+    if (missingOptions.length === 0) {
+      return null;
+    }
+
+    return {
+      optionsVisibleStatus: {
+        ...previousVisibility,
+        ...filterVisibleStatusObj(missingOptions, prevState.searchInputText),
+      },
+    };
   }
 
   handleSetCombineModeOption(combineModeIn) {
@@ -84,6 +103,7 @@ class FilterSection extends React.Component {
     const currentInput = this.inputElem.current.value;
     this.setState({
       searchInputEmpty: !currentInput || currentInput.length === 0,
+      searchInputText: currentInput,
     });
     this.updateVisibleOptions(currentInput);
   }
@@ -276,6 +296,7 @@ class FilterSection extends React.Component {
     this.inputElem.current.value = '';
     this.setState({
       searchInputEmpty: true,
+      searchInputText: '',
     });
     this.updateVisibleOptions();
   }

@@ -74,4 +74,60 @@ describe('FilterSection', () => {
     // expect all options to be unselected
     expect(component.state('filterStatus')).toEqual({});
   });
+
+  it('renders options added through props after mount', () => {
+    component.setProps({
+      options: [
+        ...singleSelectOptions,
+        { text: 'new option', filterType: 'singleSelect' },
+      ],
+    });
+    component.update();
+
+    const labels = component.find('.g3-single-select-filter__label')
+      .map((node) => node.text());
+    expect(labels).toContain('new option');
+  });
+
+  it('applies an active search to options added through props', () => {
+    const searchInput = component.find('.g3-filter-section__search-input-box');
+    searchInput.getDOMNode().value = 'test1';
+    searchInput.simulate('change');
+    component.update();
+
+    expect(component.find('.g3-single-select-filter__label')
+      .map((node) => node.text())).toEqual(['test1']);
+
+    component.setProps({
+      options: [
+        ...singleSelectOptions,
+        { text: 'another test1', filterType: 'singleSelect' },
+        { text: 'unmatched option', filterType: 'singleSelect' },
+        { text: 'constructor', filterType: 'singleSelect' },
+        { text: '__proto__', filterType: 'singleSelect' },
+      ],
+    });
+    component.update();
+
+    expect(component.find('.g3-single-select-filter__label')
+      .map((node) => node.text())).toEqual(['test1', 'another test1']);
+  });
+
+  it('renders a range option added to an initially empty section', () => {
+    const rangeComponent = mount(
+      <FilterSection
+        title='Range Section'
+        options={[]}
+        onSelect={onSelect}
+        onAfterDrag={onDrag}
+      />,
+    );
+
+    rangeComponent.setProps({
+      options: [{ min: 2, max: 97, filterType: 'range' }],
+    });
+    rangeComponent.update();
+
+    expect(rangeComponent.find('.g3-range-filter')).toHaveLength(1);
+  });
 });
